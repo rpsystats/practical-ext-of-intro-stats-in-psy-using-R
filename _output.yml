@@ -1,0 +1,14 @@
+bookdown::gitbook:
+  highlight: tango
+  css: style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">Table of Contents</a></li>
+    download: no
+  split_by: chapter
+  sharing:
+    github: yes
+  edit: https://ekarinpongpipat.com/books/practical-extension-of-introductory-statistics-in-psychology-using-R/%s
+  github-repo: "epongpipat/epongpipat.github.io"
+  url: 'https\://ekarinpongpipat.com/books/practical-extension-of-introductory-statistics-in-psychology-using-R/'

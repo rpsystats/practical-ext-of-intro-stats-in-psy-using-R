@@ -1,0 +1,5 @@
+book_filename: "Extension_of_Introductory_Univariate_Statistics_in_Psychology"
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Chapter "

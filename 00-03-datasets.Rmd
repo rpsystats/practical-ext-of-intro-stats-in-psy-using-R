@@ -1,0 +1,269 @@
+# Datasets
+Below are two public (open-access) and real datasets that we will use for the analyses. For each dataset, you will find its description, minor data wrangling (or data manipulation), and descriptive statistics in both numeric and visual formats.
+
+## Salaries Dataset
+```{r}
+datasetSalaries <- carData::Salaries
+```
+One of the datasets that we'll use is the `Salaries` dataset within the `carData` package. The dataset consists of nine-month salaries collected from 397 collegiate professors in the U.S. during 2008 to 2009. In addition to salaries, the professor's rank, sex, discipline, years since Ph.D., and years of service was also collected. Thus, there is a total of 6 variables, which are described below. 
+
+```{r, echo=F}
+kable(as.data.frame(rbind(
+  c("Variable" = "rank", "Variable Type" = "Categorical", "Description" = "Professor's rank of either assistant professor, associate professor, or professor"),
+  c("Variable" = "discipline", "Variable Type" = "Categorical", "Description" = "Type of department the professor works in, either applied or theoretical"),
+  c("Variable" = "yrs.since.phd", "Variable Type" = "Continuous", "Description" = "Number of years since the professor has obtained their PhD"),
+  c("Variable" = "yrs.service", "Variable Type" = "Continuous", "Description" = "Number of years the professor has served the department and/or university"),
+  c("Variable" = "sex", "Variable Type" = "Categorical", "Description" = "Professor's sex of either male or female"),
+  c("Variable" = "salary", "Variable Type" = "Continuous", "Description" = "Professor's nine-month salary (USD)")
+)))
+```
+
+### Data Wrangling
+Before running these analyses within the GLM context, let's clean up the dataset so that it's readable for us rather than computers.
+```{r}
+# spell out rank variables
+# rename discipline variables to its meaningful name
+# ensure both rank and discipline are factors
+datasetSalaries <- datasetSalaries %>%
+  mutate(
+    rank = case_when(
+      rank == "AssocProf" ~ "Associate Professor",
+      rank == "AsstProf" ~ "Assistant Professor",
+      rank == "Prof" ~ "Professor"
+    ),
+    discipline = case_when(
+      discipline == "A" ~ "Theoretical",
+      discipline == "B" ~ "Applied"
+    )
+  ) %>%
+  mutate(
+    rank = as.factor(rank),
+    discipline = as.factor(discipline)
+  )
+```
+
+### Descriptive Statistics
+
+It's also always a good idea to examine the data numerically and visually. Let's first look at the categorical variables then the continuous variables.
+
+#### Categorical Variables
+```{r}
+plyr::count(datasetSalaries, "rank") %>%
+  kable(.)
+```
+
+```{r figure-rank}
+ggplot(datasetSalaries, aes(rank)) +
+  geom_bar(aes(y = stat(count) / sum(stat(count))), color = "black", fill = "#3182bd") +
+  theme_classic() +
+  labs(y = "Proportion", x = "", title = "rank")
+```
+
+In this dataset, there are a lot more professors than assistant and associate professors combined.
+
+```{r}
+plyr::count(datasetSalaries, "discipline") %>%
+  kable(.)
+```
+
+```{r figure-discipline}
+ggplot(datasetSalaries, aes(discipline)) +
+  geom_bar(aes(y = stat(count) / sum(stat(count))), color = "black", fill = "#3182bd") +
+  theme_classic() +
+  labs(y = "Proportion", x = "", title = "discipline")
+```
+
+There are slightly more professors within the applied than the theoretical discipline (i.e., 35 more).
+
+```{r}
+plyr::count(datasetSalaries, "sex") %>%
+  kable(.)
+```
+
+```{r figure-sex}
+ggplot(datasetSalaries, aes(sex)) +
+  geom_bar(aes(y = stat(count) / sum(stat(count))), color = "black", fill = "#3182bd") +
+  theme_classic() +
+  labs(y = "Proportion", x = "", title = "sex")
+```
+
+There is a little over 9x as many male professors as there are female professors. 
+
+#### Continuous Variables
+```{r}
+datasetSalaries %>%
+  select(yrs.since.phd, yrs.service, salary) %>%
+  describe(.) %>%
+  select(-n, -vars, -trimmed, -mad, -range) %>%
+  round(., 2) %>%
+  kable(.)
+```
+
+```{r figure-yrs-since-phd}
+ggplot(datasetSalaries, aes(yrs.since.phd)) +
+  geom_vline(
+    xintercept = describe(datasetSalaries)["yrs.since.phd", "mean"],
+    alpha = .5,
+    linetype = "dashed"
+  ) +
+  geom_dotplot(binwidth = 1, fill = "#3182bd") +
+  geom_text(aes(
+    x = describe(datasetSalaries)["yrs.since.phd", "mean"],
+    label = paste("M =", round(describe(datasetSalaries)["yrs.since.phd", "mean"], 2)),
+    y = -.05
+  ), angle = 0) +
+  theme_classic() +
+  scale_y_continuous(NULL, breaks = NULL) +
+  labs(x = "", y = "Frequency", title = "Years since PhD")
+```
+
+On average, professors have had their Ph.D. for about 22 years.
+
+```{r figure-yrs-service}
+ggplot(datasetSalaries, aes(yrs.service)) +
+  geom_vline(
+    xintercept = describe(datasetSalaries)["yrs.service", "mean"],
+    alpha = .5,
+    linetype = "dashed"
+  ) +
+  geom_dotplot(binwidth = 1, fill = "#3182bd") +
+  geom_text(aes(
+    x = describe(datasetSalaries)["yrs.service", "mean"],
+    label = paste("M =", round(describe(datasetSalaries)["yrs.service", "mean"], 2)),
+    y = -.05
+  ), angle = 0) +
+  theme_classic() +
+  scale_y_continuous(NULL, breaks = NULL) +
+  labs(x = "", y = "Frequency", title = "Years of service")
+```
+
+On average, professors have provided a service to either the department or university for about 17 years and 7 months.
+
+```{r figure-salary}
+ggplot(datasetSalaries, aes(salary)) +
+  geom_vline(
+    xintercept = describe(datasetSalaries)["salary", "mean"],
+    alpha = .5,
+    linetype = "dashed"
+  ) +
+  geom_dotplot(binwidth = 3000, fill = "#3182bd") +
+  geom_text(aes(
+    x = describe(datasetSalaries)["salary", "mean"],
+    label = paste("M =", scales::dollar(round(describe(datasetSalaries)["salary", "mean"], 2))),
+    y = -.05
+  ), angle = 0) +
+  theme_classic() +
+  scale_y_continuous(NULL, breaks = NULL) +
+  scale_x_continuous(labels = scales::dollar) +
+  labs(x = "", y = "Frequency", title = "salary")
+```
+
+On average, a professor's 9-month annual income is $113,706.46.
+
+## Anorexia Dataset
+```{r}
+datasetAnorexia <- MASS::anorexia
+```
+
+Another dataset that we'll use is the `anorexia` dataset within the `MASS` package. The dataset consists of the weight (in lbs) of 72 female patients with anorexia before and after either cognitive behavioral therapy, family therapy, or no therapy (control condition).
+
+```{r, echo=F}
+kable(as.data.frame(rbind(
+  c("Variable" = "Treatment", "Variable Type" = "Categorical", "Description" = "Treatment of female patient with anorexia, either cognitive behavioral therapy (CBT), family therapy (FT), or no therepy (CONT)"),
+  c("Variable" = "PreWeight", "Variable Type" = "Continuous", "Weight of female patient with anorexia before treatment in lbs."),
+  c("Variable" = "PostWeight", "Variable Type" = "Continuous", "Description" = "Weight of female patient with anorexia after treatment in lbs.")
+)))
+```
+
+### Data Wrangling
+Again, we can make the dataset slightly more readable for us.
+```{r}
+# spell out variable names
+# re-order levels to be CBT, FT, then Cont rather than alphabetical order
+datasetAnorexia <- datasetAnorexia %>%
+  mutate(
+    Treatment = Treat,
+    PreWeight = Prewt,
+    PostWeight = Postwt,
+    Treatment = case_when(
+      Treatment == "CBT" ~ "CBT",
+      Treatment == "FT" ~ "FT",
+      Treatment == "Cont" ~ "Control"
+    ),
+    Treatment = factor(Treatment, levels = c("CBT", "FT", "Control"))
+    )
+```
+
+### Descriptive Statistics
+
+#### Categorical Variables
+```{r}
+plyr::count(datasetAnorexia, "Treatment") %>%
+  kable(.)
+```
+
+```{r figure-treatment}
+ggplot(datasetAnorexia, aes(Treatment)) +
+  geom_bar(aes(y = stat(count) / sum(stat(count))), color = "black", fill = "#3182bd") +
+  theme_classic() +
+  labs(y = "Proportion", x = "", title = "Treatment")
+```
+
+There are more participants within the CBT condition compared to either the FT condition or control group.
+
+#### Continuous Variables
+```{r}
+datasetAnorexia %>%
+  select(PreWeight, PostWeight) %>%
+  describe(.) %>%
+  select(-vars, -trimmed, -mad, -range) %>%
+  round(., 2) %>%
+  kable()
+```
+
+```{r figure-preweight}
+ggplot(datasetAnorexia, aes(PreWeight)) +
+  geom_vline(
+    xintercept = describe(datasetAnorexia)["PreWeight", "mean"],
+    alpha = .5,
+    linetype = "dashed"
+  ) +
+  geom_dotplot(binwidth = 1, fill = "#3182bd") +
+  geom_text(aes(
+    x = describe(datasetAnorexia)["PreWeight", "mean"],
+    label = paste("M =", round(describe(datasetAnorexia)["PreWeight", "mean"], 2)),
+    y = -.05
+  ),
+  angle = 0
+  ) +
+  theme_classic() +
+  scale_y_continuous(NULL, breaks = NULL) +
+  labs(x = "", y = "Frequency", title = "Weight Before Study (lbs)")
+```
+
+On average, women with anorexia before treatment weighed 82.41 lbs.
+
+```{r figure-postweight}
+ggplot(datasetAnorexia, aes(PostWeight)) +
+  geom_vline(
+    xintercept = describe(datasetAnorexia)["PostWeight", "mean"],
+    alpha = .5,
+    linetype = "dashed"
+  ) +
+  geom_dotplot(binwidth = 1, fill = "#3182bd") +
+  geom_text(aes(
+    x = describe(datasetAnorexia)["PostWeight", "mean"],
+    label = paste("M =", round(describe(datasetAnorexia)["PostWeight", "mean"], 2)),
+    y = -.05
+  ),
+  angle = 0
+  ) +
+  theme_classic() +
+  scale_y_continuous(NULL, breaks = NULL) +
+  labs(x = "", y = "Frequency", title = "Weight After Study (lbs)")
+```
+
+On average, women with anorexia after treatment weighed 85.17 lbs, which is about a 2.76 lbs weight gain compared to before treatment.
+
+## Use Your Own Dataset
+However, if you have an interesting dataset of your own, we encourage you to also try using that dataset alongside ours. 

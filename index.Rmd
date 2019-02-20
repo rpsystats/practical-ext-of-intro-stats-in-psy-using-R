@@ -1,0 +1,55 @@
+--- 
+title: "A Practical Extension of Introductory Statistics in Psychology using R (Draft)"
+author: "Ekarin Eric Pongpipat, M.A. & Giuseppe Miranda, M.S."
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R. Additionally, this book will extend more advanced univariate statistics in psychology into the GLM framework."
+subtitle: "This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R. Additionally, this book will extend more advanced univariate statistics in psychology into the GLM framework."
+---
+
+# Introduction
+
+Typically, introductory univariate statistics courses in psychology cover the following inferential analyses (plus or minus a few more analyses):
+
+* One Sample *t*-test
+* Dependent Samples *t*-test
+* Independent Samples *t*-test
+* One-Way Analysis of Variance (ANOVA)
+* Factorial ANOVA
+* Correlation
+* Simple Linear Regression
+
+These conventions may be useful for quickly talking about a particular statistical analysis with others; however, thinking of these analyses as derivatives (or special cases) of the GLM (i.e., ordinary least squares [OLS] regression) lends itself to understanding more advanced statistical techniques. Given that, the book will provide some evidence along with R code for others to see how the aforementioned analyses can be analyzed within the GLM framework with identical answers. The GLM is not a new idea, but an idea that needs emphasizing.
+
+## What exactly is the GLM?
+The general linear model is a unified statistical framework that allows us to think about all of the above analyses (and much more) with a single concise formula:
+
+$Y = \beta X + \varepsilon$
+
+where $Y$ represents a dependent variable (DV) or a set of DVs, $\beta$ represents a set of regression coefficients in addition to the constant, $X$ represents an independent variable (IV) or a set of IVs, and $\varepsilon$ represents the error around the model.
+
+This should look familiar as the formula is similar to the simple linear regression formula or the slope-intercept form learned in algebra.
+
+## How will this book be covered?
+We will go over each of the typical introductory statistics taught in psychology in five steps:
+
+1. State the null and research hypotheses
+2. Perform the statistical analysis in R
+3. Statistical decision *(using an alpha ($\alpha$) = 0.05, two-tailed, which is the artribrary and ubiquituous convention in psychology)*
+4. APA statement *(bare minumum)*
+5. Visualization
+
+For each analysis, the traditional approach will be performed first followed by the GLM approach for steps 1 and 2. The goal is to show the similarities and differences between stating the null and research hypotheses in step 1 as well as how the analyses are identical using both approaches in step 2.
+
+## What won't this book cover?
+This book won't go into assumptions of the inferential tests or exhaustively its respective formulas. 
+This book will also not exhaustively review data manipulation, transformations, and visualization in R as there are other books that already do this well (e.g., [R for Data Science by Wickham & Grolemund](http://r4ds.had.co.nz/). This book is meant to be an living open-source book that can be edited by others. 
+
+## Why R?
+We chose to use R to analyze and write this book because R forces us to write out how we performed our analyses (and write helpful comments if we're nice). These codes allow us and others to re-analyze the data exactly as we have. This is not always the case with statistical softwares that use GUIs.
+
+## Why should we should to you guys?
+We are neuroscientist that regular utilize statsistics. We have had to self-teach and supplement our learning of different statistical analyses and wanted to share our knowledge with others. Hopefully, making it easier and more intuitive for others.
