@@ -4,6 +4,8 @@
 
 This book assumes that readers have taken or have an understanding of introductory univariate statistics in psychology. I will only briefly cover and review some concepts, but the emphasis will be on thinking about these statistics within the perspective of the GLM framework and how to apply it in R. Thus, readers who do not have this knowledge, may or may not find this book useful. 
 
+A good book to learn the fundamentals of statistics is <A href="https://www.amazon.com/Data-Analysis-Comparison-Approach-Regression-dp-1138819832/dp/1138819832/ref=mt_paperback?_encoding=UTF8&me=&qid=" target="_blank">Data Analysis by Judd, McClelland, & Ryan</A>.
+
 ## Software
 
 Of course, we will also need <A href="https://cran.r-project.org/mirrors.html" target="_blank">R</A> (the programming language) and <A href="https://www.rstudio.com/products/rstudio/download/" target="_blank">R Studio</A> (an integrated development environment [IDE] for R).
