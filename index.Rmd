@@ -24,10 +24,12 @@ Typically, introductory univariate statistics courses in psychology cover the fo
 
 These conventions may be useful for quickly talking about a particular statistical analysis with others; however, thinking of these analyses as derivatives (or special cases) of the GLM (i.e., ordinary least squares [OLS] regression) lends itself to understanding more advanced statistical techniques. Given that, the book will provide some evidence along with R code for others to see how the aforementioned analyses can be analyzed within the GLM framework with identical answers. The GLM is not a new idea, but an idea that needs emphasizing.
 
+Ideally, this book is meant to be an live open-source book that can be edited by others in perpetuity by creating pull requests on github.
+
 ## What exactly is the GLM?
 The general linear model is a unified statistical framework that allows us to think about all of the above analyses (and much more) with a single concise formula:
 
-$Y = \beta X + \varepsilon$
+$$Y = \beta X + \varepsilon$$
 
 where $Y$ represents a dependent variable (DV) or a set of DVs, $\beta$ represents a set of regression coefficients in addition to the constant, $X$ represents an independent variable (IV) or a set of IVs, and $\varepsilon$ represents the error around the model.
 
@@ -46,10 +48,7 @@ For each analysis, the traditional approach will be performed first followed by 
 
 ## What won't this book cover?
 This book won't go into assumptions of the inferential tests or exhaustively its respective formulas. 
-This book will also not exhaustively review data manipulation, transformations, and visualization in R as there are other books that already do this well (e.g., [R for Data Science by Wickham & Grolemund](http://r4ds.had.co.nz/). This book is meant to be an living open-source book that can be edited by others. 
+This book will also not exhaustively review data manipulation, transformations, and visualization in R as there are other books that already do this well (e.g., <a href="http://r4ds.had.co.nz/" target="_blank">R for Data Science by Wickham & Grolemund</a>).
 
 ## Why R?
 We chose to use R to analyze and write this book because R forces us to write out how we performed our analyses (and write helpful comments if we're nice). These codes allow us and others to re-analyze the data exactly as we have. This is not always the case with statistical softwares that use GUIs.
-
-## Why should we should to you guys?
-We are neuroscientist that regular utilize statsistics. We have had to self-teach and supplement our learning of different statistical analyses and wanted to share our knowledge with others. Hopefully, making it easier and more intuitive for others.

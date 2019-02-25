@@ -1,0 +1,86 @@
+# Correlation
+
+The next analysis that we will go over is the correlation. The correlation and simple linear regression are similar with the only difference being that the esimate of the slope is standardized. 
+
+The correlation that is typically taught is the Pearson correlation, which is the correlation between two continuous variables. However, despite the difference in correlation nomenclature for different variable types, all correlations are similarly applied in the GLM approach. 
+
+As a side note, this is also the chapter that people associate the phrase "correlation is not causation." This phrase is correct and should be thoughtfully considered; however, all statistical analyses are looking at how variables relate (or correlate or covary) with each other. Thus, the phrase "correlation is not causation" is about research design rather than statistical analysis.
+
+Given that the simple linear regression and correlation are similar, we can use the same example from the [previous chapter][Simple Linear Regression], where we were interested in determining if there was a relationship (or correlation) between the number of years since a professor has had their Ph.D and their salary. Since, this is the same question, we will be using the same [`datasetSalaries`][Salaries Dataset] dataset.
+
+## Null and research hypotheses
+
+### Traditional approach
+$$H_0: \rho = 0$$
+$$H_1: \rho \ne 0$$
+
+where $\rho$ represents the population correlation value (Note: $r$ represents the estimated population correlation value or sample correlation value.)
+
+The null hypothesis states that there is no correlation between the amount of years since earning a Ph.D. and their salary, or similarly the relationship is equal to 0. While the research hypothesis states there is a correlation, or equivalently the relationship is not equal to 0.
+
+### GLM approach
+$$Model: Z_{salary} = \beta_0 + \beta_1*Z_{years.since.phd} + \varepsilon$$
+$$H_0: \beta_1 = 0$$
+$$H_1: \beta_1 \ne 0$$
+
+where Z is the standardized (i.e., z-scored) version of that particular variable. As a reminder, z-scoring converts a variable to have a mean of 0 and a standard deviation of 1, but its distribution is unchanged.
+
+In this example, the correlation value ($r$) is simply a standardized slope. Thus, standardizing both the DV and IV standardizes the slope. In other words, $r$ is the standardized form of $b$. (Note: The estimated standardized slope within the regression context is unfortunately referred to by the same symbol as the true population regression coefficient symbol, $\beta$.)
+
+## Statistical analysis
+
+### Traditional approach
+
+Using the traditional approach, we can test the correlation by using the `cor.test` function. The first input is the IV (`yrs.since.phd`) and the second input is the DV (`salary`). However, the order is essentially arbitrary and can be switched. Notice that in each input, we also included the name of the dataset (i.e., `datasetSalaries`) before each variable, which is seperated by a `$`. The `$` calls an object within a larger object. In this case, the `$` calls the object or variable `yrs.since.phd` within the larger object of the `datasetSalaries` dataset. 
+
+```{r}
+cor.test(datasetSalaries$yrs.since.phd, datasetSalaries$salary)
+```
+
+The new statistic that is shown in this analysis is the correlation (`cor`) and the `95 percent confidence interval`. The correlation is the estimated correlation, $r$, which equals `0.42`. The 95% confidence interval represents our probabilistic confidence (i.e., 95% confident) that our true population correlation, $\rho$, would fall between the values of `0.33` and `0.50`.
+
+### GLM approach
+
+To perform a correlation using the GLM approach, we can again use the `lm` function. 
+```{r}
+model <- lm(scale(salary) ~ scale(yrs.since.phd), data = datasetSalaries)
+```
+Remember, both the DV and IV need to be standardized so that our estimates are also standardized. Luckily, we can standardize both `salary` and `yrs.since.phd` directly in the formula by using the `scale` function.
+
+The table that most aligns with the correlation output is the coefficients table and not the ANOVA source table, so we will only be using the `summary` function for this analysis. However, we could use the `Anova` function to obtain the ANOVA source table if desired.
+```{r}
+summary(model)
+```
+Since the estimates are standardized, the units are in standard deviations rather than its original metric.
+
+For example, the slope represents the standard deviation unit change in Y for every one standard deviation unit increase in X. In this specific example, the slope of `scale(yrs.since.phd)` represents the standard deviation unit change in `salary` for every one standard deviation unit increase `yrs.since.phd`. In other words, there is a `0.42` standard deviation unit increase in salary for every one standard deviation unit increase in the number of years a professor has had their Ph.D.
+
+The intercept represents Y in standard deviation units when X is 0 standard deviation units, or at the average value of X. Remember, that 0 standard deviations (or a z-score of 0) is also the mean because z-scoring converts the mean to 0 and the standard deviation to 1. Thus, in this example, the intercept represents the predicted `salary` in standard deviation units when `yrs.since.phd` is 0 standard deviation units. In other words, for a professor that has had their Ph.D. for 0 standard deviation units (or an average number of years), their predicted salary is `-5.89e-17` standard deviation units.
+
+Given, these interpretations of standardized slopes and intercepts, they are not my preference, especially when variables have easily interpreted metrics. However, standardized slopes and intercepts are preferred for quickly determining its effect size as they can only range between -1 and +1. They are also preferred in comparing other predictors within and between other model as they are in a standardized metric; however, the validity of these comparisons are debated.
+
+```{r}
+confint(model)
+```
+
+Notice that in both analyses the values are identical with respect to place of rounding. The correlation $r$ value is `.42`, *t*-statistic is `9.18` with `395` degrees of freedom (df), and the *p*-value is `2.2e-16`.
+
+## Statistical decision
+Given the *p*-value of `2.2e-16` is smaller than the alpha level ($\alpha$) of `0.05`, we will `reject` the null hypothesis.
+
+## APA statement
+A correlation was performed to test if the amount years since obtaining a Ph.D. was related to their salary. The amount of years since obtaining a Ph.D. was significantly related to their salary, *r*(395) = 0.42, *p* < .001.
+
+## Visualization
+```{r, fig.cap="A scatterplot of years since Ph.D. and salary along with the line of best fit. The gray band represents the 95% CI."}
+ggplot(datasetSalaries, aes(scale(yrs.since.phd), scale(salary))) +
+  geom_point(alpha = 0.25) +
+  geom_smooth(method = "lm", color = "#3182bd") +
+  labs(
+    x = "Years since Ph.D.",
+    y = "9-Month Salary (USD)"
+  ) +
+  scale_y_continuous(labels = dollar) +
+  theme_classic()
+```
+

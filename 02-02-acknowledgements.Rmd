@@ -2,8 +2,6 @@
 
 I would like to thank:
 
-* Giuseppe Miranda (<a href="https://github.com/giuseppemiranda" target="_blank">\@giuseppemiranda</a>) for helping me review this book to make sure it wasn't gibberish.
-
 * Maria Boylan for pushing me to explain more and turning a blog into this book.
 
 * Linh Lazarus (<a href = "https://github.com/praxling" target="_blank">\@praxling</a>) for editing an earlier version of this when it was only a blog post.
