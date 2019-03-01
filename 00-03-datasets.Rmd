@@ -48,8 +48,7 @@ It's also always a good idea to examine the data numerically and visually. Let's
 
 #### Categorical Variables
 ```{r}
-plyr::count(datasetSalaries, "rank") %>%
-  kable(.)
+plyr::count(datasetSalaries, "rank")
 ```
 
 ```{r figure-rank}
@@ -62,8 +61,7 @@ ggplot(datasetSalaries, aes(rank)) +
 In this dataset, there are a lot more professors than assistant and associate professors combined.
 
 ```{r}
-plyr::count(datasetSalaries, "discipline") %>%
-  kable(.)
+plyr::count(datasetSalaries, "discipline")
 ```
 
 ```{r figure-discipline}
@@ -76,8 +74,7 @@ ggplot(datasetSalaries, aes(discipline)) +
 There are slightly more professors within the applied than the theoretical discipline (i.e., 35 more).
 
 ```{r}
-plyr::count(datasetSalaries, "sex") %>%
-  kable(.)
+plyr::count(datasetSalaries, "sex") 
 ```
 
 ```{r figure-sex}
@@ -95,8 +92,7 @@ datasetSalaries %>%
   select(yrs.since.phd, yrs.service, salary) %>%
   describe(.) %>%
   select(-n, -vars, -trimmed, -mad, -range) %>%
-  round(., 2) %>%
-  kable(.)
+  round(., 2)
 ```
 
 ```{r figure-yrs-since-phd}
@@ -198,8 +194,7 @@ datasetAnorexia <- datasetAnorexia %>%
 
 #### Categorical Variables
 ```{r}
-plyr::count(datasetAnorexia, "Treatment") %>%
-  kable(.)
+plyr::count(datasetAnorexia, "Treatment")
 ```
 
 ```{r figure-treatment}
@@ -217,8 +212,7 @@ datasetAnorexia %>%
   select(PreWeight, PostWeight) %>%
   describe(.) %>%
   select(-vars, -trimmed, -mad, -range) %>%
-  round(., 2) %>%
-  kable()
+  round(., 2)
 ```
 
 ```{r figure-preweight}

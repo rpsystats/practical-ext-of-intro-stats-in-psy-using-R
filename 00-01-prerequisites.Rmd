@@ -2,7 +2,7 @@
 
 ## Knowledge
 
-This book assumes that readers have taken or have an understanding of introductory univariate statistics in psychology. I will only briefly cover and review some concepts, but the emphasis will be on thinking about these statistics within the perspective of the GLM framework and how to apply it in R. Thus, readers who do not have this knowledge, may or may not find this book useful. 
+This book assumes that readers have taken or have an understanding of introductory univariate statistics in psychology. I will only briefly cover and review some concepts, but the emphasis will be on thinking about these statistics within the perspective of the GLM framework and how to apply it in R. Thus, readers who do not have this knowledge may or may not find this book useful. 
 
 A fantastic book to learn the fundamentals of statistics is <A href="https://www.amazon.com/Data-Analysis-Comparison-Approach-Regression-dp-1138819832/dp/1138819832/ref=mt_paperback?_encoding=UTF8&me=&qid=" target="_blank">Data Analysis by Judd, McClelland, & Ryan</A>.
 

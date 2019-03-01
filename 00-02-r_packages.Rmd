@@ -15,7 +15,7 @@ The main packages that we will use throughout the book are:
 6. `MASS` : Additional open access datasets
 7. `scales`: Convert numbers into dollars
 
-Note: The description of each package is only a description of how we will use each package. Each package can perform many more functions than I have described. I recommend breifly reading them by typing `??name of package` to read its help page (e.g., `??psych`).
+Note: The description of each package is only a description of how we will use each package. Each package can perform many more functions than I have described. I recommend briefly reading them by typing `??name of package` to read its help page (e.g., `??psych`).
 
 ## Install R Packages
 To install a package, we can enter the command `install.packages("name of package")`. For example, to install the `psych` package, we would type `install.packages("psych")`. 
