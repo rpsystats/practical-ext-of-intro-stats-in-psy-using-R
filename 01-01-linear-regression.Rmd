@@ -57,7 +57,7 @@ The intercept can also be tested and its null and research hypotheses are:
 $$H_0: \beta_0 = 0$$
 $$H_1: \beta_0 \ne 0$$
 
-The null hypothesis states that the intercept is equal to 0. In otherwords, the value of $Y$ when $X$ is 0 is not different than 0. Specifically, in this example, the salary of professors who have earned their Ph.D. for less than a year is essentially equal to \$0. (Note: Zero represents professors who have just earned their Ph.D. up to those who have earned their Ph.D. for less than a year because `yrs.since.phd` was collected as integers and anything less than a year would be coded as 0.)
+The null hypothesis states that the intercept is equal to 0. In other words, the value of $Y$ when $X$ is 0 is not different than 0. Specifically, in this example, the salary of professors who have earned their Ph.D. for less than a year is essentially equal to \$0. (Note: Zero represents professors who have just earned their Ph.D. up to those who have earned their Ph.D. for less than a year because `yrs.since.phd` was collected as integers and anything less than a year would be coded as 0.)
 
 The research hypothesis states that the intercept is not equal to 0. In other words, the value of $Y$ when $X$ is 0 is different than 0. Specifically, in this example, the salary of professors who have earned their Ph.D. for less than a year is essentially different than (or not equal to) \$0.
 
@@ -87,9 +87,9 @@ We can look at the variable of interest in the first column and read across that
 
 For example, let's first examine the statistics associated with the variable `(Intercept)`. The sums of squares (`Sum Sq`, which is also abbreviated as $SS$) associated with the `(Intercept)` is `8.37e+11`, the degrees of freedom (`Df`, specifically, degrees of freedom reduced) is `1`, the *F*-statistic (`F value`) is 1099.71, and the p-value (`Pr>F`) is `< 2.2e-16`.
 
-The `F value` or *F*-statistic conceptually provides a ratio of explained and unexplained variability to unexplained variability. Explained variability is how much the DV can be explained by IVs while unexplained variability is how much variabily is not explained by the DV.  
+The `F value` or *F*-statistic conceptually provides a ratio of explained and unexplained variability to unexplained variability. Explained variability is how much the DV can be explained by IVs while unexplained variability is how much variability is not explained by the DV.  
 
-The mathmatical formula of the *F*-statistic can conceptually be thought of as:
+The mathematical formula of the *F*-statistic can conceptually be thought of as:
 
 $$F = \frac{explained\ variability}{unexplained\ variability}$$
 
@@ -99,7 +99,7 @@ However, if the IV(s) can explain the DV, the *F*-statistic will be larger than 
 
 In other words, the higher the *F*-statistic, the more the IV(s) explain(s) the variability in the DV compared to its inability to explain the DV. 
 
-Thus, the interpretation of the *F*-statistic of the `(Intercept)` is that the `(Intercept)` can explain the variability in `salary` `1099.71` times more than the `(Intercept)`'s inability to explain the varaibility in salary. If interested in the mathematical formula and its calculation, see the footnote at the bottom of the page [^1].
+Thus, the interpretation of the *F*-statistic of the `(Intercept)` is that the `(Intercept)` can explain the variability in `salary` `1099.71` times more than the `(Intercept)`'s inability to explain the variability in salary. If interested in the mathematical formula and its calculation, see the footnote at the bottom of the page [^1].
 
 [^1]: `(Intercept)`: $$F = \frac{MSR}{MSE} = \frac{\frac{SSR}{df_R}}{\frac{SSE}{df_E}} = \frac{\frac{8.37e11}{1}}{\frac{2.99e11}{395}} = \frac{8.34e11}{7.58e8} = 1099.71$$
 
@@ -116,7 +116,7 @@ The *p*-value associated with `yrs.since.phd` is also `< 2.2e-16` with identical
 
 <br> 
 
-We can also obtain the coeffecients table by using the `summary` function.
+We can also obtain the coefficients  table by using the `summary` function.
 ```{r}
 summary(model)
 ```
@@ -129,7 +129,7 @@ Again, let's first take a look at the statistics associated with the `(Intercept
 
 The `Estimate` of the `(Intercept)` is the predicted intercept value, $b_0 = 91718.7$. Thus, the predicted `salary` when $yrs.since.phd = 0$ is $91,718.70. In other words, when a professor has had their Ph.D. for less than a year, their salary is predicted to be \$91,718.70.
 
-The `t value` or *t*-statistic is similar to the *F*-statistic, and can also be conceptually thought of as the ratio of systematic differences to unsystematic differences. The *t*-statistic is equal to the square root of the *F*-statistic when the degrees of freedom is 1 [^3], [^4]. Thus, the *t*-statistic interpetation is that the `(Intercept)` explains the variability in `salary` `33.162` times more than its inability to explain `salary`.
+The `t value` or *t*-statistic is similar to the *F*-statistic, and can also be conceptually thought of as the ratio of systematic differences to unsystematic differences. The *t*-statistic is equal to the square root of the *F*-statistic when the degrees of freedom is 1 [^3], [^4]. Thus, the *t*-statistic interpretation is that the `(Intercept)` explains the variability in `salary` `33.162` times more than its inability to explain `salary`.
 
 [^3]: `(Intercept)`: $$t = \frac{Estimate}{Std.\ Error} = \frac{91718.7}{2765.8} = 33.16$$
 [^4]: `(Intercept)`: $$t = \sqrt{F} = \sqrt{1099.71} = 33.16$$
