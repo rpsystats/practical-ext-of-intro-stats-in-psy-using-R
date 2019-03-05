@@ -18,7 +18,7 @@ where $Y$ is the dependent (or response) variable, $\beta_0$ is the intercept, $
 
 We will use the terms dependent variable (DV) and response variable interchangeably throughout the book. We will also use the terms independent variable (IV) or predictor variable interchangeably.
 
-$\beta$ represents the true population value, while $b$ represents the unstandardized estimate of the true population value that we will obtain from our analysis. For example, $\beta_1$ represents the true population slope, while $b_1$ represents the unstandardized estimate of the true population slope.
+$\beta$ represents the true population value, while $b$ represents the unstandardized estimate of the true population value that we will obtain from our analysis. For example, $\beta_1$ represents the true population slope, while $b_1$ represents the unstandardized estimate of the true population slope (or sample).
 
 Thus, a predicted model (as opposed to the above true hypothesized model) would be written as:
 
@@ -34,7 +34,7 @@ where $b$ is the intercept, and $m$ is the slope.
 
 The intercept and slope have the **same** meaning as they did in algebra. The intercept represents the value of $Y$ when $X$ is 0, and the slope represents the change in $Y$ ($\Delta Y$) over the change in $X$ ($\Delta X$). In other words, the intercept represents the value of the DV when the IV is 0, and the slope represents the change in the DV over the change in the IV.
 
-Note that the $b$ in the slope-intercept form is not the same and should not be confused with the $b$ in the simple linear regression. Unfortunately, using the same symbol for different terms and using different symbols for the same term is prevalent in statistics.
+Note that the $b$ in the slope-intercept form is not the same and should not be confused with the $b$ in the simple linear regression. The $b$ in the simple linear regression is the slope, while the $b$ in the slope-intercept form is the intercept. Unfortunately, using the same symbol for different terms and using different symbols for the same term is prevalent in statistics.
 
 For a practical example of the simple linear regression, let's say that we were interested in examining if there is a relationship between the amount of years since a professor has earned their Ph.D. and their salary.
 
@@ -77,10 +77,13 @@ We will save the analysis into an object named `model`. `model` can be any name 
 
 <br>
 
-We can obtain the ANOVA source table by using the `Anova` function within the `cars` package.
+We can obtain the ANOVA source table by using the `Anova` function within the `cars` package. 
+
 ```{r}
 Anova(model, type = 3)
 ```
+
+Note: We prefer the `Anova` function with a capitol **A** over the `anova` function with a lowercase **a** because we can specify the type of sum of squares. Breifly, The sum of squares in the `anova` function is type I sums of squares and cannot be changed while we can specify type III sums of squares using the `Anova` function. In short, type I sums of squares performs a sequential test while type III sums of squares performs a simultaneous test. In other words, type I sums of squares partials out shared infomation between the IVs sequentially, while type III sums of squares partials out information shared between each IV from each other simulataneously from the start. The results from using type I and type III sums of squares will be the same if there is only one IV. However, if there is more than one IV, only the last IV will be the same using either type I and type III sums of squares since all information from prior IVs will be partialled out.
 
 ### How do we read the ANOVA source table?
 We can look at the variable of interest in the first column and read across that particular variable's row for its statistical information.
@@ -134,7 +137,7 @@ The `t value` or *t*-statistic is similar to the *F*-statistic, and can also be 
 [^3]: `(Intercept)`: $$t = \frac{Estimate}{Std.\ Error} = \frac{91718.7}{2765.8} = 33.16$$
 [^4]: `(Intercept)`: $$t = \sqrt{F} = \sqrt{1099.71} = 33.16$$
 
-The *p*-value or `Pr(>|t|)` of `<2e-16` is the probability of obtaining that particular *t*-statistic or more extreme assuming that the null hypothesis is true, which is the same value from the ANOVA source table.
+The *p*-value or `Pr(>|t|)` of `<2e-16` is the probability of obtaining that particular *t*-statistic or a value more extreme than the *t*-statistic assuming that the null hypothesis is true, which is the same value from the ANOVA source table.
 
 Let's also examine statistics for `yrs.since.phd`. The `Estimate` of `yrs.since.phd` is `985.3`, the `Std. Error` is `107.4`, the `t value` is `9.18`, and the `Pr(>|t|)` is `<2e-16`.
 
