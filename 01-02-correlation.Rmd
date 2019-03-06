@@ -1,12 +1,12 @@
 # Correlation
 
-The next analysis that we will go over is the correlation. The correlation and simple linear regression are similar with the only difference being that the esimate of the slope is standardized. 
+The next analysis that we will go over is the correlation. The correlation and simple linear regression are similar with the only difference being that the estimate of the slope is standardized. 
 
 The correlation that is typically taught is the Pearson correlation, which is the correlation between two continuous variables. However, despite the difference in correlation nomenclature for different variable types, all correlations are similarly applied in the GLM approach. 
 
 As a side note, this is also the chapter that people associate the phrase "correlation is not causation." This phrase is correct and should be thoughtfully considered; however, all statistical analyses are looking at how variables relate (or correlate or covary) with each other. Thus, the phrase "correlation is not causation" is about research design rather than statistical analysis.
 
-Given that the simple linear regression and correlation are similar, we can use the same example from the [previous chapter][Simple Linear Regression], where we were interested in determining if there was a relationship (or correlation) between the number of years since a professor has had their Ph.D and their salary. Since, this is the same question, we will be using the same [`datasetSalaries`][Salaries Dataset] dataset.
+Given that the simple linear regression and correlation are similar, we can use the same example from the [previous chapter][Simple Linear Regression], where we were interested in determining if there was a relationship (or correlation) between the number of years since a professor has had their Ph.D. and their salary. Since, this is the same question, we will be using the same [`datasetSalaries`][Salaries Dataset] dataset.
 
 ## Null and research hypotheses
 
