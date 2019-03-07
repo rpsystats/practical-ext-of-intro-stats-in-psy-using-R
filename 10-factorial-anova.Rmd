@@ -1,0 +1,188 @@
+# Factorial ANOVA
+
+The factorial ANOVA, which tests more than one categorical IV, is an extension of the one-way ANOVA, which only tests one categorical IV. We can also think of the one-way ANOVA as a special case of the factorial ANOVA. In addition to testing the main effects of the categorical IV, the factorial ANOVA also tests the interactions of the categorical IVs.
+
+For example, let's say in addition to the question we asked in the [independent samples *t*-test][Independent Samples *t*-Test] chapter (i.e., are salaries of professors different depending on their discipline?). Let's also say that we were interested in two more questions: 
+
+* Does the salary of professors depend on their sex?
+* Does the relationship between salary of professors and their discpline also depend on their sex?
+
+The first question is the overall effect of a categorical IV, which is known as a main effect. The second question is the interaction of the two main effects (i.e., discipline and sex) and is automatically formed and tested in traditional factorial ANOVA.
+
+(Note: Depending on our specific research questions, the interaction term may or not be needed. Thus, the automatic formation of the interaction within the traditional factorial ANOVA may not always be beneficial. Using the GLM approach gives us the flexibility to include or not include interaction terms.)
+
+For this example, we will again use the [`datasetSalaries`][Salaries Dataset] dataset.
+
+Before we continue, let's again check the contrasts of both variables, and make them orthogonal.
+
+```{r}
+contrasts(datasetSalaries$discipline)
+```
+
+```{r}
+contrasts(datasetSalaries$discipline) <- cbind(AppliedvTheoretical = c(-1 / 2, 1 / 2))
+```
+
+```{r}
+contrasts(datasetSalaries$discipline)
+```
+
+```{r}
+contrasts(datasetSalaries$sex)
+```
+
+```{r}
+contrasts(datasetSalaries$sex) <- cbind(FemalevMale = c(-1 / 2, 1 / 2))
+```
+
+```{r}
+contrasts(datasetSalaries$sex)
+```
+
+## Null and research hypotheses
+
+Given that there are a total of three questions of interest, there will also be three pairs of null and research hypotheses.
+
+### Traditional Approach
+1. Main Effect of Discipline
+<BR>$H_0: \mu_{Applied} = \mu_{Theoretical}$
+<BR>$H_1: \mu_{Applied} \ne \mu_{Theoretical}$
+<BR><BR>The null hypothesis states that there is no difference in a professor's salary whether they work in an applied discipline compared to a theoretical discipline on average across sex. The research hypothesis states that there is salary difference in professors in the applied discipline compared to the theoretical discipline on average across sex. 
+
+2. Main Effect of Sex
+<BR>$H_0: \mu_{Female} = \mu_{Male}$
+<BR>$H_1: \mu_{Female} \ne \mu_{Male}$
+<BR><BR>The null hypothesis states there is no salary difference in professors that are female compared to those that are male on average across discipline. The research hypothesis states there is a salary difference in professors that are female compared to those that are male on average across discipline. 
+
+3. Main Interaction Effect of Discipline by Sex
+<BR>$H_0: \mu_{Female_{Applied}} - \mu_{Female_{Theoretical}} = \mu_{Male_{Applied}} - \mu_{Male_{Theoretical}}$
+<BR>$H_0: \mu_{Female_{Applied}} - \mu_{Female_{Theoretical}} \ne \mu_{Male_{Applied}} - \mu_{Male_{Theoretical}}$
+<BR><BR>The null hypothesis states that the effect of discipline (i.e., the difference of theoretical and applied) are the same for males and females. In other words, the relationship between a professor's salary and their discipline does not also change depending on their sex. The research hypothesis states that the relationship between a professor's salary and their discipline does change based on their sex.
+<BR><BR>If we were interested in determining if the relationship between sex and salary depended on discipline, we could swap the subscripts so that sex is the subscript of discipline.
+
+### GLM Approach
+$Model: Salary = \beta_0 + \beta_1*Discipline + \beta_2*Sex + \beta_3*Discipline*Sex + \varepsilon$
+
+1. Main Effect of Discipline
+<BR>$H_0: \beta_1 = 0$
+<BR>$H_1: \beta_1 \ne 0$
+<BR><BR>The null hypothesis states that the slope associated with discipline is 0. Since, the difference of our contrast is 1, the slope represents the mean salary difference between discipline on average across sex. In other words, the null hypothesis states that there is no difference in a professor's salary based on their discipline on average across sex. The research hypothesis states that there is a difference in a professor's salary based on their discpline on average across sex.
+
+2. Main Effect of Sex
+<BR>$H_0: \beta_2 = 0$
+<BR>$H_1: \beta_2 \ne 0$
+<BR><BR>The null hypothesis states that the slope associated with sex is 0. Since, the difference of our contrast is 1, the slope represents the mean salary difference between sex on average across discipline. In other words, the null hypothesis states a professor's salary is not related to their sex on average across their discipline. The research hypothesis states that the a professor's salary is related to their sex on average across their discipline.
+
+3. Main Interaction Effect of Discipline by Sex
+<BR>$H_0: \beta_3 = 0$
+<BR>$H_1: \beta_3 \ne 0$
+<BR><BR>The null hypothesis states that the slope associated with the interaction of discipline and sex is 0. Slopes associated with interactions can be thought of as changes in the slope associated with one IV included in the interaction for every 1 unit of another IV included in the interaction. In other words, if we calculated the slope between salary and discipline for just female professors and then calculated the slope between salary and discipline for just male professors, $\beta_3$ represents the difference in these slopes. Since, the difference of our contrast for sex is 1, the slope represents the difference in the slope between salary and discipline between males and females. The null hypothesis states that the relationship between a professor's salary and their discipline does not change based on their sex. The research hypothesis states that the relationship between a professor's salary and their discipline does change based on their sex.
+
+## Statistical analysis
+
+### Traditional approach
+
+To perform a traditional factorial ANOVA, we can again use the `aov` function. In the first argument, which is the formula, we can enter the IVs along with its interaction. We can indicate an interaction by placing a colon (`:`) between the two IVs we want to interact. Specifically, this will create a new interaction term by multiplying the two IVs for each subject.
+
+```{r}
+model <- aov(salary ~ discipline + sex + discipline:sex, datasetSalaries)
+```
+
+We can also more concisely place an asterik (`*`) between the two IVs to perform the exact same test (i.e., a test of an interaction along with a test for each main effect included in the interaction term).
+
+```{r}
+model <- aov(salary ~ discipline * sex, datasetSalaries)
+```
+
+```{r}
+Anova(model, type = c("III"))
+```
+
+### GLM approach
+```{r}
+model <- lm(salary ~ discipline * sex, datasetSalaries)
+```
+
+```{r}
+Anova(model, type = c("III"))
+```
+
+Note that in both analyses, the statistics are identical for each research question:
+
+1. Main Effect of Discipline
+<BR>When we look at the row for discipline, the *F*-statistic of `5.41` with `1` between degrees of freedom (df), `393` within degrees of freedom (df), and *p*-value of `.020` are identical.
+
+2. Main Effect of Sex
+<BR>When we look at the row for sex, the *F*-statistic of `1.22` with `1` between degrees of freedom (df), `393` within degrees of freedom (df), and *p*-value of `.270` are identical.
+
+3. Main Interaction Effect of Discipline by Sex
+<BR>When we look at the row for the interaction of discipline and sex (`discipline:sex`) the *F*-statistic of `1.98` with `1` between degrees of freedom (df), `393` within degrees of freedom (df), and *p*-value of `.160` are identical.
+
+```{r}
+summary(model)
+```
+
+The estimates are slightly different now with the addition of another IV and its interaction, so we will interpret the estimate of each predictor.
+
+The intercept ($b_0$) still represents the value of the DV when all IVs are 0. Since the codes of our categorical IVs are orthogonal (i.e., 0 lies in the middle of the categorical IV codes), the `(Intercept)` represents the 9-month academic salary of professors on average across discipline and sex. We don't need to mention when the interaction is also 0 because if the two variables within the interaction are zero, then the interaction must also equal 0.
+
+The estimate for the slope associated with discipline ($b_1$) represents the change in salary for every 1 unit increase in discipline when sex equals 0. Since the difference in the coding scheme of discipline is 1 and since 0 lies in-between the two codes for sex, the slope represents the mean salary difference of professors in applied compared to theoretical discipline on average across sex. Specifically, it is estimated that professors in the theoretical discipline earn `15115` less than professors in an applied discipline on average across sex. We need to say on average across sex because we have an interaction term and are allowing for the slopes to vary at different levels of each IV. 
+
+The estimate for the slope associated with sex ($b_2$) is interpreted similarly to the slope associated with discipline. The estimate for the slope associated with sex represents the change in salary for every 1 unit increase in sex when discipline equals 0. Again, since the difference in the coding scheme for sex is 1 and since 0 lies in-between the two codes for discipline, the slope represents the mean salary difference of professors that are female compared to professors that are male on average across discipline. Specifically, it is estimated that professors that are male earn `14580` more than professors that are female on average across discipline.
+
+The estimate for the slope associated with the interaction of discipline and sex ($b_3$) represents the change in the slope of salary and discipline for every 1 unit increase in sex. Since the difference in the coding scheme of sex is 1, the slope represents the sex difference of the slope of salary and discipline. Specifically, the slope of salary and discipline is estimated to decrease by `14109` for males compared to females In other words, the negative relationship between salary and discipline is expected to strengthen for males compared to females. 
+
+## Statistical decision
+Let's examine the statistical decision for each research question.
+
+1. Main Effect of Discipline
+<BR>Given the *p*-value of `.020` is less than the alpha level ($\alpha$) of 0.05, we will `reject` the null hypothesis. 
+
+2. Main Effect of Sex
+<BR>Given the *p*-value of `.270` is greater than the alpha level ($\alpha$) of 0.05, we will `retain` (or fail to reject) the null hypothesis. 
+
+3. Main Effect of Discipline by Sex
+<BR>Given the *p*-value of `.160` is greater than the alpha level ($\alpha$) of 0.05, we will `retain` (or fail to reject) the null hypothesis.
+
+## APA statement
+A factorial Analysis of Variance (ANOVA) was performed to test if 1) the salary of professors was different depending on their discipline, 2) the salary of professors was different depending on their sex, and 3) the relationship between salary of professors and their sex depending on their discipline. There was significant main effect of discipline on salary, *F*(1,393), *p* = .003. There was also a significant main effect of sex on salary, *F*(1,393), *p* = .004. However, the relationship between salary of professors and their sex did not change depending on their discipline, *F*(1,393), *p* = .160.
+
+Note: Post-hoc analyses should be conducted for significant main effects that consists of three or more levels and/or significant interactions.
+
+## Visualization
+```{r, fig.cap="A dot plot of the 9-months salaries of professors by their discipline and sex. Respectively for each discipline and sex, the dot represents the mean and the bars represent the 95% CI."}
+# calculate descriptive statistics along with the 95% CI
+dataset_summary <- datasetSalaries %>%
+  group_by(discipline, sex) %>%
+  summarize(
+    mean = mean(salary),
+    sd = sd(salary),
+    n = n(),
+    sem = sd / sqrt(n),
+    tcrit = abs(qt(0.05 / 2, df = n - 1)),
+    ME = tcrit * sem,
+    LL95CI = mean - ME,
+    UL95CI = mean + ME
+  )
+
+# plot
+ggplot(dataset_summary, mapping = aes(discipline, mean, group = sex, shape = sex)) +
+  geom_point(
+    position = position_dodge(.05),
+    size = 3
+  ) +
+  geom_line(aes(linetype = sex),
+    position = position_dodge(.05)
+  ) +
+  geom_errorbar(aes(ymin = dataset_summary$LL95CI, ymax = dataset_summary$UL95CI),
+    position = position_dodge(.05),
+    width = 0
+  ) +
+  labs(
+    x = "Discipline",
+    y = "9-Month Academic Salary (USD)"
+  ) +
+  ylim(c(min(dataset_summary$LL95CI), max(dataset_summary$UL95CI))) +
+  scale_y_continuous(labels = scales::dollar) +
+  theme_classic()
+```

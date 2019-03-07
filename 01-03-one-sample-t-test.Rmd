@@ -39,12 +39,12 @@ To perform the traditional one-sample *t*-test, we can use the `t.test` function
 t.test(x = datasetSalaries$salary, mu = 50221)
 ```
 
-From this output, we can see that the *t*-statistic (`t`) is `41.762`, degrees of freedom (`df`) is `396`, and the `p-value` is `2.2e-16`.
+From this output, we can see that the *t*-statistic (`t`) is `41.762`, degrees of freedom (`df`) is `396`, and the `p-value` is `2.2e-16`, with professor's mean salary at \$113,706.50.
 
 The *t*-statistic and its respective *p*-value can be interpreted as we previously saw in the [simple linear regression][How do we read the coefficients table?] chapter. We will spend more time explaining these values in the next section.
 
 ### GLM Approach
-Since we have an *a priori* hypothesis (i.e., median income of \$50,221), we will need to first manipulate the DV by point deviating from this *a priori* value. Specifically, we will need to subtract \$50,221 from each salary score. Luckily, we can do that within the same line. We have to do this because the `lm` function always tests regression estimates including the intercept against 0 ($H_0 = 0$). By point deviating from \$50,221, we are now asking if the mean of the new point deviated scores is different than 0, where 0 now equals \$50,221. We can do this directly inside the `lm` function. To test the intercept, we simply place a `1` as the predictor.
+Since we have an *a priori* hypothesis (i.e., median income of \$50,221), we will need to first manipulate the DV by point deviating from this *a priori* value. To do this, we will need to subtract \$50,221 from each salary score. Luckily, we can do that directly within the `lm` fucntion. We have to point-deviate because the `lm` function always tests regression estimates including the intercept against 0 ($H_0 = 0$). By point deviating from \$50,221, we are now asking if the mean of the new point deviated scores is different than 0, where 0 now equals \$50,221. To test the intercept, we simply place a `1` as the predictor.
 
 ```{r}
 model <- lm(salary - 50221 ~ 1, datasetSalaries)
@@ -63,7 +63,7 @@ Let's go over the *t*-statistic and *p*-value to reinforce these concepts.
 
 Remember that the *t*-statistic represents the systematic difference compared to the unsystematic difference. In this case, the systematic difference is the difference between professor's mean salary and U.S. median income (i.e., \$113,707 - \$50,221) and the unsystematic difference is standard error of the mean of the sample (in other words, random variability in the sample).
 
-Also, the *p*-value represents the probability of finding a *t*-statistic or more extreme assuming that the null hypothesis is true. In this case, the probability of finding a *t*-statistic of `41.76` or more extreme is `<2.2e-16`, which is extremely small and not likely to occur by chance. 
+Also, the *p*-value represents the probability of finding a particular *t*-statistic or *t*-statistic more extreme assuming that the null hypothesis is true. In this case, the probability of finding a *t*-statistic of `41.76` or more extreme is `<2.2e-16`, which is extremely small and not likely to occur by chance. 
 
 
 ## Statistical decision
@@ -73,7 +73,7 @@ Given that the *p*-value of `2.2e-16` is smaller the alpha level ($\alpha$) of `
 A one sample *t*-test was performed to test if the salary of professors was different than the national U.S. median of \$50,221. Professor salaries (*M* = \$`r format(scales::comma(round(describe(datasetSalaries)["salary","mean"],2)),scientific=F)`, *SD* = \$`r format(scales::comma(round(describe(datasetSalaries)["salary","sd"],2)),scientific=F)`) were significantly higher than the national U.S. median income, *t*(396) = 41.76, *p* < .001.
 
 ## Visualization
-```{r fig-one-sample-t-test, fig.cap="A dot plot of the salary of professors where the dot is the mean salary of professors and the whiskers are the 95% CI."}
+```{r fig-one-sample-t-test, fig.cap="A dot plot of the salary of professors where the dot is the mean salary of professors and the whiskers are the 95% CI.\nNote: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points."}
 # calculate descriptive statistics along with the 95% CI
 dataset_summary <- datasetSalaries %>%
   dplyr::summarize(
@@ -88,15 +88,25 @@ dataset_summary <- datasetSalaries %>%
   )
 
 # plot
-ggplot(dataset_summary, mapping = aes("", mean)) +
+ggplot(datasetSalaries, mapping = aes("", salary)) +
+  geom_jitter(alpha = 0.1, width = 0.05) +
   geom_hline(
     yintercept = 50221,
     alpha = .5,
     linetype = "dashed"
   ) +
-  geom_pointrange(
+  geom_errorbar(aes(
     ymin = dataset_summary$LL95CI,
     ymax = dataset_summary$UL95CI
+  ),
+  width = 0.01,
+  color = "#3182bd",
+  alpha = .5
+  ) +
+  geom_point(aes("", dataset_summary$mean),
+    size = 2,
+    color = "#3182bd",
+    alpha = .5
   ) +
   labs(
     x = "",

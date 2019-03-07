@@ -1,0 +1,188 @@
+# One-Way ANOVA {#one-way-anova}
+
+Next, let's go over the one-way ANOVA, which is used when we have two or more independent groups. Specifically, the one-way ANOVA determines if there is a difference in any of the group level means. Given that the analysis can also be used for two indepedent groups, this anaylsis could be used instead of the independent samples *t*-test.
+
+For example, let's say that we were interested in determining if salary was significantly different for professors of different ranks (i.e., assistant professor, associate professor, and professor).
+
+For this example, we will use the [`datasetSalaries`][Salaries Dataset].
+
+As mentioned in the independent samples *t*-test, when dealing with categorical predictors, it is always good idea to check the coding scheme of the categorical variable.
+
+```{r, include=F, echo=F, eval=T}
+contrasts(datasetSalaries$rank) <- contr.treatment(3)
+```
+
+```{r}
+contrasts(datasetSalaries$rank)
+```
+
+## Coding Categorical Variables {#coding-categorical-variables}
+
+When coding categorical variables, the number of contrasts ($m$) is equal to $k-1$ where $k$ is the number of levels (or factors) of an IV. In our example, `rank` has 3 levels (i.e., `Assistant Professor`, `Associate Professor`, and `Professor`) and thus has 2 contrasts [^1]. 
+
+[^1]: $m_{rank}=k_{rank}-1=3-1=2$
+
+This the reason why in a one-way ANOVA, we have $k-1$ between degrees of freedom. Thus, contrasts are always being performed, either explicitly if told or using a software package's default coding scheme (e.g., dummy coding for R) when testing a main effect of a categorical IV.
+
+### Dummy Coding
+Since `rank` has not yet been explicitly defined, `rank` is dummy coded (i.e., for each contrast, a level is coded as 1 and all other levels are coded as 0). In dummy coding, one level will always be coded as 0 in both contrasts. By default, the first level of the categorical IV in alphabetical order will be coded as 0. Thus, in our example, `Assistant Professor`, which is the first level of `rank` in alphabetical order is coded as `0`. 
+
+When interpreting dummy coding contrasts, for each contrast, it is the level that is coded as 1 compared to the level that is coded as 0 in both contrasts. In our dummy coding scheme, the first contrast is comparing `Associate Professor`, which is coded as 1 in the first contrast, to `Assistant Professor`, which is coded as 0 in both contrasts. The second contrast is comparing `Professor`, which is coded as 1 in the second contrast, to `Assistant Professor`, which is again coded as 0 in both contrasts. 
+
+### Orthogonal Coding {#othogon}
+However, my preference is to use *a prioi* orthogonal contrast coding. This coding scheme allows us to create our own *a priori* contrasts of interest to answer more specific questions. 
+
+For example, let's say that in addition to determining if there is a difference in salary of professors based on their rank that we were also interested in more specific questions of interest such as:
+
+1. Determining if there is a difference in salaries of professors that are tenured (`Associate Professor` and `Professor`) compared to those that are untenured (`Assistant Professor`).
+2. Determining if there is a difference in salaries of professors that are `Associate Professors` compared to `Professors`.
+
+```{r}
+contrasts(datasetSalaries$rank) <- cbind(
+  TenuredvAssistant = c(-2, 1, 1),
+  AssociatevProfessor = c(0, -1, 1)
+)
+```
+
+To make a coding scheme orthogonal, we need to make sure that 1) each contrast equals zero and that 2) the sum of each contrast product is 0. 
+
+For example, to make the tenured vs. untenured professor contrast, we can code `Assistant Professor` as `-2` and both `Associate Professor` and `Professor` as `1` and assign it the name `TenuredvAssistant`. It's best to use signs that go in the direction of our prediction so that it's reflected in our estimates. Since, we expect that tenured professors have higher salaries, tenured professors are assigned the positive value and assistant professors are assigned the negative value. Notice that the sum of the `TenuredvAssistant` contrast also adds up to 0 [^2].
+
+[^2]: $\Sigma Contrast\_Codes_{TenuredvAssistant} = -2 + 1 + 1 = 0$
+
+To make the next contrast of `Associate Professor` compared to `Professor`, we can code `Assistant Professor` as `0`, `Associate Professor` as `-1`, and `Professor` as `1` and give it the name `AssociatevProfessor`. Notice again that the sum of the `AssociatevProfessor` contrast adds up to 0 [^3].
+
+[^3]: $\Sigma Contrast\_Code_{AssociatevProfessor} = 0 -1 + 1 = 0$
+
+Since both contrasts sum to zero, we can now check if the sum of products for each level across contrasts equals 0. In other words, we multiply the values across each contrast pair for each level and add them together. For example, the product across the contrasts of `Assistant Professor` is $2*0 = 0$, `Associate Professor` is $1*-1=-1$, and `Professor` is $1*1=1$. If we add them together, we get $0-1+1=0$ [^4].
+
+[^4]: $\Sigma Contrast_{TenuredvAssistant}*Contrast_{AssociatevProfessor} = (2*0) + (1*-1) + (1*1) = 0$
+
+To take orthogonal contrast coding a step further and make our estimates readily interpretable as the mean difference of that contrast, we can ensure that the difference of each contrast is 1. To do this, we can divide each contrast code by the number of values that are not coded as 0 for each contrast. For example, since all 3 codes of the `TenuredvAssistant` contrast are not equal to 0, we can divide by 3. Similarly, for the `AssociatevProfessor` contrast, we can divide each contrast code by 2 since 2 of the contrast codes are not equal to 0. Note that this is a rule of thumb and should be verified if contrasts are more complex.
+
+```{r}
+contrasts(datasetSalaries$rank) <- cbind(
+  TenuredvAssistant = c(-2 / 3, 1 / 3, 1 / 3),
+  AssociatevProfessor = c(0, -1 / 2, 1 / 2)
+)
+```
+
+```{r}
+contrasts(datasetSalaries$rank)
+```
+
+## Null and research hypothses
+
+### Traditional approach
+$H_0: \mu_{Assistant\_Professors} = \mu_{Associate\_Professors} = \mu_{Professors}$
+<BR>$H_1: \mu_{Assistant\_Professors} \ne \mu_{Associate\_Professors} \ne \mu_{Professors}$
+<BR>or $\mu_{Assistant\_Professors} \ne \mu_{Associate\_Professors} = \mu_{Professors}$ 
+<BR>or $\mu_{Assistant\_Professors} \ne \mu_{Professors} = \mu_{Associate\_Professors}$ 
+<BR>or $\mu_{Associate\_Professors} \ne \mu_{Professors} = \mu_{Assistant\_Professors}$ 
+
+The null hypothesis states that there is no difference in salaries between professors of different ranks. The research hypothesis is stating that the salary of least one rank of professors is different than the others. Thus, the multiple options for a research hypothesis.
+
+### GLM approach
+$Model: Salary = \beta_0 + \beta_1*TenuredvAssistant + \beta_2*AssociatevProfessor + \varepsilon$
+<BR>$H_0: \beta_1 = \beta_2 = 0$
+<BR>$H_1: \beta_1 \ne 0$ and/or $\beta_2 \ne 0$
+
+In the model, we now have both contrasts as predictors. The main effect of rank is testing both predictors of `TenuredvAssistant` and `AssociatevProfessor`. 
+
+Given, our orthogonal contrast coding scheme, the intercept ($\beta_0$) is now the mean 9-month academic salary of professors on average across rank. 
+
+The slope of `TenuredvAssistant` ($\beta_1$) represents the mean difference in the 9-month academic salary for professors that are tenured compared to assistant professors. 
+
+The slope of `AssociatevProfessor` ($\beta_2$) represents the mean difference in the 9-month academic salary for professors that are associate professors compared to professors.
+
+Thus, the null hypothesis states that there is difference in salary of tenured versus untenured professors and there is also no difference in salary of associate professors compared to professors. In other words, there is no difference in salary based on a professor's rank. The alternative hypothesis states that there is a difference in either the salary of tenured versus untenured professors or associate professor versus professor, or both. If only one contrast is significant, then that contrast must be strong enough to mask the non-significance of the other contrast.
+
+Given the vagueness of the research hypothesis (i.e., the significance can be a single contrast or both contrasts), we can look at each individual slope to see if which is actually significant since we explicitly defined its associated contrasts beforehand.
+
+Thus, our null and research hypotheses for these specific questions would be the following for each slope:
+
+$H_0: \beta_1 = 0$
+<BR>$H_1: \beta_1 \ne 0$
+
+$H_0: \beta_2 = 0$
+<BR>$H_1: \beta_2 \ne 0$
+
+Each of these null and research hypothesis pairs are also known as 1 degree of freedom tests since we are only testing 1 contrast at a time.
+
+## Statistical analysis
+
+### Traditional approach
+To perform a traditional One-Way ANOVA, we can use the `aov` function. The first argument in the `aov` function is the formula and the second argument is the name of the dataset. Notice, that in the formula, we do not have to specifiy both contrasts because we have already applied the coding scheme directly to the categorical IV of `rank`.
+```{r}
+model <- aov(salary ~ rank, datasetSalaries)
+```
+
+```{r}
+Anova(model, type = c("III"))
+```
+
+Traditionally, if the main of effect of a categorical IV was significant, we would perform a post-hoc test (e.g., Tukey's Honest Significant Difference [HSD]). In our case, `rank` is significant as the *p*-value of `2.2e-16` is less than our alpha of `0.05` and we would perform a post-hoc test to determine where the difference in salary actually comes from.
+
+To perform Tukey's HSD, we could use the `TukeyHSD` function and provide the ANOVA analysis of the model as the input. The Tukey HSD essentially performs multiple independent samples *t*-tests of all possible pairs of the levels of a categorical IV but uses the error term from the ANOVA analysis in its calculation. 
+```{r}
+TukeyHSD(model)
+```
+
+Given that this post-hoc test compares all pairs of levels without any *a priori* assumptions (similarly, for other post-hoc tests), is another reason to use the *a priori* orthogonal contrast coding scheme.
+
+### GLM approach
+```{r}
+model <- lm(salary ~ rank, datasetSalaries)
+```
+
+```{r}
+Anova(model, type = c("III"))
+```
+
+Note that in both analyses, the *F*-statistic of `128.22` with `2` between degrees of freedom (df), `394` within degrees of freedom (df), and *p*-value of `2.2e-16` are identical.
+
+```{r}
+summary(model)
+```
+
+The estimate for the `(Intercept)` represents the mean 9-month academic salary on average across `rank`.
+
+The estimate for the `rankTenuredvAssistant` represents the mean difference in 9-month academic salary of tenured professors compared to assistant professors. Specifically, the 9-month academic salary of tenured professors was $29,548 more than assisatant professors.
+
+The estimate for teh `rankAssociatevProfessor` represents the mean difference in 9-month academic salary of associate professors compared to assistant professors. Specifically, the 9-month academic salary of professors was $32,896 more than associate professors. 
+
+## Statistical decision
+Given the *p*-value of `< 2.2e-16` for `rank` is less than the alpha level ($\alpha$) of 0.05, we will `reject` the null hypothesis.
+
+Notice both slopes are also significant, and we will also `reject` the null hypothesis for each.
+
+## APA statement
+An Analysis of Variance (ANOVA) using *a priori* orthogonal contrast coding was performed to test if there was a difference in the 9-month academic salary between 1) tenured (i.e., associate professors and professors) compared to untenured professors (i.e., assistant professors) and 2) associate professors compared to professors. There was a significant main effect of rank on salary, *F*(2, 394) = 128.22, *p* < .001. Specific to our contrasts, tenured professors earned significantly more than untenured professors, *b* = 29548, *t*(1, 394) = 8.892, *p* < .001. Professors also earned significantly more than professors, *b* = 32896, *t*(1, 394) = 9.997, *p* < .001.
+
+## Visualization
+
+```{r, fig.cap="A dot plot of the 9-month academic salaries of professors by their rank within the university (i.e., assistant professor, associate professor, and professor). Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI."}
+# calculate descriptive statistics along with the 95% CI
+dataset_summary <- datasetSalaries %>%
+  group_by(rank) %>%
+  summarize(
+    mean = mean(salary),
+    sd = sd(salary),
+    n = n(),
+    sem = sd / sqrt(n),
+    tcrit = abs(qt(0.05 / 2, df = n - 1)),
+    ME = tcrit * sem,
+    LL95CI = mean - ME,
+    UL95CI = mean + ME
+  )
+
+# plot
+ggplot(dataset_summary, aes(rank, mean)) +
+  geom_pointrange(ymin = dataset_summary$LL95CI, ymax = dataset_summary$UL95CI, color = "#3182bd") +
+  labs(
+    x = "Rank",
+    y = "9-Month Academic Salary (USD)"
+  ) +
+  scale_y_continuous(labels = scales::dollar) +
+  theme_classic()
+```

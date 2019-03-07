@@ -1,0 +1,97 @@
+# Independent Samples *t*-Test {#independent-samples-t-test}
+
+The independent samples *t*-test compares the means of two different (or independent) samples.
+
+For example, let's say that we were interested in determining if the salary of professors was different depending on whether they were part of an applied or theoretical discipline.
+
+For this example, we will use the [`datasetSalaries`][Salaries Dataset] dataset.
+
+## Null and research hypotheses
+
+### Traditional approach
+$H_0: \mu_{Applied} - \mu_{Theoretical} = 0$ or equivalently $\mu_{Applied} = \mu_{Theoretical}$
+<BR>$H_1: \mu_{Applied} - \mu_{Theoretical} \ne 0$ or equivalently $\mu_{Applied} \ne \mu_{Theoretical}$
+
+The null hypothesis states there is no difference in the salary of professors who are in an applied discipline compared to a theoretical discipline. The research hypothesis states there is a difference in the salary of professors who are in an applied discipline compared to a theoretical discipline. 
+
+### GLM approach
+$Model: Salary = \beta_0 + \beta_1*Discipline + \varepsilon$
+<BR>$H_0: \beta_1 = 0$
+<BR>$H_1: \beta_1 \ne 0$
+
+In addition to the intercept ($\beta_0$), we now have a predictor `discipline` along with its associated slope ($\beta_1$). In this model, the slope represents the change in `salary` over the change in `discipline`, and the intercept ($\beta_{0}$) in represents the value when `discipline` is 0.
+
+The null hypothesis states that the slope associated with `discipline` is equal to zero. In other words, there is no difference in the salary of professors who are in different disciplines. The alternative hypothesis states that the slope associated with `discipline` is not equal to zero. In other words, there is a difference in the salary of professors that are in different disciplines.
+
+Given that the interpretation of the slope and intercept depends on how `discipline` is coded, it is always a good idea to check how this categorical IV is coded by using the `contrasts` function.
+
+```{r}
+contrasts(datasetSalaries$discipline)
+```
+We can see that `Applied` is coded as `0` and `Theoretical` is coded as `1`. Given, that the difference of coding scheme of `discipline` is 1, the slope represents the mean difference in salary for professors that are in theoretical discplines compared to applied disciplines [^1]. Additionally, the intercept ($\beta_{0}$) represents the mean salary of professors in the applied discipline since 0 represents `Applied` in the `discipline` coding scheme. 
+
+[^1]: $b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline}$
+
+If we wanted to change the coding scheme and code `Theoretical` as `0` and `Applied` as `1`, then our interpretation of the intercept would be the mean salary of profressors in the theoretical discipline since `Theoretical` is now 0. 
+
+The slope would still have the same interpretation of the mean difference of salary for professors in different disciplines as the difference in the coding scheme is still 1. However, the sign would change.
+If the difference in `discpline` was not equal to 1, the estimate would equal the inverse of the difference. For example, if `Applied` was coded as `-1` and `Theoretical` was coded as `1`, the difference of `discipline` is now 2 and the estimate would represent half of the salary mean difference. Thus, if we multiplied the estimate by 2, we would obtain the mean salary difference. Even though the estimate changes, the test statistic and p-value will not change as the intercept and error will adjust proportionally to the coding scheme of the categorical IV (as long as they are unique values).
+
+This type of coding scheme is known as dummy coding, which is R's default coding scheme for categorical variables. Specifically, dummy coding is when one level of an IV is coded as 1 and all others are coded as 0. However, there are other coding schemes such as effects (also known deviant), helmert, polynomial, and orthogonal. For a good description of different contrasts in addition to applying and intrepreting them, check out this <a href="https://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/" target="_blank">website</a>. We will also go over coding categorical variables in more detail in the [next chapter][Coding Categorical Variables].
+
+## Statistical analysis
+
+### Traditional approach
+To perform the traditional independent samples *t*-test, we can again use the `t.test` function. However, we will now enter the formula of the GLM into the first argument.
+```{r}
+t.test(datasetSalaries$salary ~ datasetSalaries$discipline, var.equal = TRUE)
+```
+
+(Note: For this test, we will assume the variances of each group are equal or not significantly different from each other; however, this should be tested.)
+
+### GLM approach
+```{r}
+model <- lm(salary ~ discipline, datasetSalaries)
+```
+
+```{r}
+summary(model)
+```
+
+Note that in both analyses, the *t*-statistic of `-3.14` with `395` degrees of freedom (df), and *p*-value of `.002` are identical. Also, notice that if we subtract the mean salary for professors in the theoretical discipline from the applied discipline from the *t*-test results, we obtain the estimate in the GLM results (i.e.,`$108548.40` - `$118,028.70` = `$-9,480.30`).
+
+## Statistical decision
+Given the *p*-value of `.002` is less than the alpha level ($\alpha$) of 0.05, we will `reject` the null hypothesis. 
+
+## APA statement
+An independent samples *t*-test was performed to test if salary of professors was different depending on their discipline. The salary of professors was significantly higher for professors in theoretical disciplines (*M* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Theoretical"]][,"mean"],2)),scientific=F)`, *SD* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Theoretical"]][,"sd"],2)),scientific=F)`) than for professors in applied disciplines (*M* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Applied"]][,"mean"],2)),scientific=F)`, *SD* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Applied"]][,"sd"],2)),scientific=F)`), *t*(395) = , *p* = .002.
+
+## Visualization
+```{r, fig.cap = "A dot plot of the 9-month academic salaries of professors that are in applied compared to theoretical discplines. With respect to each discpline, the dot represents the mean salary and the bars represent the 95% CI."}
+# calculate descriptive statistics along with the 95% CI
+dataset_summary <- datasetSalaries %>%
+  group_by(discipline) %>%
+  summarize(
+    mean = mean(salary),
+    sd = sd(salary),
+    n = n(),
+    sem = sd / sqrt(n),
+    tcrit = abs(qt(0.05 / 2, df = n - 1)),
+    ME = tcrit * sem,
+    LL95CI = mean - ME,
+    UL95CI = mean + ME
+  )
+
+# plot
+ggplot(dataset_summary, mapping = aes(discipline, mean)) +
+  geom_pointrange(ymin = dataset_summary$LL95CI, ymax = dataset_summary$UL95CI) +
+  labs(
+    x = "Discipline",
+    y = "9-Month Academic Salary (USD)"
+  ) +
+  theme_classic() +
+  scale_y_continuous(
+    labels = scales::dollar,
+    limits = c(min(dataset_summary$LL95CI), max(dataset_summary$UL95CI))
+  )
+```
