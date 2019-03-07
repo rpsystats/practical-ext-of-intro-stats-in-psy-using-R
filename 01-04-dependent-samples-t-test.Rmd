@@ -76,8 +76,8 @@ dataset_summary <- datasetAnorexia %>%
   )
 
 ggplot(datasetAnorexia, aes("", PostWeight - PreWeight)) +
-  geom_hline(yintercept = 0, alpha = .5, linetype = "dashed") +
-  geom_jitter(alpha = 0.25, width = 0.05) +
+  geom_hline(yintercept = 0, alpha = .1, linetype = "dashed") +
+  geom_jitter(alpha = 0.25, width = 0.02) +
   geom_errorbar(aes(ymin = dataset_summary$LL95CI, ymax = dataset_summary$UL95CI), width = 0.01, color = "#3182bd", alpha = 0.5) +
   geom_point(aes("", dataset_summary$mean), size = 3, color = "#3182bd", alpha = 0.5) +
   labs(x = "", y = "Weight Difference (lbs)") +

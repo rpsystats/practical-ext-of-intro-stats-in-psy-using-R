@@ -89,7 +89,7 @@ dataset_summary <- datasetSalaries %>%
 
 # plot
 ggplot(datasetSalaries, mapping = aes("", salary)) +
-  geom_jitter(alpha = 0.1, width = 0.05) +
+  geom_jitter(alpha = 0.1, width = 0.1) +
   geom_hline(
     yintercept = 50221,
     alpha = .5,
