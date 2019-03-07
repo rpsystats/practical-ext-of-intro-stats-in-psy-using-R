@@ -8,7 +8,7 @@ set -e
 git config --global user.email "epongpipat@gmail.com"
 git config --global user.name "Ekarin Eric Pongpipat"
 
-git clone -b gh-pages https://github.com/epongpipat/epongpipat.github.io.git book-practical-ext-of-intro-stats-in-psy-using-R
+git clone -b gh-pages https://${GITHUB_PAT}@github.com/${TRAVIS_REPO_SLUG}.git book-practical-ext-of-intro-stats-in-psy-using-R
 cd book-practical-ext-of-intro-stats-in-psy-using-R
 cp -r ../_book/* ./
 git add --all *
