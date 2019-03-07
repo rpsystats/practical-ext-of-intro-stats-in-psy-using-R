@@ -1,6 +1,6 @@
 # Correlation
 
-The next analysis that we will go over is the correlation. The correlation and simple linear regression are similar with the only difference being that the estimate of the slope is standardized. 
+The next analysis that we will go over is the correlation. The correlation and simple linear regression are similar with the only difference being that the estimate of the slope of the correlation is standardized, while the estimate of the slope of the simple linear regression is unstandardized.
 
 The correlation that is typically taught is the Pearson correlation, which is the correlation between two continuous variables. However, despite the difference in correlation nomenclature for different variable types, all correlations are similarly applied in the GLM approach. 
 
@@ -25,7 +25,7 @@ $$H_1: \beta_1 \ne 0$$
 
 where Z is the standardized (i.e., z-scored) version of that particular variable. As a reminder, z-scoring converts a variable to have a mean of 0 and a standard deviation of 1, but its distribution is unchanged.
 
-In this example, the correlation value ($r$) is simply a standardized slope. Thus, standardizing both the DV and IV standardizes the slope. In other words, $r$ is the standardized form of $b$. (Note: The estimated standardized slope within the regression context is unfortunately referred to by the same symbol as the true population regression coefficient symbol, $\beta$.)
+In this example, the correlation value ($r$) is simply a standardized slope ($\beta$). Thus, standardizing both the DV and IV standardizes the slope. In other words, $r$ is the standardized form of $b$. (Note: The estimated standardized slope within the regression context is unfortunately referred to by the same symbol as the true population regression coefficient symbol, $\beta$.)
 
 ## Statistical analysis
 
