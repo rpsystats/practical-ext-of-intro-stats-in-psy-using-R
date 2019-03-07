@@ -50,7 +50,7 @@ Since we have an *a priori* hypothesis (i.e., median income of \$50,221), we wil
 model <- lm(salary - 50221 ~ 1, datasetSalaries)
 ```
 
-We will again only look at the coefficients table using the `summary` function for this test and subsequent *t*-tests. Although, the ANOVA source table is not typically assocaited with this test, we could always examine it if desired using the `Anova` function.
+We will again only look at the coefficients table using the `summary` function for this test and subsequent *t*-tests. Although, the ANOVA source table is not typically associated with this test, we could always examine it if desired using the `Anova` function.
 
 ```{r}
 summary(model)
@@ -61,7 +61,7 @@ Notice that in both approaches that the values are identical with respect to the
 
 Let's go over the *t*-statistic and *p*-value to reinforce these concepts. 
 
-Remember that the *t*-statistic represents the systemetic difference compared to the unsystematic difference. In this case, the systematic difference is the difference between professor's mean salary and U.S. median income (i.e., \$113,707 - \$50,221) and the unsystematic difference is standard error of the mean of the sample (in other words, random variability in the sample).
+Remember that the *t*-statistic represents the systematic difference compared to the unsystematic difference. In this case, the systematic difference is the difference between professor's mean salary and U.S. median income (i.e., \$113,707 - \$50,221) and the unsystematic difference is standard error of the mean of the sample (in other words, random variability in the sample).
 
 Also, the *p*-value represents the probability of finding a *t*-statistic or more extreme assuming that the null hypothesis is true. In this case, the probability of finding a *t*-statistic of `41.76` or more extreme is `<2.2e-16`, which is extremely small and not likely to occur by chance. 
 
