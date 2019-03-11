@@ -1,6 +1,6 @@
 # One-Way ANOVA {#one-way-anova}
 
-Next, let's go over the one-way ANOVA, which is used when we have two or more independent groups. Specifically, the one-way ANOVA determines if there is a difference in any of the group level means. Given that the analysis can also be used for two indepedent groups, this anaylsis could be used instead of the independent samples *t*-test.
+Next, let's go over the one-way ANOVA, which is used when we have two or more independent groups. Specifically, the one-way ANOVA determines if there is a difference in any of the group level means. Given that the analysis can also be used for two independent groups, this analysis could be used instead of the independent samples *t*-test.
 
 For example, let's say that we were interested in determining if salary was significantly different for professors of different ranks (i.e., assistant professor, associate professor, and professor).
 
@@ -22,7 +22,7 @@ When coding categorical variables, the number of contrasts ($m$) is equal to $k-
 
 [^1]: $m_{rank}=k_{rank}-1=3-1=2$
 
-This the reason why in a one-way ANOVA, we have $k-1$ between degrees of freedom. Thus, contrasts are always being performed, either explicitly if told or using a software package's default coding scheme (e.g., dummy coding for R) when testing a main effect of a categorical IV.
+This is the reason why in a one-way ANOVA, we have $k-1$ between degrees of freedom. Thus, contrasts are always being performed, either explicitly if told or using a software package's default coding scheme (e.g., dummy coding for R) when testing a main effect of a categorical IV.
 
 ### Dummy Coding
 Since `rank` has not yet been explicitly defined, `rank` is dummy coded (i.e., for each contrast, a level is coded as 1 and all other levels are coded as 0). In dummy coding, one level will always be coded as 0 in both contrasts. By default, the first level of the categorical IV in alphabetical order will be coded as 0. Thus, in our example, `Assistant Professor`, which is the first level of `rank` in alphabetical order is coded as `0`. 
@@ -71,7 +71,7 @@ contrasts(datasetSalaries$rank) <- cbind(
 contrasts(datasetSalaries$rank)
 ```
 
-## Null and research hypothses
+## Null and research hypothesis
 
 ### Traditional approach
 $H_0: \mu_{Assistant\_Professors} = \mu_{Associate\_Professors} = \mu_{Professors}$
@@ -89,7 +89,7 @@ $Model: Salary = \beta_0 + \beta_1*TenuredvAssistant + \beta_2*AssociatevProfess
 
 In the model, we now have both contrasts as predictors. The main effect of rank is testing both predictors of `TenuredvAssistant` and `AssociatevProfessor`. 
 
-Given, our orthogonal contrast coding scheme, the intercept ($\beta_0$) is now the mean 9-month academic salary of professors on average across rank. 
+Given our orthogonal contrast coding scheme, the intercept ($\beta_0$) is now the mean 9-month academic salary of professors on average across rank. 
 
 The slope of `TenuredvAssistant` ($\beta_1$) represents the mean difference in the 9-month academic salary for professors that are tenured compared to assistant professors. 
 
@@ -97,7 +97,7 @@ The slope of `AssociatevProfessor` ($\beta_2$) represents the mean difference in
 
 Thus, the null hypothesis states that there is difference in salary of tenured versus untenured professors and there is also no difference in salary of associate professors compared to professors. In other words, there is no difference in salary based on a professor's rank. The alternative hypothesis states that there is a difference in either the salary of tenured versus untenured professors or associate professor versus professor, or both. If only one contrast is significant, then that contrast must be strong enough to mask the non-significance of the other contrast.
 
-Given the vagueness of the research hypothesis (i.e., the significance can be a single contrast or both contrasts), we can look at each individual slope to see if which is actually significant since we explicitly defined its associated contrasts beforehand.
+Given the vagueness of the research hypothesis (i.e., the significance can be a single contrast or both contrasts), we can look at each individual slope to see which is actually significant since we explicitly defined its associated contrasts beforehand.
 
 Thus, our null and research hypotheses for these specific questions would be the following for each slope:
 
@@ -112,7 +112,7 @@ Each of these null and research hypothesis pairs are also known as 1 degree of f
 ## Statistical analysis
 
 ### Traditional approach
-To perform a traditional One-Way ANOVA, we can use the `aov` function. The first argument in the `aov` function is the formula and the second argument is the name of the dataset. Notice, that in the formula, we do not have to specifiy both contrasts because we have already applied the coding scheme directly to the categorical IV of `rank`.
+To perform a traditional One-Way ANOVA, we can use the `aov` function. The first argument in the `aov` function is the formula and the second argument is the name of the dataset. Notice, that in the formula, we do not have to specifyboth contrasts because we have already applied the coding scheme directly to the categorical IV of `rank`.
 ```{r}
 model <- aov(salary ~ rank, datasetSalaries)
 ```
@@ -147,9 +147,9 @@ summary(model)
 
 The estimate for the `(Intercept)` represents the mean 9-month academic salary on average across `rank`.
 
-The estimate for the `rankTenuredvAssistant` represents the mean difference in 9-month academic salary of tenured professors compared to assistant professors. Specifically, the 9-month academic salary of tenured professors was $29,548 more than assisatant professors.
+The estimate for the `rankTenuredvAssistant` represents the mean difference in 9-month academic salary of tenured professors compared to assistant professors. Specifically, the 9-month academic salary of tenured professors was $29,548 more than assistant professors.
 
-The estimate for teh `rankAssociatevProfessor` represents the mean difference in 9-month academic salary of associate professors compared to assistant professors. Specifically, the 9-month academic salary of professors was $32,896 more than associate professors. 
+The estimate for the `rankAssociatevProfessor` represents the mean difference in 9-month academic salary of associate professors compared to assistant professors. Specifically, the 9-month academic salary of professors was $32,896 more than associate professors. 
 
 ## Statistical decision
 Given the *p*-value of `< 2.2e-16` for `rank` is less than the alpha level ($\alpha$) of 0.05, we will `reject` the null hypothesis.
@@ -157,7 +157,7 @@ Given the *p*-value of `< 2.2e-16` for `rank` is less than the alpha level ($\al
 Notice both slopes are also significant, and we will also `reject` the null hypothesis for each.
 
 ## APA statement
-An Analysis of Variance (ANOVA) using *a priori* orthogonal contrast coding was performed to test if there was a difference in the 9-month academic salary between 1) tenured (i.e., associate professors and professors) compared to untenured professors (i.e., assistant professors) and 2) associate professors compared to professors. There was a significant main effect of rank on salary, *F*(2, 394) = 128.22, *p* < .001. Specific to our contrasts, tenured professors earned significantly more than untenured professors, *b* = 29548, *t*(1, 394) = 8.892, *p* < .001. Professors also earned significantly more than professors, *b* = 32896, *t*(1, 394) = 9.997, *p* < .001.
+An Analysis of Variance (ANOVA) using *a priori* orthogonal contrast coding was performed to test if there was a difference in the 9-month academic salary between 1) tenured (i.e., associate professors and professors) compared to untenured professors (i.e., assistant professors) and 2) associate professors compared to professors. There was a significant main effect of rank on salary, *F*(2, 394) = 128.22, *p* < .001. Specific to our contrasts, tenured professors earned significantly more than untenured professors, *b* = $29,548, *t*(1, 394) = 8.892, *p* < .001. Professors also earned significantly more than professors, *b* = $32,896, *t*(1, 394) = 9.997, *p* < .001.
 
 ## Visualization
 
