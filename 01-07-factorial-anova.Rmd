@@ -5,7 +5,7 @@ The factorial ANOVA, which tests more than one categorical IV, is an extension o
 For example, let's say in addition to the question we asked in the [independent samples *t*-test][Independent Samples *t*-Test] chapter (i.e., are salaries of professors different depending on their discipline?). Let's also say that we were interested in two more questions: 
 
 * Does the salary of professors depend on their sex?
-* Does the relationship between salary of professors and their discpline also depend on their sex?
+* Does the relationship between salary of professors and their discipline also depend on their sex?
 
 The first question is the overall effect of a categorical IV, which is known as a main effect. The second question is the interaction of the two main effects (i.e., discipline and sex) and is automatically formed and tested in traditional factorial ANOVA.
 
@@ -66,7 +66,7 @@ $Model: Salary = \beta_0 + \beta_1*Discipline + \beta_2*Sex + \beta_3*Discipline
 1. Main Effect of Discipline
 <BR>$H_0: \beta_1 = 0$
 <BR>$H_1: \beta_1 \ne 0$
-<BR><BR>The null hypothesis states that the slope associated with discipline is 0. Since, the difference of our contrast is 1, the slope represents the mean salary difference between discipline on average across sex. In other words, the null hypothesis states that there is no difference in a professor's salary based on their discipline on average across sex. The research hypothesis states that there is a difference in a professor's salary based on their discpline on average across sex.
+<BR><BR>The null hypothesis states that the slope associated with discipline is 0. Since, the difference of our contrast is 1, the slope represents the mean salary difference between discipline on average across sex. In other words, the null hypothesis states that there is no difference in a professor's salary based on their discipline on average across sex. The research hypothesis states that there is a difference in a professor's salary based on their discipline on average across sex.
 
 2. Main Effect of Sex
 <BR>$H_0: \beta_2 = 0$
@@ -145,7 +145,7 @@ Let's examine the statistical decision for each research question.
 <BR>Given the *p*-value of `.160` is greater than the alpha level ($\alpha$) of 0.05, we will `retain` (or fail to reject) the null hypothesis.
 
 ## APA statement
-A factorial Analysis of Variance (ANOVA) was performed to test if 1) the salary of professors was different depending on their discipline, 2) the salary of professors was different depending on their sex, and 3) the relationship between salary of professors and their sex depending on their discipline. There was significant main effect of discipline on salary, *F*(1,393), *p* = .003. There was also a significant main effect of sex on salary, *F*(1,393), *p* = .004. However, the relationship between salary of professors and their sex did not change depending on their discipline, *F*(1,393), *p* = .160.
+A factorial Analysis of Variance (ANOVA) was performed to test if 1) the salary of professors was different depending on their discipline, 2) the salary of professors was different depending on their sex, and 3) the relationship between salary of professors and their sex depending on their discipline. There was significant main effect of discipline on salary, *F*(1,393) = 9.08, *p* = .003. There was also a significant main effect of sex on salary, *F*(1,393) = 8.45, *p* = .004. However, the relationship between salary of professors and their sex did not change depending on their discipline, *F*(1,393) = 1.98, *p* = .160.
 
 Note: Post-hoc analyses should be conducted for significant main effects that consists of three or more levels and/or significant interactions.
 

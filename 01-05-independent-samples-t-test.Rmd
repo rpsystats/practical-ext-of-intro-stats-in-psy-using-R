@@ -14,7 +14,7 @@ $H_0: \mu_{Applied} - \mu_{Theoretical} = 0$ or equivalently $\mu_{Applied} = \m
 <BR>$H_1: \mu_{Applied} - \mu_{Theoretical} \ne 0$ or equivalently $\mu_{Applied} \ne \mu_{Theoretical}$
 </center>
 
-The null hypothesis states there is no difference in the salary of professors who are in an applied discipline compared to a theoretical discipline. The research hypothesis states there is a difference in the salary of professors who are in an applied discipline compared to a theoretical discipline. 
+The null hypothesis states there is no difference in the salary of professors who are in an applied discipline compared to a theoretical discipline. The research hypothesis states there is a difference in the salary of professors who are in an applied discipline compared to a theoretical discipline.
 
 ### GLM approach
 $$Model: Salary = \beta_0 + \beta_1*Discipline + \varepsilon$$
@@ -31,7 +31,7 @@ The interpretation of the slope and intercept depends on how `discipline` is cod
 contrasts(datasetSalaries$discipline)
 ```
 
-We can see that `Applied` is coded as `0` and `Theoretical` is coded as `1`. Given, that the difference of coding scheme of `discipline` is 1, the slope represents the mean difference in salary for professors that are in theoretical disciplines compared to applied disciplines [^1]. Additionally, the intercept ($\beta_{0}$) represents the mean salary of professors in the applied discipline since 0 represents `Applied` in the `discipline` coding scheme. 
+We can see that `Applied` is coded as `0` and `Theoretical` is coded as `1`. Given, that the difference of coding scheme of `discipline` is 1, the slope represents the mean difference in salary for professors that are in theoretical disciplines compared to applied disciplines [^1]. Additionally, the intercept ($\beta_{0}$) represents the mean salary of professors in the applied discipline since 0 represents `Applied` in the `discipline` coding scheme.
 
 [^1]: $$b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{1-0} = \frac{\Delta Salary}{1} = \Delta Salary$$
 
@@ -79,14 +79,14 @@ model <- lm(salary ~ discipline, datasetSalaries)
 summary(model)
 ```
 
-Notice that in both analyses, the *t*-statistic (`t value`) of `-3.14` with `395` degrees of freedom (df), and *p*-value of `.002` are identical to the output from the `t.test` function. 
+Notice that in both analyses, the *t*-statistic (`t value`) of `-3.14` with `395` degrees of freedom (df), and *p*-value of `.002` are identical to the output from the `t.test` function.
 
 We can also see that if we subtract the mean salary for professors in the theoretical discipline from the applied discipline from the `t.test` results, we obtain the same mean difference in the `estimate` in the GLM results (i.e., `$118,028.70` - `$108548.40` =  `$9,480.30`).
 
 Furthermore, we can also see that the intercept is the mean of the mean salary from both those in the applied discipline and theoretical discipline ($\frac{118028.70+108548.40}{2} = 113288.50$).
 
 ## Statistical decision
-Given the *p*-value of `.002` is less than the alpha level ($\alpha$) of 0.05, we will `reject` the null hypothesis. 
+Given the *p*-value of `.002` is less than the alpha level ($\alpha$) of 0.05, we will `reject` the null hypothesis.
 
 ## APA statement
 An independent samples *t*-test was performed to test if salary of professors was different depending on their discipline. The salary of professors was significantly higher for professors in applied disciplines (*M* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Applied"]][,"mean"],2)),scientific=F)`, *SD* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Applied"]][,"sd"],2)),scientific=F)`) than for professors in theoretical disciplines (*M* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Theoretical"]][,"mean"],2)),scientific=F)`, *SD* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Theoretical"]][,"sd"],2)),scientific=F)`), *t*(395) = , *p* = .002.
