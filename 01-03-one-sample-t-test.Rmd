@@ -73,7 +73,7 @@ Given that the *p*-value of `2.2e-16` is smaller the alpha level ($\alpha$) of `
 A one sample *t*-test was performed to test if the salary of professors was different than the national U.S. median of \$50,221. Professor salaries (*M* = \$`r format(scales::comma(round(describe(datasetSalaries)["salary","mean"],2)),scientific=F)`, *SD* = \$`r format(scales::comma(round(describe(datasetSalaries)["salary","sd"],2)),scientific=F)`) were significantly higher than the national U.S. median income, *t*(396) = 41.76, *p* < .001.
 
 ## Visualization
-```{r fig-one-sample-t-test, fig.cap="A dot plot of the salary of professors where the dot is the mean salary of professors and the whiskers are the 95% CI.\nNote: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points."}
+```{r fig-one-sample-t-test, warning = F, fig.cap="A dot plot of the salary of professors where the dot is the mean salary of professors and the whiskers are the 95% CI.\nNote: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points."}
 # calculate descriptive statistics along with the 95% CI
 dataset_summary <- datasetSalaries %>%
   dplyr::summarize(
@@ -95,21 +95,23 @@ ggplot(datasetSalaries, mapping = aes("", salary)) +
     alpha = .5,
     linetype = "dashed"
   ) +
-  geom_errorbar(aes(
-    ymin = dataset_summary$LL95CI,
-    ymax = dataset_summary$UL95CI
-  ),
-  width = 0.01,
-  color = "#3182bd",
-  alpha = .5
+  geom_errorbar(
+    data = dataset_summary,
+    aes(
+      y = mean,
+      ymin = LL95CI,
+      ymax = UL95CI
+    ),
+    width = 0.01,
+    color = "#3182bd"
   ) +
-  geom_point(aes("", dataset_summary$mean),
+  geom_point(
+    data = dataset_summary, aes("", mean),
     size = 2,
-    color = "#3182bd",
-    alpha = .5
+    color = "#3182bd"
   ) +
   labs(
-    x = "",
+    x = "0",
     y = "9-Month Salary (USD)"
   ) +
   theme_classic() +

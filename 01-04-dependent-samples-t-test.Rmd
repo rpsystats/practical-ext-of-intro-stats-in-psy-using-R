@@ -61,7 +61,7 @@ Given the *p*-value of `0.004` is smaller than the alpha level ($\alpha$) of `0.
 A dependent samples *t*-test was performed to test if female patients with anorexia had changed their weight before and after the study. The female patients with anorexia significantly gained weight after the study (*M* = `r format(scales::comma(round(describe(datasetAnorexia)["PostWeight","mean"],2)),scientific=F)`, *SD* = `r format(scales::comma(round(describe(datasetAnorexia)["PostWeight","sd"],2)),scientific=F)`) compared to before the study (*M* = `r format(scales::comma(round(describe(datasetAnorexia)["PreWeight","mean"],2)),scientific=F)`, *SD* = `r format(scales::comma(round(describe(datasetAnorexia)["PreWeight","sd"],2)),scientific=F)`), *t*(71) = 2.94, *p* = .004.
 
 ## Visualization
-```{r, fig.cap="A dot plot of the weight change of female patients with anorexia before and after the study. The dot is the mean weight change and the bars represent the 95% CI. \nNote: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points."}
+```{r fig-dependent-samples-t-test, warning = F, fig.cap="A dot plot of the weight change of female patients with anorexia before and after the study. The dot is the mean weight change and the bars represent the 95% CI. \nNote: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points."}
 # calculate descriptive statistics along with the 95% CI
 dataset_summary <- datasetAnorexia %>%
   summarize(
@@ -78,9 +78,8 @@ dataset_summary <- datasetAnorexia %>%
 ggplot(datasetAnorexia, aes("", PostWeight - PreWeight)) +
   geom_hline(yintercept = 0, alpha = .1, linetype = "dashed") +
   geom_jitter(alpha = 0.25, width = 0.02) +
-  geom_errorbar(aes(ymin = dataset_summary$LL95CI, ymax = dataset_summary$UL95CI), width = 0.01, color = "#3182bd", alpha = 0.5) +
-  geom_point(aes("", dataset_summary$mean), size = 3, color = "#3182bd", alpha = 0.5) +
-  labs(x = "", y = "Weight Difference (lbs)") +
-  # ylim(c(0, 5)) +
+  geom_errorbar(data = dataset_summary, aes(y = mean, ymin = LL95CI, ymax = UL95CI), width = 0.01, color = "#3182bd") +
+  geom_point(data = dataset_summary, aes("", mean), size = 3, color = "#3182bd") +
+  labs(x = 0, y = "Weight Difference (lbs)") +
   theme_classic()
 ```

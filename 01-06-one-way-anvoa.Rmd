@@ -25,12 +25,12 @@ When coding categorical variables, the number of contrasts ($m$) is equal to $k-
 This the reason why in a one-way ANOVA, we have $k-1$ between degrees of freedom. Thus, contrasts are always being performed, either explicitly if told or using a software package's default coding scheme (e.g., dummy coding for R) when testing a main effect of a categorical IV.
 
 ### Dummy Coding
-Since `rank` has not yet been explicitly defined, `rank` is dummy coded (i.e., for each contrast, a level is coded as 1 and all other levels are coded as 0). In dummy coding, one level will always be coded as 0 in both contrasts. By default, the first level of the categorical IV in alphabetical order will be coded as 0. Thus, in our example, `Assistant Professor`, which is the first level of `rank` in alphabetical order is coded as `0`. 
+Since `rank` has not yet been explicitly defined by us yet, `rank` is dummy coded (i.e., for each contrast, a level is coded as 1 and all other levels are coded as 0). In dummy coding, one level will always be coded as 0 in both contrasts. By default, the first level of the categorical IV in alphabetical order will be coded as 0. Thus, in our example, `Assistant Professor`, which is the first level of `rank` in alphabetical order is coded as `0`. 
 
 When interpreting dummy coding contrasts, for each contrast, it is the level that is coded as 1 compared to the level that is coded as 0 in both contrasts. In our dummy coding scheme, the first contrast is comparing `Associate Professor`, which is coded as 1 in the first contrast, to `Assistant Professor`, which is coded as 0 in both contrasts. The second contrast is comparing `Professor`, which is coded as 1 in the second contrast, to `Assistant Professor`, which is again coded as 0 in both contrasts. 
 
 ### Orthogonal Coding {#othogon}
-However, my preference is to use *a prioi* orthogonal contrast coding. This coding scheme allows us to create our own *a priori* contrasts of interest to answer more specific questions. 
+However, *a prioi* orthogonal contrast coding is preferred because this coding scheme allows us to create our own *a priori* contrasts of interest to answer more specific questions. 
 
 For example, let's say that in addition to determining if there is a difference in salary of professors based on their rank that we were also interested in more specific questions of interest such as:
 
@@ -74,18 +74,22 @@ contrasts(datasetSalaries$rank)
 ## Null and research hypothses
 
 ### Traditional approach
+<center>
 $H_0: \mu_{Assistant\_Professors} = \mu_{Associate\_Professors} = \mu_{Professors}$
 <BR>$H_1: \mu_{Assistant\_Professors} \ne \mu_{Associate\_Professors} \ne \mu_{Professors}$
 <BR>or $\mu_{Assistant\_Professors} \ne \mu_{Associate\_Professors} = \mu_{Professors}$ 
 <BR>or $\mu_{Assistant\_Professors} \ne \mu_{Professors} = \mu_{Associate\_Professors}$ 
 <BR>or $\mu_{Associate\_Professors} \ne \mu_{Professors} = \mu_{Assistant\_Professors}$ 
+</center>
 
-The null hypothesis states that there is no difference in salaries between professors of different ranks. The research hypothesis is stating that the salary of least one rank of professors is different than the others. Thus, the multiple options for a research hypothesis.
+<BR>The null hypothesis states that there is no difference in salaries between professors of different ranks. The research hypothesis is stating that the salary of least one rank of professors is different than the others. Thus, the multiple options for a research hypothesis.
 
 ### GLM approach
+<CENTER>
 $Model: Salary = \beta_0 + \beta_1*TenuredvAssistant + \beta_2*AssociatevProfessor + \varepsilon$
 <BR>$H_0: \beta_1 = \beta_2 = 0$
 <BR>$H_1: \beta_1 \ne 0$ and/or $\beta_2 \ne 0$
+</CENTER>
 
 In the model, we now have both contrasts as predictors. The main effect of rank is testing both predictors of `TenuredvAssistant` and `AssociatevProfessor`. 
 
@@ -95,24 +99,24 @@ The slope of `TenuredvAssistant` ($\beta_1$) represents the mean difference in t
 
 The slope of `AssociatevProfessor` ($\beta_2$) represents the mean difference in the 9-month academic salary for professors that are associate professors compared to professors.
 
-Thus, the null hypothesis states that there is difference in salary of tenured versus untenured professors and there is also no difference in salary of associate professors compared to professors. In other words, there is no difference in salary based on a professor's rank. The alternative hypothesis states that there is a difference in either the salary of tenured versus untenured professors or associate professor versus professor, or both. If only one contrast is significant, then that contrast must be strong enough to mask the non-significance of the other contrast.
+Thus, the null hypothesis states that there is a difference in salary of tenured versus untenured professors and there is also no difference in salary of associate professors compared to professors. In other words, there is no difference in salary based on a professor's rank. The alternative hypothesis states that there is a difference in either the salary of tenured versus untenured professors or associate professor versus professor, or both. If only one contrast is significant, then that contrast must be strong enough to mask the non-significance of the other contrast.
 
 Given the vagueness of the research hypothesis (i.e., the significance can be a single contrast or both contrasts), we can look at each individual slope to see if which is actually significant since we explicitly defined its associated contrasts beforehand.
 
 Thus, our null and research hypotheses for these specific questions would be the following for each slope:
 
-$H_0: \beta_1 = 0$
-<BR>$H_1: \beta_1 \ne 0$
-
-$H_0: \beta_2 = 0$
-<BR>$H_1: \beta_2 \ne 0$
+$$H_0: \beta_1 = 0$$
+$$H_1: \beta_1 \ne 0$$
+$$H_0: \beta_2 = 0$$
+$$H_1: \beta_2 \ne 0$$
 
 Each of these null and research hypothesis pairs are also known as 1 degree of freedom tests since we are only testing 1 contrast at a time.
 
 ## Statistical analysis
 
 ### Traditional approach
-To perform a traditional One-Way ANOVA, we can use the `aov` function. The first argument in the `aov` function is the formula and the second argument is the name of the dataset. Notice, that in the formula, we do not have to specifiy both contrasts because we have already applied the coding scheme directly to the categorical IV of `rank`.
+To perform a traditional One-Way ANOVA, we can use the `aov` function. The first argument in the `aov` function is the formula and the second argument is the name of the dataset.
+
 ```{r}
 model <- aov(salary ~ rank, datasetSalaries)
 ```
@@ -128,9 +132,12 @@ To perform Tukey's HSD, we could use the `TukeyHSD` function and provide the ANO
 TukeyHSD(model)
 ```
 
-Given that this post-hoc test compares all pairs of levels without any *a priori* assumptions (similarly, for other post-hoc tests), is another reason to use the *a priori* orthogonal contrast coding scheme.
+Given that this post-hoc test compares all pairs of levels without any *a priori* assumptions (similarly, for other post-hoc tests), is another reason to use the *a priori* orthogonal contrast coding scheme. 
 
 ### GLM approach
+
+Notice, that in the formula, we do not have to specifiy both contrasts because we have already applied the coding scheme directly to the categorical IV of `rank`.
+
 ```{r}
 model <- lm(salary ~ rank, datasetSalaries)
 ```
@@ -161,7 +168,8 @@ An Analysis of Variance (ANOVA) using *a priori* orthogonal contrast coding was 
 
 ## Visualization
 
-```{r, fig.cap="A dot plot of the 9-month academic salaries of professors by their rank within the university (i.e., assistant professor, associate professor, and professor). Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI."}
+### Traditional
+```{r, warning = F, fig.cap="A dot plot of the 9-month academic salaries of professors by their rank within the university (i.e., assistant professor, associate professor, and professor). Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. \nNote: The data points are only jittered (dispersed) for easier visualization of all data points."}
 # calculate descriptive statistics along with the 95% CI
 dataset_summary <- datasetSalaries %>%
   group_by(rank) %>%
@@ -177,12 +185,141 @@ dataset_summary <- datasetSalaries %>%
   )
 
 # plot
-ggplot(dataset_summary, aes(rank, mean)) +
-  geom_pointrange(ymin = dataset_summary$LL95CI, ymax = dataset_summary$UL95CI, color = "#3182bd") +
+ggplot(datasetSalaries, aes(rank, salary)) +
+  geom_jitter(alpha = 0.1, width = 0.1) +
+  geom_errorbar(data = dataset_summary, aes(x = rank, y = mean, ymin = LL95CI, ymax = UL95CI), color = "#3182bd", width = 0.02) +
+  geom_point(dat = dataset_summary, aes(x = rank, y = mean), color = "#3182bd", size = 3) +
   labs(
     x = "Rank",
     y = "9-Month Academic Salary (USD)"
   ) +
   scale_y_continuous(labels = scales::dollar) +
   theme_classic()
+```
+
+### Orthogonal Contrast Coding
+```{r, warning = F, fig.cap="A dot plot of the 9-month academic salaries of professors by their rank within the university. Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points are only jittered (dispersed) for easier visualization of all data points."}
+datasetSalaries_long <- datasetSalaries %>%
+  mutate(professor = 1:nrow(.), 
+         TenuredvAssistant = case_when(
+    rank == "Assistant Professor" ~ -2,
+    rank == "Associate Professor" ~ 1,
+    rank == "Professor" ~ 1),
+        AssociatevProfessor = case_when(
+    rank == "Assistant Professor" ~ 0,
+    rank == "Associate Professor" ~ -1,
+    rank == "Professor" ~ 1)
+  ) %>%
+  select(professor, salary, TenuredvAssistant, AssociatevProfessor) %>%
+  reshape2::melt(., id.vars = c("professor", "salary")) %>%
+  filter(value != 0) %>%
+  rowwise() %>%
+  mutate(rank = case_when(
+    variable == "TenuredvAssistant" && value == -2 ~ "Assistant",
+    variable == "TenuredvAssistant" && value == 1 ~ "Tenured",
+    variable == "AssociatevProfessor" && value == 1 ~ "Professor",
+    variable == "AssociatevProfessor" && value == -1 ~ "Associate"
+  ))
+
+dataset_summary <- datasetSalaries_long %>%
+  group_by(variable, value) %>%
+  summarize(
+    mean = mean(salary),
+    sd = sd(salary),
+    n = n(),
+    sem = sd / sqrt(n),
+    tcrit = abs(qt(0.05 / 2, df = n - 1)),
+    ME = tcrit * sem,
+    LL95CI = mean - ME,
+    UL95CI = mean + ME
+  )
+
+ggplot(datasetSalaries_long, aes(value, salary)) +
+  geom_jitter(alpha = 0.1, width = 0.3) +
+  geom_errorbar(data = dataset_summary, aes(x = value, y = mean, ymin = LL95CI, ymax = UL95CI), color = "#3182bd", width = 0.05) + 
+  geom_line(data = dataset_summary, aes(x = value, y = mean)) +
+  geom_point(data = dataset_summary, aes(x = value, y = mean), color = "#3182bd", size = 3) +
+  geom_text(aes(label = rank, x = value, y = 0), size = 3) +
+  facet_wrap(~ variable) +
+  labs(
+    x = "Rank",
+    y = "9-Month Academic Salary (USD)"
+  ) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_continuous(breaks = seq(-3, 3, 1), limits = c(-3,3)) +
+  theme_classic() + 
+  theme(strip.background = element_blank())
+```
+
+```{r, eval = F, echo = F}
+dataset_summary_1 <- df_salaries %>%
+  group_by(TenuredvAssistant) %>%
+  summarize(
+    mean = mean(salary),
+    sd = sd(salary),
+    n = n(),
+    sem = sd / sqrt(n),
+    tcrit = abs(qt(0.05 / 2, df = n - 1)),
+    ME = tcrit * sem,
+    LL95CI = mean - ME,
+    UL95CI = mean + ME
+  )
+
+
+dataset_summary_2 <- df_salaries %>%
+  filter(AssociatevProfessor != 0) %>%
+  group_by(AssociatevProfessor) %>%
+  summarize(
+    mean = mean(salary),
+    sd = sd(salary),
+    n = n(),
+    sem = sd / sqrt(n),
+    tcrit = abs(qt(0.05 / 2, df = n - 1)),
+    ME = tcrit * sem,
+    LL95CI = mean - ME,
+    UL95CI = mean + ME
+  )
+
+mean_of_means_1 <- mean(dataset_summary_1$mean)
+
+mean_of_means_2 <- mean(dataset_summary_2$mean)
+
+ggplot(df_salaries, aes(TenuredvAssistant, salary)) +
+  geom_jitter(alpha = 0.1, width = 0.2) +
+  geom_errorbar(data = dataset_summary_1, aes(x = TenuredvAssistant, y = mean, ymin = LL95CI, ymax = UL95CI), color = "#3182bd", width = 0.05) +
+  geom_point(data = dataset_summary_1, aes(x = TenuredvAssistant, y = mean), color = "#3182bd", size = 3) +
+  geom_line(data = dataset_summary_1, aes(x = TenuredvAssistant, y = mean), color = "#3182bd") +
+  labs(
+    x = "Rank (Tenured vs Assistant)",
+    y = "9-Month Academic Salary (USD)"
+  ) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_continuous(breaks = seq(-3, 3, 1), limits = c(-3,3)) +
+  theme_classic() + 
+  annotate(geom = "text", x = -2, y = 0, label = "Assistant") +
+  annotate(geom = "text", x = 1, y = 0, label = "Tenured")
+
+figure_associate_vs_prof <- datasetSalaries %>%
+  mutate(AssociatevProfessor = case_when(
+    rank == "Assistant Professor" ~ 0,
+    rank == "Associate Professor" ~ -1,
+    rank == "Professor" ~ 1)
+  ) %>%
+  filter(AssociatevProfessor != 0) %>%
+ggplot(., aes(AssociatevProfessor, salary)) +
+  geom_jitter(alpha = 0.1, width = 0.2) +
+  geom_errorbar(data = dataset_summary, aes(x = AssociatevProfessor, y = mean, ymin = LL95CI, ymax = UL95CI), color = "#3182bd", width = 0.05) +
+  geom_point(data = dataset_summary, aes(x = AssociatevProfessor, y = mean), color = "#3182bd", size = 3) +
+  geom_line(data = dataset_summary, aes(x = AssociatevProfessor, y = mean), color = "#3182bd") +
+  labs(
+    x = "Rank (Associate vs. Full)",
+    y = "9-Month Academic Salary (USD)"
+  ) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_continuous(breaks = seq(-3, 3, 1), limits = c(-3,3)) +
+  theme_classic() + 
+  annotate(geom = "text", x = -1, y = 0, label = "Associate") +
+  annotate(geom = "text", x = 1, y = 0, label = "Professor")
+
+gridExtra::grid.arrange(figure_tenured_vs_assistant, figure_associate_vs_prof, ncol = 2)
 ```
