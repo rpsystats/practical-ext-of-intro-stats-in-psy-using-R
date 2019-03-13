@@ -86,7 +86,7 @@ $$H_1: \beta_1 \ne 0$$
 2. Main Effect of Sex
 $$H_0: \beta_2 = 0$$
 $$H_1: \beta_2 \ne 0$$
-<BR><BR>The null hypothesis states that the slope associated with sex is 0. Since, the difference of our contrast is 1, the slope represents the mean salary difference between sex on average across discipline. In other words, the null hypothesis states a professor's salary is not related to their sex on average across their discipline. The research hypothesis states that the a professor's salary is related to their sex on average across their discipline.
+<BR><BR>The null hypothesis states that the slope associated with sex is 0. Since, the difference of our contrast is 1, the slope represents the mean salary difference between sex on average across discipline. In other words, the null hypothesis states a professor's salary is not related to their sex on average across their discipline. The research hypothesis states that a professor's salary is related to their sex on average across their discipline.
 
 3. Main Interaction Effect of Discipline by Sex
 $$H_0: \beta_3 = 0$$
