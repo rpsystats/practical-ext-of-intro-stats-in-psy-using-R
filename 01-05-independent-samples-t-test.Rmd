@@ -53,7 +53,7 @@ contrasts(datasetSalaries$discipline) <- c(0.5, -0.5)
 contrasts(datasetSalaries$discipline)
 ```
 
-Note: If the difference in `discpline` was not equal to 1, the estimate would equal the fraction of the difference. For example, if `Applied` was coded as `-1` and `Theoretical` was coded as `1`, the difference of `discipline` is now 2 and the estimate would represent half of the salary mean difference [^4]. Thus, if we multiplied the estimate by 2, we would obtain the mean salary difference. Even though the estimate changes, the *t*-statistic and *p*-value will not change as the intercept and error will adjust proportionally to the coding scheme of the categorical IV (as long as they are unique values).
+Note: If the difference in `discipline` was not equal to 1, the estimate would equal the fraction of the difference. For example, if `Applied` was coded as `-1` and `Theoretical` was coded as `1`, the difference of `discipline` is now 2 and the estimate would represent half of the salary mean difference [^4]. Thus, if we multiplied the estimate by 2, we would obtain the mean salary difference. Even though the estimate changes, the *t*-statistic and *p*-value will not change as the intercept and error will adjust proportionally to the coding scheme of the categorical IV (as long as they are unique values).
 
 [^4]: $$b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{1-(-1)} = \frac{\Delta Salary}{2}$$
 
@@ -81,7 +81,7 @@ summary(model)
 
 Notice that in both analyses, the *t*-statistic (`t value`) of `-3.14` with `395` degrees of freedom (df), and *p*-value of `.002` are identical to the output from the `t.test` function.
 
-We can also see that if we subtract the mean salary for professors in the theoretical discipline from the applied discipline from the `t.test` results, we obtain the same mean difference in the `estimate` in the GLM results (i.e., `$118,028.70` - `$108548.40` =  `$9,480.30`).
+We can also see that if we subtract the mean salary for professors in the theoretical discipline from the applied discipline from the `t.test` results, we obtain the same mean difference in the `estimate` in the GLM results (i.e., `$118,028.70` - `$108,548.40` =  `$9,480.30`).
 
 Furthermore, we can also see that the intercept is the mean of the mean salary from both those in the applied discipline and theoretical discipline ($\frac{118028.70+108548.40}{2} = 113288.50$).
 
@@ -89,10 +89,10 @@ Furthermore, we can also see that the intercept is the mean of the mean salary f
 Given the *p*-value of `.002` is less than the alpha level ($\alpha$) of 0.05, we will `reject` the null hypothesis.
 
 ## APA statement
-An independent samples *t*-test was performed to test if salary of professors was different depending on their discipline. The salary of professors was significantly higher for professors in applied disciplines (*M* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Applied"]][,"mean"],2)),scientific=F)`, *SD* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Applied"]][,"sd"],2)),scientific=F)`) than for professors in theoretical disciplines (*M* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Theoretical"]][,"mean"],2)),scientific=F)`, *SD* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Theoretical"]][,"sd"],2)),scientific=F)`), *t*(395) = , *p* = .002.
+An independent samples *t*-test was performed to test if salary of professors was different depending on their discipline. The salary of professors was significantly higher for professors in applied disciplines (*M* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Applied"]][,"mean"],2)),scientific=F)`, *SD* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Applied"]][,"sd"],2)),scientific=F)`) than for professors in theoretical disciplines (*M* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Theoretical"]][,"mean"],2)),scientific=F)`, *SD* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Theoretical"]][,"sd"],2)),scientific=F)`), *t*(395) = -3.14, *p* = .002.
 
 ## Visualization
-```{r fig-independent-samples-t-test, warning = F, fig.cap = "A dot plot of the 9-month academic salaries of professors that are in applied compared to theoretical discplines. With respect to each discpline, the dot represents the mean salary and the bars represent the 95% CI. \nNote: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points."}
+```{r fig-independent-samples-t-test, warning = F, fig.cap = "A dot plot of the 9-month academic salaries of professors that are in applied compared to theoretical disciplines. With respect to each discipline, the dot represents the mean salary and the bars represent the 95% CI. \nNote: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points."}
 # calculate descriptive statistics along with the 95% CI
 dataset_summary <- datasetSalaries %>%
   mutate(discipline = ifelse(discipline == "Applied", 0.5, -0.5)) %>%
