@@ -30,7 +30,7 @@ Since `rank` has not yet been explicitly defined by us yet, `rank` is dummy code
 When interpreting dummy coding contrasts, for each contrast, it is the level that is coded as 1 compared to the level that is coded as 0 in both contrasts. In our dummy coding scheme, the first contrast is comparing `Associate Professor`, which is coded as 1 in the first contrast, to `Assistant Professor`, which is coded as 0 in both contrasts. The second contrast is comparing `Professor`, which is coded as 1 in the second contrast, to `Assistant Professor`, which is again coded as 0 in both contrasts.
 
 ### Orthogonal Coding {#othogon}
-However, *a prioi* orthogonal contrast coding is preferred because this coding scheme allows us to create our own *a priori* contrasts of interest to answer more specific questions.
+However, *a priori* orthogonal contrast coding is preferred because this coding scheme allows us to create our own *a priori* contrasts of interest to answer more specific questions.
 
 For example, let's say that in addition to determining if there is a difference in salary of professors based on their rank that we were also interested in more specific questions of interest such as:
 
@@ -135,7 +135,7 @@ Given that this post-hoc test compares all pairs of levels without any *a priori
 
 ### GLM approach
 
-Notice, that in the formula, we do not have to specifiy both contrasts because we have already applied the coding scheme directly to the categorical IV of `rank`.
+Notice, that in the formula, we do not have to specify both contrasts because we have already applied the coding scheme directly to the categorical IV of `rank`.
 
 ```{r}
 model <- lm(salary ~ rank, datasetSalaries)
