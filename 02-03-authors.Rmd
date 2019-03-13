@@ -1,9 +1,9 @@
 # Authors {-}
 
-## Ekarin Eric Pongpipat, M.A.
+## Ekarin Eric Pongpipat, M.A. {-}
 
 <a href="https://ekarinpongpipat.com/" target="_blank">Ekarin Eric Pongpipat</a> is a Ph.D. student studying cognition and neuroscience at the University of Texas at Dallas. He obtained his undergraduate degree in psychology at California State University, Northridge and his master's degree in psychology at San Diego State University. Ekarin has over 5 years of teaching and tutoring experience within statistics. He is also interested in understanding how neural systems change with age.
 
-## Giuseppe Miranda, M.S.
+## Giuseppe Miranda, M.S. {-}
 
 Giuseppe Miranda is a Ph.D. student studying cognition and neuroscience at the University of Texas at Dallas.

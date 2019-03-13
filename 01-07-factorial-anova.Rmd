@@ -60,18 +60,18 @@ Given that there are a total of three questions of interest, there will also be 
 
 ### Traditional Approach
 1. Main Effect of Discipline
-<BR>$H_0: \mu_{Applied} = \mu_{Theoretical}$
-<BR>$H_1: \mu_{Applied} \ne \mu_{Theoretical}$
+$$H_0: \mu_{Applied} = \mu_{Theoretical}$$
+$$H_1: \mu_{Applied} \ne \mu_{Theoretical}$$
 <BR><BR>The null hypothesis states that there is no difference in a professor's salary whether they work in an applied discipline compared to a theoretical discipline on average across sex. The research hypothesis states that there is salary difference in professors in the applied discipline compared to the theoretical discipline on average across sex. 
 
 2. Main Effect of Sex
-<BR>$H_0: \mu_{Female} = \mu_{Male}$
-<BR>$H_1: \mu_{Female} \ne \mu_{Male}$
+$$H_0: \mu_{Female} = \mu_{Male}$$
+$$H_1: \mu_{Female} \ne \mu_{Male}$$
 <BR><BR>The null hypothesis states there is no salary difference in professors that are female compared to those that are male on average across discipline. The research hypothesis states there is a salary difference in professors that are female compared to those that are male on average across discipline. 
 
 3. Main Interaction Effect of Discipline by Sex
-<BR>$H_0: \mu_{Female_{Applied}} - \mu_{Female_{Theoretical}} = \mu_{Male_{Applied}} - \mu_{Male_{Theoretical}}$
-<BR>$H_0: \mu_{Female_{Applied}} - \mu_{Female_{Theoretical}} \ne \mu_{Male_{Applied}} - \mu_{Male_{Theoretical}}$
+$$H_0: \mu_{Female_{Applied}} - \mu_{Female_{Theoretical}} = \mu_{Male_{Applied}} - \mu_{Male_{Theoretical}}$$
+$$H_0: \mu_{Female_{Applied}} - \mu_{Female_{Theoretical}} \ne \mu_{Male_{Applied}} - \mu_{Male_{Theoretical}}$$
 <BR><BR>The null hypothesis states that the effect of discipline (i.e., the difference of theoretical and applied) are the same for males and females. In other words, the relationship between a professor's salary and their discipline does not also change depending on their sex. The research hypothesis states that the relationship between a professor's salary and their discipline does change based on their sex.
 <BR><BR>If we were interested in determining if the relationship between sex and salary depended on discipline, we could swap the subscripts so that sex is the subscript of discipline.
 
@@ -79,18 +79,18 @@ Given that there are a total of three questions of interest, there will also be 
 $Model: Salary = \beta_0 + \beta_1*Discipline + \beta_2*Sex + \beta_3*Discipline*Sex + \varepsilon$
 
 1. Main Effect of Discipline
-<BR>$H_0: \beta_1 = 0$
-<BR>$H_1: \beta_1 \ne 0$
+$$H_0: \beta_1 = 0$$
+$$H_1: \beta_1 \ne 0$$
 <BR><BR>The null hypothesis states that the slope associated with discipline is 0. Since, the difference of our contrast is 1, the slope represents the mean salary difference between discipline on average across sex. In other words, the null hypothesis states that there is no difference in a professor's salary based on their discipline on average across sex. The research hypothesis states that there is a difference in a professor's salary based on their discipline on average across sex.
 
 2. Main Effect of Sex
-<BR>$H_0: \beta_2 = 0$
-<BR>$H_1: \beta_2 \ne 0$
+$$H_0: \beta_2 = 0$$
+$$H_1: \beta_2 \ne 0$$
 <BR><BR>The null hypothesis states that the slope associated with sex is 0. Since, the difference of our contrast is 1, the slope represents the mean salary difference between sex on average across discipline. In other words, the null hypothesis states a professor's salary is not related to their sex on average across their discipline. The research hypothesis states that the a professor's salary is related to their sex on average across their discipline.
 
 3. Main Interaction Effect of Discipline by Sex
-<BR>$H_0: \beta_3 = 0$
-<BR>$H_1: \beta_3 \ne 0$
+$$H_0: \beta_3 = 0$$
+$$H_1: \beta_3 \ne 0$$
 <BR><BR>The null hypothesis states that the slope associated with the interaction of discipline and sex is 0. Slopes associated with interactions can be thought of as changes in the slope associated with one IV included in the interaction for every 1 unit of another IV included in the interaction. In other words, if we calculated the slope between salary and discipline for just female professors and then calculated the slope between salary and discipline for just male professors, $\beta_3$ represents the difference in these slopes. Since, the difference of our contrast for sex is 1, the slope represents the difference in the slope between salary and discipline between males and females. The null hypothesis states that the relationship between a professor's salary and their discipline does not change based on their sex. The research hypothesis states that the relationship between a professor's salary and their discipline does change based on their sex.
 
 ## Statistical analysis

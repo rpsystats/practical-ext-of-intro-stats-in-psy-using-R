@@ -2,10 +2,10 @@
 
 To summarize, the introductory univariate statistics typically taught and learned in psychology courses can be applied within the GLM context by taking the concise and unified form of:
 
-$Y = \beta X+\varepsilon$
+$$Y = \beta X+\varepsilon$$
 
 We showed how each of the traditional univariate statistics in psychology can be written in a GLM format (i.e., OLS regression). We also showed how each of the traditional univariate statistics can be performed using the `lm` function. 
 
-Within this GLM framework, we can continue to analyze more complicated models with different combinations of IVs such as using multiple continuous IVs (multiple regression) or mixing categorical and continuous variables (traditionally ANCOVA). We can also expand this to repeated measures design such as repeated-measures ANOVA, repeated-measures ANCOVA, and multiple linear regression. We again highly recommend the book <A href="https://www.amazon.com/Data-Analysis-Comparison-Approach-Regression-dp-1138819832/dp/1138819832/ref=mt_paperback?_encoding=UTF8&me=&qid=" target="_blank">Data Analysis by Judd, McClelland, & Ryan</A> for an intuitive and fundamental understanding of statistics.
+Within this GLM framework, we can continue to analyze more complicated models with different combinations of IVs such as using multiple continuous IVs (multiple regression) or mixing categorical and continuous variables (traditionally ANCOVA). We can also expand this to repeated measures design such as repeated-measures ANOVA, repeated-measures ANCOVA, and multi-level modeling. We again highly recommend the book <A href="https://www.amazon.com/Data-Analysis-Comparison-Approach-Regression-dp-1138819832/dp/1138819832/ref=mt_paperback?_encoding=UTF8&me=&qid=" target="_blank">Data Analysis by Judd, McClelland, & Ryan</A> for an intuitive and fundamental understanding of these statistics.
 
-We hope to have guided and convinced you how these analyses can be thought of and analyzed in the GLM format. More importantly, we also hope that you will continue implement this GLM framework and mindset so that you can readily expand to more complicated statistical models and analyses. 
+We hope that we have guided and convinced you how these analyses can be thought of and analyzed in the GLM format. More importantly, we also hope that you will continue implement this GLM framework and mindset so that you can readily expand to more complicated statistical models and analyses. 
