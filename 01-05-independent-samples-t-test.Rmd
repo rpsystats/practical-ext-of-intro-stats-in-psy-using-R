@@ -102,7 +102,7 @@ dataset_summary <- datasetSalaries %>%
     sd = sd(salary),
     n = n(),
     sem = sd / sqrt(n),
-    tcrit = abs(qt(0.05 / 2, df = n - 1)),
+    tcrit = abs(qt(0.05 / 2, df = n - 1)), 
     ME = tcrit * sem,
     LL95CI = mean - ME,
     UL95CI = mean + ME

@@ -13,14 +13,11 @@ The first question is the overall effect of a categorical IV, which is known as 
 
 For this example, we will again use the [`datasetSalaries`][Salaries Dataset] dataset.
 
-Before we continue, let's again check the contrasts of both variables, and make them orthogonal.
+Before we continue, let's again check the contrasts of both variables.
 
-```{r}
-contrasts(datasetSalaries$discipline)
-```
-
-```{r}
-contrasts(datasetSalaries$discipline) <- cbind(AppliedvTheoretical = c(-1 / 2, 1 / 2))
+```{r, echo = F}
+# set factor back to default from t-test chapter
+contrasts(datasetSalaries$discipline) <- cbind(Theoretical = c(0, 1))
 ```
 
 ```{r}
@@ -29,6 +26,24 @@ contrasts(datasetSalaries$discipline)
 
 ```{r}
 contrasts(datasetSalaries$sex)
+```
+
+Both of the variables are currently dummy coded. 
+
+Since we prefer a priori orthogonal contrast code, let's go ahead and change the contrast for both of these factors.
+
+We can code professors in the applied discipline as 0.5 and professors in the theoretical discipline as -0.5 since we think that those in the applied discipline will be earn a higher salary.
+
+Similarly, we can code male professors as 0.5 and female professors as -0.5 since we also think that male professors will likely earn a higher salary than female professors.
+
+Note: Since each factor is orthogonal within its respective factor, the sum of each contrast pair between the factors is also equal to 0. Thus, we do not need to actually check this; however, we encourage you test this on your own.
+
+```{r}
+contrasts(datasetSalaries$discipline) <- cbind(AppliedvTheoretical = c(1 / 2, -1 / 2))
+```
+
+```{r}
+contrasts(datasetSalaries$discipline)
 ```
 
 ```{r}
@@ -82,13 +97,13 @@ $Model: Salary = \beta_0 + \beta_1*Discipline + \beta_2*Sex + \beta_3*Discipline
 
 ### Traditional approach
 
-To perform a traditional factorial ANOVA, we can again use the `aov` function. In the first argument, which is the formula, we can enter the IVs along with its interaction. We can indicate an interaction by placing a colon (`:`) between the two IVs we want to interact. Specifically, this will create a new interaction term by multiplying the two IVs for each subject.
+To perform a traditional factorial ANOVA, we can again use the `aov` function. In the first argument, which is the formula, we can enter the DV followed by the tilde (`~`) and then the IVs along with its interaction. We can indicate an interaction by placing a colon (`:`) between the two IVs we want to interact. Specifically, this will create a new interaction term by multiplying the two IVs for each subject.
 
 ```{r}
 model <- aov(salary ~ discipline + sex + discipline:sex, datasetSalaries)
 ```
 
-We can also more concisely place an asterik (`*`) between the two IVs to perform the exact same test (i.e., a test of an interaction along with a test for each main effect included in the interaction term).
+We can also more concisely place an asterisk (`*`) between the two IVs to perform the exact same test (i.e., a test of an interaction along with a test for each main effect included in the interaction term). We prefer this form as we prefer simplicity.
 
 ```{r}
 model <- aov(salary ~ discipline * sex, datasetSalaries)
@@ -97,6 +112,18 @@ model <- aov(salary ~ discipline * sex, datasetSalaries)
 ```{r}
 Anova(model, type = c("III"))
 ```
+
+1. Main Effect of Discipline
+
+We can see from the *F*-statistic (`F value`) that the ability for discipline to explain salary is about `9.0759` times greater than its inability to explain salary, which is very large.
+
+2. Main Effect of Sex
+
+We can also see that the ability for sex to explain salary is about `8.4453` times greater than its inability to explain salary, which is also very large.
+
+3. Interaction Effect of Discipline by Sex
+
+However, the ability for the interaction between sex and discipline to explain salary is about `1.9770` times greater than its inability to explain salary, which is pretty small (close to 1).
 
 ### GLM approach
 ```{r}
@@ -141,16 +168,14 @@ Let's examine the statistical decision for each research question.
 2. Main Effect of Sex
 <BR>Given the *p*-value of `.270` is greater than the alpha level ($\alpha$) of 0.05, we will `retain` (or fail to reject) the null hypothesis. 
 
-3. Main Effect of Discipline by Sex
+3. Interaction Effect of Discipline by Sex
 <BR>Given the *p*-value of `.160` is greater than the alpha level ($\alpha$) of 0.05, we will `retain` (or fail to reject) the null hypothesis.
 
 ## APA statement
 A factorial Analysis of Variance (ANOVA) was performed to test if 1) the salary of professors was different depending on their discipline, 2) the salary of professors was different depending on their sex, and 3) the relationship between salary of professors and their sex depending on their discipline. There was significant main effect of discipline on salary, *F*(1,393) = 9.08, *p* = .003. There was also a significant main effect of sex on salary, *F*(1,393) = 8.45, *p* = .004. However, the relationship between salary of professors and their sex did not change depending on their discipline, *F*(1,393) = 1.98, *p* = .160.
 
-Note: Post-hoc analyses should be conducted for significant main effects that consists of three or more levels and/or significant interactions.
-
 ## Visualization
-```{r, fig.cap="A dot plot of the 9-months salaries of professors by their discipline and sex. Respectively for each discipline and sex, the dot represents the mean and the bars represent the 95% CI."}
+```{r fig-factorial-anova, warning = F, fig.cap="A dot plot of the 9-months salaries of professors by their discipline and sex. Respectively for each discipline and sex, the dot represents the mean and the bars represent the 95% CI."}
 # calculate descriptive statistics along with the 95% CI
 dataset_summary <- datasetSalaries %>%
   group_by(discipline, sex) %>%
@@ -163,26 +188,32 @@ dataset_summary <- datasetSalaries %>%
     ME = tcrit * sem,
     LL95CI = mean - ME,
     UL95CI = mean + ME
-  )
+  ) %>%
+  mutate(discipline_code = ifelse(discipline == "Applied", 1 / 2, -1 / 2))
 
 # plot
-ggplot(dataset_summary, mapping = aes(discipline, mean, group = sex, shape = sex)) +
+datasetSalaries %>%
+  mutate(discipline_code = ifelse(discipline == "Applied", 1 / 2, -1 / 2)) %>%
+  ggplot(., mapping = aes(discipline_code, salary, group = sex, shape = sex, color = sex)) +
+  geom_jitter(alpha = 0.2, width = 0.2) +
   geom_point(
-    position = position_dodge(.05),
+    data = dataset_summary, aes(x = discipline_code, y = mean),
     size = 3
   ) +
-  geom_line(aes(linetype = sex),
-    position = position_dodge(.05)
-  ) +
-  geom_errorbar(aes(ymin = dataset_summary$LL95CI, ymax = dataset_summary$UL95CI),
-    position = position_dodge(.05),
-    width = 0
+  geom_line(data = dataset_summary, aes(x = discipline_code, y = mean)) +
+  geom_errorbar(
+    data = dataset_summary, aes(x = discipline_code, y = mean, ymin = LL95CI, ymax = UL95CI),
+    width = 0.02
   ) +
   labs(
     x = "Discipline",
-    y = "9-Month Academic Salary (USD)"
+    y = "9-Month Academic Salary (USD)",
+    color = "Sex",
+    shape = "Sex"
   ) +
-  ylim(c(min(dataset_summary$LL95CI), max(dataset_summary$UL95CI))) +
+  theme_classic() +
+  scale_x_continuous(breaks = seq(-2, 2, 1 / 2), limits = c(-1, 1)) +
   scale_y_continuous(labels = scales::dollar) +
-  theme_classic()
+  annotate(geom = "text", x = -.5, y = 0, label = "Applied", size = 4) +
+  annotate(geom = "text", x = .5, y = 0, label = "Theoretical", size = 4)
 ```

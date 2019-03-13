@@ -118,7 +118,7 @@ Each of these null and research hypothesis pairs are also known as 1 degree of f
 To perform a traditional One-Way ANOVA, we can use the `aov` function. The first argument in the `aov` function is the formula and the second argument is the name of the dataset. Notice, that in the formula, we do not have to specify both contrasts because we have already applied the coding scheme directly to the categorical IV of `rank`.
 ```{r}
 model <- aov(salary ~ rank, datasetSalaries)
-```w
+```
 
 ```{r}
 Anova(model, type = c("III"))
@@ -157,6 +157,8 @@ The estimate for the `rankTenuredvAssistant` represents the mean difference in 9
 
 The estimate for the `rankAssociatevProfessor` represents the mean difference in 9-month academic salary of associate professors compared to assistant professors. Specifically, the 9-month academic salary of professors was $32,896 more than associate professors.
 
+
+
 ## Statistical decision
 Given the *p*-value of `< 2.2e-16` for `rank` is less than the alpha level ($\alpha$) of 0.05, we will `reject` the null hypothesis.
 
@@ -168,7 +170,7 @@ An Analysis of Variance (ANOVA) using *a priori* orthogonal contrast coding was 
 ## Visualization
 
 ### Traditional
-```{r, warning = F, fig.cap="A dot plot of the 9-month academic salaries of professors by their rank within the university (i.e., assistant professor, associate professor, and professor). Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. \nNote: The data points are only jittered (dispersed) for easier visualization of all data points."}
+```{r fig-one-way-anova-traditional, warning = F, fig.cap="A dot plot of the 9-month academic salaries of professors by their rank within the university (i.e., assistant professor, associate professor, and professor). Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. \nNote: The data points are only jittered (dispersed) for easier visualization of all data points."}
 # calculate descriptive statistics along with the 95% CI
 dataset_summary <- datasetSalaries %>%
   group_by(rank) %>%
@@ -250,7 +252,7 @@ ggplot(datasetSalaries_long, aes(value, salary)) +
   theme(strip.background = element_blank())
 ```
 
-```{r, eval = F, echo = F}
+```{r figure-one-way-anova-orthogonal-contrast, eval = F, echo = F}
 dataset_summary_1 <- df_salaries %>%
   group_by(TenuredvAssistant) %>%
   summarize(
