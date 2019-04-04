@@ -5,10 +5,12 @@ bookdown::gitbook:
     toc:
       before: |
         <li><a href="./">Table of Contents</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     download: no
   split_by: chapter
   sharing:
     github: yes
-  edit: https://ekarinpongpipat.com/books/practical-extension-of-introductory-statistics-in-psychology-using-R/%s
+  edit: https://ekarinpongpipat.com/books/practical-extension-of-introductory-statistics-in-psychology-using-R/
   github-repo: "epongpipat/epongpipat.github.io"
-  url: 'https\://ekarinpongpipat.com/books/practical-extension-of-introductory-statistics-in-psychology-using-R/'
+  url: 'https://ekarinpongpipat.com/books/practical-extension-of-introductory-statistics-in-psychology-using-R/'

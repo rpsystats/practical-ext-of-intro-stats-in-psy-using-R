@@ -1,4 +1,4 @@
---- 
+---
 title: "A Practical Extension of Introductory Statistics in Psychology using R (Draft)"
 author: "Ekarin Eric Pongpipat, M.A. & Giuseppe Miranda, M.S."
 site: bookdown::bookdown_site
@@ -6,6 +6,8 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
+github-repo: epongpipat/practical-ext-of-intro-stats-in-psy-using-R
+url: 'https\://ekarinpongpipat.com/practical-ext-of-intro-stats-in-psy-using-R/'
 description: "This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R. Additionally, this book will extend more advanced univariate statistics in psychology into the GLM framework."
 subtitle: "This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R. Additionally, this book will extend more advanced univariate statistics in psychology into the GLM framework."
 ---
@@ -47,7 +49,7 @@ We will go over each of the typical introductory statistics taught in psychology
 For each analysis, the traditional approach will be performed first followed by the GLM approach for steps 1 and 2. The goal is to show the similarities and differences between stating the null and research hypotheses in step 1 as well as how the analyses are identical using both approaches in step 2.
 
 ## What won't this book cover?
-This book won't go into assumptions of the inferential tests or exhaustively its respective formulas. 
+This book won't go into assumptions of the inferential tests or exhaustively its respective formulas.
 This book will also not exhaustively review data manipulation, transformations, and visualization in R as there are other books that already do this well (e.g., <a href="http://r4ds.had.co.nz/" target="_blank">R for Data Science by Wickham & Grolemund</a>).
 
 ## Why R?

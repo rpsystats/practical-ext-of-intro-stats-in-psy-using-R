@@ -1,5 +1,5 @@
 book_filename: "Extension_of_Introductory_Univariate_Statistics_in_Psychology"
 delete_merged_file: true
-language:
-  ui:
-    chapter_name: "Chapter "
+repo: https://github.com/epongpipat/practical-ext-of-intro-stats-in-psy-using-R
+output_dir: docs
+chapter_name: "Chapter "
