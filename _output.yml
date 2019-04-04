@@ -11,6 +11,3 @@ bookdown::gitbook:
   split_by: chapter
   sharing:
     github: yes
-  edit: https://ekarinpongpipat.com/books/practical-extension-of-introductory-statistics-in-psychology-using-R/
-  github-repo: "epongpipat/epongpipat.github.io"
-  url: 'https://ekarinpongpipat.com/books/practical-extension-of-introductory-statistics-in-psychology-using-R/'
