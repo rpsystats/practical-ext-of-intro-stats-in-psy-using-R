@@ -1,0 +1,5 @@
+Package: placeholder
+Title: A Practical Extension of Introductory Statistics in Psychology using R.
+Version: 0.0.1
+Imports: bookdown
+Remotes: rstudio/bookdown
