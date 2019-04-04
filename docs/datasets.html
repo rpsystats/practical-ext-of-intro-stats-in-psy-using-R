@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 4 Datasets | A Practical Extension of Introductory Statistics in Psychology using R (Draft)</title>
+  <meta name="description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R. Additionally, this book will extend more advanced univariate statistics in psychology into the GLM framework.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 4 Datasets | A Practical Extension of Introductory Statistics in Psychology using R (Draft)" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://ekarinpongpipat.com/practical-ext-of-intro-stats-in-psy-using-R/" />
+  
+  <meta property="og:description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R. Additionally, this book will extend more advanced univariate statistics in psychology into the GLM framework." />
+  <meta name="github-repo" content="epongpipat/practical-ext-of-intro-stats-in-psy-using-R" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Datasets | A Practical Extension of Introductory Statistics in Psychology using R (Draft)" />
+  
+  <meta name="twitter:description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R. Additionally, this book will extend more advanced univariate statistics in psychology into the GLM framework." />
+  
+
+<meta name="author" content="Ekarin Eric Pongpipat, M.A. &amp; Giuseppe Miranda, M.S.">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="r-packages.html">
+<link rel="next" href="simple-linear-regression.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Table of Contents</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#what-exactly-is-the-glm"><i class="fa fa-check"></i><b>1.1</b> What exactly is the GLM?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#how-will-this-book-be-covered"><i class="fa fa-check"></i><b>1.2</b> How will this book be covered?</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#what-wont-this-book-cover"><i class="fa fa-check"></i><b>1.3</b> What won’t this book cover?</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#why-r"><i class="fa fa-check"></i><b>1.4</b> Why R?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>2</b> Prerequisites</a><ul>
+<li class="chapter" data-level="2.1" data-path="prerequisites.html"><a href="prerequisites.html#knowledge"><i class="fa fa-check"></i><b>2.1</b> Knowledge</a></li>
+<li class="chapter" data-level="2.2" data-path="prerequisites.html"><a href="prerequisites.html#software"><i class="fa fa-check"></i><b>2.2</b> Software</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>3</b> R Packages</a><ul>
+<li class="chapter" data-level="3.1" data-path="r-packages.html"><a href="r-packages.html#what-are-packages"><i class="fa fa-check"></i><b>3.1</b> What are packages?</a></li>
+<li class="chapter" data-level="3.2" data-path="r-packages.html"><a href="r-packages.html#packages"><i class="fa fa-check"></i><b>3.2</b> Packages</a></li>
+<li class="chapter" data-level="3.3" data-path="r-packages.html"><a href="r-packages.html#install-r-packages"><i class="fa fa-check"></i><b>3.3</b> Install R Packages</a></li>
+<li class="chapter" data-level="3.4" data-path="r-packages.html"><a href="r-packages.html#load-r-packages"><i class="fa fa-check"></i><b>3.4</b> Load R Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>4</b> Datasets</a><ul>
+<li class="chapter" data-level="4.1" data-path="datasets.html"><a href="datasets.html#salaries-dataset"><i class="fa fa-check"></i><b>4.1</b> Salaries Dataset</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="datasets.html"><a href="datasets.html#data-wrangling"><i class="fa fa-check"></i><b>4.1.1</b> Data Wrangling</a></li>
+<li class="chapter" data-level="4.1.2" data-path="datasets.html"><a href="datasets.html#descriptive-statistics"><i class="fa fa-check"></i><b>4.1.2</b> Descriptive Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="datasets.html"><a href="datasets.html#anorexia-dataset"><i class="fa fa-check"></i><b>4.2</b> Anorexia Dataset</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="datasets.html"><a href="datasets.html#data-wrangling-1"><i class="fa fa-check"></i><b>4.2.1</b> Data Wrangling</a></li>
+<li class="chapter" data-level="4.2.2" data-path="datasets.html"><a href="datasets.html#descriptive-statistics-1"><i class="fa fa-check"></i><b>4.2.2</b> Descriptive Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="datasets.html"><a href="datasets.html#use-your-own-dataset"><i class="fa fa-check"></i><b>4.3</b> Use Your Own Dataset</a></li>
+</ul></li>
+<li class="part"><span><b>I Introductory Univariate Statistics</b></span></li>
+<li class="chapter" data-level="5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>5</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="5.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#null-and-research-hypotheses"><i class="fa fa-check"></i><b>5.1</b> Null and research hypotheses</a></li>
+<li class="chapter" data-level="5.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#statistical-analyses"><i class="fa fa-check"></i><b>5.2</b> Statistical analyses</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-do-we-read-the-anova-source-table"><i class="fa fa-check"></i><b>5.2.1</b> How do we read the ANOVA source table?</a></li>
+<li class="chapter" data-level="5.2.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-do-we-read-the-coefficients-table"><i class="fa fa-check"></i><b>5.2.2</b> How do we read the coefficients table?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#statistical-decision"><i class="fa fa-check"></i><b>5.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="5.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#apa-statement"><i class="fa fa-check"></i><b>5.4</b> APA statement</a></li>
+<li class="chapter" data-level="5.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#visualization"><i class="fa fa-check"></i><b>5.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="correlation.html"><a href="correlation.html"><i class="fa fa-check"></i><b>6</b> Correlation</a><ul>
+<li class="chapter" data-level="6.1" data-path="correlation.html"><a href="correlation.html#null-and-research-hypotheses-1"><i class="fa fa-check"></i><b>6.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="correlation.html"><a href="correlation.html#traditional-approach"><i class="fa fa-check"></i><b>6.1.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="6.1.2" data-path="correlation.html"><a href="correlation.html#glm-approach"><i class="fa fa-check"></i><b>6.1.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="correlation.html"><a href="correlation.html#statistical-analysis"><i class="fa fa-check"></i><b>6.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="correlation.html"><a href="correlation.html#traditional-approach-1"><i class="fa fa-check"></i><b>6.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="6.2.2" data-path="correlation.html"><a href="correlation.html#glm-approach-1"><i class="fa fa-check"></i><b>6.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="correlation.html"><a href="correlation.html#statistical-decision-1"><i class="fa fa-check"></i><b>6.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="6.4" data-path="correlation.html"><a href="correlation.html#apa-statement-1"><i class="fa fa-check"></i><b>6.4</b> APA statement</a></li>
+<li class="chapter" data-level="6.5" data-path="correlation.html"><a href="correlation.html#visualization-1"><i class="fa fa-check"></i><b>6.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html"><i class="fa fa-check"></i><b>7</b> One Sample <em>t</em>-Test</a><ul>
+<li class="chapter" data-level="7.1" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#null-and-research-hypotheses-2"><i class="fa fa-check"></i><b>7.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#traditional-approach-2"><i class="fa fa-check"></i><b>7.1.1</b> Traditional Approach</a></li>
+<li class="chapter" data-level="7.1.2" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#glm-approach-2"><i class="fa fa-check"></i><b>7.1.2</b> GLM Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#statistical-analysis-1"><i class="fa fa-check"></i><b>7.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#traditional-approach-3"><i class="fa fa-check"></i><b>7.2.1</b> Traditional Approach</a></li>
+<li class="chapter" data-level="7.2.2" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#glm-approach-3"><i class="fa fa-check"></i><b>7.2.2</b> GLM Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#statistical-decision-2"><i class="fa fa-check"></i><b>7.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="7.4" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#apa-statement-2"><i class="fa fa-check"></i><b>7.4</b> APA statement</a></li>
+<li class="chapter" data-level="7.5" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#visualization-2"><i class="fa fa-check"></i><b>7.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html"><i class="fa fa-check"></i><b>8</b> Dependent Samples <em>t</em>-Test</a><ul>
+<li class="chapter" data-level="8.1" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#null-and-research-hypotheses-3"><i class="fa fa-check"></i><b>8.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#traditional-approach-4"><i class="fa fa-check"></i><b>8.1.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="8.1.2" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#glm-approach-4"><i class="fa fa-check"></i><b>8.1.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#statistical-analysis-2"><i class="fa fa-check"></i><b>8.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#traditional-approach-5"><i class="fa fa-check"></i><b>8.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="8.2.2" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#glm-approach-5"><i class="fa fa-check"></i><b>8.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#statistical-decision-3"><i class="fa fa-check"></i><b>8.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="8.4" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#apa-statement-3"><i class="fa fa-check"></i><b>8.4</b> APA statement</a></li>
+<li class="chapter" data-level="8.5" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#visualization-3"><i class="fa fa-check"></i><b>8.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html"><i class="fa fa-check"></i><b>9</b> Independent Samples <em>t</em>-Test</a><ul>
+<li class="chapter" data-level="9.1" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#null-and-research-hypotheses-4"><i class="fa fa-check"></i><b>9.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#traditional-approach-6"><i class="fa fa-check"></i><b>9.1.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="9.1.2" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#glm-approach-6"><i class="fa fa-check"></i><b>9.1.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#statistical-analysis-3"><i class="fa fa-check"></i><b>9.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#traditional-approach-7"><i class="fa fa-check"></i><b>9.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="9.2.2" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#glm-approach-7"><i class="fa fa-check"></i><b>9.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#statistical-decision-4"><i class="fa fa-check"></i><b>9.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="9.4" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#apa-statement-4"><i class="fa fa-check"></i><b>9.4</b> APA statement</a></li>
+<li class="chapter" data-level="9.5" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#visualization-4"><i class="fa fa-check"></i><b>9.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>10</b> One-Way ANOVA</a><ul>
+<li class="chapter" data-level="10.1" data-path="one-way-anova.html"><a href="one-way-anova.html#coding-categorical-variables"><i class="fa fa-check"></i><b>10.1</b> Coding Categorical Variables</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="one-way-anova.html"><a href="one-way-anova.html#dummy-coding"><i class="fa fa-check"></i><b>10.1.1</b> Dummy Coding</a></li>
+<li class="chapter" data-level="10.1.2" data-path="one-way-anova.html"><a href="one-way-anova.html#othogon"><i class="fa fa-check"></i><b>10.1.2</b> Orthogonal Coding</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="one-way-anova.html"><a href="one-way-anova.html#null-and-research-hypothesis"><i class="fa fa-check"></i><b>10.2</b> Null and research hypothesis</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#traditional-approach-8"><i class="fa fa-check"></i><b>10.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="10.2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#glm-approach-8"><i class="fa fa-check"></i><b>10.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="one-way-anova.html"><a href="one-way-anova.html#statistical-analysis-4"><i class="fa fa-check"></i><b>10.3</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="one-way-anova.html"><a href="one-way-anova.html#traditional-approach-9"><i class="fa fa-check"></i><b>10.3.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="10.3.2" data-path="one-way-anova.html"><a href="one-way-anova.html#glm-approach-9"><i class="fa fa-check"></i><b>10.3.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="one-way-anova.html"><a href="one-way-anova.html#statistical-decision-5"><i class="fa fa-check"></i><b>10.4</b> Statistical decision</a></li>
+<li class="chapter" data-level="10.5" data-path="one-way-anova.html"><a href="one-way-anova.html#apa-statement-5"><i class="fa fa-check"></i><b>10.5</b> APA statement</a></li>
+<li class="chapter" data-level="10.6" data-path="one-way-anova.html"><a href="one-way-anova.html#visualization-5"><i class="fa fa-check"></i><b>10.6</b> Visualization</a><ul>
+<li class="chapter" data-level="10.6.1" data-path="one-way-anova.html"><a href="one-way-anova.html#traditional"><i class="fa fa-check"></i><b>10.6.1</b> Traditional</a></li>
+<li class="chapter" data-level="10.6.2" data-path="one-way-anova.html"><a href="one-way-anova.html#orthogonal-contrast-coding"><i class="fa fa-check"></i><b>10.6.2</b> Orthogonal Contrast Coding</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="factorial-anova.html"><a href="factorial-anova.html"><i class="fa fa-check"></i><b>11</b> Factorial ANOVA</a><ul>
+<li class="chapter" data-level="11.1" data-path="factorial-anova.html"><a href="factorial-anova.html#null-and-research-hypotheses-5"><i class="fa fa-check"></i><b>11.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="factorial-anova.html"><a href="factorial-anova.html#traditional-approach-10"><i class="fa fa-check"></i><b>11.1.1</b> Traditional Approach</a></li>
+<li class="chapter" data-level="11.1.2" data-path="factorial-anova.html"><a href="factorial-anova.html#glm-approach-10"><i class="fa fa-check"></i><b>11.1.2</b> GLM Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="factorial-anova.html"><a href="factorial-anova.html#statistical-analysis-5"><i class="fa fa-check"></i><b>11.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="factorial-anova.html"><a href="factorial-anova.html#traditional-approach-11"><i class="fa fa-check"></i><b>11.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="11.2.2" data-path="factorial-anova.html"><a href="factorial-anova.html#glm-approach-11"><i class="fa fa-check"></i><b>11.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="factorial-anova.html"><a href="factorial-anova.html#statistical-decision-6"><i class="fa fa-check"></i><b>11.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="11.4" data-path="factorial-anova.html"><a href="factorial-anova.html#apa-statement-6"><i class="fa fa-check"></i><b>11.4</b> APA statement</a></li>
+<li class="chapter" data-level="11.5" data-path="factorial-anova.html"><a href="factorial-anova.html#visualization-6"><i class="fa fa-check"></i><b>11.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="glm-approach-summary.html"><a href="glm-approach-summary.html"><i class="fa fa-check"></i><b>12</b> GLM Approach Summary</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html"><i class="fa fa-check"></i>Authors</a><ul>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#ekarin-eric-pongpipat-m.a."><i class="fa fa-check"></i>Ekarin Eric Pongpipat, M.A.</a></li>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#giuseppe-miranda-m.s."><i class="fa fa-check"></i>Giuseppe Miranda, M.S.</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Practical Extension of Introductory Statistics in Psychology using R (Draft)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="datasets" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Datasets</h1>
+<p>Below are two public (open-access) and real datasets that we will use for the analyses. For each dataset, you will find its description, minor data wrangling (or data manipulation), and descriptive statistics in both numeric and visual formats.</p>
+<div id="salaries-dataset" class="section level2">
+<h2><span class="header-section-number">4.1</span> Salaries Dataset</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasetSalaries &lt;-<span class="st"> </span>carData<span class="op">::</span>Salaries</code></pre></div>
+<p>One of the datasets that we’ll use is the <code>Salaries</code> dataset within the <code>carData</code> package. The dataset consists of nine-month salaries collected from 397 collegiate professors in the U.S. during 2008 to 2009. In addition to salaries, the professor’s rank, sex, discipline, years since Ph.D., and years of service was also collected. Thus, there is a total of 6 variables, which are described below.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:left;">
+Variable Type
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+rank
+</td>
+<td style="text-align:left;">
+Categorical
+</td>
+<td style="text-align:left;">
+Professor’s rank of either assistant professor, associate professor, or professor
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+discipline
+</td>
+<td style="text-align:left;">
+Categorical
+</td>
+<td style="text-align:left;">
+Type of department the professor works in, either applied or theoretical
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+yrs.since.phd
+</td>
+<td style="text-align:left;">
+Continuous
+</td>
+<td style="text-align:left;">
+Number of years since the professor has obtained their PhD
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+yrs.service
+</td>
+<td style="text-align:left;">
+Continuous
+</td>
+<td style="text-align:left;">
+Number of years the professor has served the department and/or university
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sex
+</td>
+<td style="text-align:left;">
+Categorical
+</td>
+<td style="text-align:left;">
+Professor’s sex of either male or female
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+salary
+</td>
+<td style="text-align:left;">
+Continuous
+</td>
+<td style="text-align:left;">
+Professor’s nine-month salary (USD)
+</td>
+</tr>
+</tbody>
+</table>
+<div id="data-wrangling" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Data Wrangling</h3>
+<p>Before running these analyses within the GLM context, let’s clean up the dataset so that it’s readable for us rather than computers.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># spell out rank variables</span>
+<span class="co"># rename discipline variables to its meaningful name</span>
+<span class="co"># ensure both rank and discipline are factors</span>
+datasetSalaries &lt;-<span class="st"> </span>datasetSalaries <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">rank =</span> <span class="kw">case_when</span>(
+      rank <span class="op">==</span><span class="st"> &quot;AssocProf&quot;</span> <span class="op">~</span><span class="st"> &quot;Associate Professor&quot;</span>,
+      rank <span class="op">==</span><span class="st"> &quot;AsstProf&quot;</span> <span class="op">~</span><span class="st"> &quot;Assistant Professor&quot;</span>,
+      rank <span class="op">==</span><span class="st"> &quot;Prof&quot;</span> <span class="op">~</span><span class="st"> &quot;Professor&quot;</span>
+    ),
+    <span class="dt">discipline =</span> <span class="kw">case_when</span>(
+      discipline <span class="op">==</span><span class="st"> &quot;A&quot;</span> <span class="op">~</span><span class="st"> &quot;Theoretical&quot;</span>,
+      discipline <span class="op">==</span><span class="st"> &quot;B&quot;</span> <span class="op">~</span><span class="st"> &quot;Applied&quot;</span>
+    )
+  ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">rank =</span> <span class="kw">as.factor</span>(rank),
+    <span class="dt">discipline =</span> <span class="kw">as.factor</span>(discipline)
+  )</code></pre></div>
+</div>
+<div id="descriptive-statistics" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> Descriptive Statistics</h3>
+<p>It’s also always a good idea to examine the data numerically and visually. Let’s first look at the categorical variables then the continuous variables.</p>
+<div id="categorical-variables" class="section level4">
+<h4><span class="header-section-number">4.1.2.1</span> Categorical Variables</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plyr<span class="op">::</span><span class="kw">count</span>(datasetSalaries, <span class="st">&quot;rank&quot;</span>)</code></pre></div>
+<pre><code>##                  rank freq
+## 1 Assistant Professor   67
+## 2 Associate Professor   64
+## 3           Professor  266</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(rank)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">y =</span> <span class="kw">stat</span>(count) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">stat</span>(count))), <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Proportion&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;rank&quot;</span>)</code></pre></div>
+<p><img src="Extension_of_Introductory_Univariate_Statistics_in_Psychology_files/figure-html/figure-rank-1.png" width="672" /></p>
+<p>In this dataset, there are a lot more professors than assistant and associate professors combined.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plyr<span class="op">::</span><span class="kw">count</span>(datasetSalaries, <span class="st">&quot;discipline&quot;</span>)</code></pre></div>
+<pre><code>##    discipline freq
+## 1     Applied  216
+## 2 Theoretical  181</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(discipline)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">y =</span> <span class="kw">stat</span>(count) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">stat</span>(count))), <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Proportion&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;discipline&quot;</span>)</code></pre></div>
+<p><img src="Extension_of_Introductory_Univariate_Statistics_in_Psychology_files/figure-html/figure-discipline-1.png" width="672" /></p>
+<p>There are slightly more professors within the applied than the theoretical discipline (i.e., 35 more).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plyr<span class="op">::</span><span class="kw">count</span>(datasetSalaries, <span class="st">&quot;sex&quot;</span>) </code></pre></div>
+<pre><code>##      sex freq
+## 1 Female   39
+## 2   Male  358</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(sex)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">y =</span> <span class="kw">stat</span>(count) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">stat</span>(count))), <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Proportion&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;sex&quot;</span>)</code></pre></div>
+<p><img src="Extension_of_Introductory_Univariate_Statistics_in_Psychology_files/figure-html/figure-sex-1.png" width="672" /></p>
+<p>There is a little over 9x as many male professors as there are female professors.</p>
+</div>
+<div id="continuous-variables" class="section level4">
+<h4><span class="header-section-number">4.1.2.2</span> Continuous Variables</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasetSalaries <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(yrs.since.phd, yrs.service, salary) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">describe</span>(.) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>n, <span class="op">-</span>vars, <span class="op">-</span>trimmed, <span class="op">-</span>mad, <span class="op">-</span>range) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">round</span>(., <span class="dv">2</span>)</code></pre></div>
+<pre><code>##                    mean       sd median   min    max skew kurtosis      se
+## yrs.since.phd     22.31    12.89     21     1     56 0.30    -0.81    0.65
+## yrs.service       17.61    13.01     16     0     60 0.65    -0.34    0.65
+## salary        113706.46 30289.04 107300 57800 231545 0.71     0.18 1520.16</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(yrs.since.phd)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(
+    <span class="dt">xintercept =</span> <span class="kw">describe</span>(datasetSalaries)[<span class="st">&quot;yrs.since.phd&quot;</span>, <span class="st">&quot;mean&quot;</span>],
+    <span class="dt">alpha =</span> .<span class="dv">5</span>,
+    <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>
+  ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_dotplot</span>(<span class="dt">binwidth =</span> <span class="dv">1</span>, <span class="dt">fill =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(
+    <span class="dt">x =</span> <span class="kw">describe</span>(datasetSalaries)[<span class="st">&quot;yrs.since.phd&quot;</span>, <span class="st">&quot;mean&quot;</span>],
+    <span class="dt">label =</span> <span class="kw">paste</span>(<span class="st">&quot;M =&quot;</span>, <span class="kw">round</span>(<span class="kw">describe</span>(datasetSalaries)[<span class="st">&quot;yrs.since.phd&quot;</span>, <span class="st">&quot;mean&quot;</span>], <span class="dv">2</span>)),
+    <span class="dt">y =</span> <span class="op">-</span>.<span class="dv">05</span>
+  ), <span class="dt">angle =</span> <span class="dv">0</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="ot">NULL</span>, <span class="dt">breaks =</span> <span class="ot">NULL</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Years since PhD&quot;</span>)</code></pre></div>
+<p><img src="Extension_of_Introductory_Univariate_Statistics_in_Psychology_files/figure-html/figure-yrs-since-phd-1.png" width="672" /></p>
+<p>On average, professors have had their Ph.D. for about 22 years.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(yrs.service)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(
+    <span class="dt">xintercept =</span> <span class="kw">describe</span>(datasetSalaries)[<span class="st">&quot;yrs.service&quot;</span>, <span class="st">&quot;mean&quot;</span>],
+    <span class="dt">alpha =</span> .<span class="dv">5</span>,
+    <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>
+  ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_dotplot</span>(<span class="dt">binwidth =</span> <span class="dv">1</span>, <span class="dt">fill =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(
+    <span class="dt">x =</span> <span class="kw">describe</span>(datasetSalaries)[<span class="st">&quot;yrs.service&quot;</span>, <span class="st">&quot;mean&quot;</span>],
+    <span class="dt">label =</span> <span class="kw">paste</span>(<span class="st">&quot;M =&quot;</span>, <span class="kw">round</span>(<span class="kw">describe</span>(datasetSalaries)[<span class="st">&quot;yrs.service&quot;</span>, <span class="st">&quot;mean&quot;</span>], <span class="dv">2</span>)),
+    <span class="dt">y =</span> <span class="op">-</span>.<span class="dv">05</span>
+  ), <span class="dt">angle =</span> <span class="dv">0</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="ot">NULL</span>, <span class="dt">breaks =</span> <span class="ot">NULL</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Years of service&quot;</span>)</code></pre></div>
+<p><img src="Extension_of_Introductory_Univariate_Statistics_in_Psychology_files/figure-html/figure-yrs-service-1.png" width="672" /></p>
+<p>On average, professors have provided a service to either the department or university for about 17 years and 7 months.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(salary)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(
+    <span class="dt">xintercept =</span> <span class="kw">describe</span>(datasetSalaries)[<span class="st">&quot;salary&quot;</span>, <span class="st">&quot;mean&quot;</span>],
+    <span class="dt">alpha =</span> .<span class="dv">5</span>,
+    <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>
+  ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_dotplot</span>(<span class="dt">binwidth =</span> <span class="dv">3000</span>, <span class="dt">fill =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(
+    <span class="dt">x =</span> <span class="kw">describe</span>(datasetSalaries)[<span class="st">&quot;salary&quot;</span>, <span class="st">&quot;mean&quot;</span>],
+    <span class="dt">label =</span> <span class="kw">paste</span>(<span class="st">&quot;M =&quot;</span>, scales<span class="op">::</span><span class="kw">dollar</span>(<span class="kw">round</span>(<span class="kw">describe</span>(datasetSalaries)[<span class="st">&quot;salary&quot;</span>, <span class="st">&quot;mean&quot;</span>], <span class="dv">2</span>))),
+    <span class="dt">y =</span> <span class="op">-</span>.<span class="dv">05</span>
+  ), <span class="dt">angle =</span> <span class="dv">0</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="ot">NULL</span>, <span class="dt">breaks =</span> <span class="ot">NULL</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;salary&quot;</span>)</code></pre></div>
+<p><img src="Extension_of_Introductory_Univariate_Statistics_in_Psychology_files/figure-html/figure-salary-1.png" width="672" /></p>
+<p>On average, a professor’s 9-month annual income is $113,706.46.</p>
+</div>
+</div>
+</div>
+<div id="anorexia-dataset" class="section level2">
+<h2><span class="header-section-number">4.2</span> Anorexia Dataset</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasetAnorexia &lt;-<span class="st"> </span>MASS<span class="op">::</span>anorexia</code></pre></div>
+<p>Another dataset that we’ll use is the <code>anorexia</code> dataset within the <code>MASS</code> package. The dataset consists of the weight (in lbs) of 72 female patients with anorexia before and after either cognitive behavioral therapy, family therapy, or no therapy (control condition).</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:left;">
+Variable Type
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Treatment
+</td>
+<td style="text-align:left;">
+Categorical
+</td>
+<td style="text-align:left;">
+Treatment of female patient with anorexia, either cognitive behavioral therapy (CBT), family therapy (FT), or no therepy (CONT)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PreWeight
+</td>
+<td style="text-align:left;">
+Continuous
+</td>
+<td style="text-align:left;">
+Weight of female patient with anorexia before treatment in lbs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PostWeight
+</td>
+<td style="text-align:left;">
+Continuous
+</td>
+<td style="text-align:left;">
+Weight of female patient with anorexia after treatment in lbs.
+</td>
+</tr>
+</tbody>
+</table>
+<div id="data-wrangling-1" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Data Wrangling</h3>
+<p>Again, we can make the dataset slightly more readable for us.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># spell out variable names</span>
+<span class="co"># re-order levels to be CBT, FT, then Cont rather than alphabetical order</span>
+datasetAnorexia &lt;-<span class="st"> </span>datasetAnorexia <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">Treatment =</span> Treat,
+    <span class="dt">PreWeight =</span> Prewt,
+    <span class="dt">PostWeight =</span> Postwt,
+    <span class="dt">Treatment =</span> <span class="kw">case_when</span>(
+      Treatment <span class="op">==</span><span class="st"> &quot;CBT&quot;</span> <span class="op">~</span><span class="st"> &quot;CBT&quot;</span>,
+      Treatment <span class="op">==</span><span class="st"> &quot;FT&quot;</span> <span class="op">~</span><span class="st"> &quot;FT&quot;</span>,
+      Treatment <span class="op">==</span><span class="st"> &quot;Cont&quot;</span> <span class="op">~</span><span class="st"> &quot;Control&quot;</span>
+    ),
+    <span class="dt">Treatment =</span> <span class="kw">factor</span>(Treatment, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;CBT&quot;</span>, <span class="st">&quot;FT&quot;</span>, <span class="st">&quot;Control&quot;</span>))
+    )</code></pre></div>
+</div>
+<div id="descriptive-statistics-1" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Descriptive Statistics</h3>
+<div id="categorical-variables-1" class="section level4">
+<h4><span class="header-section-number">4.2.2.1</span> Categorical Variables</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plyr<span class="op">::</span><span class="kw">count</span>(datasetAnorexia, <span class="st">&quot;Treatment&quot;</span>)</code></pre></div>
+<pre><code>##   Treatment freq
+## 1       CBT   29
+## 2        FT   17
+## 3   Control   26</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetAnorexia, <span class="kw">aes</span>(Treatment)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">y =</span> <span class="kw">stat</span>(count) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">stat</span>(count))), <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Proportion&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Treatment&quot;</span>)</code></pre></div>
+<p><img src="Extension_of_Introductory_Univariate_Statistics_in_Psychology_files/figure-html/figure-treatment-1.png" width="672" /></p>
+<p>There are more participants within the CBT condition compared to either the FT condition or control group.</p>
+</div>
+<div id="continuous-variables-1" class="section level4">
+<h4><span class="header-section-number">4.2.2.2</span> Continuous Variables</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasetAnorexia <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(PreWeight, PostWeight) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">describe</span>(.) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>vars, <span class="op">-</span>trimmed, <span class="op">-</span>mad, <span class="op">-</span>range) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">round</span>(., <span class="dv">2</span>)</code></pre></div>
+<pre><code>##             n  mean   sd median  min   max  skew kurtosis   se
+## PreWeight  72 82.41 5.18  82.30 70.0  94.9 -0.05    -0.16 0.61
+## PostWeight 72 85.17 8.04  84.05 71.3 103.6  0.36    -0.81 0.95</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetAnorexia, <span class="kw">aes</span>(PreWeight)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(
+    <span class="dt">xintercept =</span> <span class="kw">describe</span>(datasetAnorexia)[<span class="st">&quot;PreWeight&quot;</span>, <span class="st">&quot;mean&quot;</span>],
+    <span class="dt">alpha =</span> .<span class="dv">5</span>,
+    <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>
+  ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_dotplot</span>(<span class="dt">binwidth =</span> <span class="dv">1</span>, <span class="dt">fill =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(
+    <span class="dt">x =</span> <span class="kw">describe</span>(datasetAnorexia)[<span class="st">&quot;PreWeight&quot;</span>, <span class="st">&quot;mean&quot;</span>],
+    <span class="dt">label =</span> <span class="kw">paste</span>(<span class="st">&quot;M =&quot;</span>, <span class="kw">round</span>(<span class="kw">describe</span>(datasetAnorexia)[<span class="st">&quot;PreWeight&quot;</span>, <span class="st">&quot;mean&quot;</span>], <span class="dv">2</span>)),
+    <span class="dt">y =</span> <span class="op">-</span>.<span class="dv">05</span>
+  ),
+  <span class="dt">angle =</span> <span class="dv">0</span>
+  ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="ot">NULL</span>, <span class="dt">breaks =</span> <span class="ot">NULL</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Weight Before Study (lbs)&quot;</span>)</code></pre></div>
+<p><img src="Extension_of_Introductory_Univariate_Statistics_in_Psychology_files/figure-html/figure-preweight-1.png" width="672" /></p>
+<p>On average, women with anorexia before treatment weighed 82.41 lbs.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetAnorexia, <span class="kw">aes</span>(PostWeight)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(
+    <span class="dt">xintercept =</span> <span class="kw">describe</span>(datasetAnorexia)[<span class="st">&quot;PostWeight&quot;</span>, <span class="st">&quot;mean&quot;</span>],
+    <span class="dt">alpha =</span> .<span class="dv">5</span>,
+    <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>
+  ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_dotplot</span>(<span class="dt">binwidth =</span> <span class="dv">1</span>, <span class="dt">fill =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(
+    <span class="dt">x =</span> <span class="kw">describe</span>(datasetAnorexia)[<span class="st">&quot;PostWeight&quot;</span>, <span class="st">&quot;mean&quot;</span>],
+    <span class="dt">label =</span> <span class="kw">paste</span>(<span class="st">&quot;M =&quot;</span>, <span class="kw">round</span>(<span class="kw">describe</span>(datasetAnorexia)[<span class="st">&quot;PostWeight&quot;</span>, <span class="st">&quot;mean&quot;</span>], <span class="dv">2</span>)),
+    <span class="dt">y =</span> <span class="op">-</span>.<span class="dv">05</span>
+  ),
+  <span class="dt">angle =</span> <span class="dv">0</span>
+  ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="ot">NULL</span>, <span class="dt">breaks =</span> <span class="ot">NULL</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Weight After Study (lbs)&quot;</span>)</code></pre></div>
+<p><img src="Extension_of_Introductory_Univariate_Statistics_in_Psychology_files/figure-html/figure-postweight-1.png" width="672" /></p>
+<p>On average, women with anorexia after treatment weighed 85.17 lbs, which is about a 2.76 lbs weight gain compared to before treatment.</p>
+</div>
+</div>
+</div>
+<div id="use-your-own-dataset" class="section level2">
+<h2><span class="header-section-number">4.3</span> Use Your Own Dataset</h2>
+<p>However, if you have an interesting dataset of your own, we encourage you to also try using that dataset alongside ours.</p>
+
+</div>
+</div>
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="r-packages.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="simple-linear-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

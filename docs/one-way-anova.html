@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 10 One-Way ANOVA | A Practical Extension of Introductory Statistics in Psychology using R (Draft)</title>
+  <meta name="description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R. Additionally, this book will extend more advanced univariate statistics in psychology into the GLM framework.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 10 One-Way ANOVA | A Practical Extension of Introductory Statistics in Psychology using R (Draft)" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://ekarinpongpipat.com/practical-ext-of-intro-stats-in-psy-using-R/" />
+  
+  <meta property="og:description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R. Additionally, this book will extend more advanced univariate statistics in psychology into the GLM framework." />
+  <meta name="github-repo" content="epongpipat/practical-ext-of-intro-stats-in-psy-using-R" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 10 One-Way ANOVA | A Practical Extension of Introductory Statistics in Psychology using R (Draft)" />
+  
+  <meta name="twitter:description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R. Additionally, this book will extend more advanced univariate statistics in psychology into the GLM framework." />
+  
+
+<meta name="author" content="Ekarin Eric Pongpipat, M.A. &amp; Giuseppe Miranda, M.S.">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="independent-samples-t-test.html">
+<link rel="next" href="factorial-anova.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Table of Contents</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#what-exactly-is-the-glm"><i class="fa fa-check"></i><b>1.1</b> What exactly is the GLM?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#how-will-this-book-be-covered"><i class="fa fa-check"></i><b>1.2</b> How will this book be covered?</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#what-wont-this-book-cover"><i class="fa fa-check"></i><b>1.3</b> What won’t this book cover?</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#why-r"><i class="fa fa-check"></i><b>1.4</b> Why R?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>2</b> Prerequisites</a><ul>
+<li class="chapter" data-level="2.1" data-path="prerequisites.html"><a href="prerequisites.html#knowledge"><i class="fa fa-check"></i><b>2.1</b> Knowledge</a></li>
+<li class="chapter" data-level="2.2" data-path="prerequisites.html"><a href="prerequisites.html#software"><i class="fa fa-check"></i><b>2.2</b> Software</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>3</b> R Packages</a><ul>
+<li class="chapter" data-level="3.1" data-path="r-packages.html"><a href="r-packages.html#what-are-packages"><i class="fa fa-check"></i><b>3.1</b> What are packages?</a></li>
+<li class="chapter" data-level="3.2" data-path="r-packages.html"><a href="r-packages.html#packages"><i class="fa fa-check"></i><b>3.2</b> Packages</a></li>
+<li class="chapter" data-level="3.3" data-path="r-packages.html"><a href="r-packages.html#install-r-packages"><i class="fa fa-check"></i><b>3.3</b> Install R Packages</a></li>
+<li class="chapter" data-level="3.4" data-path="r-packages.html"><a href="r-packages.html#load-r-packages"><i class="fa fa-check"></i><b>3.4</b> Load R Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>4</b> Datasets</a><ul>
+<li class="chapter" data-level="4.1" data-path="datasets.html"><a href="datasets.html#salaries-dataset"><i class="fa fa-check"></i><b>4.1</b> Salaries Dataset</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="datasets.html"><a href="datasets.html#data-wrangling"><i class="fa fa-check"></i><b>4.1.1</b> Data Wrangling</a></li>
+<li class="chapter" data-level="4.1.2" data-path="datasets.html"><a href="datasets.html#descriptive-statistics"><i class="fa fa-check"></i><b>4.1.2</b> Descriptive Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="datasets.html"><a href="datasets.html#anorexia-dataset"><i class="fa fa-check"></i><b>4.2</b> Anorexia Dataset</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="datasets.html"><a href="datasets.html#data-wrangling-1"><i class="fa fa-check"></i><b>4.2.1</b> Data Wrangling</a></li>
+<li class="chapter" data-level="4.2.2" data-path="datasets.html"><a href="datasets.html#descriptive-statistics-1"><i class="fa fa-check"></i><b>4.2.2</b> Descriptive Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="datasets.html"><a href="datasets.html#use-your-own-dataset"><i class="fa fa-check"></i><b>4.3</b> Use Your Own Dataset</a></li>
+</ul></li>
+<li class="part"><span><b>I Introductory Univariate Statistics</b></span></li>
+<li class="chapter" data-level="5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>5</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="5.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#null-and-research-hypotheses"><i class="fa fa-check"></i><b>5.1</b> Null and research hypotheses</a></li>
+<li class="chapter" data-level="5.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#statistical-analyses"><i class="fa fa-check"></i><b>5.2</b> Statistical analyses</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-do-we-read-the-anova-source-table"><i class="fa fa-check"></i><b>5.2.1</b> How do we read the ANOVA source table?</a></li>
+<li class="chapter" data-level="5.2.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-do-we-read-the-coefficients-table"><i class="fa fa-check"></i><b>5.2.2</b> How do we read the coefficients table?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#statistical-decision"><i class="fa fa-check"></i><b>5.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="5.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#apa-statement"><i class="fa fa-check"></i><b>5.4</b> APA statement</a></li>
+<li class="chapter" data-level="5.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#visualization"><i class="fa fa-check"></i><b>5.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="correlation.html"><a href="correlation.html"><i class="fa fa-check"></i><b>6</b> Correlation</a><ul>
+<li class="chapter" data-level="6.1" data-path="correlation.html"><a href="correlation.html#null-and-research-hypotheses-1"><i class="fa fa-check"></i><b>6.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="correlation.html"><a href="correlation.html#traditional-approach"><i class="fa fa-check"></i><b>6.1.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="6.1.2" data-path="correlation.html"><a href="correlation.html#glm-approach"><i class="fa fa-check"></i><b>6.1.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="correlation.html"><a href="correlation.html#statistical-analysis"><i class="fa fa-check"></i><b>6.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="correlation.html"><a href="correlation.html#traditional-approach-1"><i class="fa fa-check"></i><b>6.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="6.2.2" data-path="correlation.html"><a href="correlation.html#glm-approach-1"><i class="fa fa-check"></i><b>6.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="correlation.html"><a href="correlation.html#statistical-decision-1"><i class="fa fa-check"></i><b>6.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="6.4" data-path="correlation.html"><a href="correlation.html#apa-statement-1"><i class="fa fa-check"></i><b>6.4</b> APA statement</a></li>
+<li class="chapter" data-level="6.5" data-path="correlation.html"><a href="correlation.html#visualization-1"><i class="fa fa-check"></i><b>6.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html"><i class="fa fa-check"></i><b>7</b> One Sample <em>t</em>-Test</a><ul>
+<li class="chapter" data-level="7.1" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#null-and-research-hypotheses-2"><i class="fa fa-check"></i><b>7.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#traditional-approach-2"><i class="fa fa-check"></i><b>7.1.1</b> Traditional Approach</a></li>
+<li class="chapter" data-level="7.1.2" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#glm-approach-2"><i class="fa fa-check"></i><b>7.1.2</b> GLM Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#statistical-analysis-1"><i class="fa fa-check"></i><b>7.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#traditional-approach-3"><i class="fa fa-check"></i><b>7.2.1</b> Traditional Approach</a></li>
+<li class="chapter" data-level="7.2.2" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#glm-approach-3"><i class="fa fa-check"></i><b>7.2.2</b> GLM Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#statistical-decision-2"><i class="fa fa-check"></i><b>7.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="7.4" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#apa-statement-2"><i class="fa fa-check"></i><b>7.4</b> APA statement</a></li>
+<li class="chapter" data-level="7.5" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#visualization-2"><i class="fa fa-check"></i><b>7.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html"><i class="fa fa-check"></i><b>8</b> Dependent Samples <em>t</em>-Test</a><ul>
+<li class="chapter" data-level="8.1" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#null-and-research-hypotheses-3"><i class="fa fa-check"></i><b>8.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#traditional-approach-4"><i class="fa fa-check"></i><b>8.1.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="8.1.2" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#glm-approach-4"><i class="fa fa-check"></i><b>8.1.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#statistical-analysis-2"><i class="fa fa-check"></i><b>8.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#traditional-approach-5"><i class="fa fa-check"></i><b>8.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="8.2.2" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#glm-approach-5"><i class="fa fa-check"></i><b>8.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#statistical-decision-3"><i class="fa fa-check"></i><b>8.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="8.4" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#apa-statement-3"><i class="fa fa-check"></i><b>8.4</b> APA statement</a></li>
+<li class="chapter" data-level="8.5" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#visualization-3"><i class="fa fa-check"></i><b>8.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html"><i class="fa fa-check"></i><b>9</b> Independent Samples <em>t</em>-Test</a><ul>
+<li class="chapter" data-level="9.1" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#null-and-research-hypotheses-4"><i class="fa fa-check"></i><b>9.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#traditional-approach-6"><i class="fa fa-check"></i><b>9.1.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="9.1.2" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#glm-approach-6"><i class="fa fa-check"></i><b>9.1.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#statistical-analysis-3"><i class="fa fa-check"></i><b>9.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#traditional-approach-7"><i class="fa fa-check"></i><b>9.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="9.2.2" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#glm-approach-7"><i class="fa fa-check"></i><b>9.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#statistical-decision-4"><i class="fa fa-check"></i><b>9.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="9.4" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#apa-statement-4"><i class="fa fa-check"></i><b>9.4</b> APA statement</a></li>
+<li class="chapter" data-level="9.5" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#visualization-4"><i class="fa fa-check"></i><b>9.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>10</b> One-Way ANOVA</a><ul>
+<li class="chapter" data-level="10.1" data-path="one-way-anova.html"><a href="one-way-anova.html#coding-categorical-variables"><i class="fa fa-check"></i><b>10.1</b> Coding Categorical Variables</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="one-way-anova.html"><a href="one-way-anova.html#dummy-coding"><i class="fa fa-check"></i><b>10.1.1</b> Dummy Coding</a></li>
+<li class="chapter" data-level="10.1.2" data-path="one-way-anova.html"><a href="one-way-anova.html#othogon"><i class="fa fa-check"></i><b>10.1.2</b> Orthogonal Coding</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="one-way-anova.html"><a href="one-way-anova.html#null-and-research-hypothesis"><i class="fa fa-check"></i><b>10.2</b> Null and research hypothesis</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#traditional-approach-8"><i class="fa fa-check"></i><b>10.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="10.2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#glm-approach-8"><i class="fa fa-check"></i><b>10.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="one-way-anova.html"><a href="one-way-anova.html#statistical-analysis-4"><i class="fa fa-check"></i><b>10.3</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="one-way-anova.html"><a href="one-way-anova.html#traditional-approach-9"><i class="fa fa-check"></i><b>10.3.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="10.3.2" data-path="one-way-anova.html"><a href="one-way-anova.html#glm-approach-9"><i class="fa fa-check"></i><b>10.3.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="one-way-anova.html"><a href="one-way-anova.html#statistical-decision-5"><i class="fa fa-check"></i><b>10.4</b> Statistical decision</a></li>
+<li class="chapter" data-level="10.5" data-path="one-way-anova.html"><a href="one-way-anova.html#apa-statement-5"><i class="fa fa-check"></i><b>10.5</b> APA statement</a></li>
+<li class="chapter" data-level="10.6" data-path="one-way-anova.html"><a href="one-way-anova.html#visualization-5"><i class="fa fa-check"></i><b>10.6</b> Visualization</a><ul>
+<li class="chapter" data-level="10.6.1" data-path="one-way-anova.html"><a href="one-way-anova.html#traditional"><i class="fa fa-check"></i><b>10.6.1</b> Traditional</a></li>
+<li class="chapter" data-level="10.6.2" data-path="one-way-anova.html"><a href="one-way-anova.html#orthogonal-contrast-coding"><i class="fa fa-check"></i><b>10.6.2</b> Orthogonal Contrast Coding</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="factorial-anova.html"><a href="factorial-anova.html"><i class="fa fa-check"></i><b>11</b> Factorial ANOVA</a><ul>
+<li class="chapter" data-level="11.1" data-path="factorial-anova.html"><a href="factorial-anova.html#null-and-research-hypotheses-5"><i class="fa fa-check"></i><b>11.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="factorial-anova.html"><a href="factorial-anova.html#traditional-approach-10"><i class="fa fa-check"></i><b>11.1.1</b> Traditional Approach</a></li>
+<li class="chapter" data-level="11.1.2" data-path="factorial-anova.html"><a href="factorial-anova.html#glm-approach-10"><i class="fa fa-check"></i><b>11.1.2</b> GLM Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="factorial-anova.html"><a href="factorial-anova.html#statistical-analysis-5"><i class="fa fa-check"></i><b>11.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="factorial-anova.html"><a href="factorial-anova.html#traditional-approach-11"><i class="fa fa-check"></i><b>11.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="11.2.2" data-path="factorial-anova.html"><a href="factorial-anova.html#glm-approach-11"><i class="fa fa-check"></i><b>11.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="factorial-anova.html"><a href="factorial-anova.html#statistical-decision-6"><i class="fa fa-check"></i><b>11.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="11.4" data-path="factorial-anova.html"><a href="factorial-anova.html#apa-statement-6"><i class="fa fa-check"></i><b>11.4</b> APA statement</a></li>
+<li class="chapter" data-level="11.5" data-path="factorial-anova.html"><a href="factorial-anova.html#visualization-6"><i class="fa fa-check"></i><b>11.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="glm-approach-summary.html"><a href="glm-approach-summary.html"><i class="fa fa-check"></i><b>12</b> GLM Approach Summary</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html"><i class="fa fa-check"></i>Authors</a><ul>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#ekarin-eric-pongpipat-m.a."><i class="fa fa-check"></i>Ekarin Eric Pongpipat, M.A.</a></li>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#giuseppe-miranda-m.s."><i class="fa fa-check"></i>Giuseppe Miranda, M.S.</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Practical Extension of Introductory Statistics in Psychology using R (Draft)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="one-way-anova" class="section level1">
+<h1><span class="header-section-number">Chapter 10</span> One-Way ANOVA</h1>
+<p>Next, let’s go over the one-way ANOVA, which is used when we have two or more independent groups. Specifically, the one-way ANOVA determines if there is a difference in any of the group level means. Given that the analysis can also be used for two independent groups, this analysis could be used instead of the independent samples <em>t</em>-test.</p>
+<p>For example, let’s say that we were interested in determining if salary was significantly different for professors of different ranks (i.e., assistant professor, associate professor, and professor).</p>
+<p>For this example, we will use the <a href="datasets.html#salaries-dataset"><code>datasetSalaries</code></a>.</p>
+<p>As mentioned in the independent samples <em>t</em>-test, when dealing with categorical predictors, it is always good idea to check the coding scheme of the categorical variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>rank)</code></pre></div>
+<pre><code>##                     2 3
+## Assistant Professor 0 0
+## Associate Professor 1 0
+## Professor           0 1</code></pre>
+<div id="coding-categorical-variables" class="section level2">
+<h2><span class="header-section-number">10.1</span> Coding Categorical Variables</h2>
+<p>When coding categorical variables, the number of contrasts (<span class="math inline">\(m\)</span>) is equal to <span class="math inline">\(k-1\)</span> where <span class="math inline">\(k\)</span> is the number of levels (or factors) of an IV. In our example, <code>rank</code> has 3 levels (i.e., <code>Assistant Professor</code>, <code>Associate Professor</code>, and <code>Professor</code>) and thus has 2 contrasts.<a href="#fn12" class="footnoteRef" id="fnref12"><sup>12</sup></a></p>
+<p>This is the reason why in a one-way ANOVA, we have <span class="math inline">\(k-1\)</span> between degrees of freedom. Thus, contrasts are always being performed, either explicitly if told or using a software package’s default coding scheme (e.g., dummy coding for R) when testing a main effect of a categorical IV.</p>
+<div id="dummy-coding" class="section level3">
+<h3><span class="header-section-number">10.1.1</span> Dummy Coding</h3>
+<p>Since <code>rank</code> has not yet been explicitly defined by us yet, <code>rank</code> is dummy coded (i.e., for each contrast, a level is coded as 1 and all other levels are coded as 0). In dummy coding, one level will always be coded as 0 in both contrasts. By default, the first level of the categorical IV in alphabetical order will be coded as 0. Thus, in our example, <code>Assistant Professor</code>, which is the first level of <code>rank</code> in alphabetical order is coded as <code>0</code>.</p>
+<p>When interpreting dummy coding contrasts, for each contrast, it is the level that is coded as 1 compared to the level that is coded as 0 in both contrasts. In our dummy coding scheme, the first contrast is comparing <code>Associate Professor</code>, which is coded as 1 in the first contrast, to <code>Assistant Professor</code>, which is coded as 0 in both contrasts. The second contrast is comparing <code>Professor</code>, which is coded as 1 in the second contrast, to <code>Assistant Professor</code>, which is again coded as 0 in both contrasts.</p>
+</div>
+<div id="othogon" class="section level3">
+<h3><span class="header-section-number">10.1.2</span> Orthogonal Coding</h3>
+<p>However, <em>a priori</em> orthogonal contrast coding is preferred because this coding scheme allows us to create our own <em>a priori</em> contrasts of interest to answer more specific questions.</p>
+<p>For example, let’s say that in addition to determining if there is a difference in salary of professors based on their rank that we were also interested in more specific questions of interest such as:</p>
+<ol style="list-style-type: decimal">
+<li>Determining if there is a difference in salaries of professors that are tenured (<code>Associate Professor</code> and <code>Professor</code>) compared to those that are untenured (<code>Assistant Professor</code>).</li>
+<li>Determining if there is a difference in salaries of professors that are <code>Associate Professors</code> compared to <code>Professors</code>.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>rank) &lt;-<span class="st"> </span><span class="kw">cbind</span>(
+  <span class="dt">TenuredvAssistant =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>),
+  <span class="dt">AssociatevProfessor =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)
+)</code></pre></div>
+<p>To make a coding scheme orthogonal, we need to make sure that 1) each contrast equals zero and that 2) the sum of each contrast product is 0.</p>
+<p>For example, to make the tenured vs. untenured professor contrast, we can code <code>Assistant Professor</code> as <code>-2</code> and both <code>Associate Professor</code> and <code>Professor</code> as <code>1</code> and assign it the name <code>TenuredvAssistant</code>. It’s best to use signs that go in the direction of our prediction so that it’s reflected in our estimates. Since, we expect that tenured professors have higher salaries, tenured professors are assigned the positive value and assistant professors are assigned the negative value. Notice that the sum of the <code>TenuredvAssistant</code> contrast also adds up to 0.<a href="#fn13" class="footnoteRef" id="fnref13"><sup>13</sup></a></p>
+<p>To make the next contrast of <code>Associate Professor</code> compared to <code>Professor</code>, we can code <code>Assistant Professor</code> as <code>0</code>, <code>Associate Professor</code> as <code>-1</code>, and <code>Professor</code> as <code>1</code> and give it the name <code>AssociatevProfessor</code>. Notice again that the sum of the <code>AssociatevProfessor</code> contrast adds up to 0.<a href="#fn14" class="footnoteRef" id="fnref14"><sup>14</sup></a></p>
+<p>Since both contrasts sum to zero, we can now check if the sum of products for each level across contrasts equals 0. In other words, we multiply the values across each contrast pair for each level and add them together. For example, the product across the contrasts of <code>Assistant Professor</code> is <span class="math inline">\(2*0 = 0\)</span>, <code>Associate Professor</code> is <span class="math inline">\(1*-1=-1\)</span>, and <code>Professor</code> is <span class="math inline">\(1*1=1\)</span>. If we add them together, we get <span class="math inline">\(0-1+1=0\)</span>.<a href="#fn15" class="footnoteRef" id="fnref15"><sup>15</sup></a></p>
+<p>To take orthogonal contrast coding a step further and make our estimates readily interpretable as the mean difference of that contrast, we can ensure that the difference of each contrast is 1. To do this, we can divide each contrast code by the number of values that are not coded as 0 for each contrast. For example, since all 3 codes of the <code>TenuredvAssistant</code> contrast are not equal to 0, we can divide by 3. Similarly, for the <code>AssociatevProfessor</code> contrast, we can divide each contrast code by 2 since 2 of the contrast codes are not equal to 0. Note that this is a rule of thumb and should be verified if contrasts are more complex.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>rank) &lt;-<span class="st"> </span><span class="kw">cbind</span>(
+  <span class="dt">TenuredvAssistant =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>),
+  <span class="dt">AssociatevProfessor =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)
+)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>rank)</code></pre></div>
+<pre><code>##                     TenuredvAssistant AssociatevProfessor
+## Assistant Professor        -0.6666667                 0.0
+## Associate Professor         0.3333333                -0.5
+## Professor                   0.3333333                 0.5</code></pre>
+</div>
+</div>
+<div id="null-and-research-hypothesis" class="section level2">
+<h2><span class="header-section-number">10.2</span> Null and research hypothesis</h2>
+<div id="traditional-approach-8" class="section level3">
+<h3><span class="header-section-number">10.2.1</span> Traditional approach</h3>
+<center>
+<span class="math inline">\(H_0: \mu_{Assistant\_Professors} = \mu_{Associate\_Professors} = \mu_{Professors}\)</span> <BR><span class="math inline">\(H_1: \mu_{Assistant\_Professors} \ne \mu_{Associate\_Professors} \ne \mu_{Professors}\)</span> <BR>or <span class="math inline">\(\mu_{Assistant\_Professors} \ne \mu_{Associate\_Professors} = \mu_{Professors}\)</span> <BR>or <span class="math inline">\(\mu_{Assistant\_Professors} \ne \mu_{Professors} = \mu_{Associate\_Professors}\)</span> <BR>or <span class="math inline">\(\mu_{Associate\_Professors} \ne \mu_{Professors} = \mu_{Assistant\_Professors}\)</span>
+</center>
+<p><BR>The null hypothesis states that there is no difference in salaries between professors of different ranks. The research hypothesis is stating that the salary of least one rank of professors is different than the others. Thus, the multiple options for a research hypothesis.</p>
+</div>
+<div id="glm-approach-8" class="section level3">
+<h3><span class="header-section-number">10.2.2</span> GLM approach</h3>
+<CENTER>
+<span class="math inline">\(Model: Salary = \beta_0 + \beta_1*TenuredvAssistant + \beta_2*AssociatevProfessor + \varepsilon\)</span> <BR><span class="math inline">\(H_0: \beta_1 = \beta_2 = 0\)</span> <BR><span class="math inline">\(H_1: \beta_1 \ne 0\)</span> and/or <span class="math inline">\(\beta_2 \ne 0\)</span>
+</CENTER>
+<p>In the model, we now have both contrasts as predictors. The main effect of rank is testing both predictors of <code>TenuredvAssistant</code> and <code>AssociatevProfessor</code>.</p>
+<p>Given our orthogonal contrast coding scheme, the intercept (<span class="math inline">\(\beta_0\)</span>) is now the mean 9-month academic salary of professors on average across rank.</p>
+<p>The slope of <code>TenuredvAssistant</code> (<span class="math inline">\(\beta_1\)</span>) represents the mean difference in the 9-month academic salary for professors that are tenured compared to assistant professors.</p>
+<p>The slope of <code>AssociatevProfessor</code> (<span class="math inline">\(\beta_2\)</span>) represents the mean difference in the 9-month academic salary for professors that are associate professors compared to professors.</p>
+<p>Thus, the null hypothesis states that there is a difference in salary of tenured versus untenured professors and there is also no difference in salary of associate professors compared to professors. In other words, there is no difference in salary based on a professor’s rank. The alternative hypothesis states that there is a difference in either the salary of tenured versus untenured professors or associate professor versus professor, or both. If only one contrast is significant, then that contrast must be strong enough to mask the non-significance of the other contrast.</p>
+<p>Given the vagueness of the research hypothesis (i.e., the significance can be a single contrast or both contrasts), we can look at each individual slope to see which is actually significant since we explicitly defined its associated contrasts beforehand.</p>
+<p>Thus, our null and research hypotheses for these specific questions would be the following for each slope:</p>
+<p><span class="math display">\[H_0: \beta_1 = 0\]</span> <span class="math display">\[H_1: \beta_1 \ne 0\]</span> <span class="math display">\[H_0: \beta_2 = 0\]</span> <span class="math display">\[H_1: \beta_2 \ne 0\]</span></p>
+<p>Each of these null and research hypothesis pairs are also known as 1 degree of freedom tests since we are only testing 1 contrast at a time.</p>
+</div>
+</div>
+<div id="statistical-analysis-4" class="section level2">
+<h2><span class="header-section-number">10.3</span> Statistical analysis</h2>
+<div id="traditional-approach-9" class="section level3">
+<h3><span class="header-section-number">10.3.1</span> Traditional approach</h3>
+<p>To perform a traditional One-Way ANOVA, we can use the <code>aov</code> function. The first argument in the <code>aov</code> function is the formula and the second argument is the name of the dataset. Notice, that in the formula, we do not have to specify both contrasts because we have already applied the coding scheme directly to the categorical IV of <code>rank</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">aov</span>(salary <span class="op">~</span><span class="st"> </span>rank, datasetSalaries)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Anova</span>(model, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;III&quot;</span>))</code></pre></div>
+<pre><code>## Anova Table (Type III tests)
+## 
+## Response: salary
+##                 Sum Sq  Df F value    Pr(&gt;F)    
+## (Intercept) 2.6481e+12   1 4741.08 &lt; 2.2e-16 ***
+## rank        1.4323e+11   2  128.22 &lt; 2.2e-16 ***
+## Residuals   2.2007e+11 394                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Traditionally, if the main of effect of a categorical IV was significant, we would perform a post-hoc test (e.g., Tukey’s Honest Significant Difference [HSD]). In our case, <code>rank</code> is significant as the <em>p</em>-value of <code>2.2e-16</code> is less than our alpha of <code>0.05</code> and we would perform a post-hoc test to determine where the difference in salary actually comes from.</p>
+<p>To perform Tukey’s HSD, we could use the <code>TukeyHSD</code> function and provide the ANOVA analysis of the model as the input. The Tukey HSD essentially performs multiple independent samples <em>t</em>-tests of all possible pairs of the levels of a categorical IV but uses the error term from the ANOVA analysis in its calculation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">TukeyHSD</span>(model)</code></pre></div>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = salary ~ rank, data = datasetSalaries)
+## 
+## $rank
+##                                             diff       lwr      upr
+## Associate Professor-Assistant Professor 13100.45  3382.195 22818.71
+## Professor-Assistant Professor           45996.12 38395.941 53596.31
+## Professor-Associate Professor           32895.67 25154.507 40636.84
+##                                             p adj
+## Associate Professor-Assistant Professor 0.0046514
+## Professor-Assistant Professor           0.0000000
+## Professor-Associate Professor           0.0000000</code></pre>
+<p>Given that this post-hoc test compares all pairs of levels without any <em>a priori</em> assumptions (similarly, for other post-hoc tests), is another reason to use the <em>a priori</em> orthogonal contrast coding scheme.</p>
+</div>
+<div id="glm-approach-9" class="section level3">
+<h3><span class="header-section-number">10.3.2</span> GLM approach</h3>
+<p>Notice, that in the formula, we do not have to specify both contrasts because we have already applied the coding scheme directly to the categorical IV of <code>rank</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(salary <span class="op">~</span><span class="st"> </span>rank, datasetSalaries)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Anova</span>(model, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;III&quot;</span>))</code></pre></div>
+<pre><code>## Anova Table (Type III tests)
+## 
+## Response: salary
+##                 Sum Sq  Df F value    Pr(&gt;F)    
+## (Intercept) 2.6481e+12   1 4741.08 &lt; 2.2e-16 ***
+## rank        1.4323e+11   2  128.22 &lt; 2.2e-16 ***
+## Residuals   2.2007e+11 394                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Note that in both analyses, the <em>F</em>-statistic of <code>128.22</code> with <code>2</code> between degrees of freedom (df), <code>394</code> within degrees of freedom (df), and <em>p</em>-value of <code>2.2e-16</code> are identical.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = salary ~ rank, data = datasetSalaries)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -68972 -16376  -1580  11755 104773 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)               100475       1459  68.855   &lt;2e-16 ***
+## rankTenuredvAssistant      29548       3323   8.892   &lt;2e-16 ***
+## rankAssociatevProfessor    32896       3290   9.997   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 23630 on 394 degrees of freedom
+## Multiple R-squared:  0.3943, Adjusted R-squared:  0.3912 
+## F-statistic: 128.2 on 2 and 394 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>The estimate for the <code>(Intercept)</code> represents the mean 9-month academic salary on average across <code>rank</code>.</p>
+<p>The estimate for the <code>rankTenuredvAssistant</code> represents the mean difference in 9-month academic salary of tenured professors compared to assistant professors. Specifically, the 9-month academic salary of tenured professors was $29,548 more than assistant professors.</p>
+<p>The estimate for the <code>rankAssociatevProfessor</code> represents the mean difference in 9-month academic salary of associate professors compared to assistant professors. Specifically, the 9-month academic salary of professors was $32,896 more than associate professors.</p>
+</div>
+</div>
+<div id="statistical-decision-5" class="section level2">
+<h2><span class="header-section-number">10.4</span> Statistical decision</h2>
+<p>Given the <em>p</em>-value of <code>&lt; 2.2e-16</code> for <code>rank</code> is less than the alpha level (<span class="math inline">\(\alpha\)</span>) of 0.05, we will <code>reject</code> the null hypothesis.</p>
+<p>Notice both slopes are also significant, and we will also <code>reject</code> the null hypothesis for each.</p>
+</div>
+<div id="apa-statement-5" class="section level2">
+<h2><span class="header-section-number">10.5</span> APA statement</h2>
+<p>An Analysis of Variance (ANOVA) using <em>a priori</em> orthogonal contrast coding was performed to test if there was a difference in the 9-month academic salary between 1) tenured (i.e., associate professors and professors) compared to untenured professors (i.e., assistant professors) and 2) associate professors compared to professors. There was a significant main effect of rank on salary, <em>F</em>(2, 394) = 128.22, <em>p</em> &lt; .001. Specific to our contrasts, tenured professors earned significantly more than untenured professors, <em>b</em> = $29,548, <em>t</em>(1, 394) = 8.892, <em>p</em> &lt; .001. Professors also earned significantly more than professors, <em>b</em> = $32,896, <em>t</em>(1, 394) = 9.997, <em>p</em> &lt; .001.</p>
+</div>
+<div id="visualization-5" class="section level2">
+<h2><span class="header-section-number">10.6</span> Visualization</h2>
+<div id="traditional" class="section level3">
+<h3><span class="header-section-number">10.6.1</span> Traditional</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate descriptive statistics along with the 95% CI</span>
+dataset_summary &lt;-<span class="st"> </span>datasetSalaries <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(rank) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(
+    <span class="dt">mean =</span> <span class="kw">mean</span>(salary),
+    <span class="dt">sd =</span> <span class="kw">sd</span>(salary),
+    <span class="dt">n =</span> <span class="kw">n</span>(),
+    <span class="dt">sem =</span> sd <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n),
+    <span class="dt">tcrit =</span> <span class="kw">abs</span>(<span class="kw">qt</span>(<span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">df =</span> n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)),
+    <span class="dt">ME =</span> tcrit <span class="op">*</span><span class="st"> </span>sem,
+    <span class="dt">LL95CI =</span> mean <span class="op">-</span><span class="st"> </span>ME,
+    <span class="dt">UL95CI =</span> mean <span class="op">+</span><span class="st"> </span>ME
+  )
+
+<span class="co"># plot</span>
+<span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(rank, salary)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">width =</span> <span class="fl">0.1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">data =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> rank, <span class="dt">y =</span> mean, <span class="dt">ymin =</span> LL95CI, <span class="dt">ymax =</span> UL95CI), <span class="dt">color =</span> <span class="st">&quot;#3182bd&quot;</span>, <span class="dt">width =</span> <span class="fl">0.02</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">dat =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> rank, <span class="dt">y =</span> mean), <span class="dt">color =</span> <span class="st">&quot;#3182bd&quot;</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(
+    <span class="dt">x =</span> <span class="st">&quot;Rank&quot;</span>,
+    <span class="dt">y =</span> <span class="st">&quot;9-Month Academic Salary (USD)&quot;</span>
+  ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>()</code></pre></div>
+<div class="figure"><span id="fig:fig-one-way-anova-traditional"></span>
+<img src="Extension_of_Introductory_Univariate_Statistics_in_Psychology_files/figure-html/fig-one-way-anova-traditional-1.png" alt="A dot plot of the 9-month academic salaries of professors by their rank within the university (i.e., assistant professor, associate professor, and professor). Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. 
+Note: The data points are only jittered (dispersed) for easier visualization of all data points." width="672" />
+<p class="caption">
+Figure 10.1: A dot plot of the 9-month academic salaries of professors by their rank within the university (i.e., assistant professor, associate professor, and professor). Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points are only jittered (dispersed) for easier visualization of all data points.
+</p>
+</div>
+</div>
+<div id="orthogonal-contrast-coding" class="section level3">
+<h3><span class="header-section-number">10.6.2</span> Orthogonal Contrast Coding</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasetSalaries_long &lt;-<span class="st"> </span>datasetSalaries <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">professor =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(.),
+         <span class="dt">TenuredvAssistant =</span> <span class="kw">case_when</span>(
+    rank <span class="op">==</span><span class="st"> &quot;Assistant Professor&quot;</span> <span class="op">~</span><span class="st"> </span><span class="op">-</span><span class="dv">2</span>,
+    rank <span class="op">==</span><span class="st"> &quot;Associate Professor&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,
+    rank <span class="op">==</span><span class="st"> &quot;Professor&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>),
+        <span class="dt">AssociatevProfessor =</span> <span class="kw">case_when</span>(
+    rank <span class="op">==</span><span class="st"> &quot;Assistant Professor&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">0</span>,
+    rank <span class="op">==</span><span class="st"> &quot;Associate Professor&quot;</span> <span class="op">~</span><span class="st"> </span><span class="op">-</span><span class="dv">1</span>,
+    rank <span class="op">==</span><span class="st"> &quot;Professor&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>)
+  ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(professor, salary, TenuredvAssistant, AssociatevProfessor) <span class="op">%&gt;%</span>
+<span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(., <span class="dt">id.vars =</span> <span class="kw">c</span>(<span class="st">&quot;professor&quot;</span>, <span class="st">&quot;salary&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(value <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rank =</span> <span class="kw">case_when</span>(
+    variable <span class="op">==</span><span class="st"> &quot;TenuredvAssistant&quot;</span> <span class="op">&amp;&amp;</span><span class="st"> </span>value <span class="op">==</span><span class="st"> </span><span class="op">-</span><span class="dv">2</span> <span class="op">~</span><span class="st"> &quot;Assistant&quot;</span>,
+    variable <span class="op">==</span><span class="st"> &quot;TenuredvAssistant&quot;</span> <span class="op">&amp;&amp;</span><span class="st"> </span>value <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> &quot;Tenured&quot;</span>,
+    variable <span class="op">==</span><span class="st"> &quot;AssociatevProfessor&quot;</span> <span class="op">&amp;&amp;</span><span class="st"> </span>value <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> &quot;Professor&quot;</span>,
+    variable <span class="op">==</span><span class="st"> &quot;AssociatevProfessor&quot;</span> <span class="op">&amp;&amp;</span><span class="st"> </span>value <span class="op">==</span><span class="st"> </span><span class="op">-</span><span class="dv">1</span> <span class="op">~</span><span class="st"> &quot;Associate&quot;</span>
+  ))
+
+dataset_summary &lt;-<span class="st"> </span>datasetSalaries_long <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(variable, value) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(
+    <span class="dt">mean =</span> <span class="kw">mean</span>(salary),
+    <span class="dt">sd =</span> <span class="kw">sd</span>(salary),
+    <span class="dt">n =</span> <span class="kw">n</span>(),
+    <span class="dt">sem =</span> sd <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n),
+    <span class="dt">tcrit =</span> <span class="kw">abs</span>(<span class="kw">qt</span>(<span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">df =</span> n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)),
+    <span class="dt">ME =</span> tcrit <span class="op">*</span><span class="st"> </span>sem,
+    <span class="dt">LL95CI =</span> mean <span class="op">-</span><span class="st"> </span>ME,
+    <span class="dt">UL95CI =</span> mean <span class="op">+</span><span class="st"> </span>ME
+  )
+
+<span class="kw">ggplot</span>(datasetSalaries_long, <span class="kw">aes</span>(value, salary)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">width =</span> <span class="fl">0.3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">data =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> value, <span class="dt">y =</span> mean, <span class="dt">ymin =</span> LL95CI, <span class="dt">ymax =</span> UL95CI), <span class="dt">color =</span> <span class="st">&quot;#3182bd&quot;</span>, <span class="dt">width =</span> <span class="fl">0.05</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> value, <span class="dt">y =</span> mean)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> value, <span class="dt">y =</span> mean), <span class="dt">color =</span> <span class="st">&quot;#3182bd&quot;</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> rank, <span class="dt">x =</span> value, <span class="dt">y =</span> <span class="dv">0</span>), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>variable) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(
+    <span class="dt">x =</span> <span class="st">&quot;Rank&quot;</span>,
+    <span class="dt">y =</span> <span class="st">&quot;9-Month Academic Salary (USD)&quot;</span>
+  ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>), <span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">strip.background =</span> <span class="kw">element_blank</span>())</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-44"></span>
+<img src="Extension_of_Introductory_Univariate_Statistics_in_Psychology_files/figure-html/unnamed-chunk-44-1.png" alt="A dot plot of the 9-month academic salaries of professors by their rank within the university. Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points are only jittered (dispersed) for easier visualization of all data points." width="672" />
+<p class="caption">
+Figure 10.2: A dot plot of the 9-month academic salaries of professors by their rank within the university. Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points are only jittered (dispersed) for easier visualization of all data points.
+</p>
+</div>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="12">
+<li id="fn12"><p><span class="math inline">\(m_{rank}=k_{rank}-1=3-1=2\)</span><a href="one-way-anova.html#fnref12">↩</a></p></li>
+<li id="fn13"><p><span class="math inline">\(\Sigma Contrast\_Codes_{TenuredvAssistant} = -2 + 1 + 1 = 0\)</span><a href="one-way-anova.html#fnref13">↩</a></p></li>
+<li id="fn14"><p><span class="math inline">\(\Sigma Contrast\_Code_{AssociatevProfessor} = 0 -1 + 1 = 0\)</span><a href="one-way-anova.html#fnref14">↩</a></p></li>
+<li id="fn15"><p><span class="math inline">\(\Sigma Contrast_{TenuredvAssistant}*Contrast_{AssociatevProfessor} = (2*0) + (1*-1) + (1*1) = 0\)</span><a href="one-way-anova.html#fnref15">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="independent-samples-t-test.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="factorial-anova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
