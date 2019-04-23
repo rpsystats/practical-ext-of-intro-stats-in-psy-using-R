@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/epongpipat/practical-ext-of-intro-stats-in-psy-using-R.svg?branch=master)](https://travis-ci.org/epongpipat/practical-ext-of-intro-stats-in-psy-using-R)
 
+[![codecov](https://codecov.io/gh/epongpipat/practical-ext-of-intro-stats-in-psy-using-R/branch/master/graph/badge.svg)](https://codecov.io/gh/epongpipat/practical-ext-of-intro-stats-in-psy-using-R)
+
 This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R.
 
 Typically, introductory univariate statistics courses in psychology cover the following inferential analyses (plus or minus a few more analyses):
