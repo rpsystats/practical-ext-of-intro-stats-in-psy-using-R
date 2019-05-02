@@ -4,7 +4,7 @@ Next, let's go over the one-way ANOVA, which is used when we have two or more in
 
 For example, let's say that we were interested in determining if salary was significantly different for professors of different ranks (i.e., assistant professor, associate professor, and professor).
 
-For this example, we will use the [`datasetSalaries`][Salaries Dataset].
+For this example, we will use the dataset: [`datasetSalaries`][Salaries Dataset].
 
 As mentioned in the independent samples *t*-test, when dealing with categorical predictors, it is always good idea to check the coding scheme of the categorical variable.
 
@@ -46,7 +46,7 @@ contrasts(datasetSalaries$rank) <- cbind(
 
 To make a coding scheme orthogonal, we need to make sure that 1) each contrast equals zero and that 2) the sum of each contrast product is 0.
 
-For example, to make the tenured vs. untenured professor contrast, we can code `Assistant Professor` as `-2` and both `Associate Professor` and `Professor` as `1` and assign it the name `TenuredvAssistant`. It's best to use signs that go in the direction of our prediction so that it's reflected in our estimates. Since, we expect that tenured professors have higher salaries, tenured professors are assigned the positive value and assistant professors are assigned the negative value. Notice that the sum of the `TenuredvAssistant` contrast also adds up to 0 [^2].
+For example, to make the tenured vs. untenured professor contrast, we can code `Assistant Professor` as `-2` and both `Associate Professor` and `Professor` as `1` and assign it the name `TenuredvAssistant`. It's best to use signs that go in the direction of our prediction so that it's reflected in our estimates. Since we expect that tenured professors have higher salaries, tenured professors are assigned the positive value and assistant professors are assigned the negative value. Notice that the sum of the `TenuredvAssistant` contrast also adds up to 0 [^2].
 
 [^2]: $\Sigma Contrast\_Codes_{TenuredvAssistant} = -2 + 1 + 1 = 0$
 
@@ -115,7 +115,7 @@ Each of these null and research hypothesis pairs are also known as 1 degree of f
 ## Statistical analysis
 
 ### Traditional approach
-To perform a traditional One-Way ANOVA, we can use the `aov` function. The first argument in the `aov` function is the formula and the second argument is the name of the dataset. Notice, that in the formula, we do not have to specify both contrasts because we have already applied the coding scheme directly to the categorical IV of `rank`.
+To perform a traditional One-Way ANOVA, we can use the `aov()` function. The first argument in the `aov()` function is the formula and the second argument is the name of the dataset. Notice, that in the formula, we do not have to specify both contrasts because we have already applied the coding scheme directly to the categorical IV of `rank`.
 ```{r}
 model <- aov(salary ~ rank, datasetSalaries)
 ```
@@ -138,7 +138,7 @@ Given that this post-hoc test compares all pairs of levels without any *a priori
 Notice, that in the formula, we do not have to specify both contrasts because we have already applied the coding scheme directly to the categorical IV of `rank`.
 
 ```{r}
-model <- lm(salary ~ rank, datasetSalaries)
+model <- lm(salary ~ 1 + rank, datasetSalaries)
 ```
 
 ```{r}
@@ -162,7 +162,7 @@ The estimate for the `rankAssociatevProfessor` represents the mean difference in
 ## Statistical decision
 Given the *p*-value of `< 2.2e-16` for `rank` is less than the alpha level ($\alpha$) of 0.05, we will `reject` the null hypothesis.
 
-Notice both slopes are also significant, and we will also `reject` the null hypothesis for each.
+Notice both slopes are also significant, and we will also reject the null hypothesis for each.
 
 ## APA statement
 An Analysis of Variance (ANOVA) using *a priori* orthogonal contrast coding was performed to test if there was a difference in the 9-month academic salary between 1) tenured (i.e., associate professors and professors) compared to untenured professors (i.e., assistant professors) and 2) associate professors compared to professors. There was a significant main effect of rank on salary, *F*(2, 394) = 128.22, *p* < .001. Specific to our contrasts, tenured professors earned significantly more than untenured professors, *b* = $29,548, *t*(1, 394) = 8.892, *p* < .001. Professors also earned significantly more than professors, *b* = $32,896, *t*(1, 394) = 9.997, *p* < .001.

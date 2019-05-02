@@ -50,41 +50,66 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-pre, code { background-color: #f8f8f8; }
-code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code > span.dt { color: #204a87; } /* DataType */
-code > span.dv { color: #0000cf; } /* DecVal */
-code > span.bn { color: #0000cf; } /* BaseN */
-code > span.fl { color: #0000cf; } /* Float */
-code > span.ch { color: #4e9a06; } /* Char */
-code > span.st { color: #4e9a06; } /* String */
-code > span.co { color: #8f5902; font-style: italic; } /* Comment */
-code > span.ot { color: #8f5902; } /* Other */
-code > span.al { color: #ef2929; } /* Alert */
-code > span.fu { color: #000000; } /* Function */
-code > span.er { color: #a40000; font-weight: bold; } /* Error */
-code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #000000; } /* Constant */
-code > span.sc { color: #000000; } /* SpecialChar */
-code > span.vs { color: #4e9a06; } /* VerbatimString */
-code > span.ss { color: #4e9a06; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #000000; } /* Variable */
-code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code > span.ex { } /* Extension */
-code > span.at { color: #c4a000; } /* Attribute */
-code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -232,6 +257,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="authors.html"><a href="authors.html"><i class="fa fa-check"></i>Authors</a><ul>
 <li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#ekarin-eric-pongpipat-m.a."><i class="fa fa-check"></i>Ekarin Eric Pongpipat, M.A.</a></li>
 <li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#giuseppe-miranda-m.s."><i class="fa fa-check"></i>Giuseppe Miranda, M.S.</a></li>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#matthew-j.-kmiecik-b.s."><i class="fa fa-check"></i>Matthew J. Kmiecik, B.S.</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -263,39 +289,43 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <div id="traditional-approach-6" class="section level3">
 <h3><span class="header-section-number">9.1.1</span> Traditional approach</h3>
 <center>
-<span class="math inline">\(H_0: \mu_{Applied} - \mu_{Theoretical} = 0\)</span> or equivalently <span class="math inline">\(\mu_{Applied} = \mu_{Theoretical}\)</span> <BR><span class="math inline">\(H_1: \mu_{Applied} - \mu_{Theoretical} \ne 0\)</span> or equivalently <span class="math inline">\(\mu_{Applied} \ne \mu_{Theoretical}\)</span>
+<span class="math inline">\(H_0: \mu_{Applied} - \mu_{Theoretical} = 0\)</span> or equivalently <span class="math inline">\(\mu_{Applied} = \mu_{Theoretical}\)</span>
+<BR><span class="math inline">\(H_1: \mu_{Applied} - \mu_{Theoretical} \ne 0\)</span> or equivalently <span class="math inline">\(\mu_{Applied} \ne \mu_{Theoretical}\)</span>
 </center>
+<p><br /></p>
 <p>The null hypothesis states there is no difference in the salary of professors who are in an applied discipline compared to a theoretical discipline. The research hypothesis states there is a difference in the salary of professors who are in an applied discipline compared to a theoretical discipline.</p>
 </div>
 <div id="glm-approach-6" class="section level3">
 <h3><span class="header-section-number">9.1.2</span> GLM approach</h3>
-<p><span class="math display">\[Model: Salary = \beta_0 + \beta_1*Discipline + \varepsilon\]</span> <span class="math display">\[H_0: \beta_1 = 0\]</span> <span class="math display">\[H_1: \beta_1 \ne 0\]</span></p>
+<p><span class="math display">\[Model: Salary = \beta_0 + \beta_1*Discipline + \varepsilon\]</span>
+<span class="math display">\[H_0: \beta_1 = 0\]</span>
+<span class="math display">\[H_1: \beta_1 \ne 0\]</span></p>
 <p>In addition to the intercept (<span class="math inline">\(\beta_0\)</span>), we now have a predictor <code>discipline</code> along with its associated slope (<span class="math inline">\(\beta_1\)</span>). In this model, the slope represents the change in <code>salary</code> over the change in <code>discipline</code>, and the intercept (<span class="math inline">\(\beta_{0}\)</span>) in represents the value when <code>discipline</code> is 0.</p>
 <p>The null hypothesis states that the slope associated with <code>discipline</code> is equal to zero. In other words, there is no difference in the salary of professors who are in different disciplines. The alternative hypothesis states that the slope associated with <code>discipline</code> is not equal to zero. In other words, there is a difference in the salary of professors that are in different disciplines.</p>
-<p>The interpretation of the slope and intercept depends on how <code>discipline</code> is coded. Thus, it is always a good idea to check how this categorical IV is coded, which can be done using the <code>contrasts</code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>discipline)</code></pre></div>
+<p>The interpretation of the slope and intercept depends on how <code>discipline</code> is coded. Thus, it is always a good idea to check how this categorical IV is coded, which can be done using the <code>contrasts()</code> function.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>discipline)</code></pre>
 <pre><code>##             Theoretical
 ## Applied               0
 ## Theoretical           1</code></pre>
-<p>We can see that <code>Applied</code> is coded as <code>0</code> and <code>Theoretical</code> is coded as <code>1</code>. Given, that the difference of coding scheme of <code>discipline</code> is 1, the slope represents the mean difference in salary for professors that are in theoretical disciplines compared to applied disciplines.<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a> Additionally, the intercept (<span class="math inline">\(\beta_{0}\)</span>) represents the mean salary of professors in the applied discipline since 0 represents <code>Applied</code> in the <code>discipline</code> coding scheme.</p>
-<p>If we wanted to change the coding scheme and code <code>Theoretical</code> as <code>0</code> and <code>Applied</code> as <code>1</code>, then our interpretation of the intercept would be the mean salary of professors in the theoretical discipline since <code>Theoretical</code> is now 0. The slope would still have the same interpretation of the mean difference of salary for professors in different disciplines as the difference in the coding scheme is still 1. However, the sign would change.<a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a></p>
+<p>We can see that <code>Applied</code> is coded as <code>0</code> and <code>Theoretical</code> is coded as <code>1</code>. Given, that the difference of coding scheme of <code>discipline</code> is 1, the slope represents the mean difference in salary for professors that are in theoretical disciplines compared to applied disciplines.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> Additionally, the intercept (<span class="math inline">\(\beta_{0}\)</span>) represents the mean salary of professors in the applied discipline since 0 represents <code>Applied</code> in the <code>discipline</code> coding scheme.</p>
+<p>If we wanted to change the coding scheme and code <code>Theoretical</code> as <code>0</code> and <code>Applied</code> as <code>1</code>, then our interpretation of the intercept would be the mean salary of professors in the theoretical discipline since <code>Theoretical</code> is now 0. The slope would still have the same interpretation of the mean difference of salary for professors in different disciplines as the difference in the coding scheme is still 1. However, the sign would change.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
 <p>These two types of coding scheme is known as dummy coding, which is R’s default coding scheme for categorical variables. Specifically, dummy coding is when one level of an IV is coded as 1 and all others are coded as 0. However, there are other coding schemes such as effects (also known deviant), helmert, polynomial, and orthogonal. For a good description of different contrasts in addition to applying and interpreting them, check out this <a ref="httpd://stats.dire.UCLA.ed/r/library/r-library-contrast-coding-systems-for-categorical-variables/" target="_blank">website</a>. We will also go over coding categorical variables in more detail in the <a href="one-way-anova.html#coding-categorical-variables">next chapter</a>.</p>
-<p>Our preferred contrast for the independent samples <em>t</em>-test is to use -0.5 for one group and 0.5 for the other group. We prefer this coding scheme because the slope will still provide the mean difference;<a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a> however, since 0 lies in between the two groups, the intercept will now represent the mean of the group means. In this example case, it will be the mean of the mean salary of professors in the applied discipline and the mean salary of professors in the theoretical discipline.</p>
-<p>We recommend assigning the group expected to have a higher value in the dependent variable as 0.5 and the other group as -0.5. In our example, we might expect that those in the applied discipline will have higher salaries and thus assign that group to 0.5, while the theoretical discipline to have lower salaries and thus assign them to -0.5. We can do this by using the concatenate (<code>c</code>) function to group the numbers together and assign them back to the contrast. The order inside the <code>c</code> function must be in alphanumerical order of the levels of the independent variable.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>discipline) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.5</span>)
-<span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>discipline)</code></pre></div>
+<p>Our preferred contrast for the independent samples <em>t</em>-test is to use -0.5 for one group and 0.5 for the other group. We prefer this coding scheme because the slope will still provide the mean difference;<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> however, since 0 lies in between the two groups, the intercept will now represent the mean of the group means. In this example case, it will be the mean of the mean salary of professors in the applied discipline and the mean salary of professors in the theoretical discipline.</p>
+<p>We recommend assigning the group expected to have a higher value in the dependent variable as 0.5 and the other group as -0.5. In our example, we might expect that those in the applied discipline will have higher salaries and thus assign that group to 0.5, while the theoretical discipline to have lower salaries and thus assign them to -0.5. We can do this by using the concatenate <code>c()</code> function to group the numbers together and assign them back to the contrast. The order inside the <code>c()</code> function must be in alphanumerical order of the levels of the independent variable.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>discipline) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">-0.5</span>)
+<span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>discipline)</code></pre>
 <pre><code>##             [,1]
 ## Applied      0.5
 ## Theoretical -0.5</code></pre>
-<p>Note: If the difference in <code>discipline</code> was not equal to 1, the estimate would equal the fraction of the difference. For example, if <code>Applied</code> was coded as <code>-1</code> and <code>Theoretical</code> was coded as <code>1</code>, the difference of <code>discipline</code> is now 2 and the estimate would represent half of the salary mean difference.<a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a> Thus, if we multiplied the estimate by 2, we would obtain the mean salary difference. Even though the estimate changes, the <em>t</em>-statistic and <em>p</em>-value will not change as the intercept and error will adjust proportionally to the coding scheme of the categorical IV (as long as they are unique values).</p>
+<p>Note: If the difference in <code>discipline</code> was not equal to 1, the estimate would equal the fraction of the difference. For example, if <code>Applied</code> was coded as <code>-1</code> and <code>Theoretical</code> was coded as <code>1</code>, the difference of <code>discipline</code> is now 2 and the estimate would represent half of the salary mean difference.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> Thus, if we multiplied the estimate by 2, we would obtain the mean salary difference. Even though the estimate changes, the <em>t</em>-statistic and <em>p</em>-value will not change as the intercept and error will adjust proportionally to the coding scheme of the categorical IV (as long as they are unique values).</p>
 </div>
 </div>
 <div id="statistical-analysis-3" class="section level2">
 <h2><span class="header-section-number">9.2</span> Statistical analysis</h2>
 <div id="traditional-approach-7" class="section level3">
 <h3><span class="header-section-number">9.2.1</span> Traditional approach</h3>
-<p>To perform the traditional independent samples <em>t</em>-test, we can again use the <code>t.test</code> function. However, we will now enter the formula of the GLM into the first argument. For this test, we will assume the variances of each group are equal (not significantly different from each other); however, this should be tested.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(datasetSalaries<span class="op">$</span>salary <span class="op">~</span><span class="st"> </span>datasetSalaries<span class="op">$</span>discipline, <span class="dt">var.equal =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>To perform the traditional independent samples <em>t</em>-test, we can again use the <code>t.test()</code> function. However, we will now enter the formula of the GLM into the first argument. For this test, we will assume the variances of each group are equal (not significantly different from each other); however, this should be tested.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(datasetSalaries<span class="op">$</span>salary <span class="op">~</span><span class="st"> </span>datasetSalaries<span class="op">$</span>discipline, <span class="dt">var.equal =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
@@ -307,16 +337,16 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 ## sample estimates:
 ##     mean in group Applied mean in group Theoretical 
 ##                  118028.7                  108548.4</code></pre>
-<p>Note: There are other ways to enter the formula into <code>t.test</code> function depending on how the dataset is formatted.</p>
-<p>From this output we can see that the <em>t</em>-statistic (<code>t</code>) is <code>3.1406</code>, degrees of freedom (<code>df</code>) is <code>395</code>, and <code>p-value</code> is <code>0.001813</code>, with the mean salary of professors in the <code>Applied</code> discipline being <code>$118,028.70</code> and the mean salary of professors in the <code>Theoretical</code> discipline being <code>$108,548.40</code>.</p>
+<p>Note: There are other ways to enter the formula into <code>t.test()</code> function depending on how the dataset is formatted.</p>
+<p>From this output we can see that the <em>t</em>-statistic (<code>t</code>) is <code>3.1406</code>, degrees of freedom (<code>df</code>) is <code>395</code>, and <code>p-value</code> is <code>0.001813</code>, with the mean salary of professors in the <code>Applied</code> discipline being <code>$118,028.70</code> and the mean salary of professors in the <code>Theoretical</code> discipline being <code>$108,548.40</code>. Therefore, professors with <code>Applied</code> disciplines earn significantly higher salaries than professors with <code>Theoretical</code> disciplines.</p>
 </div>
 <div id="glm-approach-7" class="section level3">
 <h3><span class="header-section-number">9.2.2</span> GLM approach</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(salary <span class="op">~</span><span class="st"> </span>discipline, datasetSalaries)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(salary <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>discipline, datasetSalaries)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model)</code></pre>
 <pre><code>## 
 ## Call:
-## lm(formula = salary ~ discipline, data = datasetSalaries)
+## lm(formula = salary ~ 1 + discipline, data = datasetSalaries)
 ## 
 ## Residuals:
 ##    Min     1Q Median     3Q    Max 
@@ -332,14 +362,14 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 ## Residual standard error: 29960 on 395 degrees of freedom
 ## Multiple R-squared:  0.02436,    Adjusted R-squared:  0.02189 
 ## F-statistic: 9.863 on 1 and 395 DF,  p-value: 0.001813</code></pre>
-<p>Notice that in both analyses, the <em>t</em>-statistic (<code>t value</code>) of <code>-3.14</code> with <code>395</code> degrees of freedom (df), and <em>p</em>-value of <code>.002</code> are identical to the output from the <code>t.test</code> function.</p>
-<p>We can also see that if we subtract the mean salary for professors in the theoretical discipline from the applied discipline from the <code>t.test</code> results, we obtain the same mean difference in the <code>estimate</code> in the GLM results (i.e., <code>$118,028.70</code> - <code>$108,548.40</code> = <code>$9,480.30</code>).</p>
+<p>Notice that in both analyses, the <em>t</em>-statistic (<code>t value</code>) of <code>-3.14</code> with <code>395</code> degrees of freedom (df), and <em>p</em>-value of <code>.002</code> are identical to the output from the <code>t.test()</code> function.</p>
+<p>We can also see that if we subtract the mean salary for professors in the theoretical discipline from the applied discipline from the <code>t.test()</code> results, we obtain the same mean difference in the <code>estimate</code> in the GLM results (i.e., <code>$118,028.70</code> - <code>$108,548.40</code> = <code>$9,480.30</code>).</p>
 <p>Furthermore, we can also see that the intercept is the mean of the mean salary from both those in the applied discipline and theoretical discipline (<span class="math inline">\(\frac{118028.70+108548.40}{2} = 113288.50\)</span>).</p>
 </div>
 </div>
 <div id="statistical-decision-4" class="section level2">
 <h2><span class="header-section-number">9.3</span> Statistical decision</h2>
-<p>Given the <em>p</em>-value of <code>.002</code> is less than the alpha level (<span class="math inline">\(\alpha\)</span>) of 0.05, we will <code>reject</code> the null hypothesis.</p>
+<p>Given the <em>p</em>-value of <code>.002</code> is less than the alpha level (<span class="math inline">\(\alpha\)</span>) of 0.05, we will reject the null hypothesis.</p>
 </div>
 <div id="apa-statement-4" class="section level2">
 <h2><span class="header-section-number">9.4</span> APA statement</h2>
@@ -347,9 +377,9 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="visualization-4" class="section level2">
 <h2><span class="header-section-number">9.5</span> Visualization</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate descriptive statistics along with the 95% CI</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate descriptive statistics along with the 95% CI</span>
 dataset_summary &lt;-<span class="st"> </span>datasetSalaries <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">discipline =</span> <span class="kw">ifelse</span>(discipline <span class="op">==</span><span class="st"> &quot;Applied&quot;</span>, <span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.5</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">discipline =</span> <span class="kw">ifelse</span>(discipline <span class="op">==</span><span class="st"> &quot;Applied&quot;</span>, <span class="fl">0.5</span>, <span class="fl">-0.5</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(discipline) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarize</span>(
     <span class="dt">mean =</span> <span class="kw">mean</span>(salary),
@@ -366,7 +396,7 @@ mean_of_means &lt;-<span class="st"> </span><span class="kw">mean</span>(dataset
 
 <span class="co"># plot</span>
 datasetSalaries <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">discipline =</span> <span class="kw">ifelse</span>(discipline <span class="op">==</span><span class="st"> &quot;Applied&quot;</span>, <span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.5</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">discipline =</span> <span class="kw">ifelse</span>(discipline <span class="op">==</span><span class="st"> &quot;Applied&quot;</span>, <span class="fl">0.5</span>, <span class="fl">-0.5</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(discipline, salary)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">width =</span> <span class="fl">0.05</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">data =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> discipline, <span class="dt">y =</span> mean), <span class="dt">color =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
@@ -383,13 +413,14 @@ datasetSalaries <span class="op">%&gt;%</span>
       <span class="dt">labels =</span> scales<span class="op">::</span>dollar
     ) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span>.<span class="dv">5</span>,<span class="dv">0</span>,.<span class="dv">5</span>,<span class="dv">1</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">annotate</span>(<span class="dt">geom =</span> <span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="op">-</span>.<span class="dv">5</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">label =</span> <span class="st">&quot;Applied&quot;</span>, <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">annotate</span>(<span class="dt">geom =</span> <span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> .<span class="dv">5</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">label =</span> <span class="st">&quot;Theoretical&quot;</span>, <span class="dt">size =</span> <span class="dv">4</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">annotate</span>(<span class="dt">geom =</span> <span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="fl">-.5</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">label =</span> <span class="st">&quot;Applied&quot;</span>, <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">annotate</span>(<span class="dt">geom =</span> <span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="fl">.5</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">label =</span> <span class="st">&quot;Theoretical&quot;</span>, <span class="dt">size =</span> <span class="dv">4</span>)</code></pre>
 <div class="figure"><span id="fig:fig-independent-samples-t-test"></span>
 <img src="practical-ext-of-intro-stats-in-psy-using-R_files/figure-html/fig-independent-samples-t-test-1.png" alt="A dot plot of the 9-month academic salaries of professors that are in applied compared to theoretical disciplines. With respect to each discipline, the dot represents the mean salary and the bars represent the 95% CI. 
 Note: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points." width="672" />
 <p class="caption">
-Figure 9.1: A dot plot of the 9-month academic salaries of professors that are in applied compared to theoretical disciplines. With respect to each discipline, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points.
+Figure 9.1: A dot plot of the 9-month academic salaries of professors that are in applied compared to theoretical disciplines. With respect to each discipline, the dot represents the mean salary and the bars represent the 95% CI.
+Note: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points.
 </p>
 </div>
 
@@ -398,10 +429,10 @@ Figure 9.1: A dot plot of the 9-month academic salaries of professors that are i
 <div class="footnotes">
 <hr />
 <ol start="8">
-<li id="fn8"><p><span class="math inline">\(m_{rank}=k_{rank}-1=3-1=2\)</span><a href="independent-samples-t-test.html#fnref8">↩</a></p></li>
-<li id="fn9"><p><span class="math inline">\(\Sigma Contrast\_Codes_{TenuredvAssistant} = -2 + 1 + 1 = 0\)</span><a href="independent-samples-t-test.html#fnref9">↩</a></p></li>
-<li id="fn10"><p><span class="math inline">\(\Sigma Contrast\_Code_{AssociatevProfessor} = 0 -1 + 1 = 0\)</span><a href="independent-samples-t-test.html#fnref10">↩</a></p></li>
-<li id="fn11"><p><span class="math inline">\(\Sigma Contrast_{TenuredvAssistant}*Contrast_{AssociatevProfessor} = (2*0) + (1*-1) + (1*1) = 0\)</span><a href="independent-samples-t-test.html#fnref11">↩</a></p></li>
+<li id="fn8"><p><span class="math inline">\(m_{rank}=k_{rank}-1=3-1=2\)</span><a href="independent-samples-t-test.html#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p><span class="math inline">\(\Sigma Contrast\_Codes_{TenuredvAssistant} = -2 + 1 + 1 = 0\)</span><a href="independent-samples-t-test.html#fnref9" class="footnote-back">↩</a></p></li>
+<li id="fn10"><p><span class="math inline">\(\Sigma Contrast\_Code_{AssociatevProfessor} = 0 -1 + 1 = 0\)</span><a href="independent-samples-t-test.html#fnref10" class="footnote-back">↩</a></p></li>
+<li id="fn11"><p><span class="math inline">\(\Sigma Contrast_{TenuredvAssistant}*Contrast_{AssociatevProfessor} = (2*0) + (1*-1) + (1*1) = 0\)</span><a href="independent-samples-t-test.html#fnref11" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -460,7 +491,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

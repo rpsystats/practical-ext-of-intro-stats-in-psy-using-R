@@ -13,6 +13,7 @@ For this example, we will use the [`datasetSalaries`][Salaries Dataset] data set
 $H_0: \mu_{Applied} - \mu_{Theoretical} = 0$ or equivalently $\mu_{Applied} = \mu_{Theoretical}$
 <BR>$H_1: \mu_{Applied} - \mu_{Theoretical} \ne 0$ or equivalently $\mu_{Applied} \ne \mu_{Theoretical}$
 </center>
+<br />
 
 The null hypothesis states there is no difference in the salary of professors who are in an applied discipline compared to a theoretical discipline. The research hypothesis states there is a difference in the salary of professors who are in an applied discipline compared to a theoretical discipline.
 
@@ -25,7 +26,7 @@ In addition to the intercept ($\beta_0$), we now have a predictor `discipline` a
 
 The null hypothesis states that the slope associated with `discipline` is equal to zero. In other words, there is no difference in the salary of professors who are in different disciplines. The alternative hypothesis states that the slope associated with `discipline` is not equal to zero. In other words, there is a difference in the salary of professors that are in different disciplines.
 
-The interpretation of the slope and intercept depends on how `discipline` is coded. Thus, it is always a good idea to check how this categorical IV is coded, which can be done using the `contrasts` function.
+The interpretation of the slope and intercept depends on how `discipline` is coded. Thus, it is always a good idea to check how this categorical IV is coded, which can be done using the `contrasts()` function.
 
 ```{r}
 contrasts(datasetSalaries$discipline)
@@ -46,7 +47,7 @@ Our preferred contrast for the independent samples *t*-test is to use -0.5 for o
 
 [^3]: $$b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{0.5-(-0.5)} = \frac{\Delta Salary}{1} = \Delta Salary$$
 
-We recommend assigning the group expected to have a higher value in the dependent variable as 0.5 and the other group as -0.5. In our example, we might expect that those in the applied discipline will have higher salaries and thus assign that group to 0.5, while the theoretical discipline to have lower salaries and thus assign them to -0.5. We can do this by using the concatenate (`c`) function to group the numbers together and assign them back to the contrast. The order inside the `c` function must be in alphanumerical order of the levels of the independent variable.
+We recommend assigning the group expected to have a higher value in the dependent variable as 0.5 and the other group as -0.5. In our example, we might expect that those in the applied discipline will have higher salaries and thus assign that group to 0.5, while the theoretical discipline to have lower salaries and thus assign them to -0.5. We can do this by using the concatenate `c()` function to group the numbers together and assign them back to the contrast. The order inside the `c()` function must be in alphanumerical order of the levels of the independent variable.
 
 ```{r}
 contrasts(datasetSalaries$discipline) <- c(0.5, -0.5)
@@ -60,33 +61,33 @@ Note: If the difference in `discipline` was not equal to 1, the estimate would e
 ## Statistical analysis
 
 ### Traditional approach
-To perform the traditional independent samples *t*-test, we can again use the `t.test` function. However, we will now enter the formula of the GLM into the first argument. For this test, we will assume the variances of each group are equal (not significantly different from each other); however, this should be tested.
+To perform the traditional independent samples *t*-test, we can again use the `t.test()` function. However, we will now enter the formula of the GLM into the first argument. For this test, we will assume the variances of each group are equal (not significantly different from each other); however, this should be tested.
 
 ```{r}
 t.test(datasetSalaries$salary ~ datasetSalaries$discipline, var.equal = TRUE)
 ```
 
-Note: There are other ways to enter the formula into `t.test` function depending on how the dataset is formatted.
+Note: There are other ways to enter the formula into `t.test()` function depending on how the dataset is formatted.
 
-From this output we can see that the *t*-statistic (`t`) is `3.1406`, degrees of freedom (`df`) is `395`, and `p-value` is `0.001813`, with the mean salary of professors in the `Applied` discipline being `$118,028.70` and the mean salary of professors in the  `Theoretical` discipline being `$108,548.40`.
+From this output we can see that the *t*-statistic (`t`) is `3.1406`, degrees of freedom (`df`) is `395`, and `p-value` is `0.001813`, with the mean salary of professors in the `Applied` discipline being `$118,028.70` and the mean salary of professors in the  `Theoretical` discipline being `$108,548.40`. Therefore, professors with `Applied` disciplines earn significantly higher salaries than professors with `Theoretical` disciplines.
 
 ### GLM approach
 ```{r}
-model <- lm(salary ~ discipline, datasetSalaries)
+model <- lm(salary ~ 1 + discipline, datasetSalaries)
 ```
 
 ```{r}
 summary(model)
 ```
 
-Notice that in both analyses, the *t*-statistic (`t value`) of `-3.14` with `395` degrees of freedom (df), and *p*-value of `.002` are identical to the output from the `t.test` function.
+Notice that in both analyses, the *t*-statistic (`t value`) of `-3.14` with `395` degrees of freedom (df), and *p*-value of `.002` are identical to the output from the `t.test()` function.
 
-We can also see that if we subtract the mean salary for professors in the theoretical discipline from the applied discipline from the `t.test` results, we obtain the same mean difference in the `estimate` in the GLM results (i.e., `$118,028.70` - `$108,548.40` =  `$9,480.30`).
+We can also see that if we subtract the mean salary for professors in the theoretical discipline from the applied discipline from the `t.test()` results, we obtain the same mean difference in the `estimate` in the GLM results (i.e., `$118,028.70` - `$108,548.40` =  `$9,480.30`).
 
 Furthermore, we can also see that the intercept is the mean of the mean salary from both those in the applied discipline and theoretical discipline ($\frac{118028.70+108548.40}{2} = 113288.50$).
 
 ## Statistical decision
-Given the *p*-value of `.002` is less than the alpha level ($\alpha$) of 0.05, we will `reject` the null hypothesis.
+Given the *p*-value of `.002` is less than the alpha level ($\alpha$) of 0.05, we will reject the null hypothesis.
 
 ## APA statement
 An independent samples *t*-test was performed to test if salary of professors was different depending on their discipline. The salary of professors was significantly higher for professors in applied disciplines (*M* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Applied"]][,"mean"],2)),scientific=F)`, *SD* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Applied"]][,"sd"],2)),scientific=F)`) than for professors in theoretical disciplines (*M* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Theoretical"]][,"mean"],2)),scientific=F)`, *SD* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Theoretical"]][,"sd"],2)),scientific=F)`), *t*(395) = -3.14, *p* = .002.

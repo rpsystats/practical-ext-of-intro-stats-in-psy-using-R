@@ -34,23 +34,24 @@ In the model, when there is no other predictor, the intercept will be the mean. 
 ## Statistical analysis
 
 ### Traditional Approach
-To perform the traditional one-sample *t*-test, we can use the `t.test` function. The first input is the DV of `salary`, which is again prefixed by the name of the dataset and the dollar sign. The second input is the *a priori* value (or population value, $\mu$) that we are interested in testing (i.e., $50,221).
+To perform the traditional one-sample *t*-test, we can use the `t.test()` function. The first input is the DV of `salary`, which is again prefixed by the name of the dataset and the dollar sign. The second input is the *a priori* value (or population value, $\mu$) that we are interested in testing (i.e., $50,221).
 ```{r}
 t.test(x = datasetSalaries$salary, mu = 50221)
 ```
 
-From this output, we can see that the *t*-statistic (`t`) is `41.762`, degrees of freedom (`df`) is `396`, and the `p-value` is `2.2e-16`, with professor's mean salary at \$113,706.50.
+From this output, we can see that the *t*-statistic (`t`) is `41.762`, degrees of freedom (`df`) is `396`, and the `p-value` is `2.2e-16`, with professor's mean salary at \$113,706.50. Therefore, professors earn a significantly higher salary compared with the national U.S. median income of $50,221 in 2009.
 
 The *t*-statistic and its respective *p*-value can be interpreted as we previously saw in the [simple linear regression][How do we read the coefficients table?] chapter. We will spend more time explaining these values in the next section.
 
 ### GLM Approach
-Since we have an *a priori* hypothesis (i.e., median income of \$50,221), we will need to first manipulate the DV by point deviating from this *a priori* value. To do this, we will need to subtract \$50,221 from each salary score. Luckily, we can do that directly within the `lm` fucntion. We have to point-deviate because the `lm` function always tests regression estimates including the intercept against 0 ($H_0 = 0$). By point deviating from \$50,221, we are now asking if the mean of the new point deviated scores is different than 0, where 0 now equals \$50,221. To test the intercept, we simply place a `1` as the predictor.
+
+Since we have an *a priori* hypothesis (i.e., median income of \$50,221), we will need to first manipulate the DV by point deviating from this *a priori* value. To do this, we will need to subtract \$50,221 from each salary score. Luckily, we can do that directly within the `lm()` fucntion. We have to point-deviate because the `lm()` function always tests regression estimates including the intercept against 0 ($H_0 = 0$). By point deviating from \$50,221, we are now asking if the mean of the new point deviated scores is different than 0, where 0 now equals \$50,221. To test the intercept, we simply place a `1` as the predictor.
 
 ```{r}
 model <- lm(salary - 50221 ~ 1, datasetSalaries)
 ```
 
-We will again only look at the coefficients table using the `summary` function for this test and subsequent *t*-tests. Although, the ANOVA source table is not typically associated with this test, we could always examine it if desired using the `Anova` function.
+We will again only look at the coefficients table using the `summary()` function for this test and subsequent *t*-tests. Although, the ANOVA source table is not typically associated with this test, we could always examine it if desired using the `Anova()` function.
 
 ```{r}
 summary(model)
@@ -67,7 +68,7 @@ Also, the *p*-value represents the probability of finding a particular *t*-stati
 
 
 ## Statistical decision
-Given that the *p*-value of `2.2e-16` is smaller the alpha level ($\alpha$) of `0.05`, we will `reject` the null hypothesis. 
+Given that the *p*-value of `2.2e-16` is smaller the alpha level ($\alpha$) of `0.05`, we will reject the null hypothesis. 
 
 ## APA statement
 A one sample *t*-test was performed to test if the salary of professors was different than the national U.S. median of \$50,221. Professor salaries (*M* = \$`r format(scales::comma(round(describe(datasetSalaries)["salary","mean"],2)),scientific=F)`, *SD* = \$`r format(scales::comma(round(describe(datasetSalaries)["salary","sd"],2)),scientific=F)`) were significantly higher than the national U.S. median income, *t*(396) = 41.76, *p* < .001.

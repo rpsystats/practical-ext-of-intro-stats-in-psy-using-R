@@ -5,6 +5,7 @@ Below are two public (open-access) and real datasets that we will use for the an
 ```{r}
 datasetSalaries <- carData::Salaries
 ```
+
 One of the datasets that we'll use is the `Salaries` dataset within the `carData` package. The dataset consists of nine-month salaries collected from 397 collegiate professors in the U.S. during 2008 to 2009. In addition to salaries, the professor's rank, sex, discipline, years since Ph.D., and years of service was also collected. Thus, there is a total of 6 variables, which are described below. 
 
 ```{r, echo=F}
@@ -161,7 +162,7 @@ On average, a professor's 9-month annual income is $113,706.46.
 datasetAnorexia <- MASS::anorexia
 ```
 
-Another dataset that we'll use is the `anorexia` dataset within the `MASS` package. The dataset consists of the weight (in lbs) of 72 female patients with anorexia before and after either cognitive behavioral therapy, family therapy, or no therapy (control condition).
+Another dataset that we'll use is the `anorexia` dataset within the `MASS` package. The dataset consists of the weight (in lbs.) of 72 female patients with anorexia before and after either cognitive behavioral therapy, family therapy, or no therapy (control condition).
 
 ```{r, echo=F}
 kable(as.data.frame(rbind(
@@ -182,9 +183,8 @@ datasetAnorexia <- datasetAnorexia %>%
     PreWeight = Prewt,
     PostWeight = Postwt,
     Treatment = case_when(
-      Treatment == "CBT" ~ "CBT",
-      Treatment == "FT" ~ "FT",
-      Treatment == "Cont" ~ "Control"
+      Treatment == "Cont" ~ "Control",
+      TRUE ~ as.character(Treatment)
     ),
     Treatment = factor(Treatment, levels = c("CBT", "FT", "Control"))
     )
