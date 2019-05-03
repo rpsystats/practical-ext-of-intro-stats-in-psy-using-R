@@ -2,3 +2,4 @@ book_filename: "practical-ext-of-intro-stats-in-psy-using-R"
 repo: https://github.com/epongpipat/practical-ext-of-intro-stats-in-psy-using-R
 output_dir: docs
 chapter_name: "Chapter "
+delete_merged_file: true

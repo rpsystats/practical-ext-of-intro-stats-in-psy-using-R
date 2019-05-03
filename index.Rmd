@@ -42,7 +42,7 @@ We will go over each of the typical introductory statistics taught in psychology
 
 1. State the null and research hypotheses
 2. Perform the statistical analysis in R
-3. Statistical decision *(using an alpha ($\alpha$) = 0.05, two-tailed, which is the arbitrary and ubiquitous convention in psychology)*
+3. Statistical decision *(using an alpha ($\alpha$) = 0.05, two-tailed, which is the arbitrary and ubiquitous convention in psychology)[^1]*
 4. APA statement *(bare minimum)*
 5. Visualization
 
@@ -51,6 +51,8 @@ For each analysis, the traditional approach will be performed first followed by 
 ## What won't this book cover?
 This book won't go into assumptions of the inferential tests or exhaustively its respective formulas.
 This book will also not exhaustively review data manipulation, transformations, and visualization in R as there are other books that already do this well (e.g., <a href="http://r4ds.had.co.nz/" target="_blank">R for Data Science by Wickham & Grolemund</a>).
+
+[^1]: Good read on p-values from the American Statistical Association (ASA): https://www.tandfonline.com/doi/full/10.1080/00031305.2016.1154108
 
 ## Why R?
 We chose to use R to analyze and write this book because R forces us to write out how we performed our analyses (and write helpful comments if we're nice). These codes allow us and others to re-analyze the data exactly as we have. This is not always the case with statistical software that use GUIs.

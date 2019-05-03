@@ -283,7 +283,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 5</span> Simple Linear Regression</h1>
 <p>The first analysis that we will go over is the simple linear regression. Typically, this is one of the last analyses that is taught in introductory statistics in psychology; however, we will go over the simple linear regression first because its steps are essentially identical to the GLM (i.e., OLS regression) and provides a foundation for the GLM framework.</p>
 <p>The simple linear regression is typically taught to be used in understanding the relationship between two continuous variables, especially if one can predict the other.</p>
+<<<<<<< HEAD
 <p>However, the simple linear regression is a specific case of regression<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> where variables can actually be either continuous or categorical, the number of predictor variables can be more than one, and causation is not a requirement. Thus, regression is applicable to most data types.</p>
+=======
+<p>However, the simple linear regression is a specific case of regression<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> where variables can actually be either continuous or categorical, the number of predictor variables can be more than one, and causation is not a requirement. Thus, regression is applicable to most data types.</p>
+>>>>>>> master
 <p>The simple linear regression is written as:</p>
 <p><span class="math display">\[Y = \beta_0 + \beta_1X + \varepsilon\]</span></p>
 <p>where <span class="math inline">\(Y\)</span> is the dependent (or response) variable, <span class="math inline">\(\beta_0\)</span> is the intercept, <span class="math inline">\(\beta_1\)</span> is the slope, <span class="math inline">\(X\)</span> is the independent (or predictor) variable, and <span class="math inline">\(\varepsilon\)</span> is the error.</p>
@@ -345,10 +349,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Thus, if the IV can’t explain any of the variability within the DV, then the <em>F</em>-statistic is less than or equal to 1.</p>
 <p>However, if the IV(s) can explain the DV, the <em>F</em>-statistic will be larger than 1.</p>
 <p>In other words, the higher the <em>F</em>-statistic, the more the IV(s) explain(s) the variability in the DV compared to its inability to explain the DV.</p>
+<<<<<<< HEAD
 <p>Thus, the interpretation of the <em>F</em>-statistic of the <code>(Intercept)</code> is that the <code>(Intercept)</code> can explain the variability in <code>salary</code> <code>1099.71</code> times more than the <code>(Intercept)</code>’s inability to explain the variability in salary.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <p>The <code>Pr(&gt;F)</code> or <em>p</em>-value associated with the <code>Intercept</code> is <code>&lt; 2.2e-16</code>. The <em>p</em>-value is the probability of obtaining that particular <em>F</em>-statistic or more extreme assuming that the null hypothesis is true. In other words, the probability of obtaining this <em>F</em>-statistic by chance is extremely small.</p>
 <p>Since <code>yrs.since.phd</code> was our main predictor of interest (and for extra practice), let’s also look at the statistics associated with <code>yrs.since.phd</code>.</p>
 <p>The <em>F</em>-statistic associated with <code>yrs.since.phd</code> is <code>84.23</code>, and can be interpreted as <code>yrs.since.phd</code> explains the variability in <code>salary</code> <code>84.23</code> times more than <code>years.since.phd</code>’s inability to expain the variability in salary. The mathematical formula and calculation for <code>yrs.since.phd</code> can also be seen in the footnotes section.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+=======
+<p>Thus, the interpretation of the <em>F</em>-statistic of the <code>(Intercept)</code> is that the <code>(Intercept)</code> can explain the variability in <code>salary</code> <code>1099.71</code> times more than the <code>(Intercept)</code>’s inability to explain the variability in salary. If interested in the mathematical formula and its calculation, see the footnote at the bottom of the page.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></p>
+<p>The <code>Pr(&gt;F)</code> or <em>p</em>-value associated with the <code>Intercept</code> is <code>&lt; 2.2e-16</code>. The <em>p</em>-value is the probability of obtaining that particular <em>F</em>-statistic or more extreme assuming that the null hypothesis is true. In other words, the probability of obtaining this <em>F</em>-statistic by chance is extremely small.</p>
+<p>Since <code>yrs.since.phd</code> was our main predictor of interest (and for extra practice), let’s also look at the statistics associated with <code>yrs.since.phd</code>.</p>
+<p>The <em>F</em>-statistic associated with <code>yrs.since.phd</code> is <code>84.23</code>, and can be interpreted as <code>yrs.since.phd</code> explains the variability in <code>salary</code> <code>84.23</code> times more than <code>years.since.phd</code>’s inability to expain the variability in salary. The mathematical formula and calculation for <code>yrs.since.phd</code> can also be seen in the footnotes section.<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a></p>
+>>>>>>> master
 <p>The <em>p</em>-value associated with <code>yrs.since.phd</code> is also <code>&lt; 2.2e-16</code> with identical interpretations for the <em>p</em>-value of the <code>(Intercept)</code>.</p>
 <p><br></p>
 <p>We can also obtain the coefficients table by using the <code>summary</code> function.</p>
@@ -377,10 +388,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Similarly, we can look at the variable of interest in the first column and read across that particular variable’s row for its statistical information.</p>
 <p>Again, let’s first take a look at the statistics associated with the <code>(Intercept)</code>. The <code>Estimate</code> of the <code>(Intercept)</code> is <code>91718.7</code>, the standard error (<code>Std. Error</code>) is <code>2765.8</code>, the <em>t</em>-statistic (<code>t value</code>) is 33.162, and the <em>p</em>-value (<code>(Pr&gt;|t|)</code>) is <code>&lt; 2e-16</code>.</p>
 <p>The <code>Estimate</code> of the <code>(Intercept)</code> is the predicted intercept value, <span class="math inline">\(b_0 = 91718.7\)</span>. Thus, the predicted <code>salary</code> when <span class="math inline">\(yrs.since.phd = 0\)</span> is $91,718.70. In other words, when a professor has had their Ph.D. for less than a year, their salary is predicted to be $91,718.70.</p>
+<<<<<<< HEAD
 <p>The <code>t value</code> or <em>t</em>-statistic is similar to the <em>F</em>-statistic, and can also be conceptually thought of as the ratio of systematic differences to unsystematic differences. The <em>t</em>-statistic is equal to the square root of the <em>F</em>-statistic when the degrees of freedom is 1.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> Thus, the <em>t</em>-statistic interpretation is that the <code>(Intercept)</code> explains the variability in <code>salary</code> <code>33.162</code> times more than its inability to explain <code>salary</code>.</p>
 <p>The <em>p</em>-value or <code>Pr(&gt;|t|)</code> of <code>&lt;2e-16</code> is the probability of obtaining that particular <em>t</em>-statistic or a value more extreme than the <em>t</em>-statistic assuming that the null hypothesis is true, which is the same value from the ANOVA source table.</p>
 <p>Let’s also examine statistics for <code>yrs.since.phd</code>. The <code>Estimate</code> of <code>yrs.since.phd</code> is <code>985.3</code>, the <code>Std. Error</code> is <code>107.4</code>, the <code>t value</code> is <code>9.18</code>, and the <code>Pr(&gt;|t|)</code> is <code>&lt;2e-16</code>.</p>
 <p>The <code>Estimate</code> of the <code>yrs.since.phd</code> is the estimated slope, <span class="math inline">\(b_1 = 985.3\)</span>. Thus, <code>salary</code> is predicted to change by <code>$985.30</code> for every 1 unit increase in <code>yrs.since.phd</code>.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> In other words, salary is predicted to increase by $985.30 for every additional year a professor has earned their Ph.D.</p>
+=======
+<p>The <code>t value</code> or <em>t</em>-statistic is similar to the <em>F</em>-statistic, and can also be conceptually thought of as the ratio of systematic differences to unsystematic differences. The <em>t</em>-statistic is equal to the square root of the <em>F</em>-statistic when the degrees of freedom is 1,<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>.<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a> Thus, the <em>t</em>-statistic interpretation is that the <code>(Intercept)</code> explains the variability in <code>salary</code> <code>33.162</code> times more than its inability to explain <code>salary</code>.</p>
+<p>The <em>p</em>-value or <code>Pr(&gt;|t|)</code> of <code>&lt;2e-16</code> is the probability of obtaining that particular <em>t</em>-statistic or a value more extreme than the <em>t</em>-statistic assuming that the null hypothesis is true, which is the same value from the ANOVA source table.</p>
+<p>Let’s also examine statistics for <code>yrs.since.phd</code>. The <code>Estimate</code> of <code>yrs.since.phd</code> is <code>985.3</code>, the <code>Std. Error</code> is <code>107.4</code>, the <code>t value</code> is <code>9.18</code>, and the <code>Pr(&gt;|t|)</code> is <code>&lt;2e-16</code>.</p>
+<p>The <code>Estimate</code> of the <code>yrs.since.phd</code> is the estimated slope, <span class="math inline">\(b_1 = 985.3\)</span>. Thus, <code>salary</code> is predicted to change by <code>$985.30</code> for every 1 unit increase in <code>yrs.since.phd</code>.<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a> In other words, salary is predicted to increase by $985.30 for every additional year a professor has earned their Ph.D.</p>
+>>>>>>> master
 <p>The <em>t</em>-statistic can be interpreted as <code>yrs.since.phd</code> explains the variability in <code>salary</code> 9.18 times more than <code>yrs.since.phd</code>’s inability to the explain the variability in <code>salary</code>.</p>
 <p>The <em>p</em>-value of <code>yrs.since.phd</code> is identical to the <em>p</em>-value of the <code>(Intercept)</code> and has identical interpretations.</p>
 <p>Now, if wanted, we can fill in our predicted model, <span class="math inline">\(\hat{Y} = b_0 + b_1X\)</span>, with the estimates from the coefficients table to predict (or estimate) other values of salary given a certain number of years since a professor has earned their Ph.D.</p>
@@ -421,6 +439,7 @@ Figure 5.1: A scatterplot of years since Ph.D. and salary along with the line o
 </div>
 <div class="footnotes">
 <hr />
+<<<<<<< HEAD
 <ol start="1">
 <li id="fn1"><p><span class="math inline">\(m_{rank}=k_{rank}-1=3-1=2\)</span><a href="simple-linear-regression.html#fnref1" class="footnote-back">↩</a></p></li>
 <li id="fn2"><p><span class="math inline">\(m_{rank}=k_{rank}-1=3-1=2\)</span><a href="simple-linear-regression.html#fnref2" class="footnote-back">↩</a></p></li>
@@ -428,6 +447,15 @@ Figure 5.1: A scatterplot of years since Ph.D. and salary along with the line o
 <li id="fn4"><p><span class="math inline">\(\Sigma Contrast\_Code_{AssociatevProfessor} = 0 -1 + 1 = 0\)</span><a href="simple-linear-regression.html#fnref4" class="footnote-back">↩</a></p></li>
 <li id="fn5"><p><span class="math inline">\(\Sigma Contrast_{TenuredvAssistant}*Contrast_{AssociatevProfessor} = (2*0) + (1*-1) + (1*1) = 0\)</span><a href="simple-linear-regression.html#fnref5" class="footnote-back">↩</a></p></li>
 <li id="fn6"><p><span class="math display">\[b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta DV}{\Delta IV} = \frac{\Delta salary}{\Delta yrs.since.phd} = \frac{985.3}{1} = 985.3\]</span><a href="simple-linear-regression.html#fnref6" class="footnote-back">↩</a></p></li>
+=======
+<ol start="2">
+<li id="fn2"><p><span class="math inline">\(\Sigma Contrast_{TenuredvAssistant}*Contrast_{AssociatevProfessor} = (2*0) + (1*-1) + (1*1) = 0\)</span><a href="simple-linear-regression.html#fnref2">↩</a></p></li>
+<li id="fn3"><p><span class="math inline">\(\Sigma Contrast_{TenuredvAssistant}*Contrast_{AssociatevProfessor} = (2*0) + (1*-1) + (1*1) = 0\)</span><a href="simple-linear-regression.html#fnref3">↩</a></p></li>
+<li id="fn4"><p><span class="math inline">\(\Sigma Contrast_{TenuredvAssistant}*Contrast_{AssociatevProfessor} = (2*0) + (1*-1) + (1*1) = 0\)</span><a href="simple-linear-regression.html#fnref4">↩</a></p></li>
+<li id="fn5"><p><span class="math inline">\(\Sigma Contrast_{TenuredvAssistant}*Contrast_{AssociatevProfessor} = (2*0) + (1*-1) + (1*1) = 0\)</span><a href="simple-linear-regression.html#fnref5">↩</a></p></li>
+<li id="fn6"><p><span class="math inline">\(\Sigma Contrast_{TenuredvAssistant}*Contrast_{AssociatevProfessor} = (2*0) + (1*-1) + (1*1) = 0\)</span><a href="simple-linear-regression.html#fnref6">↩</a></p></li>
+<li id="fn7"><p><span class="math inline">\(\Sigma Contrast_{TenuredvAssistant}*Contrast_{AssociatevProfessor} = (2*0) + (1*-1) + (1*1) = 0\)</span><a href="simple-linear-regression.html#fnref7">↩</a></p></li>
+>>>>>>> master
 </ol>
 </div>
             </section>
