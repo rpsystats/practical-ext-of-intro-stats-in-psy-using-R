@@ -2,9 +2,9 @@
 
 The next analysis that we will go over is the correlation. The correlation and simple linear regression are similar with the only difference being that the estimate of the slope of the correlation is standardized, while the estimate of the slope of the simple linear regression is unstandardized.
 
-The correlation that is typically taught is the Pearson correlation, which is the correlation between two continuous variables. However, despite the difference in correlation nomenclature for different variable types, all correlations are similarly applied in the GLM approach. 
+The correlation that is typically taught is the Pearson correlation, which is the correlation between two continuous variables. However, despite the difference in correlation nomenclature for different variable types, these correlations are similarly applied in the GLM approach. 
 
-As a side note, this is also the chapter that people associate the phrase "correlation is not causation." This phrase is correct and should be thoughtfully considered; however, all statistical analyses are looking at how variables relate (or correlate or covary) with each other. Thus, the phrase "correlation is not causation" is about research design rather than statistical analysis.
+As a side note, this is also the chapter that people associate the phrase "correlation is not causation." This phrase is correct and should be thoughtfully considered. All statistical analyses are looking at how variables relate (or correlate or covary) with each other. Thus, the phrase "correlation is not causation" is about research design rather than statistical analysis.
 
 Given that the simple linear regression and correlation are similar, we can use the same example from the [previous chapter][Simple Linear Regression], where we were interested in determining if there was a relationship (or correlation) between the number of years since a professor has had their Ph.D. and their salary. We will be using the same [`datasetSalaries`][Salaries Dataset] dataset to facilitate comparisons.
 
@@ -48,14 +48,15 @@ model <- lm(scale(salary) ~ 1 + scale(yrs.since.phd), data = datasetSalaries)
 Remember, both the DV and IV need to be standardized so that our estimates are also standardized. Luckily, we can standardize both `salary` and `yrs.since.phd` directly in the formula by using the `scale` function.
 
 The table that most aligns with the correlation output is the coefficients table and not the ANOVA source table, so we will only be using the `summary()` function for this analysis. However, we could use the `Anova()` function to obtain the ANOVA source table if desired.
+
 ```{r}
 summary(model)
 ```
 Since the estimates are standardized, the units are in standard deviations rather than their original metric.
 
-For example, the slope represents the standard deviation unit change in Y for every one standard deviation unit increase in X. In this specific example, the slope of `scale(yrs.since.phd)` represents the standard deviation unit change in `salary` for every one standard deviation unit increase `yrs.since.phd`. In other words, there is a `0.42` standard deviation unit increase in salary for every one standard deviation unit increase in the number of years a professor has had their Ph.D.
+For example, the slope represents the standard deviation unit change in Y (`scale(yrs.since.phd)`) for every one standard deviation unit increase in X (`salary`). In other words, there is a `0.42` standard deviation unit increase in salary for every one standard deviation unit increase in the number of years a professor has had their Ph.D.
 
-The intercept represents Y in standard deviation units when X is 0 standard deviation units, or at the average value of X. Remember, that 0 standard deviations (or a z-score of 0) is also the mean because z-scoring converts the mean to 0 and the standard deviation to 1. Thus, in this example, the intercept represents the predicted `salary` in standard deviation units when `yrs.since.phd` is 0 standard deviation units. In other words, for a professor that has had their Ph.D. for 0 standard deviation units (or an average number of years), their predicted salary is `-5.89e-17` standard deviation units.
+The intercept represents Y (`salary`) in standard deviation units when X (`yrs.since.phd`) is 0 standard deviation units, or at the average value of X (`yrs.since.phd`). Remember, that 0 standard deviations (or a z-score of 0) is also the mean because z-scoring converts the mean to 0 and the standard deviation to 1. In other words, for a professor that has had their Ph.D. for 0 standard deviation units (or an average number of years), their predicted salary is `-5.89e-17` standard deviation units.
 
 Given these interpretations of standardized slopes and intercepts, they are not our preference, especially when variables have easily interpreted metrics. However, standardized slopes and intercepts are preferred for quickly determining effect sizes as they can only range between -1 and +1. They are also preferred when comparing other predictors within and between other models as they are in a standardized metric; however, the validity of these comparisons are debated.
 

@@ -7,9 +7,9 @@ Packages are an organized set of scripts or code that an author has compiled tog
 ## Packages
 The main packages that we will use throughout the book are:
 
-1. `psych` : Descriptive statistics
-2. `car` : Analysis of Variance (ANOVA) source table with sums of squares type III
-3. `tidyverse` : Data manipulation and visualization
+1. `tidyverse` : Data manipulation and visualization
+2. `psych` : Descriptive statistics
+3. `car` : Analysis of Variance (ANOVA) source table with sums of squares type III
 4. `knitr` : Nice, clean-looking tables
 5. `carData` : Open access datasets
 6. `MASS` : Additional open access datasets
@@ -21,9 +21,9 @@ Note: The description of each package is only a description of how we will use e
 To install a package, we can enter the command `install.packages("name of package")`. For example, to install the `psych` package, we would type `install.packages("psych")`. 
 
 ```{r, eval=F}
+install.packages("tidyverse")
 install.packages("psych")
 install.packages("car")
-install.packages("tidyverse")
 install.packages("knitr")
 install.packages("kableExtra")
 install.packages("carData")
@@ -35,9 +35,9 @@ install.packages("scales")
 To load a package, we can enter the command `library(name of package)`. For example, to load the `psych` package, we would type `library(psych)`. We won't be loading the `carData` and `MASS` package as we will be extracting the datasets directly from those packages, which we will go over in the [datasets chapter][Datasets].
 
 ```{r, echo = T, warning = F, message = F}
+library(tidyverse)
 library(psych)
 library(car)
-library(tidyverse)
 library(knitr)
 library(kableExtra)
 library(scales)

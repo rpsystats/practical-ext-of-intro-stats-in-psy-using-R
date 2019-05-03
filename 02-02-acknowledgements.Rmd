@@ -1,8 +1,10 @@
 # Acknowledgements {-}
 
-I would like to thank:
+We would like to thank:
 
-* Maria Boylan for pushing me to explain more and turning a blog into this book.
+* <a href="https://twitter.com/hashtag/rstats?src=hash" target="_blank">\#rstats</a> community for sharing and documenting code (inspiration for this book)
+
+* Maria Boylan for pushing me to explain more, which turned an initial blog idea into this book.
 
 * Linh Lazarus (<a href = "https://github.com/praxling" target="_blank">\@praxling</a>) for editing an earlier version of this when it was only a blog post.
 

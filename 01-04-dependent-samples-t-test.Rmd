@@ -13,15 +13,15 @@ In other cases, not properly accounting for the dependence of measures can artif
 ## Null and research hypotheses
 
 ### Traditional approach
-$H_0: \mu_{WeightDifference} = 0$
-<BR>$H_1: \mu_{WeightDifference} \ne 0$
+$$H_0: \mu_{WeightDifference} = 0$$
+$$H_1: \mu_{WeightDifference} \ne 0$$
 
 The null hypothesis states that there is no weight difference in female patients with anorexia before and after the study. The research hypothesis states there is a weight difference in female patients with anorexia before and after the study.
 
 ### GLM approach
-$Model: WeightDifference = \beta_0 + \varepsilon$
-<BR>$H_0: \beta_0 = 0$
-<BR>$H_1: \beta_0 \ne 0$
+$$Model: WeightDifference = \beta_0 + \varepsilon$$
+$$H_0: \beta_0 = 0$$
+$$H_1: \beta_0 \ne 0$$
 
 where $\beta_0$ represents the intercept and $\varepsilon$ represents the error
 

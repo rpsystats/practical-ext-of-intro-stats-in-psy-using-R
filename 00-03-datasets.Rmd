@@ -49,11 +49,13 @@ It's also always a good idea to examine the data numerically and visually. Let's
 
 #### Categorical Variables
 ```{r}
-plyr::count(datasetSalaries, "rank")
+summary(datasetSalaries$rank)
 ```
 
+To visualize our data, we will be using the function `ggplot()`. We won't be going into detail about plotting since data visualization is out of the book's scope. However, if interested, check out Grolemund's and Wickham's <a href="https://r4ds.had.co.nz/data-visualisation.html" target="_blank">data visualization chapter</a> to learn more about `ggplot()`.
+
 ```{r figure-rank}
-ggplot(datasetSalaries, aes(rank)) +
+ggplot(data = datasetSalaries, mapping = aes(x = rank)) +
   geom_bar(aes(y = stat(count) / sum(stat(count))), color = "black", fill = "#3182bd") +
   theme_classic() +
   labs(y = "Proportion", x = "", title = "rank")
@@ -62,11 +64,11 @@ ggplot(datasetSalaries, aes(rank)) +
 In this dataset, there are a lot more professors than assistant and associate professors combined.
 
 ```{r}
-plyr::count(datasetSalaries, "discipline")
+summary(datasetSalaries$discipline)
 ```
 
 ```{r figure-discipline}
-ggplot(datasetSalaries, aes(discipline)) +
+ggplot(data = datasetSalaries, mapping = aes(x = discipline)) +
   geom_bar(aes(y = stat(count) / sum(stat(count))), color = "black", fill = "#3182bd") +
   theme_classic() +
   labs(y = "Proportion", x = "", title = "discipline")
@@ -75,11 +77,11 @@ ggplot(datasetSalaries, aes(discipline)) +
 There are slightly more professors within the applied than the theoretical discipline (i.e., 35 more).
 
 ```{r}
-plyr::count(datasetSalaries, "sex") 
+summary(datasetSalaries$sex)
 ```
 
 ```{r figure-sex}
-ggplot(datasetSalaries, aes(sex)) +
+ggplot(data = datasetSalaries, mapping = aes(x = sex)) +
   geom_bar(aes(y = stat(count) / sum(stat(count))), color = "black", fill = "#3182bd") +
   theme_classic() +
   labs(y = "Proportion", x = "", title = "sex")
@@ -97,7 +99,7 @@ datasetSalaries %>%
 ```
 
 ```{r figure-yrs-since-phd}
-ggplot(datasetSalaries, aes(yrs.since.phd)) +
+ggplot(datasetSalaries, mapping = aes(yrs.since.phd)) +
   geom_vline(
     xintercept = describe(datasetSalaries)["yrs.since.phd", "mean"],
     alpha = .5,
@@ -117,7 +119,7 @@ ggplot(datasetSalaries, aes(yrs.since.phd)) +
 On average, professors have had their Ph.D. for about 22 years.
 
 ```{r figure-yrs-service}
-ggplot(datasetSalaries, aes(yrs.service)) +
+ggplot(data = datasetSalaries, mapping = aes(yrs.service)) +
   geom_vline(
     xintercept = describe(datasetSalaries)["yrs.service", "mean"],
     alpha = .5,
@@ -137,7 +139,7 @@ ggplot(datasetSalaries, aes(yrs.service)) +
 On average, professors have provided a service to either the department or university for about 17 years and 7 months.
 
 ```{r figure-salary}
-ggplot(datasetSalaries, aes(salary)) +
+ggplot(data = datasetSalaries, mapping = aes(x = salary)) +
   geom_vline(
     xintercept = describe(datasetSalaries)["salary", "mean"],
     alpha = .5,
@@ -194,11 +196,11 @@ datasetAnorexia <- datasetAnorexia %>%
 
 #### Categorical Variables
 ```{r}
-plyr::count(datasetAnorexia, "Treatment")
+summary(datasetAnorexia$Treatment)
 ```
 
 ```{r figure-treatment}
-ggplot(datasetAnorexia, aes(Treatment)) +
+ggplot(data = datasetAnorexia, mapping = aes(x = Treatment)) +
   geom_bar(aes(y = stat(count) / sum(stat(count))), color = "black", fill = "#3182bd") +
   theme_classic() +
   labs(y = "Proportion", x = "", title = "Treatment")
@@ -216,7 +218,7 @@ datasetAnorexia %>%
 ```
 
 ```{r figure-preweight}
-ggplot(datasetAnorexia, aes(PreWeight)) +
+ggplot(data = datasetAnorexia, mapping = aes(x = PreWeight)) +
   geom_vline(
     xintercept = describe(datasetAnorexia)["PreWeight", "mean"],
     alpha = .5,
@@ -238,7 +240,7 @@ ggplot(datasetAnorexia, aes(PreWeight)) +
 On average, women with anorexia before treatment weighed 82.41 lbs.
 
 ```{r figure-postweight}
-ggplot(datasetAnorexia, aes(PostWeight)) +
+ggplot(data = datasetAnorexia, mapping = aes(x = PostWeight)) +
   geom_vline(
     xintercept = describe(datasetAnorexia)["PostWeight", "mean"],
     alpha = .5,

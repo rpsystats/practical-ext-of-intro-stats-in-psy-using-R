@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chapter 9 Independent Samples t-Test | A Practical Extension of Introductory Statistics in Psychology using R (Draft)</title>
+  <title>Chapter 9 Independent Samples t-Test | A Practical Extension of Introductory Statistics in Psychology using R</title>
   <meta name="description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 9 Independent Samples t-Test | A Practical Extension of Introductory Statistics in Psychology using R (Draft)" />
+  <meta property="og:title" content="Chapter 9 Independent Samples t-Test | A Practical Extension of Introductory Statistics in Psychology using R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://ekarinpongpipat.com/practical-ext-of-intro-stats-in-psy-using-R/" />
   
@@ -17,12 +17,12 @@
   <meta name="github-repo" content="epongpipat/practical-ext-of-intro-stats-in-psy-using-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Independent Samples t-Test | A Practical Extension of Introductory Statistics in Psychology using R (Draft)" />
+  <meta name="twitter:title" content="Chapter 9 Independent Samples t-Test | A Practical Extension of Introductory Statistics in Psychology using R" />
   
   <meta name="twitter:description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R." />
   
 
-<meta name="author" content="Ekarin Eric Pongpipat, M.A. &amp; Giuseppe Miranda, M.S.">
+<meta name="author" content="Ekarin E. Pongpipat, Giuseppe Miranda, &amp; Matthew J. Kmiecik">
 
 
 
@@ -108,6 +108,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#how-will-this-book-be-covered"><i class="fa fa-check"></i><b>1.2</b> How will this book be covered?</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#what-wont-this-book-cover"><i class="fa fa-check"></i><b>1.3</b> What won’t this book cover?</a></li>
 <li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#why-r"><i class="fa fa-check"></i><b>1.4</b> Why R?</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#issues-and-recommendations"><i class="fa fa-check"></i><b>1.5</b> Issues and Recommendations</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>2</b> Prerequisites</a><ul>
 <li class="chapter" data-level="2.1" data-path="prerequisites.html"><a href="prerequisites.html#knowledge"><i class="fa fa-check"></i><b>2.1</b> Knowledge</a></li>
@@ -246,7 +247,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Practical Extension of Introductory Statistics in Psychology using R (Draft)</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Practical Extension of Introductory Statistics in Psychology using R</a>
           </h1>
         </div>
 
@@ -272,7 +273,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <div id="glm-approach-6" class="section level3">
 <h3><span class="header-section-number">9.1.2</span> GLM approach</h3>
 <p><span class="math display">\[Model: Salary = \beta_0 + \beta_1*Discipline + \varepsilon\]</span> <span class="math display">\[H_0: \beta_1 = 0\]</span> <span class="math display">\[H_1: \beta_1 \ne 0\]</span></p>
-<p>In addition to the intercept (<span class="math inline">\(\beta_0\)</span>), we now have a predictor <code>discipline</code> along with its associated slope (<span class="math inline">\(\beta_1\)</span>). In this model, the slope represents the change in <code>salary</code> over the change in <code>discipline</code>, and the intercept (<span class="math inline">\(\beta_{0}\)</span>) in represents the value when <code>discipline</code> is 0.</p>
+<p>In addition to the intercept (<span class="math inline">\(\beta_0\)</span>), we now have a predictor <code>discipline</code> along with its associated slope (<span class="math inline">\(\beta_1\)</span>). In this model, the slope represents the change in <code>salary</code> over the change in <code>discipline</code>, and the intercept (<span class="math inline">\(\beta_{0}\)</span>) represents the value when <code>discipline</code> is 0.</p>
 <p>The null hypothesis states that the slope associated with <code>discipline</code> is equal to zero. In other words, there is no difference in the salary of professors who are in different disciplines. The alternative hypothesis states that the slope associated with <code>discipline</code> is not equal to zero. In other words, there is a difference in the salary of professors that are in different disciplines.</p>
 <p>The interpretation of the slope and intercept depends on how <code>discipline</code> is coded. Thus, it is always a good idea to check how this categorical IV is coded, which can be done using the <code>contrasts()</code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>discipline)</code></pre></div>
@@ -281,7 +282,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 ## Theoretical           1</code></pre>
 <p>We can see that <code>Applied</code> is coded as <code>0</code> and <code>Theoretical</code> is coded as <code>1</code>. Given, that the difference of coding scheme of <code>discipline</code> is 1, the slope represents the mean difference in salary for professors that are in theoretical disciplines compared to applied disciplines.<a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a> Additionally, the intercept (<span class="math inline">\(\beta_{0}\)</span>) represents the mean salary of professors in the applied discipline since 0 represents <code>Applied</code> in the <code>discipline</code> coding scheme.</p>
 <p>If we wanted to change the coding scheme and code <code>Theoretical</code> as <code>0</code> and <code>Applied</code> as <code>1</code>, then our interpretation of the intercept would be the mean salary of professors in the theoretical discipline since <code>Theoretical</code> is now 0. The slope would still have the same interpretation of the mean difference of salary for professors in different disciplines as the difference in the coding scheme is still 1. However, the sign would change.<a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a></p>
-<p>These two types of coding scheme is known as dummy coding, which is R’s default coding scheme for categorical variables. Specifically, dummy coding is when one level of an IV is coded as 1 and all others are coded as 0. However, there are other coding schemes such as effects (also known deviant), helmert, polynomial, and orthogonal. For a good description of different contrasts in addition to applying and interpreting them, check out this <a ref="httpd://stats.dire.UCLA.ed/r/library/r-library-contrast-coding-systems-for-categorical-variables/" target="_blank">website</a>. We will also go over coding categorical variables in more detail in the <a href="one-way-anova.html#coding-categorical-variables">next chapter</a>.</p>
+<p>These two types of coding schemes are known as dummy coding, which is R’s default coding scheme for categorical variables. Specifically, dummy coding is when one level of an IV is coded as 1 and all others are coded as 0. However, there are other coding schemes such as effects (also known deviant), helmert, polynomial, and orthogonal. For a good description of different contrasts in addition to applying and interpreting them, check out UCLA Statistical Consulting Group’s <a href="https://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/" target="_blank">description</a>. We will also go over coding categorical variables in more detail in the <a href="one-way-anova.html#coding-categorical-variables">next chapter</a>.</p>
 <p>Our preferred contrast for the independent samples <em>t</em>-test is to use -0.5 for one group and 0.5 for the other group. We prefer this coding scheme because the slope will still provide the mean difference;<a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a> however, since 0 lies in between the two groups, the intercept will now represent the mean of the group means. In this example case, it will be the mean of the mean salary of professors in the applied discipline and the mean salary of professors in the theoretical discipline.</p>
 <p>We recommend assigning the group expected to have a higher value in the dependent variable as 0.5 and the other group as -0.5. In our example, we might expect that those in the applied discipline will have higher salaries and thus assign that group to 0.5, while the theoretical discipline to have lower salaries and thus assign them to -0.5. We can do this by using the concatenate <code>c()</code> function to group the numbers together and assign them back to the contrast. The order inside the <code>c()</code> function must be in alphanumerical order of the levels of the independent variable.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>discipline) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.5</span>)
@@ -389,9 +390,9 @@ datasetSalaries <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">annotate</span>(<span class="dt">geom =</span> <span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> .<span class="dv">5</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">label =</span> <span class="st">&quot;Theoretical&quot;</span>, <span class="dt">size =</span> <span class="dv">4</span>)</code></pre></div>
 <div class="figure"><span id="fig:fig-independent-samples-t-test"></span>
 <img src="practical-ext-of-intro-stats-in-psy-using-R_files/figure-html/fig-independent-samples-t-test-1.png" alt="A dot plot of the 9-month academic salaries of professors that are in applied compared to theoretical disciplines. With respect to each discipline, the dot represents the mean salary and the bars represent the 95% CI. 
-Note: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points." width="672" />
+Note: The data points of each group are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points." width="672" />
 <p class="caption">
-Figure 9.1: A dot plot of the 9-month academic salaries of professors that are in applied compared to theoretical disciplines. With respect to each discipline, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points.
+Figure 9.1: A dot plot of the 9-month academic salaries of professors that are in applied compared to theoretical disciplines. With respect to each discipline, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points of each group are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points.
 </p>
 </div>
 
@@ -400,7 +401,7 @@ Figure 9.1: A dot plot of the 9-month academic salaries of professors that are i
 <div class="footnotes">
 <hr />
 <ol start="9">
-<li id="fn9"><p><span class="math inline">\(\Sigma Contrast_{TenuredvAssistant}*Contrast_{AssociatevProfessor} = (2*0) + (1*-1) + (1*1) = 0\)</span><a href="independent-samples-t-test.html#fnref9">↩</a></p></li>
+<li id="fn9"><p><span class="math display">\[b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{1-0} = \frac{\Delta Salary}{1} = \Delta Salary\]</span><a href="independent-samples-t-test.html#fnref9">↩</a></p></li>
 <li id="fn10"><p><span class="math display">\[b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{0-1} = \frac{\Delta Salary}{-1} = -\Delta Salary\]</span><a href="independent-samples-t-test.html#fnref10">↩</a></p></li>
 <li id="fn11"><p><span class="math display">\[b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{0.5-(-0.5)} = \frac{\Delta Salary}{1} = \Delta Salary\]</span><a href="independent-samples-t-test.html#fnref11">↩</a></p></li>
 <li id="fn12"><p><span class="math display">\[b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{1-(-1)} = \frac{\Delta Salary}{2}\]</span><a href="independent-samples-t-test.html#fnref12">↩</a></p></li>

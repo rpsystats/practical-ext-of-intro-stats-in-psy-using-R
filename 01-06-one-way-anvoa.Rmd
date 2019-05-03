@@ -18,9 +18,9 @@ contrasts(datasetSalaries$rank)
 
 ## Coding Categorical Variables {#coding-categorical-variables}
 
-When coding categorical variables, the number of contrasts ($m$) is equal to $k-1$ where $k$ is the number of levels (or factors) of an IV. In our example, `rank` has 3 levels (i.e., `Assistant Professor`, `Associate Professor`, and `Professor`) and thus has 2 contrasts [^1].
+When coding categorical variables, the number of contrasts ($m$) is equal to $k-1$ where $k$ is the number of levels (or factors) of an IV. In our example, `rank` has 3 levels (i.e., `Assistant Professor`, `Associate Professor`, and `Professor`) and thus has 2 contrasts [^13].
 
-[^1]: $m_{rank}=k_{rank}-1=3-1=2$
+[^3]: $m_{rank}=k_{rank}-1=3-1=2$
 
 This is the reason why in a one-way ANOVA, we have $k-1$ between degrees of freedom. Thus, contrasts are always being performed, either explicitly if told or using a software package's default coding scheme (e.g., dummy coding for R) when testing a main effect of a categorical IV.
 
@@ -44,19 +44,19 @@ contrasts(datasetSalaries$rank) <- cbind(
 )
 ```
 
-To make a coding scheme orthogonal, we need to make sure that 1) each contrast equals zero and that 2) the sum of each contrast product is 0.
+To make a coding scheme orthogonal, we need to make sure that 1) the sum of each contrast equals zero and that 2) the sum of each contrast product is 0.
 
-For example, to make the tenured vs. untenured professor contrast, we can code `Assistant Professor` as `-2` and both `Associate Professor` and `Professor` as `1` and assign it the name `TenuredvAssistant`. It's best to use signs that go in the direction of our prediction so that it's reflected in our estimates. Since, we expect that tenured professors have higher salaries, tenured professors are assigned the positive value and assistant professors are assigned the negative value. Notice that the sum of the `TenuredvAssistant` contrast also adds up to 0 [^1].
+For example, to make the tenured vs. untenured professor contrast, we can code `Assistant Professor` as `-2` and both `Associate Professor` and `Professor` as `1` and assign it the name `TenuredvAssistant`. It's best to use signs that go in the direction of our prediction so that it's reflected in our estimates. Since, we expect that tenured professors have higher salaries, tenured professors are assigned the positive value and assistant professors are assigned the negative value. Notice that the sum of the `TenuredvAssistant` contrast also adds up to 0 [^14].
 
-[^1]: $\Sigma Contrast\_Codes_{TenuredvAssistant} = -2 + 1 + 1 = 0$
+[^14]: $\Sigma Contrast\_Codes_{TenuredvAssistant} = -2 + 1 + 1 = 0$
 
-To make the next contrast of `Associate Professor` compared to `Professor`, we can code `Assistant Professor` as `0`, `Associate Professor` as `-1`, and `Professor` as `1` and give it the name `AssociatevProfessor`. Notice again that the sum of the `AssociatevProfessor` contrast adds up to 0 [^1].
+To make the next contrast of `Associate Professor` compared to `Professor`, we can code `Assistant Professor` as `0`, `Associate Professor` as `-1`, and `Professor` as `1` and give it the name `AssociatevProfessor`. Notice again that the sum of the `AssociatevProfessor` contrast adds up to 0 [^15].
 
-[^1]: $\Sigma Contrast\_Code_{AssociatevProfessor} = 0 -1 + 1 = 0$
+[^15]: $\Sigma Contrast\_Code_{AssociatevProfessor} = 0 -1 + 1 = 0$
 
-Since both contrasts sum to zero, we can now check if the sum of products for each level across contrasts equals 0. In other words, we multiply the values across each contrast pair for each level and add them together. For example, the product across the contrasts of `Assistant Professor` is $2*0 = 0$, `Associate Professor` is $1*-1=-1$, and `Professor` is $1*1=1$. If we add them together, we get $0-1+1=0$ [^1].
+Since both contrasts sum to zero, we can now check if the sum of products for each level across contrasts equals 0. In other words, we multiply the values across each contrast pair for each level and add them together. For example, the product across the contrasts of `Assistant Professor` is $2*0 = 0$, `Associate Professor` is $1*-1=-1$, and `Professor` is $1*1=1$. If we add them together, we get $0-1+1=0$ [^16].
 
-[^1]: $\Sigma Contrast_{TenuredvAssistant}*Contrast_{AssociatevProfessor} = (2*0) + (1*-1) + (1*1) = 0$
+[^16]: $\Sigma Contrast_{TenuredvAssistant}*Contrast_{AssociatevProfessor} = (2*0) + (1*-1) + (1*1) = 0$
 
 To take orthogonal contrast coding a step further and make our estimates readily interpretable as the mean difference of that contrast, we can ensure that the difference of each contrast is 1. To do this, we can divide each contrast code by the number of values that are not coded as 0 for each contrast. For example, since all 3 codes of the `TenuredvAssistant` contrast are not equal to 0, we can divide by 3. Similarly, for the `AssociatevProfessor` contrast, we can divide each contrast code by 2 since 2 of the contrast codes are not equal to 0. Note that this is a rule of thumb and should be verified if contrasts are more complex.
 
@@ -160,12 +160,12 @@ The estimate for the `rankAssociatevProfessor` represents the mean difference in
 
 
 ## Statistical decision
-Given the *p*-value of `< 2.2e-16` for `rank` is less than the alpha level ($\alpha$) of 0.05, we will `reject` the null hypothesis.
+Given the *p*-value of `< 2.2e-16` for `rank` is less than the alpha level ($\alpha$) of 0.05, we will reject the null hypothesis.
 
 Notice both slopes are also significant, and we will also reject the null hypothesis for each.
 
 ## APA statement
-An Analysis of Variance (ANOVA) using *a priori* orthogonal contrast coding was performed to test if there was a difference in the 9-month academic salary between 1) tenured (i.e., associate professors and professors) compared to untenured professors (i.e., assistant professors) and 2) associate professors compared to professors. There was a significant main effect of rank on salary, *F*(2, 394) = 128.22, *p* < .001. Specific to our contrasts, tenured professors earned significantly more than untenured professors, *b* = $29,548, *t*(1, 394) = 8.892, *p* < .001. Professors also earned significantly more than professors, *b* = $32,896, *t*(1, 394) = 9.997, *p* < .001.
+An Analysis of Variance (ANOVA) using *a priori* orthogonal contrast coding was performed to test if there was a difference in the 9-month academic salary between 1) tenured (i.e., associate professors and professors) compared to untenured professors (i.e., assistant professors) and 2) associate professors compared to professors. There was a significant main effect of rank on salary, *F*(2, 394) = 128.22, *p* < .001. Specific to our contrasts, tenured professors earned significantly more than untenured professors, *b* = $29,548, *t*(1, 394) = 8.892, *p* < .001. Professors also earned significantly more than associate professors, *b* = $32,896, *t*(1, 394) = 9.997, *p* < .001.
 
 ## Visualization
 

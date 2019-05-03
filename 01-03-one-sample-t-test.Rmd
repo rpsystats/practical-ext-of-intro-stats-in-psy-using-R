@@ -56,9 +56,9 @@ We will again only look at the coefficients table using the `summary()` function
 ```{r}
 summary(model)
 ```
-Notice that in both approaches that the values are identical with respect to the place of rounding. The *t*-statistic is `41.76` with `396` degrees of freedom (df), and the *p*-value is `<2e-16`. However, the estimate of the GLM approach is now the sample mean of the point deviated scores. Thus, we if add back `$50,221`, we will obtain the same sample mean of `$113,707`[^1].
+Notice that in both approaches that the values are identical with respect to the place of rounding. The *t*-statistic is `41.76` with `396` degrees of freedom (df), and the *p*-value is `<2e-16`. However, the estimate of the GLM approach is now the sample mean of the point deviated scores. Thus, we if add back `$50,221`, we will obtain the same sample mean of `$113,707`[^8].
 
-[^1]: $M = \$63,486+\$50,221=\$113,707$
+[^8]: $M = \$63,486+\$50,221=\$113,707$
 
 Let's go over the *t*-statistic and *p*-value to reinforce these concepts. 
 

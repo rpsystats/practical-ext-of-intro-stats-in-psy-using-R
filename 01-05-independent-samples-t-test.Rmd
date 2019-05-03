@@ -22,7 +22,7 @@ $$Model: Salary = \beta_0 + \beta_1*Discipline + \varepsilon$$
 $$H_0: \beta_1 = 0$$
 $$H_1: \beta_1 \ne 0$$
 
-In addition to the intercept ($\beta_0$), we now have a predictor `discipline` along with its associated slope ($\beta_1$). In this model, the slope represents the change in `salary` over the change in `discipline`, and the intercept ($\beta_{0}$) in represents the value when `discipline` is 0.
+In addition to the intercept ($\beta_0$), we now have a predictor `discipline` along with its associated slope ($\beta_1$). In this model, the slope represents the change in `salary` over the change in `discipline`, and the intercept ($\beta_{0}$) represents the value when `discipline` is 0.
 
 The null hypothesis states that the slope associated with `discipline` is equal to zero. In other words, there is no difference in the salary of professors who are in different disciplines. The alternative hypothesis states that the slope associated with `discipline` is not equal to zero. In other words, there is a difference in the salary of professors that are in different disciplines.
 
@@ -32,20 +32,20 @@ The interpretation of the slope and intercept depends on how `discipline` is cod
 contrasts(datasetSalaries$discipline)
 ```
 
-We can see that `Applied` is coded as `0` and `Theoretical` is coded as `1`. Given, that the difference of coding scheme of `discipline` is 1, the slope represents the mean difference in salary for professors that are in theoretical disciplines compared to applied disciplines [^1]. Additionally, the intercept ($\beta_{0}$) represents the mean salary of professors in the applied discipline since 0 represents `Applied` in the `discipline` coding scheme.
+We can see that `Applied` is coded as `0` and `Theoretical` is coded as `1`. Given, that the difference of coding scheme of `discipline` is 1, the slope represents the mean difference in salary for professors that are in theoretical disciplines compared to applied disciplines [^9]. Additionally, the intercept ($\beta_{0}$) represents the mean salary of professors in the applied discipline since 0 represents `Applied` in the `discipline` coding scheme.
 
-[^1]: $$b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{1-0} = \frac{\Delta Salary}{1} = \Delta Salary$$
+[^9]: $$b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{1-0} = \frac{\Delta Salary}{1} = \Delta Salary$$
 
-If we wanted to change the coding scheme and code `Theoretical` as `0` and `Applied` as `1`, then our interpretation of the intercept would be the mean salary of professors in the theoretical discipline since `Theoretical` is now 0. The slope would still have the same interpretation of the mean difference of salary for professors in different disciplines as the difference in the coding scheme is still 1. However, the sign would change. [^2]
+If we wanted to change the coding scheme and code `Theoretical` as `0` and `Applied` as `1`, then our interpretation of the intercept would be the mean salary of professors in the theoretical discipline since `Theoretical` is now 0. The slope would still have the same interpretation of the mean difference of salary for professors in different disciplines as the difference in the coding scheme is still 1. However, the sign would change. [^10]
 
-[^2]: $$b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{0-1} = \frac{\Delta Salary}{-1} = -\Delta Salary$$
+[^10]: $$b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{0-1} = \frac{\Delta Salary}{-1} = -\Delta Salary$$
 
 
-These two types of coding scheme is known as dummy coding, which is R's default coding scheme for categorical variables. Specifically, dummy coding is when one level of an IV is coded as 1 and all others are coded as 0. However, there are other coding schemes such as effects (also known deviant), helmert, polynomial, and orthogonal. For a good description of different contrasts in addition to applying and interpreting them, check out this <a ref="httpd://stats.dire.UCLA.ed/r/library/r-library-contrast-coding-systems-for-categorical-variables/" target="_blank">website</a>. We will also go over coding categorical variables in more detail in the [next chapter][Coding Categorical Variables].
+These two types of coding schemes are known as dummy coding, which is R's default coding scheme for categorical variables. Specifically, dummy coding is when one level of an IV is coded as 1 and all others are coded as 0. However, there are other coding schemes such as effects (also known deviant), helmert, polynomial, and orthogonal. For a good description of different contrasts in addition to applying and interpreting them, check out UCLA Statistical Consulting Group's <a href="https://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/" target="_blank">description</a>. We will also go over coding categorical variables in more detail in the [next chapter][Coding Categorical Variables].
 
-Our preferred contrast for the independent samples *t*-test is to use -0.5 for one group and 0.5 for the other group. We prefer this coding scheme because the slope will still provide the mean difference [^3]; however, since 0 lies in between the two groups, the intercept will now represent the mean of the group means. In this example case, it will be the mean of the mean salary of professors in the applied discipline and the mean salary of professors in the theoretical discipline.
+Our preferred contrast for the independent samples *t*-test is to use -0.5 for one group and 0.5 for the other group. We prefer this coding scheme because the slope will still provide the mean difference [^11]; however, since 0 lies in between the two groups, the intercept will now represent the mean of the group means. In this example case, it will be the mean of the mean salary of professors in the applied discipline and the mean salary of professors in the theoretical discipline.
 
-[^3]: $$b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{0.5-(-0.5)} = \frac{\Delta Salary}{1} = \Delta Salary$$
+[^11]: $$b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{0.5-(-0.5)} = \frac{\Delta Salary}{1} = \Delta Salary$$
 
 We recommend assigning the group expected to have a higher value in the dependent variable as 0.5 and the other group as -0.5. In our example, we might expect that those in the applied discipline will have higher salaries and thus assign that group to 0.5, while the theoretical discipline to have lower salaries and thus assign them to -0.5. We can do this by using the concatenate `c()` function to group the numbers together and assign them back to the contrast. The order inside the `c()` function must be in alphanumerical order of the levels of the independent variable.
 
@@ -54,9 +54,9 @@ contrasts(datasetSalaries$discipline) <- c(0.5, -0.5)
 contrasts(datasetSalaries$discipline)
 ```
 
-Note: If the difference in `discipline` was not equal to 1, the estimate would equal the fraction of the difference. For example, if `Applied` was coded as `-1` and `Theoretical` was coded as `1`, the difference of `discipline` is now 2 and the estimate would represent half of the salary mean difference [^4]. Thus, if we multiplied the estimate by 2, we would obtain the mean salary difference. Even though the estimate changes, the *t*-statistic and *p*-value will not change as the intercept and error will adjust proportionally to the coding scheme of the categorical IV (as long as they are unique values).
+Note: If the difference in `discipline` was not equal to 1, the estimate would equal the fraction of the difference. For example, if `Applied` was coded as `-1` and `Theoretical` was coded as `1`, the difference of `discipline` is now 2 and the estimate would represent half of the salary mean difference [^12]. Thus, if we multiplied the estimate by 2, we would obtain the mean salary difference. Even though the estimate changes, the *t*-statistic and *p*-value will not change as the intercept and error will adjust proportionally to the coding scheme of the categorical IV (as long as they are unique values).
 
-[^4]: $$b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{1-(-1)} = \frac{\Delta Salary}{2}$$
+[^12]: $$b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{1-(-1)} = \frac{\Delta Salary}{2}$$
 
 ## Statistical analysis
 
@@ -93,7 +93,7 @@ Given the *p*-value of `.002` is less than the alpha level ($\alpha$) of 0.05, w
 An independent samples *t*-test was performed to test if salary of professors was different depending on their discipline. The salary of professors was significantly higher for professors in applied disciplines (*M* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Applied"]][,"mean"],2)),scientific=F)`, *SD* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Applied"]][,"sd"],2)),scientific=F)`) than for professors in theoretical disciplines (*M* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Theoretical"]][,"mean"],2)),scientific=F)`, *SD* = \$`r format(scales::comma(round(describeBy(datasetSalaries$salary,datasetSalaries$discipline)[["Theoretical"]][,"sd"],2)),scientific=F)`), *t*(395) = -3.14, *p* = .002.
 
 ## Visualization
-```{r fig-independent-samples-t-test, warning = F, fig.cap = "A dot plot of the 9-month academic salaries of professors that are in applied compared to theoretical disciplines. With respect to each discipline, the dot represents the mean salary and the bars represent the 95% CI. \nNote: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points."}
+```{r fig-independent-samples-t-test, warning = F, fig.cap = "A dot plot of the 9-month academic salaries of professors that are in applied compared to theoretical disciplines. With respect to each discipline, the dot represents the mean salary and the bars represent the 95% CI. \nNote: The data points of each group are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points."}
 # calculate descriptive statistics along with the 95% CI
 dataset_summary <- datasetSalaries %>%
   mutate(discipline = ifelse(discipline == "Applied", 0.5, -0.5)) %>%
