@@ -46,11 +46,7 @@ contrasts(datasetSalaries$rank) <- cbind(
 
 To make a coding scheme orthogonal, we need to make sure that 1) each contrast equals zero and that 2) the sum of each contrast product is 0.
 
-<<<<<<< HEAD
-For example, to make the tenured vs. untenured professor contrast, we can code `Assistant Professor` as `-2` and both `Associate Professor` and `Professor` as `1` and assign it the name `TenuredvAssistant`. It's best to use signs that go in the direction of our prediction so that it's reflected in our estimates. Since we expect that tenured professors have higher salaries, tenured professors are assigned the positive value and assistant professors are assigned the negative value. Notice that the sum of the `TenuredvAssistant` contrast also adds up to 0 [^2].
-=======
 For example, to make the tenured vs. untenured professor contrast, we can code `Assistant Professor` as `-2` and both `Associate Professor` and `Professor` as `1` and assign it the name `TenuredvAssistant`. It's best to use signs that go in the direction of our prediction so that it's reflected in our estimates. Since, we expect that tenured professors have higher salaries, tenured professors are assigned the positive value and assistant professors are assigned the negative value. Notice that the sum of the `TenuredvAssistant` contrast also adds up to 0 [^1].
->>>>>>> master
 
 [^1]: $\Sigma Contrast\_Codes_{TenuredvAssistant} = -2 + 1 + 1 = 0$
 

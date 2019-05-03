@@ -50,66 +50,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  { background-color: #f8f8f8; }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ef2929; } /* Alert */
-code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
-code span.bn { color: #0000cf; } /* BaseN */
-code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
-code span.co { color: #8f5902; font-style: italic; } /* Comment */
-code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code span.dt { color: #204a87; } /* DataType */
-code span.dv { color: #0000cf; } /* DecVal */
-code span.er { color: #a40000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code span.ot { color: #8f5902; } /* Other */
-code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
-code span.ss { color: #4e9a06; } /* SpecialString */
-code span.st { color: #4e9a06; } /* String */
-code span.va { color: #000000; } /* Variable */
-code span.vs { color: #4e9a06; } /* VerbatimString */
-code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -289,16 +264,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.1</span> Null and research hypotheses</h2>
 <div id="traditional-approach-2" class="section level3">
 <h3><span class="header-section-number">7.1.1</span> Traditional Approach</h3>
-<p><span class="math display">\[H_0: \mu = \$50,221\]</span>
-<span class="math display">\[H_1: \mu \ne \$50,221\]</span></p>
+<p><span class="math display">\[H_0: \mu = \$50,221\]</span> <span class="math display">\[H_1: \mu \ne \$50,221\]</span></p>
 <p>where <span class="math inline">\(\mu\)</span> represents the population mean</p>
 <p>The null hypothesis states that there is no difference between the sample and population mean, or equivalently the sample and population mean are equal. The research hypothesis states that there is a difference between the sample and population mean, or equivalently the sample and population mean are not equal.</p>
 </div>
 <div id="glm-approach-2" class="section level3">
 <h3><span class="header-section-number">7.1.2</span> GLM Approach</h3>
-<p><span class="math display">\[Model: Salary = \beta_0 + \varepsilon\]</span>
-<span class="math display">\[H_0: \beta_0 = \$50,221\]</span>
-<span class="math display">\[H_1: \beta_0 \ne \$50,221\]</span></p>
+<p><span class="math display">\[Model: Salary = \beta_0 + \varepsilon\]</span> <span class="math display">\[H_0: \beta_0 = \$50,221\]</span> <span class="math display">\[H_1: \beta_0 \ne \$50,221\]</span></p>
 <p>where <span class="math inline">\(\beta_{0}\)</span> represents the intercept, <span class="math inline">\(\varepsilon\)</span> represents the population error, <span class="math inline">\(H_0\)</span> represents the null hypothesis, and <span class="math inline">\(H_1\)</span> represents the research hypothesis.</p>
 <p>In this particular case, we will not be using the nil hypothesis as we have an <em>a priori</em> comparison of $50,221.</p>
 <p>In the model, when there is no other predictor, the intercept will be the mean. This is because without any other information, the single best number to describe the data is the mean. Thus, the null hypothesis states the intercept (or the mean of 9-month academic salary of professors) is equal to $50,221. The research hypothesis states that the intercept (or the mean 9-month academic salary of professors) is not equal to $50,221.</p>
@@ -309,7 +281,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="traditional-approach-3" class="section level3">
 <h3><span class="header-section-number">7.2.1</span> Traditional Approach</h3>
 <p>To perform the traditional one-sample <em>t</em>-test, we can use the <code>t.test()</code> function. The first input is the DV of <code>salary</code>, which is again prefixed by the name of the dataset and the dollar sign. The second input is the <em>a priori</em> value (or population value, <span class="math inline">\(\mu\)</span>) that we are interested in testing (i.e., $50,221).</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(<span class="dt">x =</span> datasetSalaries<span class="op">$</span>salary, <span class="dt">mu =</span> <span class="dv">50221</span>)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(<span class="dt">x =</span> datasetSalaries<span class="op">$</span>salary, <span class="dt">mu =</span> <span class="dv">50221</span>)</code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
 ## 
@@ -327,9 +299,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="glm-approach-3" class="section level3">
 <h3><span class="header-section-number">7.2.2</span> GLM Approach</h3>
 <p>Since we have an <em>a priori</em> hypothesis (i.e., median income of $50,221), we will need to first manipulate the DV by point deviating from this <em>a priori</em> value. To do this, we will need to subtract $50,221 from each salary score. Luckily, we can do that directly within the <code>lm()</code> fucntion. We have to point-deviate because the <code>lm()</code> function always tests regression estimates including the intercept against 0 (<span class="math inline">\(H_0 = 0\)</span>). By point deviating from $50,221, we are now asking if the mean of the new point deviated scores is different than 0, where 0 now equals $50,221. To test the intercept, we simply place a <code>1</code> as the predictor.</p>
-<pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(salary <span class="op">-</span><span class="st"> </span><span class="dv">50221</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, datasetSalaries)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(salary <span class="op">-</span><span class="st"> </span><span class="dv">50221</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, datasetSalaries)</code></pre></div>
 <p>We will again only look at the coefficients table using the <code>summary()</code> function for this test and subsequent <em>t</em>-tests. Although, the ANOVA source table is not typically associated with this test, we could always examine it if desired using the <code>Anova()</code> function.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model)</code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = salary - 50221 ~ 1, data = datasetSalaries)
@@ -345,11 +317,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 30290 on 396 degrees of freedom</code></pre>
-<<<<<<< HEAD
-<p>Notice that in both approaches that the values are identical with respect to the place of rounding. The <em>t</em>-statistic is <code>41.76</code> with <code>396</code> degrees of freedom (df), and the <em>p</em>-value is <code>&lt;2e-16</code>. However, the estimate of the GLM approach is now the sample mean of the point deviated scores. Thus, we if add back <code>$50,221</code>, we will obtain the same sample mean of <code>$113,707</code><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>.</p>
-=======
 <p>Notice that in both approaches that the values are identical with respect to the place of rounding. The <em>t</em>-statistic is <code>41.76</code> with <code>396</code> degrees of freedom (df), and the <em>p</em>-value is <code>&lt;2e-16</code>. However, the estimate of the GLM approach is now the sample mean of the point deviated scores. Thus, we if add back <code>$50,221</code>, we will obtain the same sample mean of <code>$113,707</code><a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a>.</p>
->>>>>>> master
 <p>Let’s go over the <em>t</em>-statistic and <em>p</em>-value to reinforce these concepts.</p>
 <p>Remember that the <em>t</em>-statistic represents the systematic difference compared to the unsystematic difference. In this case, the systematic difference is the difference between professor’s mean salary and U.S. median income (i.e., $113,707 - $50,221) and the unsystematic difference is standard error of the mean of the sample (in other words, random variability in the sample).</p>
 <p>Also, the <em>p</em>-value represents the probability of finding a particular <em>t</em>-statistic or <em>t</em>-statistic more extreme assuming that the null hypothesis is true. In this case, the probability of finding a <em>t</em>-statistic of <code>41.76</code> or more extreme is <code>&lt;2.2e-16</code>, which is extremely small and not likely to occur by chance.</p>
@@ -365,7 +333,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="visualization-2" class="section level2">
 <h2><span class="header-section-number">7.5</span> Visualization</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate descriptive statistics along with the 95% CI</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate descriptive statistics along with the 95% CI</span>
 dataset_summary &lt;-<span class="st"> </span>datasetSalaries <span class="op">%&gt;%</span>
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw">summarize</span>(
     <span class="dt">mean =</span> <span class="kw">mean</span>(salary),
@@ -383,7 +351,7 @@ dataset_summary &lt;-<span class="st"> </span>datasetSalaries <span class="op">%
 <span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">width =</span> <span class="fl">0.1</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_hline</span>(
     <span class="dt">yintercept =</span> <span class="dv">50221</span>,
-    <span class="dt">alpha =</span> <span class="fl">.5</span>,
+    <span class="dt">alpha =</span> .<span class="dv">5</span>,
     <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>
   ) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_errorbar</span>(
@@ -406,13 +374,12 @@ dataset_summary &lt;-<span class="st"> </span>datasetSalaries <span class="op">%
     <span class="dt">y =</span> <span class="st">&quot;9-Month Salary (USD)&quot;</span>
   ) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar)</code></pre>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar)</code></pre></div>
 <div class="figure"><span id="fig:fig-one-sample-t-test"></span>
 <img src="practical-ext-of-intro-stats-in-psy-using-R_files/figure-html/fig-one-sample-t-test-1.png" alt="A dot plot of the salary of professors where the dot is the mean salary of professors and the whiskers are the 95% CI.
 Note: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points." width="672" />
 <p class="caption">
-Figure 7.1: A dot plot of the salary of professors where the dot is the mean salary of professors and the whiskers are the 95% CI.
-Note: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points.
+Figure 7.1: A dot plot of the salary of professors where the dot is the mean salary of professors and the whiskers are the 95% CI. Note: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points.
 </p>
 </div>
 
@@ -420,13 +387,8 @@ Note: The data points are actually only on a single line on the x-axis. They are
 </div>
 <div class="footnotes">
 <hr />
-<<<<<<< HEAD
-<ol start="7">
-<li id="fn7"><p><span class="math inline">\(m_{rank}=k_{rank}-1=3-1=2\)</span><a href="one-sample-t-test.html#fnref7" class="footnote-back">↩</a></p></li>
-=======
 <ol start="8">
 <li id="fn8"><p><span class="math inline">\(\Sigma Contrast_{TenuredvAssistant}*Contrast_{AssociatevProfessor} = (2*0) + (1*-1) + (1*1) = 0\)</span><a href="one-sample-t-test.html#fnref8">↩</a></p></li>
->>>>>>> master
 </ol>
 </div>
             </section>
@@ -485,7 +447,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
