@@ -50,41 +50,66 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-pre, code { background-color: #f8f8f8; }
-code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code > span.dt { color: #204a87; } /* DataType */
-code > span.dv { color: #0000cf; } /* DecVal */
-code > span.bn { color: #0000cf; } /* BaseN */
-code > span.fl { color: #0000cf; } /* Float */
-code > span.ch { color: #4e9a06; } /* Char */
-code > span.st { color: #4e9a06; } /* String */
-code > span.co { color: #8f5902; font-style: italic; } /* Comment */
-code > span.ot { color: #8f5902; } /* Other */
-code > span.al { color: #ef2929; } /* Alert */
-code > span.fu { color: #000000; } /* Function */
-code > span.er { color: #a40000; font-weight: bold; } /* Error */
-code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #000000; } /* Constant */
-code > span.sc { color: #000000; } /* SpecialChar */
-code > span.vs { color: #4e9a06; } /* VerbatimString */
-code > span.ss { color: #4e9a06; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #000000; } /* Variable */
-code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code > span.ex { } /* Extension */
-code > span.at { color: #c4a000; } /* Attribute */
-code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -232,6 +257,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="authors.html"><a href="authors.html"><i class="fa fa-check"></i>Authors</a><ul>
 <li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#ekarin-eric-pongpipat-m.a."><i class="fa fa-check"></i>Ekarin Eric Pongpipat, M.A.</a></li>
 <li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#giuseppe-miranda-m.s."><i class="fa fa-check"></i>Giuseppe Miranda, M.S.</a></li>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#matthew-j.-kmiecik-b.s."><i class="fa fa-check"></i>Matthew J. Kmiecik, B.S.</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -258,7 +284,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <p>Below are two public (open-access) and real datasets that we will use for the analyses. For each dataset, you will find its description, minor data wrangling (or data manipulation), and descriptive statistics in both numeric and visual formats.</p>
 <div id="salaries-dataset" class="section level2">
 <h2><span class="header-section-number">4.1</span> Salaries Dataset</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasetSalaries &lt;-<span class="st"> </span>carData<span class="op">::</span>Salaries</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">datasetSalaries &lt;-<span class="st"> </span>carData<span class="op">::</span>Salaries</code></pre>
 <p>One of the datasets that we’ll use is the <code>Salaries</code> dataset within the <code>carData</code> package. The dataset consists of nine-month salaries collected from 397 collegiate professors in the U.S. during 2008 to 2009. In addition to salaries, the professor’s rank, sex, discipline, years since Ph.D., and years of service was also collected. Thus, there is a total of 6 variables, which are described below.</p>
 <table>
 <thead>
@@ -346,7 +372,7 @@ Professor’s nine-month salary (USD)
 <div id="data-wrangling" class="section level3">
 <h3><span class="header-section-number">4.1.1</span> Data Wrangling</h3>
 <p>Before running these analyses within the GLM context, let’s clean up the dataset so that it’s readable for us rather than computers.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># spell out rank variables</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># spell out rank variables</span>
 <span class="co"># rename discipline variables to its meaningful name</span>
 <span class="co"># ensure both rank and discipline are factors</span>
 datasetSalaries &lt;-<span class="st"> </span>datasetSalaries <span class="op">%&gt;%</span>
@@ -364,106 +390,106 @@ datasetSalaries &lt;-<span class="st"> </span>datasetSalaries <span class="op">%
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">rank =</span> <span class="kw">as.factor</span>(rank),
     <span class="dt">discipline =</span> <span class="kw">as.factor</span>(discipline)
-  )</code></pre></div>
+  )</code></pre>
 </div>
 <div id="descriptive-statistics" class="section level3">
 <h3><span class="header-section-number">4.1.2</span> Descriptive Statistics</h3>
 <p>It’s also always a good idea to examine the data numerically and visually. Let’s first look at the categorical variables then the continuous variables.</p>
 <div id="categorical-variables" class="section level4">
 <h4><span class="header-section-number">4.1.2.1</span> Categorical Variables</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plyr<span class="op">::</span><span class="kw">count</span>(datasetSalaries, <span class="st">&quot;rank&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">plyr<span class="op">::</span><span class="kw">count</span>(datasetSalaries, <span class="st">&quot;rank&quot;</span>)</code></pre>
 <pre><code>##                  rank freq
 ## 1 Assistant Professor   67
 ## 2 Associate Professor   64
 ## 3           Professor  266</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(rank)) <span class="op">+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(rank)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">y =</span> <span class="kw">stat</span>(count) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">stat</span>(count))), <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Proportion&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;rank&quot;</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Proportion&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;rank&quot;</span>)</code></pre>
 <p><img src="practical-ext-of-intro-stats-in-psy-using-R_files/figure-html/figure-rank-1.png" width="672" /></p>
 <p>In this dataset, there are a lot more professors than assistant and associate professors combined.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plyr<span class="op">::</span><span class="kw">count</span>(datasetSalaries, <span class="st">&quot;discipline&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">plyr<span class="op">::</span><span class="kw">count</span>(datasetSalaries, <span class="st">&quot;discipline&quot;</span>)</code></pre>
 <pre><code>##    discipline freq
 ## 1     Applied  216
 ## 2 Theoretical  181</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(discipline)) <span class="op">+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(discipline)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">y =</span> <span class="kw">stat</span>(count) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">stat</span>(count))), <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Proportion&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;discipline&quot;</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Proportion&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;discipline&quot;</span>)</code></pre>
 <p><img src="practical-ext-of-intro-stats-in-psy-using-R_files/figure-html/figure-discipline-1.png" width="672" /></p>
 <p>There are slightly more professors within the applied than the theoretical discipline (i.e., 35 more).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plyr<span class="op">::</span><span class="kw">count</span>(datasetSalaries, <span class="st">&quot;sex&quot;</span>) </code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">plyr<span class="op">::</span><span class="kw">count</span>(datasetSalaries, <span class="st">&quot;sex&quot;</span>) </code></pre>
 <pre><code>##      sex freq
 ## 1 Female   39
 ## 2   Male  358</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(sex)) <span class="op">+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(sex)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">y =</span> <span class="kw">stat</span>(count) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">stat</span>(count))), <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Proportion&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;sex&quot;</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Proportion&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;sex&quot;</span>)</code></pre>
 <p><img src="practical-ext-of-intro-stats-in-psy-using-R_files/figure-html/figure-sex-1.png" width="672" /></p>
 <p>There is a little over 9x as many male professors as there are female professors.</p>
 </div>
 <div id="continuous-variables" class="section level4">
 <h4><span class="header-section-number">4.1.2.2</span> Continuous Variables</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasetSalaries <span class="op">%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r">datasetSalaries <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(yrs.since.phd, yrs.service, salary) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">describe</span>(.) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>n, <span class="op">-</span>vars, <span class="op">-</span>trimmed, <span class="op">-</span>mad, <span class="op">-</span>range) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">round</span>(., <span class="dv">2</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">round</span>(., <span class="dv">2</span>)</code></pre>
 <pre><code>##                    mean       sd median   min    max skew kurtosis      se
 ## yrs.since.phd     22.31    12.89     21     1     56 0.30    -0.81    0.65
 ## yrs.service       17.61    13.01     16     0     60 0.65    -0.34    0.65
 ## salary        113706.46 30289.04 107300 57800 231545 0.71     0.18 1520.16</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(yrs.since.phd)) <span class="op">+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(yrs.since.phd)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_vline</span>(
     <span class="dt">xintercept =</span> <span class="kw">describe</span>(datasetSalaries)[<span class="st">&quot;yrs.since.phd&quot;</span>, <span class="st">&quot;mean&quot;</span>],
-    <span class="dt">alpha =</span> .<span class="dv">5</span>,
+    <span class="dt">alpha =</span> <span class="fl">.5</span>,
     <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>
   ) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_dotplot</span>(<span class="dt">binwidth =</span> <span class="dv">1</span>, <span class="dt">fill =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(
     <span class="dt">x =</span> <span class="kw">describe</span>(datasetSalaries)[<span class="st">&quot;yrs.since.phd&quot;</span>, <span class="st">&quot;mean&quot;</span>],
     <span class="dt">label =</span> <span class="kw">paste</span>(<span class="st">&quot;M =&quot;</span>, <span class="kw">round</span>(<span class="kw">describe</span>(datasetSalaries)[<span class="st">&quot;yrs.since.phd&quot;</span>, <span class="st">&quot;mean&quot;</span>], <span class="dv">2</span>)),
-    <span class="dt">y =</span> <span class="op">-</span>.<span class="dv">05</span>
+    <span class="dt">y =</span> <span class="fl">-.05</span>
   ), <span class="dt">angle =</span> <span class="dv">0</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="ot">NULL</span>, <span class="dt">breaks =</span> <span class="ot">NULL</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Years since PhD&quot;</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Years since PhD&quot;</span>)</code></pre>
 <p><img src="practical-ext-of-intro-stats-in-psy-using-R_files/figure-html/figure-yrs-since-phd-1.png" width="672" /></p>
 <p>On average, professors have had their Ph.D. for about 22 years.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(yrs.service)) <span class="op">+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(yrs.service)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_vline</span>(
     <span class="dt">xintercept =</span> <span class="kw">describe</span>(datasetSalaries)[<span class="st">&quot;yrs.service&quot;</span>, <span class="st">&quot;mean&quot;</span>],
-    <span class="dt">alpha =</span> .<span class="dv">5</span>,
+    <span class="dt">alpha =</span> <span class="fl">.5</span>,
     <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>
   ) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_dotplot</span>(<span class="dt">binwidth =</span> <span class="dv">1</span>, <span class="dt">fill =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(
     <span class="dt">x =</span> <span class="kw">describe</span>(datasetSalaries)[<span class="st">&quot;yrs.service&quot;</span>, <span class="st">&quot;mean&quot;</span>],
     <span class="dt">label =</span> <span class="kw">paste</span>(<span class="st">&quot;M =&quot;</span>, <span class="kw">round</span>(<span class="kw">describe</span>(datasetSalaries)[<span class="st">&quot;yrs.service&quot;</span>, <span class="st">&quot;mean&quot;</span>], <span class="dv">2</span>)),
-    <span class="dt">y =</span> <span class="op">-</span>.<span class="dv">05</span>
+    <span class="dt">y =</span> <span class="fl">-.05</span>
   ), <span class="dt">angle =</span> <span class="dv">0</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="ot">NULL</span>, <span class="dt">breaks =</span> <span class="ot">NULL</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Years of service&quot;</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Years of service&quot;</span>)</code></pre>
 <p><img src="practical-ext-of-intro-stats-in-psy-using-R_files/figure-html/figure-yrs-service-1.png" width="672" /></p>
 <p>On average, professors have provided a service to either the department or university for about 17 years and 7 months.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(salary)) <span class="op">+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(salary)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_vline</span>(
     <span class="dt">xintercept =</span> <span class="kw">describe</span>(datasetSalaries)[<span class="st">&quot;salary&quot;</span>, <span class="st">&quot;mean&quot;</span>],
-    <span class="dt">alpha =</span> .<span class="dv">5</span>,
+    <span class="dt">alpha =</span> <span class="fl">.5</span>,
     <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>
   ) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_dotplot</span>(<span class="dt">binwidth =</span> <span class="dv">3000</span>, <span class="dt">fill =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(
     <span class="dt">x =</span> <span class="kw">describe</span>(datasetSalaries)[<span class="st">&quot;salary&quot;</span>, <span class="st">&quot;mean&quot;</span>],
     <span class="dt">label =</span> <span class="kw">paste</span>(<span class="st">&quot;M =&quot;</span>, scales<span class="op">::</span><span class="kw">dollar</span>(<span class="kw">round</span>(<span class="kw">describe</span>(datasetSalaries)[<span class="st">&quot;salary&quot;</span>, <span class="st">&quot;mean&quot;</span>], <span class="dv">2</span>))),
-    <span class="dt">y =</span> <span class="op">-</span>.<span class="dv">05</span>
+    <span class="dt">y =</span> <span class="fl">-.05</span>
   ), <span class="dt">angle =</span> <span class="dv">0</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="ot">NULL</span>, <span class="dt">breaks =</span> <span class="ot">NULL</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;salary&quot;</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;salary&quot;</span>)</code></pre>
 <p><img src="practical-ext-of-intro-stats-in-psy-using-R_files/figure-html/figure-salary-1.png" width="672" /></p>
 <p>On average, a professor’s 9-month annual income is $113,706.46.</p>
 </div>
@@ -471,8 +497,8 @@ datasetSalaries &lt;-<span class="st"> </span>datasetSalaries <span class="op">%
 </div>
 <div id="anorexia-dataset" class="section level2">
 <h2><span class="header-section-number">4.2</span> Anorexia Dataset</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasetAnorexia &lt;-<span class="st"> </span>MASS<span class="op">::</span>anorexia</code></pre></div>
-<p>Another dataset that we’ll use is the <code>anorexia</code> dataset within the <code>MASS</code> package. The dataset consists of the weight (in lbs) of 72 female patients with anorexia before and after either cognitive behavioral therapy, family therapy, or no therapy (control condition).</p>
+<pre class="sourceCode r"><code class="sourceCode r">datasetAnorexia &lt;-<span class="st"> </span>MASS<span class="op">::</span>anorexia</code></pre>
+<p>Another dataset that we’ll use is the <code>anorexia</code> dataset within the <code>MASS</code> package. The dataset consists of the weight (in lbs.) of 72 female patients with anorexia before and after either cognitive behavioral therapy, family therapy, or no therapy (control condition).</p>
 <table>
 <thead>
 <tr>
@@ -526,7 +552,7 @@ Weight of female patient with anorexia after treatment in lbs.
 <div id="data-wrangling-1" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> Data Wrangling</h3>
 <p>Again, we can make the dataset slightly more readable for us.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># spell out variable names</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># spell out variable names</span>
 <span class="co"># re-order levels to be CBT, FT, then Cont rather than alphabetical order</span>
 datasetAnorexia &lt;-<span class="st"> </span>datasetAnorexia <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
@@ -534,75 +560,74 @@ datasetAnorexia &lt;-<span class="st"> </span>datasetAnorexia <span class="op">%
     <span class="dt">PreWeight =</span> Prewt,
     <span class="dt">PostWeight =</span> Postwt,
     <span class="dt">Treatment =</span> <span class="kw">case_when</span>(
-      Treatment <span class="op">==</span><span class="st"> &quot;CBT&quot;</span> <span class="op">~</span><span class="st"> &quot;CBT&quot;</span>,
-      Treatment <span class="op">==</span><span class="st"> &quot;FT&quot;</span> <span class="op">~</span><span class="st"> &quot;FT&quot;</span>,
-      Treatment <span class="op">==</span><span class="st"> &quot;Cont&quot;</span> <span class="op">~</span><span class="st"> &quot;Control&quot;</span>
+      Treatment <span class="op">==</span><span class="st"> &quot;Cont&quot;</span> <span class="op">~</span><span class="st"> &quot;Control&quot;</span>,
+      <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span><span class="kw">as.character</span>(Treatment)
     ),
     <span class="dt">Treatment =</span> <span class="kw">factor</span>(Treatment, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;CBT&quot;</span>, <span class="st">&quot;FT&quot;</span>, <span class="st">&quot;Control&quot;</span>))
-    )</code></pre></div>
+    )</code></pre>
 </div>
 <div id="descriptive-statistics-1" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> Descriptive Statistics</h3>
 <div id="categorical-variables-1" class="section level4">
 <h4><span class="header-section-number">4.2.2.1</span> Categorical Variables</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plyr<span class="op">::</span><span class="kw">count</span>(datasetAnorexia, <span class="st">&quot;Treatment&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">plyr<span class="op">::</span><span class="kw">count</span>(datasetAnorexia, <span class="st">&quot;Treatment&quot;</span>)</code></pre>
 <pre><code>##   Treatment freq
 ## 1       CBT   29
 ## 2        FT   17
 ## 3   Control   26</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetAnorexia, <span class="kw">aes</span>(Treatment)) <span class="op">+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetAnorexia, <span class="kw">aes</span>(Treatment)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">y =</span> <span class="kw">stat</span>(count) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">stat</span>(count))), <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Proportion&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Treatment&quot;</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Proportion&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Treatment&quot;</span>)</code></pre>
 <p><img src="practical-ext-of-intro-stats-in-psy-using-R_files/figure-html/figure-treatment-1.png" width="672" /></p>
 <p>There are more participants within the CBT condition compared to either the FT condition or control group.</p>
 </div>
 <div id="continuous-variables-1" class="section level4">
 <h4><span class="header-section-number">4.2.2.2</span> Continuous Variables</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasetAnorexia <span class="op">%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r">datasetAnorexia <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(PreWeight, PostWeight) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">describe</span>(.) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>vars, <span class="op">-</span>trimmed, <span class="op">-</span>mad, <span class="op">-</span>range) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">round</span>(., <span class="dv">2</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">round</span>(., <span class="dv">2</span>)</code></pre>
 <pre><code>##             n  mean   sd median  min   max  skew kurtosis   se
 ## PreWeight  72 82.41 5.18  82.30 70.0  94.9 -0.05    -0.16 0.61
 ## PostWeight 72 85.17 8.04  84.05 71.3 103.6  0.36    -0.81 0.95</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetAnorexia, <span class="kw">aes</span>(PreWeight)) <span class="op">+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetAnorexia, <span class="kw">aes</span>(PreWeight)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_vline</span>(
     <span class="dt">xintercept =</span> <span class="kw">describe</span>(datasetAnorexia)[<span class="st">&quot;PreWeight&quot;</span>, <span class="st">&quot;mean&quot;</span>],
-    <span class="dt">alpha =</span> .<span class="dv">5</span>,
+    <span class="dt">alpha =</span> <span class="fl">.5</span>,
     <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>
   ) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_dotplot</span>(<span class="dt">binwidth =</span> <span class="dv">1</span>, <span class="dt">fill =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(
     <span class="dt">x =</span> <span class="kw">describe</span>(datasetAnorexia)[<span class="st">&quot;PreWeight&quot;</span>, <span class="st">&quot;mean&quot;</span>],
     <span class="dt">label =</span> <span class="kw">paste</span>(<span class="st">&quot;M =&quot;</span>, <span class="kw">round</span>(<span class="kw">describe</span>(datasetAnorexia)[<span class="st">&quot;PreWeight&quot;</span>, <span class="st">&quot;mean&quot;</span>], <span class="dv">2</span>)),
-    <span class="dt">y =</span> <span class="op">-</span>.<span class="dv">05</span>
+    <span class="dt">y =</span> <span class="fl">-.05</span>
   ),
   <span class="dt">angle =</span> <span class="dv">0</span>
   ) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="ot">NULL</span>, <span class="dt">breaks =</span> <span class="ot">NULL</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Weight Before Study (lbs)&quot;</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Weight Before Study (lbs)&quot;</span>)</code></pre>
 <p><img src="practical-ext-of-intro-stats-in-psy-using-R_files/figure-html/figure-preweight-1.png" width="672" /></p>
 <p>On average, women with anorexia before treatment weighed 82.41 lbs.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetAnorexia, <span class="kw">aes</span>(PostWeight)) <span class="op">+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetAnorexia, <span class="kw">aes</span>(PostWeight)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_vline</span>(
     <span class="dt">xintercept =</span> <span class="kw">describe</span>(datasetAnorexia)[<span class="st">&quot;PostWeight&quot;</span>, <span class="st">&quot;mean&quot;</span>],
-    <span class="dt">alpha =</span> .<span class="dv">5</span>,
+    <span class="dt">alpha =</span> <span class="fl">.5</span>,
     <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>
   ) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_dotplot</span>(<span class="dt">binwidth =</span> <span class="dv">1</span>, <span class="dt">fill =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(
     <span class="dt">x =</span> <span class="kw">describe</span>(datasetAnorexia)[<span class="st">&quot;PostWeight&quot;</span>, <span class="st">&quot;mean&quot;</span>],
     <span class="dt">label =</span> <span class="kw">paste</span>(<span class="st">&quot;M =&quot;</span>, <span class="kw">round</span>(<span class="kw">describe</span>(datasetAnorexia)[<span class="st">&quot;PostWeight&quot;</span>, <span class="st">&quot;mean&quot;</span>], <span class="dv">2</span>)),
-    <span class="dt">y =</span> <span class="op">-</span>.<span class="dv">05</span>
+    <span class="dt">y =</span> <span class="fl">-.05</span>
   ),
   <span class="dt">angle =</span> <span class="dv">0</span>
   ) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="ot">NULL</span>, <span class="dt">breaks =</span> <span class="ot">NULL</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Weight After Study (lbs)&quot;</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Weight After Study (lbs)&quot;</span>)</code></pre>
 <p><img src="practical-ext-of-intro-stats-in-psy-using-R_files/figure-html/figure-postweight-1.png" width="672" /></p>
 <p>On average, women with anorexia after treatment weighed 85.17 lbs, which is about a 2.76 lbs weight gain compared to before treatment.</p>
 </div>
@@ -673,7 +698,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

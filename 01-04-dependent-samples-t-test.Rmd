@@ -30,7 +30,7 @@ Just like in the one sample *t*-test, the intercept ($\beta_{0}$) represents the
 ## Statistical analysis
 
 ### Traditional approach
-To perform the traditional dependent samples *t*-test, we can again use the `t.test` function. However, we will also set the `paired` option to `TRUE`.
+To perform the traditional dependent samples *t*-test, we can again use the `t.test()` function. However, we will also set the `paired` option to `TRUE`.
 ```{r dependentSamplesttest.traditional}
 t.test(datasetAnorexia$PostWeight, datasetAnorexia$PreWeight, paired = TRUE)
 ```
@@ -38,7 +38,7 @@ t.test(datasetAnorexia$PostWeight, datasetAnorexia$PreWeight, paired = TRUE)
 From this output, we can see that the *t*-statistic (`t`) is `2.9376`, degrees of freedom (`df`) is `71`, and the `p-value` is `0.004458`.
 
 ### GLM approach
-For the DV, we will input the difference of weight before and after treatment (i.e., `PostWeight-PreWeight`) directly into the `lm` function. Since we are testing the intercept, we will again place `1` as the predictor. 
+For the DV, we will input the difference of weight before and after treatment (i.e., `PostWeight-PreWeight`) directly into the `lm()` function. Since we are testing the intercept, we will again place `1` as the predictor. 
 ```{r dependentSamplesttest.GLM}
 model <- lm(PostWeight - PreWeight ~ 1, datasetAnorexia)
 ```
@@ -51,7 +51,7 @@ Notice that in both analyses the sample mean difference of `2.76`, the *t*-stati
 
 In this case, the systematic difference of the *t*-statistic is the difference in weight before and after a study and the unsystematic difference is standard error of the mean of the differences (in other words, random variability of the difference scores).
 
-In this case, the probability of finding a *t*-statistic of `2.94` or more extreme is `.004`, which is very small and not likely to occur by chance.
+In this case, the probability of finding a *t*-statistic of `2.94` or more extreme is `.004`, which is very small and not likely to occur by chance if the null hypothesis was true.
 
 ## Statistical decision
 Given the *p*-value of `0.004` is smaller than the alpha level ($\alpha$) of `0.05`, we will `reject` the null hypothesis.

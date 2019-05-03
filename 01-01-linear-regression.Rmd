@@ -14,7 +14,7 @@ The simple linear regression is written as:
 
 $$Y = \beta_0 + \beta_1X + \varepsilon$$
 
-where $Y$ is the dependent (or response) variable, $\beta_0$ is the intercept, $\beta_1$ is the slope, $X$ is the independent (or predictor) variable, and $\varepsilon$ is the error. 
+where $Y$ is the dependent (or response) variable, $\beta_0$ is the intercept, $\beta_1$ is the slope, $X$ is the independent (or predictor) variable, and $\varepsilon$ is the error.
 
 We will use the terms dependent variable (DV) and response variable interchangeably throughout the book. We will also use the terms independent variable (IV) or predictor variable interchangeably.
 
@@ -41,7 +41,7 @@ For a practical example of the simple linear regression, let's say that we were 
 For this example, we will use the [`datasetSalaries`][Salaries Dataset] dataset.
 
 ## Null and research hypotheses
-$$Model: Salary = \beta_0 + \beta_1 Years.Since.PhD + \varepsilon$$
+$$Model: Salary = \beta_0 + \beta_1 YearsSincePhD + \varepsilon$$
 $$H_0: \beta_1 = 0$$
 $$H_1: \beta_1 \ne 0$$
 
@@ -64,20 +64,20 @@ The research hypothesis states that the intercept is not equal to 0. In other wo
 Again, the null and research hypotheses are identical for both traditional and GLM approaches.
 
 ## Statistical analyses
-To perform the simple linear regression in R, we can use the `lm` function. 
+To perform the simple linear regression in R, we can use the `lm` function.
 ```{r}
 model <- lm(formula = salary ~ yrs.since.phd, data = datasetSalaries)
 ```
 
-The first input is the formula of the model, which is the DV, followed by a tilde sign (`~`), followed by the IV. 
+The first input is the formula of the model, which is the DV, followed by a tilde sign (`~`), followed by the IV.
 
-In our case, the DV of `salary` is be the first variable, followed by a `~` and the IV of `yrs.since.phd`. Notice the similarity between the model and formula. The second input is the dataset (i.e., `datasetSalaries`). 
+In our case, the DV of `salary` is be the first variable, followed by a `~` and the IV of `yrs.since.phd`. Notice the similarity between the model and formula. The second input is the dataset (i.e., `datasetSalaries`).
 
 We will save the analysis into an object named `model`. `model` can be any name and was chosen for simplicity.
 
 <br>
 
-We can obtain the ANOVA source table by using the `Anova` function within the `cars` package. 
+We can obtain the ANOVA source table by using the `Anova` function within the `cars` package.
 
 ```{r}
 Anova(model, type = 3)
@@ -90,7 +90,7 @@ We can look at the variable of interest in the first column and read across that
 
 For example, let's first examine the statistics associated with the variable `(Intercept)`. The sums of squares (`Sum Sq`, which is also abbreviated as $SS$) associated with the `(Intercept)` is `8.37e+11`, the degrees of freedom (`Df`, specifically, degrees of freedom reduced) is `1`, the *F*-statistic (`F value`) is 1099.71, and the p-value (`Pr>F`) is `< 2.2e-16`.
 
-The `F value` or *F*-statistic conceptually provides a ratio of explained and unexplained variability to unexplained variability. Explained variability is how much the DV can be explained by IVs while unexplained variability is how much variability is not explained by the DV.  
+The `F value` or *F*-statistic conceptually provides a ratio of explained to unexplained variability. Explained variability is how much the DV can be explained by IVs while unexplained variability is how much variability is not explained by the IV.  
 
 The mathematical formula of the *F*-statistic can conceptually be thought of as:
 
@@ -100,9 +100,9 @@ Thus, if the IV can't explain any of the variability within the DV, then the *F*
 
 However, if the IV(s) can explain the DV, the *F*-statistic will be larger than 1.
 
-In other words, the higher the *F*-statistic, the more the IV(s) explain(s) the variability in the DV compared to its inability to explain the DV. 
+In other words, the higher the *F*-statistic, the more the IV(s) explain(s) the variability in the DV compared to its inability to explain the DV.
 
-Thus, the interpretation of the *F*-statistic of the `(Intercept)` is that the `(Intercept)` can explain the variability in `salary` `1099.71` times more than the `(Intercept)`'s inability to explain the variability in salary. If interested in the mathematical formula and its calculation, see the footnote at the bottom of the page [^1].
+Thus, the interpretation of the *F*-statistic of the `(Intercept)` is that the `(Intercept)` can explain the variability in `salary` `1099.71` times more than the `(Intercept)`'s inability to explain the variability in salary. [^1]
 
 [^1]: `(Intercept)`: $$F = \frac{MSR}{MSE} = \frac{\frac{SSR}{df_R}}{\frac{SSE}{df_E}} = \frac{\frac{8.37e11}{1}}{\frac{2.99e11}{395}} = \frac{8.34e11}{7.58e8} = 1099.71$$
 
@@ -117,7 +117,7 @@ The *F*-statistic associated with `yrs.since.phd` is `84.23`, and can be interpr
 The *p*-value associated with `yrs.since.phd` is also `< 2.2e-16` with identical interpretations for the *p*-value of the `(Intercept)`.
 
 
-<br> 
+<br>
 
 We can also obtain the coefficients  table by using the `summary` function.
 ```{r}
@@ -128,7 +128,7 @@ summary(model)
 
 Similarly, we can look at the variable of interest in the first column and read across that particular variable's row for its statistical information.
 
-Again, let's first take a look at the statistics associated with the `(Intercept)`. The `Estimate` of the `(Intercept)` is `91718.7`, the standard error (`Std. Error`) is `2765.8`, the *t*-statistic (`t value`) is 33.162, and the *p*-value (`(Pr>|t|)`) is `< 2e-16`. 
+Again, let's first take a look at the statistics associated with the `(Intercept)`. The `Estimate` of the `(Intercept)` is `91718.7`, the standard error (`Std. Error`) is `2765.8`, the *t*-statistic (`t value`) is 33.162, and the *p*-value (`(Pr>|t|)`) is `< 2e-16`.
 
 The `Estimate` of the `(Intercept)` is the predicted intercept value, $b_0 = 91718.7$. Thus, the predicted `salary` when $yrs.since.phd = 0$ is $91,718.70. In other words, when a professor has had their Ph.D. for less than a year, their salary is predicted to be \$91,718.70.
 
@@ -168,7 +168,7 @@ We can also determine if the intercept is statistically significant. Given, that
 A regression was performed to test if the amount of years since obtaining a Ph.D. was related to their salary. The amount of years since obtaining a Ph.D. was significantly related to their salary, *b* = 985.3, *t*(395) = 9.18, *p* < .001. For every passing year that a professor has earned their Ph.D., their salary is estimated to increase by $985.30.
 
 ## Visualization
-```{r, fig.cap="A scatterplot of years since Ph.D. and salary along with the line of best fit. The gray band represents the 95% CI."}
+```{r, fig.cap="A scatterplot of years since Ph.D. and salary along with the line of best fit. The gray band represents the 95% confidence interval (CI)."}
 ggplot(datasetSalaries, aes(yrs.since.phd, salary)) +
   geom_point(alpha = 0.25) +
   geom_smooth(method = "lm", color = "#3182bd") +
