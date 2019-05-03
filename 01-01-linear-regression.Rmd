@@ -110,9 +110,9 @@ The `Pr(>F)` or *p*-value associated with the `Intercept` is `< 2.2e-16`. The *p
 
 Since `yrs.since.phd` was our main predictor of interest (and for extra practice), let's also look at the statistics associated with `yrs.since.phd`.
 
-The *F*-statistic associated with `yrs.since.phd` is `84.23`, and can be interpreted as `yrs.since.phd` explains the variability in `salary` `84.23` times more than `years.since.phd`'s inability to expain the variability in salary. The mathematical formula and calculation for `yrs.since.phd` can also be seen in the footnotes section [^2].
+The *F*-statistic associated with `yrs.since.phd` is `84.23`, and can be interpreted as `yrs.since.phd` explains the variability in `salary` `84.23` times more than `years.since.phd`'s inability to expain the variability in salary. The mathematical formula and calculation for `yrs.since.phd` can also be seen in the footnotes section [^1].
 
-[^2]: `yrs.since.phd`: $$F = \frac{MSR}{MSE} = \frac{\frac{SSR}{df_R}}{\frac{SSE}{df_E}} = \frac{\frac{6.39e10}{1}}{\frac{2.99e11}{395}} = \frac{6.39e10}{7.58e8} = 84.23$$
+[^1]: `yrs.since.phd`: $$F = \frac{MSR}{MSE} = \frac{\frac{SSR}{df_R}}{\frac{SSE}{df_E}} = \frac{\frac{6.39e10}{1}}{\frac{2.99e11}{395}} = \frac{6.39e10}{7.58e8} = 84.23$$
 
 The *p*-value associated with `yrs.since.phd` is also `< 2.2e-16` with identical interpretations for the *p*-value of the `(Intercept)`.
 
@@ -132,18 +132,18 @@ Again, let's first take a look at the statistics associated with the `(Intercept
 
 The `Estimate` of the `(Intercept)` is the predicted intercept value, $b_0 = 91718.7$. Thus, the predicted `salary` when $yrs.since.phd = 0$ is $91,718.70. In other words, when a professor has had their Ph.D. for less than a year, their salary is predicted to be \$91,718.70.
 
-The `t value` or *t*-statistic is similar to the *F*-statistic, and can also be conceptually thought of as the ratio of systematic differences to unsystematic differences. The *t*-statistic is equal to the square root of the *F*-statistic when the degrees of freedom is 1 [^3], [^4]. Thus, the *t*-statistic interpretation is that the `(Intercept)` explains the variability in `salary` `33.162` times more than its inability to explain `salary`.
+The `t value` or *t*-statistic is similar to the *F*-statistic, and can also be conceptually thought of as the ratio of systematic differences to unsystematic differences. The *t*-statistic is equal to the square root of the *F*-statistic when the degrees of freedom is 1 [^1], [^1]. Thus, the *t*-statistic interpretation is that the `(Intercept)` explains the variability in `salary` `33.162` times more than its inability to explain `salary`.
 
-[^3]: `(Intercept)`: $$t = \frac{Estimate}{Std.\ Error} = \frac{91718.7}{2765.8} = 33.16$$
-[^4]: `(Intercept)`: $$t = \sqrt{F} = \sqrt{1099.71} = 33.16$$
+[^1]: `(Intercept)`: $$t = \frac{Estimate}{Std.\ Error} = \frac{91718.7}{2765.8} = 33.16$$
+[^1]: `(Intercept)`: $$t = \sqrt{F} = \sqrt{1099.71} = 33.16$$
 
 The *p*-value or `Pr(>|t|)` of `<2e-16` is the probability of obtaining that particular *t*-statistic or a value more extreme than the *t*-statistic assuming that the null hypothesis is true, which is the same value from the ANOVA source table.
 
 Let's also examine statistics for `yrs.since.phd`. The `Estimate` of `yrs.since.phd` is `985.3`, the `Std. Error` is `107.4`, the `t value` is `9.18`, and the `Pr(>|t|)` is `<2e-16`.
 
-The `Estimate` of the `yrs.since.phd` is the estimated slope, $b_1 = 985.3$. Thus, `salary` is predicted to change by `$985.30` for every 1 unit increase in `yrs.since.phd` [^5]. In other words, salary is predicted to increase by $985.30 for every additional year a professor has earned their Ph.D.
+The `Estimate` of the `yrs.since.phd` is the estimated slope, $b_1 = 985.3$. Thus, `salary` is predicted to change by `$985.30` for every 1 unit increase in `yrs.since.phd` [^1]. In other words, salary is predicted to increase by $985.30 for every additional year a professor has earned their Ph.D.
 
-[^5]: $$b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta DV}{\Delta IV} = \frac{\Delta salary}{\Delta yrs.since.phd} = \frac{985.3}{1} = 985.3$$
+[^1]: $$b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta DV}{\Delta IV} = \frac{\Delta salary}{\Delta yrs.since.phd} = \frac{985.3}{1} = 985.3$$
 
 The *t*-statistic can be interpreted as `yrs.since.phd` explains the variability in `salary` 9.18 times more than `yrs.since.phd`'s inability to the explain the variability in `salary`.
 

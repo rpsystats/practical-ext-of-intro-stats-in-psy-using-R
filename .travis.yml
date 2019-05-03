@@ -3,3 +3,9 @@ cache: packages
 
 script:
   - Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::gitbook")'
+
+r_packages:
+  - covr
+
+after_success:
+  - Rscript -e 'library(covr); codecov()'
