@@ -22,7 +22,7 @@
   <meta name="twitter:description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R." />
   
 
-<meta name="author" content="Ekarin E. Pongpipat, Giuseppe Miranda, &amp; Matthew J. Kmiecik">
+<meta name="author" content="Ekarin E. Pongpipat, Giuseppe G. Miranda, &amp; Matthew J. Kmiecik">
 
 
 
@@ -50,41 +50,66 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-pre, code { background-color: #f8f8f8; }
-code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code > span.dt { color: #204a87; } /* DataType */
-code > span.dv { color: #0000cf; } /* DecVal */
-code > span.bn { color: #0000cf; } /* BaseN */
-code > span.fl { color: #0000cf; } /* Float */
-code > span.ch { color: #4e9a06; } /* Char */
-code > span.st { color: #4e9a06; } /* String */
-code > span.co { color: #8f5902; font-style: italic; } /* Comment */
-code > span.ot { color: #8f5902; } /* Other */
-code > span.al { color: #ef2929; } /* Alert */
-code > span.fu { color: #000000; } /* Function */
-code > span.er { color: #a40000; font-weight: bold; } /* Error */
-code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #000000; } /* Constant */
-code > span.sc { color: #000000; } /* SpecialChar */
-code > span.vs { color: #4e9a06; } /* VerbatimString */
-code > span.ss { color: #4e9a06; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #000000; } /* Variable */
-code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code > span.ex { } /* Extension */
-code > span.at { color: #c4a000; } /* Attribute */
-code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -232,7 +257,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
 <li class="chapter" data-level="" data-path="authors.html"><a href="authors.html"><i class="fa fa-check"></i>Authors</a><ul>
 <li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#ekarin-eric-pongpipat-m.a."><i class="fa fa-check"></i>Ekarin Eric Pongpipat, M.A.</a></li>
-<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#giuseppe-miranda-m.s."><i class="fa fa-check"></i>Giuseppe Miranda, M.S.</a></li>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#giuseppe-g.-miranda-b.s."><i class="fa fa-check"></i>Giuseppe G. Miranda, B.S.</a></li>
 <li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#matthew-j.-kmiecik-b.s."><i class="fa fa-check"></i>Matthew J. Kmiecik, B.S.</a></li>
 </ul></li>
 <li class="divider"></li>
@@ -259,7 +284,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">Chapter 5</span> Simple Linear Regression</h1>
 <p>The first analysis that we will go over is the simple linear regression. Typically, this is one of the last analyses that is taught in introductory statistics in psychology; however, we will go over the simple linear regression first because its steps are essentially identical to the GLM (i.e., OLS regression) and provides a foundation for the GLM framework.</p>
 <p>The simple linear regression is typically taught to be used in understanding the relationship between two continuous variables, especially if one can predict the other.</p>
-<p>However, the simple linear regression is a specific case of regression<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> where variables can actually be either continuous or categorical, the number of predictor variables can be more than one, and causation is not a requirement. Thus, regression is applicable to most data types.</p>
+<p>However, the simple linear regression is a specific case of regression<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> where variables can actually be either continuous or categorical, the number of predictor variables can be more than one, and causation is not a requirement. Thus, regression is applicable to most data types.</p>
 <p>The simple linear regression is written as:</p>
 <p><span class="math display">\[Y = \beta_0 + \beta_1X + \varepsilon\]</span></p>
 <p>where <span class="math inline">\(Y\)</span> is the dependent (or response) variable, <span class="math inline">\(\beta_0\)</span> is the intercept, <span class="math inline">\(\beta_1\)</span> is the slope, <span class="math inline">\(X\)</span> is the independent (or predictor) variable, and <span class="math inline">\(\varepsilon\)</span> is the error.</p>
@@ -277,12 +302,16 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <p>For this example, we will use the <a href="datasets.html#salaries-dataset"><code>datasetSalaries</code></a> dataset.</p>
 <div id="null-and-research-hypotheses" class="section level2">
 <h2><span class="header-section-number">5.1</span> Null and research hypotheses</h2>
-<p><span class="math display">\[Model: Salary = \beta_0 + \beta_1 YearsSincePhD + \varepsilon\]</span> <span class="math display">\[H_0: \beta_1 = 0\]</span> <span class="math display">\[H_1: \beta_1 \ne 0\]</span></p>
+<p><span class="math display">\[Model: Salary = \beta_0 + \beta_1 YearsSincePhD + \varepsilon\]</span>
+<span class="math display">\[H_0: \beta_1 = 0\]</span>
+<span class="math display">\[H_1: \beta_1 \ne 0\]</span></p>
 <p>where <span class="math inline">\(\beta_0\)</span> is the intercept, <span class="math inline">\(\beta_1\)</span> is the slope, <span class="math inline">\(H_0\)</span> is the null hypothesis and <span class="math inline">\(H_1\)</span> is the research or alternative hypothesis. Typically, the model is written as the hypothesized true model and thus the use of <span class="math inline">\(\beta\)</span> rather than <span class="math inline">\(b\)</span>.</p>
 <p>In this example, the null hypothesis states that the slope is equal to 0, or that there is no relationship between <span class="math inline">\(X\)</span> (years since a professor has earned their Ph.D.) and <span class="math inline">\(Y\)</span> (their 9-month academic salary). (Note: The null hypothesis is sometimes referred to as the nil hypothesis in psychology since we are typically comparing our estimate against 0, or nil).</p>
 <p>The research hypothesis states that the slope is not equal to 0, or that there is a relationship between <span class="math inline">\(X\)</span> (years since a professor has earned their Ph.D.) and <span class="math inline">\(Y\)</span> (their 9-month academic salary).</p>
 <p>The model, null hypothesis, and research hypothesis are identical for both traditional and GLM approaches.</p>
-<p>The intercept can also be tested and its null and research hypotheses are: <span class="math display">\[H_0: \beta_0 = 0\]</span> <span class="math display">\[H_1: \beta_0 \ne 0\]</span></p>
+<p>The intercept can also be tested and its null and research hypotheses are:
+<span class="math display">\[H_0: \beta_0 = 0\]</span>
+<span class="math display">\[H_1: \beta_0 \ne 0\]</span></p>
 <p>The null hypothesis states that the intercept is equal to 0. In other words, the value of <span class="math inline">\(Y\)</span> (9-month academic salary) when <span class="math inline">\(X\)</span> (years since a professor has earned their Ph.D.) is 0 is not different than 0 ($0). (Note: Zero represents professors who have just earned their Ph.D. up to those who have earned their Ph.D. for less than a year because <code>yrs.since.phd</code> was collected as integers and anything less than a year would be coded as 0.)</p>
 <p>The research hypothesis states that the intercept is not equal to 0. In other words, the value of <span class="math inline">\(Y\)</span> (9-month academic salary) when <span class="math inline">\(X\)</span> (years since a professor has earned their Ph.D.) is 0 is different than 0 ($0)</p>
 <p>Again, the null and research hypotheses are identical for both traditional and GLM approaches.</p>
@@ -290,13 +319,13 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <div id="statistical-analyses" class="section level2">
 <h2><span class="header-section-number">5.2</span> Statistical analyses</h2>
 <p>To perform the simple linear regression in R, we can use the <code>lm()</code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> salary <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>yrs.since.phd, <span class="dt">data =</span> datasetSalaries)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> salary <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>yrs.since.phd, <span class="dt">data =</span> datasetSalaries)</code></pre>
 <p>The first input is the formula of the model, which is the DV, followed by a tilde sign (<code>~</code>), followed by the IV. (Note: 1 is a placeholder for the intercept. The same analysis with identical results can be obtained without the 1. However, we place 1 there to remind us that 1 represents the intercept to gain intuition of the formula).</p>
 <p>In our case, the DV of <code>salary</code> is be the first variable, followed by a <code>~</code> and the IV of <code>yrs.since.phd</code>. Notice the similarity between the model and formula. The second input is the dataset (i.e., <code>datasetSalaries</code>).</p>
 <p>We will save the analysis into an object named <code>model</code>. <code>model</code> can be any name and was chosen for simplicity.</p>
 <p><br></p>
 <p>We can obtain the ANOVA source table by using the <code>Anova</code> function within the <code>cars</code> package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Anova</span>(model, <span class="dt">type =</span> <span class="dv">3</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Anova</span>(model, <span class="dt">type =</span> <span class="dv">3</span>)</code></pre>
 <pre><code>## Anova Table (Type III tests)
 ## 
 ## Response: salary
@@ -316,14 +345,14 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <p><span class="math display">\[F = \frac{explained\ variability}{unexplained\ variability}\]</span></p>
 <p>Thus, if the IV can’t explain any of the variability within the DV, then the <em>F</em>-statistic is less than or equal to 1.</p>
 <p>However, if the IV(s) can explain the DV, the <em>F</em>-statistic will be larger than 1. In other words, the higher the <em>F</em>-statistic, the more the IV(s) explain(s) the variability in the DV compared to its inability to explain the DV.</p>
-<p>Thus, the interpretation of the <em>F</em>-statistic of the <code>(Intercept)</code> is that the <code>(Intercept)</code> can explain the variability in <code>salary</code> <code>1099.71</code> times more than the <code>(Intercept)</code>’s inability to explain the variability in salary.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></p>
+<p>Thus, the interpretation of the <em>F</em>-statistic of the <code>(Intercept)</code> is that the <code>(Intercept)</code> can explain the variability in <code>salary</code> <code>1099.71</code> times more than the <code>(Intercept)</code>’s inability to explain the variability in salary.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 <p>The <code>Pr(&gt;F)</code> or <em>p</em>-value associated with the <code>Intercept</code> is <code>&lt; 2.2e-16</code>. The <em>p</em>-value is the probability of obtaining that particular <em>F</em>-statistic or more extreme assuming that the null hypothesis is true. In other words, the probability of obtaining this <em>F</em>-statistic by chance is extremely small.</p>
 <p>Since <code>yrs.since.phd</code> was our main predictor of interest (and for extra practice), let’s also look at the statistics associated with <code>yrs.since.phd</code>.</p>
-<p>The <em>F</em>-statistic associated with <code>yrs.since.phd</code> is <code>84.23</code>, and can be interpreted as <code>yrs.since.phd</code> explains the variability in <code>salary</code> <code>84.23</code> times more than <code>years.since.phd</code>’s inability to expain the variability in salary..<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a></p>
+<p>The <em>F</em>-statistic associated with <code>yrs.since.phd</code> is <code>84.23</code>, and can be interpreted as <code>yrs.since.phd</code> explains the variability in <code>salary</code> <code>84.23</code> times more than <code>years.since.phd</code>’s inability to expain the variability in salary..<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
 <p>The <em>p</em>-value associated with <code>yrs.since.phd</code> is also <code>&lt; 2.2e-16</code> with identical interpretations for the <em>p</em>-value of the <code>(Intercept)</code>.</p>
 <p><br></p>
 <p>We can also obtain the coefficients table by using the <code>summary()</code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model)</code></pre>
 <pre><code>## 
 ## Call:
 ## lm(formula = salary ~ 1 + yrs.since.phd, data = datasetSalaries)
@@ -348,10 +377,10 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <p>Similarly, we can look at the variable of interest in the first column and read across that particular variable’s row for its statistical information.</p>
 <p>Again, let’s first take a look at the statistics associated with the <code>(Intercept)</code>. The <code>Estimate</code> of the <code>(Intercept)</code> is <code>91718.7</code>, the standard error (<code>Std. Error</code>) is <code>2765.8</code>, the <em>t</em>-statistic (<code>t value</code>) is <code>33.162</code>, and the <em>p</em>-value (<code>(Pr&gt;|t|)</code>) is <code>&lt; 2e-16</code>.</p>
 <p>The <code>Estimate</code> of the <code>(Intercept)</code> is the predicted intercept value, <span class="math inline">\(b_0 = 91718.7\)</span>. Thus, the predicted <code>salary</code> when <span class="math inline">\(yrs.since.phd = 0\)</span> is $91,718.70. In other words, when a professor has had their Ph.D. for less than a year, their salary is predicted to be $91,718.70.</p>
-<p>The <code>t value</code> or <em>t</em>-statistic is similar to the <em>F</em>-statistic, and can also be conceptually thought of as the ratio of explained variability to unexplained variability. The <em>t</em>-statistic is equal to the square root of the <em>F</em>-statistic when the degrees of freedom is 1.<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a><a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a> Thus, the <em>t</em>-statistic interpretation is that the <code>(Intercept)</code> explains the variability in <code>salary</code> <code>33.162</code> times more than its inability to explain <code>salary</code>.</p>
+<p>The <code>t value</code> or <em>t</em>-statistic is similar to the <em>F</em>-statistic, and can also be conceptually thought of as the ratio of explained variability to unexplained variability. The <em>t</em>-statistic is equal to the square root of the <em>F</em>-statistic when the degrees of freedom is 1<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>. Thus, the <em>t</em>-statistic interpretation is that the <code>(Intercept)</code> explains the variability in <code>salary</code> <code>33.162</code> times more than its inability to explain <code>salary</code>.</p>
 <p>The <em>p</em>-value or <code>Pr(&gt;|t|)</code> of <code>&lt;2e-16</code> is the probability of obtaining that particular <em>t</em>-statistic or a value more extreme than the <em>t</em>-statistic assuming that the null hypothesis is true, which is the same value from the ANOVA source table.</p>
 <p>Let’s also examine statistics for <code>yrs.since.phd</code>. The <code>Estimate</code> of <code>yrs.since.phd</code> is <code>985.3</code>, the <code>Std. Error</code> is <code>107.4</code>, the <code>t value</code> is <code>9.18</code>, and the <code>Pr(&gt;|t|)</code> is <code>&lt;2e-16</code>.</p>
-<p>The <code>Estimate</code> of the <code>yrs.since.phd</code> is the estimated slope, <span class="math inline">\(b_1 = 985.3\)</span>. Thus, <code>salary</code> is predicted to change by <code>$985.30</code> for every 1 unit increase in <code>yrs.since.phd</code>.<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a> In other words, salary is predicted to increase by $985.30 for every additional year a professor has earned their Ph.D.</p>
+<p>The <code>Estimate</code> of the <code>yrs.since.phd</code> is the estimated slope, <span class="math inline">\(b_1 = 985.3\)</span>. Thus, <code>salary</code> is predicted to change by <code>$985.30</code> for every 1 unit increase in <code>yrs.since.phd</code>.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> In other words, salary is predicted to increase by $985.30 for every additional year a professor has earned their Ph.D.</p>
 <p>The <em>t</em>-statistic can be interpreted as <code>yrs.since.phd</code> explains the variability in <code>salary</code> 9.18 times more than <code>yrs.since.phd</code>’s inability to the explain the variability in <code>salary</code>.</p>
 <p>The <em>p</em>-value of <code>yrs.since.phd</code> is identical to the <em>p</em>-value of the <code>(Intercept)</code> and has identical interpretations.</p>
 <p>Now, if wanted, we can fill in our predicted model, <span class="math inline">\(\hat{Y} = b_0 + b_1X\)</span>, with the estimates from the coefficients table to predict (or estimate) other values of salary given a certain number of years since a professor has earned their Ph.D.</p>
@@ -372,7 +401,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="visualization" class="section level2">
 <h2><span class="header-section-number">5.5</span> Visualization</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(yrs.since.phd, salary)) <span class="op">+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(yrs.since.phd, salary)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.25</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(
@@ -380,7 +409,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
     <span class="dt">y =</span> <span class="st">&quot;9-Month Salary (USD)&quot;</span>
   ) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> dollar) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_classic</span>()</code></pre></div>
+<span class="st">  </span><span class="kw">theme_classic</span>()</code></pre>
 <div class="figure"><span id="fig:unnamed-chunk-18"></span>
 <img src="practical-ext-of-intro-stats-in-psy-using-R_files/figure-html/unnamed-chunk-18-1.png" alt="A scatterplot of years since Ph.D. and salary along with the line of best fit. The gray band represents the 95% confidence interval (CI)." width="672" />
 <p class="caption">
@@ -393,12 +422,12 @@ Figure 5.1: A scatterplot of years since Ph.D. and salary along with the line o
 <div class="footnotes">
 <hr />
 <ol start="2">
-<li id="fn2"><p>Specifically, the simple linear regression is a specific case of ordinary least squares (OLS) regression. OLS is one of the several ways that we can calculate the error term.<a href="simple-linear-regression.html#fnref2">↩</a></p></li>
-<li id="fn3"><p><span class="math inline">\(m_{rank}=k_{rank}-1=3-1=2\)</span><a href="simple-linear-regression.html#fnref3">↩</a></p></li>
-<li id="fn4"><p><code>yrs.since.phd</code>: <span class="math display">\[F = \frac{MSR}{MSE} = \frac{\frac{SSR}{df_R}}{\frac{SSE}{df_E}} = \frac{\frac{6.39e10}{1}}{\frac{2.99e11}{395}} = \frac{6.39e10}{7.58e8} = 84.23\]</span><a href="simple-linear-regression.html#fnref4">↩</a></p></li>
-<li id="fn5"><p><code>(Intercept)</code>: <span class="math display">\[t = \frac{Estimate}{Std.\ Error} = \frac{91718.7}{2765.8} = 33.16\]</span><a href="simple-linear-regression.html#fnref5">↩</a></p></li>
-<li id="fn6"><p><code>(Intercept)</code>: <span class="math display">\[t = \sqrt{F} = \sqrt{1099.71} = 33.16\]</span><a href="simple-linear-regression.html#fnref6">↩</a></p></li>
-<li id="fn7"><p><span class="math display">\[b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta DV}{\Delta IV} = \frac{\Delta salary}{\Delta yrs.since.phd} = \frac{985.3}{1} = 985.3\]</span><a href="simple-linear-regression.html#fnref7">↩</a></p></li>
+<li id="fn2"><p>Specifically, the simple linear regression is a specific case of ordinary least squares (OLS) regression. OLS is one of the several ways that we can calculate the error term.<a href="simple-linear-regression.html#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p><span class="math inline">\(m_{rank}=k_{rank}-1=3-1=2\)</span><a href="simple-linear-regression.html#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p><code>yrs.since.phd</code>: <span class="math display">\[F = \frac{MSR}{MSE} = \frac{\frac{SSR}{df_R}}{\frac{SSE}{df_E}} = \frac{\frac{6.39e10}{1}}{\frac{2.99e11}{395}} = \frac{6.39e10}{7.58e8} = 84.23\]</span><a href="simple-linear-regression.html#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p><code>(Intercept)</code>: <span class="math display">\[t = \frac{Estimate}{Std.\ Error} = \frac{91718.7}{2765.8} = 33.16\]</span><a href="simple-linear-regression.html#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p><code>(Intercept)</code>: <span class="math display">\[t = \sqrt{F} = \sqrt{1099.71} = 33.16\]</span><a href="simple-linear-regression.html#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn7"><p><span class="math display">\[b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta DV}{\Delta IV} = \frac{\Delta salary}{\Delta yrs.since.phd} = \frac{985.3}{1} = 985.3\]</span><a href="simple-linear-regression.html#fnref7" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -457,7 +486,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
