@@ -6,14 +6,11 @@ r_packages:
   - bookdown
   - covr
 
-script:
-  - ./scripts/cibuild
-
 deploy:
-  provider: pages                         # Specify the gh-pages deployment method
-  skip_cleanup: true                      # Don't remove files
-  github_token: $GITHUB_TOKEN             # Set in travis-ci.org dashboard
-  local_dir: docs                         # Deploy the docs folder
+  provider: pages                  # Specify the gh-pages deployment method
+  skip_cleanup: true               # Don't remove files
+  github_token: $GITHUB_TOKEN      # Set in travis-ci.org dashboard
+  local_dir: docs                  # Deploy the docs folder
   on:
     branch: master
 
