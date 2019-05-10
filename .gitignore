@@ -1,7 +1,8 @@
-_book
-_bookdown_files
+_book/
+_bookdown_files/
 .Rproj.user
 .Rhistory
 .DS_Store
-.pptx
-docs
+docs/
+*.pptx
+*.html

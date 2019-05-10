@@ -50,66 +50,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  { background-color: #f8f8f8; }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ef2929; } /* Alert */
-code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
-code span.bn { color: #0000cf; } /* BaseN */
-code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
-code span.co { color: #8f5902; font-style: italic; } /* Comment */
-code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code span.dt { color: #204a87; } /* DataType */
-code span.dv { color: #0000cf; } /* DecVal */
-code span.er { color: #a40000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code span.ot { color: #8f5902; } /* Other */
-code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
-code span.ss { color: #4e9a06; } /* SpecialString */
-code span.st { color: #4e9a06; } /* String */
-code span.va { color: #000000; } /* Variable */
-code span.vs { color: #4e9a06; } /* VerbatimString */
-code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -290,16 +265,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.1</span> Null and research hypotheses</h2>
 <div id="traditional-approach" class="section level3">
 <h3><span class="header-section-number">6.1.1</span> Traditional approach</h3>
-<p><span class="math display">\[H_0: \rho = 0\]</span>
-<span class="math display">\[H_1: \rho \ne 0\]</span></p>
+<p><span class="math display">\[H_0: \rho = 0\]</span> <span class="math display">\[H_1: \rho \ne 0\]</span></p>
 <p>where <span class="math inline">\(\rho\)</span> represents the population correlation value (Note: <span class="math inline">\(r\)</span> represents the estimated population correlation value or sample correlation value.)</p>
 <p>The null hypothesis states that there is no correlation between the amount of years since earning a Ph.D. and their salary (i.e., their relationship is equal to 0). In contrast, the research hypothesis states there is a correlation (i.e., the relationship is not equal to 0).</p>
 </div>
 <div id="glm-approach" class="section level3">
 <h3><span class="header-section-number">6.1.2</span> GLM approach</h3>
-<p><span class="math display">\[Model: Z_{salary} = \beta_0 + \beta_1*Z_{years.since.phd} + \varepsilon\]</span>
-<span class="math display">\[H_0: \beta_1 = 0\]</span>
-<span class="math display">\[H_1: \beta_1 \ne 0\]</span></p>
+<p><span class="math display">\[Model: Z_{salary} = \beta_0 + \beta_1*Z_{years.since.phd} + \varepsilon\]</span> <span class="math display">\[H_0: \beta_1 = 0\]</span> <span class="math display">\[H_1: \beta_1 \ne 0\]</span></p>
 <p>where Z is the standardized (i.e., z-scored) version of that particular variable. As a reminder, z-scoring converts a variable to have a mean of 0 and a standard deviation of 1, but its distribution is unchanged.</p>
 <p>In this example, the correlation value (<span class="math inline">\(r\)</span>) is simply a standardized slope (<span class="math inline">\(\beta\)</span>). Thus, standardizing both the DV and IV standardizes the slope. In other words, <span class="math inline">\(r\)</span> is the standardized form of <span class="math inline">\(b\)</span>. (Note: The estimated standardized slope within the regression context is unfortunately referred to by the same symbol as the true population regression coefficient symbol, <span class="math inline">\(\beta\)</span>.)</p>
 </div>
@@ -309,7 +281,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="traditional-approach-1" class="section level3">
 <h3><span class="header-section-number">6.2.1</span> Traditional approach</h3>
 <p>Using the traditional approach, we can test the correlation by using the <code>cor.test()</code> function. The first input is the IV (<code>yrs.since.phd</code>) and the second input is the DV (<code>salary</code>). However, the order is essentially arbitrary and can be switched. Notice that in each input, we also included the name of the dataset (i.e., <code>datasetSalaries</code>) before each variable, which is seperated by a <code>$</code>. The <code>$</code> calls an object within a larger object. In this case, the <code>$</code> calls the object or variable <code>yrs.since.phd</code> within the larger object of the <code>datasetSalaries</code> dataset.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor.test</span>(datasetSalaries<span class="op">$</span>yrs.since.phd, datasetSalaries<span class="op">$</span>salary)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor.test</span>(datasetSalaries<span class="op">$</span>yrs.since.phd, datasetSalaries<span class="op">$</span>salary)</code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
@@ -326,10 +298,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="glm-approach-1" class="section level3">
 <h3><span class="header-section-number">6.2.2</span> GLM approach</h3>
 <p>To perform a correlation using the GLM approach, we can again use the <code>lm</code> function.</p>
-<pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">scale</span>(salary) <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">scale</span>(yrs.since.phd), <span class="dt">data =</span> datasetSalaries)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">scale</span>(salary) <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">scale</span>(yrs.since.phd), <span class="dt">data =</span> datasetSalaries)</code></pre></div>
 <p>Remember, both the DV and IV need to be standardized so that our estimates are also standardized. Luckily, we can standardize both <code>salary</code> and <code>yrs.since.phd</code> directly in the formula by using the <code>scale</code> function.</p>
 <p>The table that most aligns with the correlation output is the coefficients table and not the ANOVA source table, so we will only be using the <code>summary()</code> function for this analysis. However, we could use the <code>Anova()</code> function to obtain the ANOVA source table if desired.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model)</code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = scale(salary) ~ 1 + scale(yrs.since.phd), data = datasetSalaries)
@@ -352,7 +324,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>For example, the slope represents the standard deviation unit change in Y (<code>scale(yrs.since.phd)</code>) for every one standard deviation unit increase in X (<code>salary</code>). In other words, there is a <code>0.42</code> standard deviation unit increase in salary for every one standard deviation unit increase in the number of years a professor has had their Ph.D.</p>
 <p>The intercept represents Y (<code>salary</code>) in standard deviation units when X (<code>yrs.since.phd</code>) is 0 standard deviation units, or at the average value of X (<code>yrs.since.phd</code>). Remember, that 0 standard deviations (or a z-score of 0) is also the mean because z-scoring converts the mean to 0 and the standard deviation to 1. In other words, for a professor that has had their Ph.D. for 0 standard deviation units (or an average number of years), their predicted salary is <code>-5.89e-17</code> standard deviation units.</p>
 <p>Given these interpretations of standardized slopes and intercepts, they are not our preference, especially when variables have easily interpreted metrics. However, standardized slopes and intercepts are preferred for quickly determining effect sizes as they can only range between -1 and +1. They are also preferred when comparing other predictors within and between other models as they are in a standardized metric; however, the validity of these comparisons are debated.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">confint</span>(model)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">confint</span>(model)</code></pre></div>
 <pre><code>##                            2.5 %     97.5 %
 ## (Intercept)          -0.08969389 0.08969389
 ## scale(yrs.since.phd)  0.32942404 0.50903818</code></pre>
@@ -369,7 +341,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="visualization-1" class="section level2">
 <h2><span class="header-section-number">6.5</span> Visualization</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(<span class="kw">scale</span>(yrs.since.phd), <span class="kw">scale</span>(salary))) <span class="op">+</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(<span class="kw">scale</span>(yrs.since.phd), <span class="kw">scale</span>(salary))) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.25</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(
@@ -377,7 +349,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     <span class="dt">y =</span> <span class="st">&quot;9-Month Salary (USD)&quot;</span>
   ) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> dollar) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_classic</span>()</code></pre>
+<span class="st">  </span><span class="kw">theme_classic</span>()</code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-23"></span>
 <img src="practical-ext-of-intro-stats-in-psy-using-R_files/figure-html/unnamed-chunk-23-1.png" alt="A scatterplot of years since Ph.D. and salary along with the line of best fit. The gray band represents the 95% CI." width="672" />
 <p class="caption">
@@ -443,7 +415,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
