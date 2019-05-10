@@ -6,6 +6,9 @@ r_packages:
   - bookdown
   - covr
 
+script:
+  - Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::gitbook")'
+
 deploy:
   provider: pages                  # Specify the gh-pages deployment method
   skip_cleanup: true               # Don't remove files
@@ -13,9 +16,6 @@ deploy:
   local_dir: docs                  # Deploy the docs folder
   on:
     branch: master
-
-script:
-  - Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::gitbook")'
 
 after_success:
   - Rscript -e 'covr::codecov()'
