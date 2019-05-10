@@ -8,7 +8,9 @@ bookdown::gitbook:
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     download: no
-  edit: null
+  edit:
+    link: https://github.com/epongpipat/practical-ext-of-intro-stats-in-psy-using-R/edit/master/%s
+    text: "Edit"
   split_by: chapter
   sharing:
     github: yes
