@@ -14,5 +14,8 @@ deploy:
   on:
     branch: master
 
+script:
+  - Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::gitbook")'
+
 after_success:
   - Rscript -e 'covr::codecov()'
