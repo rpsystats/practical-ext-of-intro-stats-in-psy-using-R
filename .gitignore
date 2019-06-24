@@ -4,5 +4,6 @@ _bookdown_files/
 .Rhistory
 .DS_Store
 docs/
-*.pptx
-*.html
+.pptx
+.html
+.dcf
