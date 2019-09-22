@@ -1,6 +1,6 @@
 # Practical Extension of Introductory Statistics in Psychology using R
 
-[![Build Status](https://travis-ci.org/epongpipat/practical-ext-of-intro-stats-in-psy-using-R.svg?branch=master)](https://travis-ci.org/epongpipat/practical-ext-of-intro-stats-in-psy-using-R)
+[![Build Status](https://travis-ci.org/epongpipat/practical-ext-of-intro-stats-in-psy-using-R.svg?branch=master)](https://travis-ci.org/epongpipat/practical-ext-of-intro-stats-in-psy-using-R) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/epongpipat)
 
 ## Link
 https://rpsystats.com
