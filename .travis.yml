@@ -16,6 +16,7 @@ deploy:
   local_dir: docs                  # Deploy the docs folder
   on:
     branch: master
+  fqdn: rpsystats.com
 
 after_success:
   - Rscript -e 'covr::codecov()'
