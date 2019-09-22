@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/epongpipat/practical-ext-of-intro-stats-in-psy-using-R.svg?branch=master)](https://travis-ci.org/epongpipat/practical-ext-of-intro-stats-in-psy-using-R)
 
 ## Link
-https://ekarinpongpipat.com/practical-ext-of-intro-stats-in-psy-using-R/
+https://rpsystats.com
 
 ## Description
 This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R.
