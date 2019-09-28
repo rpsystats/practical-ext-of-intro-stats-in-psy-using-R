@@ -59,3 +59,9 @@ We chose to use R to analyze and write this book because R forces us to write ou
 ## Issues and Recommendations
 
 Hopefully, there aren't any bugs or errors in the book, but you find any issues please report them on our github <a href="https://github.com/epongpipat/practical-ext-of-intro-stats-in-psy-using-R/issues" target="_blank">issues page</a>. This book is also ideally meant to be a live open-source book that can be edited by us and others (you) in perpetuity by creating pull requests on our github <a href="https://github.com/epongpipat/practical-ext-of-intro-stats-in-psy-using-R/pulls" target="_blank">pulls page</a>. 
+
+## License
+
+<img src="https://mirrors.creativecommons.org/presskit/icons/cc.xlarge.png" width="50px" alt="Attribution"> <img src="https://mirrors.creativecommons.org/presskit/icons/by.xlarge.png" width="50px" alt="Non-Commericial"> <img src="https://mirrors.creativecommons.org/presskit/icons/nc.xlarge.png" width="50px"> <img src="https://mirrors.creativecommons.org/presskit/icons/sa.xlarge.png" width="50px" alt="ShareAlike">
+
+This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.

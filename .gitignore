@@ -1,9 +1,9 @@
 _book/
 _bookdown_files/
-.Rproj.user
-.Rhistory
-.DS_Store
+*.Rproj.user
+*.Rhistory
+*.DS_Store
 docs/
-.pptx
-.html
-.dcf
+*.pptx
+*.html
+*.dcf
