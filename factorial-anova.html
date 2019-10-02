@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 11 Factorial ANOVA | A Practical Extension of Introductory Statistics in Psychology using R</title>
+  <meta name="description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R." />
+  <meta name="generator" content="bookdown 0.14.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 11 Factorial ANOVA | A Practical Extension of Introductory Statistics in Psychology using R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://ekarinpongpipat.com/practical-ext-of-intro-stats-in-psy-using-R/" />
+  <meta property="og:image" content="https://ekarinpongpipat.com/practical-ext-of-intro-stats-in-psy-using-R/cover.png" />
+  <meta property="og:description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R." />
+  <meta name="github-repo" content="epongpipat/practical-ext-of-intro-stats-in-psy-using-R" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 11 Factorial ANOVA | A Practical Extension of Introductory Statistics in Psychology using R" />
+  
+  <meta name="twitter:description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R." />
+  <meta name="twitter:image" content="https://ekarinpongpipat.com/practical-ext-of-intro-stats-in-psy-using-R/cover.png" />
+
+<meta name="author" content="Ekarin E. Pongpipat, Giuseppe G. Miranda, &amp; Matthew J. Kmiecik" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="one-way-anova.html"/>
+<link rel="next" href="glm-approach-summary.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148431457-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-148431457-1');
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Table of Contents</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#what-exactly-is-the-glm"><i class="fa fa-check"></i><b>1.1</b> What exactly is the GLM?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#how-will-this-book-be-covered"><i class="fa fa-check"></i><b>1.2</b> How will this book be covered?</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#what-wont-this-book-cover"><i class="fa fa-check"></i><b>1.3</b> What won’t this book cover?</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#why-r"><i class="fa fa-check"></i><b>1.4</b> Why R?</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#issues-and-recommendations"><i class="fa fa-check"></i><b>1.5</b> Issues and Recommendations</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>1.6</b> License</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>2</b> Prerequisites</a><ul>
+<li class="chapter" data-level="2.1" data-path="prerequisites.html"><a href="prerequisites.html#knowledge"><i class="fa fa-check"></i><b>2.1</b> Knowledge</a></li>
+<li class="chapter" data-level="2.2" data-path="prerequisites.html"><a href="prerequisites.html#software"><i class="fa fa-check"></i><b>2.2</b> Software</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>3</b> R Packages</a><ul>
+<li class="chapter" data-level="3.1" data-path="r-packages.html"><a href="r-packages.html#what-are-packages"><i class="fa fa-check"></i><b>3.1</b> What are packages?</a></li>
+<li class="chapter" data-level="3.2" data-path="r-packages.html"><a href="r-packages.html#packages"><i class="fa fa-check"></i><b>3.2</b> Packages</a></li>
+<li class="chapter" data-level="3.3" data-path="r-packages.html"><a href="r-packages.html#install-r-packages"><i class="fa fa-check"></i><b>3.3</b> Install R Packages</a></li>
+<li class="chapter" data-level="3.4" data-path="r-packages.html"><a href="r-packages.html#load-r-packages"><i class="fa fa-check"></i><b>3.4</b> Load R Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>4</b> Datasets</a><ul>
+<li class="chapter" data-level="4.1" data-path="datasets.html"><a href="datasets.html#salaries-dataset"><i class="fa fa-check"></i><b>4.1</b> Salaries Dataset</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="datasets.html"><a href="datasets.html#data-wrangling"><i class="fa fa-check"></i><b>4.1.1</b> Data Wrangling</a></li>
+<li class="chapter" data-level="4.1.2" data-path="datasets.html"><a href="datasets.html#descriptive-statistics"><i class="fa fa-check"></i><b>4.1.2</b> Descriptive Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="datasets.html"><a href="datasets.html#anorexia-dataset"><i class="fa fa-check"></i><b>4.2</b> Anorexia Dataset</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="datasets.html"><a href="datasets.html#data-wrangling-1"><i class="fa fa-check"></i><b>4.2.1</b> Data Wrangling</a></li>
+<li class="chapter" data-level="4.2.2" data-path="datasets.html"><a href="datasets.html#descriptive-statistics-1"><i class="fa fa-check"></i><b>4.2.2</b> Descriptive Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="datasets.html"><a href="datasets.html#use-your-own-dataset"><i class="fa fa-check"></i><b>4.3</b> Use Your Own Dataset</a></li>
+</ul></li>
+<li class="part"><span><b>I Introductory Univariate Statistics</b></span></li>
+<li class="chapter" data-level="5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>5</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="5.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#null-and-research-hypotheses"><i class="fa fa-check"></i><b>5.1</b> Null and research hypotheses</a></li>
+<li class="chapter" data-level="5.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#statistical-analyses"><i class="fa fa-check"></i><b>5.2</b> Statistical analyses</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-do-we-read-the-anova-source-table"><i class="fa fa-check"></i><b>5.2.1</b> How do we read the ANOVA source table?</a></li>
+<li class="chapter" data-level="5.2.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-do-we-read-the-coefficients-table"><i class="fa fa-check"></i><b>5.2.2</b> How do we read the coefficients table?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#statistical-decision"><i class="fa fa-check"></i><b>5.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="5.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#apa-statement"><i class="fa fa-check"></i><b>5.4</b> APA statement</a></li>
+<li class="chapter" data-level="5.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#visualization"><i class="fa fa-check"></i><b>5.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="correlation.html"><a href="correlation.html"><i class="fa fa-check"></i><b>6</b> Correlation</a><ul>
+<li class="chapter" data-level="6.1" data-path="correlation.html"><a href="correlation.html#null-and-research-hypotheses-1"><i class="fa fa-check"></i><b>6.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="correlation.html"><a href="correlation.html#traditional-approach"><i class="fa fa-check"></i><b>6.1.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="6.1.2" data-path="correlation.html"><a href="correlation.html#glm-approach"><i class="fa fa-check"></i><b>6.1.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="correlation.html"><a href="correlation.html#statistical-analysis"><i class="fa fa-check"></i><b>6.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="correlation.html"><a href="correlation.html#traditional-approach-1"><i class="fa fa-check"></i><b>6.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="6.2.2" data-path="correlation.html"><a href="correlation.html#glm-approach-1"><i class="fa fa-check"></i><b>6.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="correlation.html"><a href="correlation.html#statistical-decision-1"><i class="fa fa-check"></i><b>6.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="6.4" data-path="correlation.html"><a href="correlation.html#apa-statement-1"><i class="fa fa-check"></i><b>6.4</b> APA statement</a></li>
+<li class="chapter" data-level="6.5" data-path="correlation.html"><a href="correlation.html#visualization-1"><i class="fa fa-check"></i><b>6.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html"><i class="fa fa-check"></i><b>7</b> One Sample <em>t</em>-Test</a><ul>
+<li class="chapter" data-level="7.1" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#null-and-research-hypotheses-2"><i class="fa fa-check"></i><b>7.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#traditional-approach-2"><i class="fa fa-check"></i><b>7.1.1</b> Traditional Approach</a></li>
+<li class="chapter" data-level="7.1.2" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#glm-approach-2"><i class="fa fa-check"></i><b>7.1.2</b> GLM Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#statistical-analysis-1"><i class="fa fa-check"></i><b>7.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#traditional-approach-3"><i class="fa fa-check"></i><b>7.2.1</b> Traditional Approach</a></li>
+<li class="chapter" data-level="7.2.2" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#glm-approach-3"><i class="fa fa-check"></i><b>7.2.2</b> GLM Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#statistical-decision-2"><i class="fa fa-check"></i><b>7.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="7.4" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#apa-statement-2"><i class="fa fa-check"></i><b>7.4</b> APA statement</a></li>
+<li class="chapter" data-level="7.5" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#visualization-2"><i class="fa fa-check"></i><b>7.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html"><i class="fa fa-check"></i><b>8</b> Dependent Samples <em>t</em>-Test</a><ul>
+<li class="chapter" data-level="8.1" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#null-and-research-hypotheses-3"><i class="fa fa-check"></i><b>8.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#traditional-approach-4"><i class="fa fa-check"></i><b>8.1.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="8.1.2" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#glm-approach-4"><i class="fa fa-check"></i><b>8.1.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#statistical-analysis-2"><i class="fa fa-check"></i><b>8.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#traditional-approach-5"><i class="fa fa-check"></i><b>8.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="8.2.2" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#glm-approach-5"><i class="fa fa-check"></i><b>8.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#statistical-decision-3"><i class="fa fa-check"></i><b>8.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="8.4" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#apa-statement-3"><i class="fa fa-check"></i><b>8.4</b> APA statement</a></li>
+<li class="chapter" data-level="8.5" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#visualization-3"><i class="fa fa-check"></i><b>8.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html"><i class="fa fa-check"></i><b>9</b> Independent Samples <em>t</em>-Test</a><ul>
+<li class="chapter" data-level="9.1" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#null-and-research-hypotheses-4"><i class="fa fa-check"></i><b>9.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#traditional-approach-6"><i class="fa fa-check"></i><b>9.1.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="9.1.2" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#glm-approach-6"><i class="fa fa-check"></i><b>9.1.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#statistical-analysis-3"><i class="fa fa-check"></i><b>9.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#traditional-approach-7"><i class="fa fa-check"></i><b>9.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="9.2.2" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#glm-approach-7"><i class="fa fa-check"></i><b>9.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#statistical-decision-4"><i class="fa fa-check"></i><b>9.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="9.4" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#apa-statement-4"><i class="fa fa-check"></i><b>9.4</b> APA statement</a></li>
+<li class="chapter" data-level="9.5" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#visualization-4"><i class="fa fa-check"></i><b>9.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>10</b> One-Way ANOVA</a><ul>
+<li class="chapter" data-level="10.1" data-path="one-way-anova.html"><a href="one-way-anova.html#coding-categorical-variables"><i class="fa fa-check"></i><b>10.1</b> Coding Categorical Variables</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="one-way-anova.html"><a href="one-way-anova.html#dummy-coding"><i class="fa fa-check"></i><b>10.1.1</b> Dummy Coding</a></li>
+<li class="chapter" data-level="10.1.2" data-path="one-way-anova.html"><a href="one-way-anova.html#othogon"><i class="fa fa-check"></i><b>10.1.2</b> Orthogonal Coding</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="one-way-anova.html"><a href="one-way-anova.html#null-and-research-hypothesis"><i class="fa fa-check"></i><b>10.2</b> Null and research hypothesis</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#traditional-approach-8"><i class="fa fa-check"></i><b>10.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="10.2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#glm-approach-8"><i class="fa fa-check"></i><b>10.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="one-way-anova.html"><a href="one-way-anova.html#statistical-analysis-4"><i class="fa fa-check"></i><b>10.3</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="one-way-anova.html"><a href="one-way-anova.html#traditional-approach-9"><i class="fa fa-check"></i><b>10.3.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="10.3.2" data-path="one-way-anova.html"><a href="one-way-anova.html#glm-approach-9"><i class="fa fa-check"></i><b>10.3.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="one-way-anova.html"><a href="one-way-anova.html#statistical-decision-5"><i class="fa fa-check"></i><b>10.4</b> Statistical decision</a></li>
+<li class="chapter" data-level="10.5" data-path="one-way-anova.html"><a href="one-way-anova.html#apa-statement-5"><i class="fa fa-check"></i><b>10.5</b> APA statement</a></li>
+<li class="chapter" data-level="10.6" data-path="one-way-anova.html"><a href="one-way-anova.html#visualization-5"><i class="fa fa-check"></i><b>10.6</b> Visualization</a><ul>
+<li class="chapter" data-level="10.6.1" data-path="one-way-anova.html"><a href="one-way-anova.html#traditional"><i class="fa fa-check"></i><b>10.6.1</b> Traditional</a></li>
+<li class="chapter" data-level="10.6.2" data-path="one-way-anova.html"><a href="one-way-anova.html#orthogonal-contrast-coding"><i class="fa fa-check"></i><b>10.6.2</b> Orthogonal Contrast Coding</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="factorial-anova.html"><a href="factorial-anova.html"><i class="fa fa-check"></i><b>11</b> Factorial ANOVA</a><ul>
+<li class="chapter" data-level="11.1" data-path="factorial-anova.html"><a href="factorial-anova.html#null-and-research-hypotheses-5"><i class="fa fa-check"></i><b>11.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="factorial-anova.html"><a href="factorial-anova.html#traditional-approach-10"><i class="fa fa-check"></i><b>11.1.1</b> Traditional Approach</a></li>
+<li class="chapter" data-level="11.1.2" data-path="factorial-anova.html"><a href="factorial-anova.html#glm-approach-10"><i class="fa fa-check"></i><b>11.1.2</b> GLM Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="factorial-anova.html"><a href="factorial-anova.html#statistical-analysis-5"><i class="fa fa-check"></i><b>11.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="factorial-anova.html"><a href="factorial-anova.html#traditional-approach-11"><i class="fa fa-check"></i><b>11.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="11.2.2" data-path="factorial-anova.html"><a href="factorial-anova.html#glm-approach-11"><i class="fa fa-check"></i><b>11.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="factorial-anova.html"><a href="factorial-anova.html#statistical-decision-6"><i class="fa fa-check"></i><b>11.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="11.4" data-path="factorial-anova.html"><a href="factorial-anova.html#apa-statement-6"><i class="fa fa-check"></i><b>11.4</b> APA statement</a></li>
+<li class="chapter" data-level="11.5" data-path="factorial-anova.html"><a href="factorial-anova.html#visualization-6"><i class="fa fa-check"></i><b>11.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="glm-approach-summary.html"><a href="glm-approach-summary.html"><i class="fa fa-check"></i><b>12</b> GLM Approach Summary</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html"><i class="fa fa-check"></i>Authors</a><ul>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#ekarin-e.-pongpipat-m.a."><i class="fa fa-check"></i>Ekarin E. Pongpipat, M.A.</a></li>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#giuseppe-g.-miranda-m.s."><i class="fa fa-check"></i>Giuseppe G. Miranda, M.S.</a></li>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#matthew-j.-kmiecik-b.s."><i class="fa fa-check"></i>Matthew J. Kmiecik, B.S.</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Practical Extension of Introductory Statistics in Psychology using R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="factorial-anova" class="section level1">
+<h1><span class="header-section-number">Chapter 11</span> Factorial ANOVA</h1>
+<p>The factorial ANOVA, which tests more than one categorical IV, is an extension of the one-way ANOVA, which only tests one categorical IV. We can also think of the one-way ANOVA as a special case of the factorial ANOVA. In addition to testing the main effects of the categorical IV, the factorial ANOVA also tests the interactions of the categorical IVs.</p>
+<p>For example, let’s say in addition to the question we asked in the <a href="independent-samples-t-test.html#independent-samples-t-test">independent samples <em>t</em>-test</a> chapter (i.e., are salaries of professors different depending on their discipline?). Let’s also say that we were interested in two more questions:</p>
+<ul>
+<li>Does the salary of professors depend on their sex?</li>
+<li>Does the relationship between salary of professors and their discipline also depend on their sex?</li>
+</ul>
+<p>The first question is the overall effect of a categorical IV, which is known as a main effect. The second question is the interaction of the two main effects (i.e., discipline and sex) and is automatically formed and tested in traditional factorial ANOVA.</p>
+<p>(Note: Depending on our specific research questions, the interaction term may or not be needed. Thus, the automatic formation of the interaction within the traditional factorial ANOVA may not always be beneficial. Using the GLM approach gives us the flexibility to include or not include interaction terms.)</p>
+<p>For this example, we will again use the <a href="datasets.html#salaries-dataset"><code>datasetSalaries</code></a> dataset.</p>
+<p>Before we continue, let’s again check the contrasts of both variables.</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>discipline)</a></code></pre></div>
+<pre><code>##             Theoretical
+## Applied               0
+## Theoretical           1</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>sex)</a></code></pre></div>
+<pre><code>##        Male
+## Female    0
+## Male      1</code></pre>
+<p>Both of the variables are currently dummy coded.</p>
+<p>Since we prefer a priori orthogonal contrast code, let’s go ahead and change the contrast for both of these factors.</p>
+<p>We can code professors in the applied discipline as 0.5 and professors in the theoretical discipline as -0.5 since we think that those in the applied discipline will be earn a higher salary.</p>
+<p>Similarly, we can code male professors as 0.5 and female professors as -0.5 since we also think that male professors will likely earn a higher salary than female professors.</p>
+<p>Note: Since each factor is orthogonal within its respective factor, the sum of each contrast pair between the factors is also equal to 0. Thus, we do not need to actually check this; however, we encourage you test this on your own.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>discipline) &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">AppliedvTheoretical =</span> <span class="kw">c</span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>discipline)</a></code></pre></div>
+<pre><code>##             AppliedvTheoretical
+## Applied                     0.5
+## Theoretical                -0.5</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>sex) &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">FemalevMale =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>sex)</a></code></pre></div>
+<pre><code>##        FemalevMale
+## Female        -0.5
+## Male           0.5</code></pre>
+<div id="null-and-research-hypotheses-5" class="section level2">
+<h2><span class="header-section-number">11.1</span> Null and research hypotheses</h2>
+<p>Given that there are a total of three questions of interest, there will also be three pairs of null and research hypotheses.</p>
+<div id="traditional-approach-10" class="section level3">
+<h3><span class="header-section-number">11.1.1</span> Traditional Approach</h3>
+<ol style="list-style-type: decimal">
+<li><p>Main Effect of Discipline
+<span class="math display">\[H_0: \mu_{Applied} = \mu_{Theoretical}\]</span>
+<span class="math display">\[H_1: \mu_{Applied} \ne \mu_{Theoretical}\]</span>
+<BR><BR>The null hypothesis states that there is no difference in a professor’s salary whether they work in an applied discipline compared to a theoretical discipline on average across sex. The research hypothesis states that there is salary difference in professors in the applied discipline compared to the theoretical discipline on average across sex.</p></li>
+<li><p>Main Effect of Sex
+<span class="math display">\[H_0: \mu_{Female} = \mu_{Male}\]</span>
+<span class="math display">\[H_1: \mu_{Female} \ne \mu_{Male}\]</span>
+<BR><BR>The null hypothesis states there is no salary difference in professors that are female compared to those that are male on average across discipline. The research hypothesis states there is a salary difference in professors that are female compared to those that are male on average across discipline.</p></li>
+<li><p>Main Interaction Effect of Discipline by Sex
+<span class="math display">\[H_0: \mu_{Female_{Applied}} - \mu_{Female_{Theoretical}} = \mu_{Male_{Applied}} - \mu_{Male_{Theoretical}}\]</span>
+<span class="math display">\[H_0: \mu_{Female_{Applied}} - \mu_{Female_{Theoretical}} \ne \mu_{Male_{Applied}} - \mu_{Male_{Theoretical}}\]</span>
+<BR><BR>The null hypothesis states that the effect of discipline (i.e., the difference of theoretical and applied) are the same for males and females. In other words, the relationship between a professor’s salary and their discipline does not also change depending on their sex. The research hypothesis states that the relationship between a professor’s salary and their discipline does change based on their sex.
+<BR><BR>If we were interested in determining if the relationship between sex and salary depended on discipline, we could swap the subscripts so that sex is the subscript of discipline.</p></li>
+</ol>
+</div>
+<div id="glm-approach-10" class="section level3">
+<h3><span class="header-section-number">11.1.2</span> GLM Approach</h3>
+<p><span class="math inline">\(Model: Salary = \beta_0 + \beta_1*Discipline + \beta_2*Sex + \beta_3*Discipline*Sex + \varepsilon\)</span></p>
+<ol style="list-style-type: decimal">
+<li><p>Main Effect of Discipline
+<span class="math display">\[H_0: \beta_1 = 0\]</span>
+<span class="math display">\[H_1: \beta_1 \ne 0\]</span>
+<BR><BR>The null hypothesis states that the slope associated with discipline is 0. Since the difference of our contrast is 1, the slope represents the mean salary difference between discipline on average across sex. In other words, the null hypothesis states that there is no difference in a professor’s salary based on their discipline on average across sex. The research hypothesis states that there is a difference in a professor’s salary based on their discipline on average across sex.</p></li>
+<li><p>Main Effect of Sex
+<span class="math display">\[H_0: \beta_2 = 0\]</span>
+<span class="math display">\[H_1: \beta_2 \ne 0\]</span>
+<BR><BR>The null hypothesis states that the slope associated with sex is 0. Since the difference of our contrast is 1, the slope represents the mean salary difference between sex on average across discipline. In other words, the null hypothesis states a professor’s salary is not related to their sex on average across their discipline. The research hypothesis states that a professor’s salary is related to their sex on average across their discipline.</p></li>
+<li><p>Main Interaction Effect of Discipline by Sex
+<span class="math display">\[H_0: \beta_3 = 0\]</span>
+<span class="math display">\[H_1: \beta_3 \ne 0\]</span>
+<BR><BR>The null hypothesis states that the slope associated with the interaction of discipline and sex is 0. Slopes associated with interactions can be thought of as changes in the slope associated with one IV included in the interaction for every 1 unit of another IV included in the interaction. In other words, if we calculated the slope between salary and discipline for just female professors and then calculated the slope between salary and discipline for just male professors, <span class="math inline">\(\beta_3\)</span> represents the difference in these slopes. Since the difference of our contrast for sex is 1, the slope represents the difference in the slope between salary and discipline between males and females. The null hypothesis states that the relationship between a professor’s salary and their discipline does not change based on their sex. The research hypothesis states that the relationship between a professor’s salary and their discipline does change based on their sex.</p></li>
+</ol>
+</div>
+</div>
+<div id="statistical-analysis-5" class="section level2">
+<h2><span class="header-section-number">11.2</span> Statistical analysis</h2>
+<div id="traditional-approach-11" class="section level3">
+<h3><span class="header-section-number">11.2.1</span> Traditional approach</h3>
+<p>To perform a traditional factorial ANOVA, we can again use the <code>aov()</code> function. In the first argument, which is the formula, we can enter the DV followed by the tilde (<code>~</code>) and then the IVs along with its interaction. We can indicate an interaction by placing a colon (<code>:</code>) between the two IVs we want to interact. Specifically, this will create a new interaction term by multiplying the two IVs for each subject.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">model &lt;-<span class="st"> </span><span class="kw">aov</span>(salary <span class="op">~</span><span class="st"> </span>discipline <span class="op">+</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>discipline<span class="op">:</span>sex, datasetSalaries)</a></code></pre></div>
+<p>We can also more concisely place an asterisk (<code>*</code>) between the two IVs to perform the exact same test (i.e., a test of an interaction along with a test for each main effect included in the interaction term). We prefer this form as we prefer simplicity.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1">model &lt;-<span class="st"> </span><span class="kw">aov</span>(salary <span class="op">~</span><span class="st"> </span>discipline <span class="op">*</span><span class="st"> </span>sex, datasetSalaries)</a></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1"><span class="kw">Anova</span>(model, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;III&quot;</span>))</a></code></pre></div>
+<pre><code>## Anova Table (Type III tests)
+## 
+## Response: salary
+##                    Sum Sq  Df   F value    Pr(&gt;F)    
+## (Intercept)    1.6139e+12   1 1834.2735 &lt; 2.2e-16 ***
+## discipline     7.9856e+09   1    9.0759  0.002758 ** 
+## sex            7.4307e+09   1    8.4453  0.003867 ** 
+## discipline:sex 1.7395e+09   1    1.9770  0.160492    
+## Residuals      3.4579e+11 393                        
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<ol style="list-style-type: decimal">
+<li>Main Effect of Discipline</li>
+</ol>
+<p>We can see from the <em>F</em>-statistic (<code>F value</code>) that the ability for discipline to explain salary is about <code>9.0759</code> times greater than its inability to explain salary, which is very large.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Main Effect of Sex</li>
+</ol>
+<p>We can also see that the ability for sex to explain salary is about <code>8.4453</code> times greater than its inability to explain salary, which is also very large.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Interaction Effect of Discipline by Sex</li>
+</ol>
+<p>However, the ability for the interaction between sex and discipline to explain salary is about <code>1.9770</code> times greater than its inability to explain salary, which is pretty small (close to 1).</p>
+</div>
+<div id="glm-approach-11" class="section level3">
+<h3><span class="header-section-number">11.2.2</span> GLM approach</h3>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1">model &lt;-<span class="st"> </span><span class="kw">lm</span>(salary <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>discipline <span class="op">*</span><span class="st"> </span>sex, datasetSalaries)</a></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="kw">Anova</span>(model, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;III&quot;</span>))</a></code></pre></div>
+<pre><code>## Anova Table (Type III tests)
+## 
+## Response: salary
+##                    Sum Sq  Df   F value    Pr(&gt;F)    
+## (Intercept)    1.6139e+12   1 1834.2735 &lt; 2.2e-16 ***
+## discipline     7.9856e+09   1    9.0759  0.002758 ** 
+## sex            7.4307e+09   1    8.4453  0.003867 ** 
+## discipline:sex 1.7395e+09   1    1.9770  0.160492    
+## Residuals      3.4579e+11 393                        
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Note that in both analyses, the statistics are identical for each research question:</p>
+<ol style="list-style-type: decimal">
+<li><p>Main Effect of Discipline
+<BR>When we look at the row for discipline, the <em>F</em>-statistic of <code>5.41</code> with <code>1</code> between degrees of freedom (df), <code>393</code> within degrees of freedom (df), and <em>p</em>-value of <code>.020</code> are identical.</p></li>
+<li><p>Main Effect of Sex
+<BR>When we look at the row for sex, the <em>F</em>-statistic of <code>1.22</code> with <code>1</code> between degrees of freedom (df), <code>393</code> within degrees of freedom (df), and <em>p</em>-value of <code>.270</code> are identical.</p></li>
+<li><p>Main Interaction Effect of Discipline by Sex
+<BR>When we look at the row for the interaction of discipline and sex (<code>discipline:sex</code>) the <em>F</em>-statistic of <code>1.98</code> with <code>1</code> between degrees of freedom (df), <code>393</code> within degrees of freedom (df), and <em>p</em>-value of <code>.160</code> are identical.</p></li>
+</ol>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1"><span class="kw">summary</span>(model)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = salary ~ 1 + discipline * sex, data = datasetSalaries)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -52900 -23149  -5419  20505 112785 
+## 
+## Coefficients:
+##                                              Estimate Std. Error t value
+## (Intercept)                                    107440       2509  42.828
+## disciplineAppliedvTheoretical                   15115       5017   3.013
+## sexFemalevMale                                  14580       5017   2.906
+## disciplineAppliedvTheoretical:sexFemalevMale   -14109      10034  -1.406
+##                                              Pr(&gt;|t|)    
+## (Intercept)                                   &lt; 2e-16 ***
+## disciplineAppliedvTheoretical                 0.00276 ** 
+## sexFemalevMale                                0.00387 ** 
+## disciplineAppliedvTheoretical:sexFemalevMale  0.16049    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 29660 on 393 degrees of freedom
+## Multiple R-squared:  0.0482, Adjusted R-squared:  0.04094 
+## F-statistic: 6.634 on 3 and 393 DF,  p-value: 0.0002217</code></pre>
+<p>The estimates are slightly different now with the addition of another IV and its interaction, so we will interpret the estimate of each predictor.</p>
+<p>The intercept (<span class="math inline">\(b_0\)</span>) still represents the value of the DV when all IVs are 0. Since the codes of our categorical IVs are orthogonal (i.e., 0 lies in the middle of the categorical IV codes), the <code>(Intercept)</code> represents the 9-month academic salary of professors on average across discipline and sex. We don’t need to mention when the interaction is also 0 because if the two variables within the interaction are zero, then the interaction must also equal 0.</p>
+<p>The estimate for the slope associated with discipline (<span class="math inline">\(b_1\)</span>) represents the change in salary for every 1 unit increase in discipline when sex equals 0. Since the difference in the coding scheme of discipline is 1 and since 0 lies in-between the two codes for sex, the slope represents the mean salary difference of professors in applied compared to theoretical discipline on average across sex. Specifically, it is estimated that professors in the theoretical discipline earn <code>$15,115</code> less than professors in an applied discipline on average across sex. We need to say on average across sex because we have an interaction term and are allowing for the slopes to vary at different levels of each IV.</p>
+<p>The estimate for the slope associated with sex (<span class="math inline">\(b_2\)</span>) is interpreted similarly to the slope associated with discipline. The estimate for the slope associated with sex represents the change in salary for every 1 unit increase in sex when discipline equals 0. Again, since the difference in the coding scheme for sex is 1 and since 0 lies in-between the two codes for discipline, the slope represents the mean salary difference of professors that are female compared to professors that are male on average across discipline. Specifically, it is estimated that professors that are male earn <code>$14,580</code> more than professors that are female on average across discipline.</p>
+<p>The estimate for the slope associated with the interaction of discipline and sex (<span class="math inline">\(b_3\)</span>) represents the change in the slope of salary and discipline for every 1 unit increase in sex. Since the difference in the coding scheme of sex is 1, the slope represents the sex difference of the slope of salary and discipline. Specifically, the slope of salary and discipline is estimated to decrease by <code>$14,109</code> for males compared to females In other words, the negative relationship between salary and discipline is expected to strengthen for males compared to females.</p>
+</div>
+</div>
+<div id="statistical-decision-6" class="section level2">
+<h2><span class="header-section-number">11.3</span> Statistical decision</h2>
+<p>Let’s examine the statistical decision for each research question.</p>
+<ol style="list-style-type: decimal">
+<li><p>Main Effect of Discipline
+<BR>Given the <em>p</em>-value of <code>.020</code> is less than the alpha level (<span class="math inline">\(\alpha\)</span>) of 0.05, we will reject the null hypothesis.</p></li>
+<li><p>Main Effect of Sex
+<BR>Given the <em>p</em>-value of <code>.270</code> is greater than the alpha level (<span class="math inline">\(\alpha\)</span>) of 0.05, we will retain (or fail to reject) the null hypothesis.</p></li>
+<li><p>Interaction Effect of Discipline by Sex
+<BR>Given the <em>p</em>-value of <code>.160</code> is greater than the alpha level (<span class="math inline">\(\alpha\)</span>) of 0.05, we will retain (or fail to reject) the null hypothesis.</p></li>
+</ol>
+</div>
+<div id="apa-statement-6" class="section level2">
+<h2><span class="header-section-number">11.4</span> APA statement</h2>
+<p>A factorial Analysis of Variance (ANOVA) was performed to test if 1) the salary of professors was different depending on their discipline, 2) the salary of professors was different depending on their sex, and 3) the relationship between salary of professors and their sex depending on their discipline. There was significant main effect of discipline on salary, <em>F</em>(1,393) = 9.08, <em>p</em> = .003. There was also a significant main effect of sex on salary, <em>F</em>(1,393) = 8.45, <em>p</em> = .004. However, the relationship between salary of professors and their sex did not change depending on their discipline, <em>F</em>(1,393) = 1.98, <em>p</em> = .160.</p>
+</div>
+<div id="visualization-6" class="section level2">
+<h2><span class="header-section-number">11.5</span> Visualization</h2>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="co"># calculate descriptive statistics along with the 95% CI</span></a>
+<a class="sourceLine" id="cb101-2" data-line-number="2">dataset_summary &lt;-<span class="st"> </span>datasetSalaries <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb101-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(discipline, sex) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb101-4" data-line-number="4"><span class="st">  </span><span class="kw">summarize</span>(</a>
+<a class="sourceLine" id="cb101-5" data-line-number="5">    <span class="dt">mean =</span> <span class="kw">mean</span>(salary),</a>
+<a class="sourceLine" id="cb101-6" data-line-number="6">    <span class="dt">sd =</span> <span class="kw">sd</span>(salary),</a>
+<a class="sourceLine" id="cb101-7" data-line-number="7">    <span class="dt">n =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb101-8" data-line-number="8">    <span class="dt">sem =</span> sd <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n),</a>
+<a class="sourceLine" id="cb101-9" data-line-number="9">    <span class="dt">tcrit =</span> <span class="kw">abs</span>(<span class="kw">qt</span>(<span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">df =</span> n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)),</a>
+<a class="sourceLine" id="cb101-10" data-line-number="10">    <span class="dt">ME =</span> tcrit <span class="op">*</span><span class="st"> </span>sem,</a>
+<a class="sourceLine" id="cb101-11" data-line-number="11">    <span class="dt">LL95CI =</span> mean <span class="op">-</span><span class="st"> </span>ME,</a>
+<a class="sourceLine" id="cb101-12" data-line-number="12">    <span class="dt">UL95CI =</span> mean <span class="op">+</span><span class="st"> </span>ME</a>
+<a class="sourceLine" id="cb101-13" data-line-number="13">  ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb101-14" data-line-number="14"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">discipline_code =</span> <span class="kw">ifelse</span>(discipline <span class="op">==</span><span class="st"> &quot;Applied&quot;</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb101-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb101-16" data-line-number="16"><span class="co"># plot</span></a>
+<a class="sourceLine" id="cb101-17" data-line-number="17">datasetSalaries <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb101-18" data-line-number="18"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">discipline_code =</span> <span class="kw">ifelse</span>(discipline <span class="op">==</span><span class="st"> &quot;Applied&quot;</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb101-19" data-line-number="19"><span class="st">  </span><span class="kw">ggplot</span>(., <span class="dt">mapping =</span> <span class="kw">aes</span>(discipline_code, salary, <span class="dt">group =</span> sex, <span class="dt">shape =</span> sex, <span class="dt">color =</span> sex)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb101-20" data-line-number="20"><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.2</span>, <span class="dt">width =</span> <span class="fl">0.2</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb101-21" data-line-number="21"><span class="st">  </span><span class="kw">geom_point</span>(</a>
+<a class="sourceLine" id="cb101-22" data-line-number="22">    <span class="dt">data =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> discipline_code, <span class="dt">y =</span> mean),</a>
+<a class="sourceLine" id="cb101-23" data-line-number="23">    <span class="dt">size =</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb101-24" data-line-number="24">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb101-25" data-line-number="25"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> discipline_code, <span class="dt">y =</span> mean)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb101-26" data-line-number="26"><span class="st">  </span><span class="kw">geom_errorbar</span>(</a>
+<a class="sourceLine" id="cb101-27" data-line-number="27">    <span class="dt">data =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> discipline_code, <span class="dt">y =</span> mean, <span class="dt">ymin =</span> LL95CI, <span class="dt">ymax =</span> UL95CI),</a>
+<a class="sourceLine" id="cb101-28" data-line-number="28">    <span class="dt">width =</span> <span class="fl">0.02</span></a>
+<a class="sourceLine" id="cb101-29" data-line-number="29">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb101-30" data-line-number="30"><span class="st">  </span><span class="kw">labs</span>(</a>
+<a class="sourceLine" id="cb101-31" data-line-number="31">    <span class="dt">x =</span> <span class="st">&quot;Discipline&quot;</span>,</a>
+<a class="sourceLine" id="cb101-32" data-line-number="32">    <span class="dt">y =</span> <span class="st">&quot;9-Month Academic Salary (USD)&quot;</span>,</a>
+<a class="sourceLine" id="cb101-33" data-line-number="33">    <span class="dt">color =</span> <span class="st">&quot;Sex&quot;</span>,</a>
+<a class="sourceLine" id="cb101-34" data-line-number="34">    <span class="dt">shape =</span> <span class="st">&quot;Sex&quot;</span></a>
+<a class="sourceLine" id="cb101-35" data-line-number="35">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb101-36" data-line-number="36"><span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb101-37" data-line-number="37"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>), <span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb101-38" data-line-number="38"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar) <span class="op">+</span></a>
+<a class="sourceLine" id="cb101-39" data-line-number="39"><span class="st">  </span><span class="kw">annotate</span>(<span class="dt">geom =</span> <span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="fl">-.5</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">label =</span> <span class="st">&quot;Applied&quot;</span>, <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb101-40" data-line-number="40"><span class="st">  </span><span class="kw">annotate</span>(<span class="dt">geom =</span> <span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="fl">.5</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">label =</span> <span class="st">&quot;Theoretical&quot;</span>, <span class="dt">size =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:fig-factorial-anova"></span>
+<img src="practical-ext-of-intro-stats-in-psy-using-R_files/figure-html/fig-factorial-anova-1.png" alt="A dot plot of the 9-months salaries of professors by their discipline and sex. Respectively for each discipline and sex, the dot represents the mean and the bars represent the 95% CI." width="672" />
+<p class="caption">
+Figure 11.1: A dot plot of the 9-months salaries of professors by their discipline and sex. Respectively for each discipline and sex, the dot represents the mean and the bars represent the 95% CI.
+</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="one-way-anova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="glm-approach-summary.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/epongpipat/practical-ext-of-intro-stats-in-psy-using-R/edit/master/01-07-factorial-anova.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

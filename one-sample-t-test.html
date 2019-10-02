@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 One Sample t-Test | A Practical Extension of Introductory Statistics in Psychology using R</title>
+  <meta name="description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R." />
+  <meta name="generator" content="bookdown 0.14.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 One Sample t-Test | A Practical Extension of Introductory Statistics in Psychology using R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://ekarinpongpipat.com/practical-ext-of-intro-stats-in-psy-using-R/" />
+  <meta property="og:image" content="https://ekarinpongpipat.com/practical-ext-of-intro-stats-in-psy-using-R/cover.png" />
+  <meta property="og:description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R." />
+  <meta name="github-repo" content="epongpipat/practical-ext-of-intro-stats-in-psy-using-R" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 One Sample t-Test | A Practical Extension of Introductory Statistics in Psychology using R" />
+  
+  <meta name="twitter:description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R." />
+  <meta name="twitter:image" content="https://ekarinpongpipat.com/practical-ext-of-intro-stats-in-psy-using-R/cover.png" />
+
+<meta name="author" content="Ekarin E. Pongpipat, Giuseppe G. Miranda, &amp; Matthew J. Kmiecik" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="correlation.html"/>
+<link rel="next" href="dependent-samples-t-test.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148431457-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-148431457-1');
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Table of Contents</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#what-exactly-is-the-glm"><i class="fa fa-check"></i><b>1.1</b> What exactly is the GLM?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#how-will-this-book-be-covered"><i class="fa fa-check"></i><b>1.2</b> How will this book be covered?</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#what-wont-this-book-cover"><i class="fa fa-check"></i><b>1.3</b> What won’t this book cover?</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#why-r"><i class="fa fa-check"></i><b>1.4</b> Why R?</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#issues-and-recommendations"><i class="fa fa-check"></i><b>1.5</b> Issues and Recommendations</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>1.6</b> License</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>2</b> Prerequisites</a><ul>
+<li class="chapter" data-level="2.1" data-path="prerequisites.html"><a href="prerequisites.html#knowledge"><i class="fa fa-check"></i><b>2.1</b> Knowledge</a></li>
+<li class="chapter" data-level="2.2" data-path="prerequisites.html"><a href="prerequisites.html#software"><i class="fa fa-check"></i><b>2.2</b> Software</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>3</b> R Packages</a><ul>
+<li class="chapter" data-level="3.1" data-path="r-packages.html"><a href="r-packages.html#what-are-packages"><i class="fa fa-check"></i><b>3.1</b> What are packages?</a></li>
+<li class="chapter" data-level="3.2" data-path="r-packages.html"><a href="r-packages.html#packages"><i class="fa fa-check"></i><b>3.2</b> Packages</a></li>
+<li class="chapter" data-level="3.3" data-path="r-packages.html"><a href="r-packages.html#install-r-packages"><i class="fa fa-check"></i><b>3.3</b> Install R Packages</a></li>
+<li class="chapter" data-level="3.4" data-path="r-packages.html"><a href="r-packages.html#load-r-packages"><i class="fa fa-check"></i><b>3.4</b> Load R Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>4</b> Datasets</a><ul>
+<li class="chapter" data-level="4.1" data-path="datasets.html"><a href="datasets.html#salaries-dataset"><i class="fa fa-check"></i><b>4.1</b> Salaries Dataset</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="datasets.html"><a href="datasets.html#data-wrangling"><i class="fa fa-check"></i><b>4.1.1</b> Data Wrangling</a></li>
+<li class="chapter" data-level="4.1.2" data-path="datasets.html"><a href="datasets.html#descriptive-statistics"><i class="fa fa-check"></i><b>4.1.2</b> Descriptive Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="datasets.html"><a href="datasets.html#anorexia-dataset"><i class="fa fa-check"></i><b>4.2</b> Anorexia Dataset</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="datasets.html"><a href="datasets.html#data-wrangling-1"><i class="fa fa-check"></i><b>4.2.1</b> Data Wrangling</a></li>
+<li class="chapter" data-level="4.2.2" data-path="datasets.html"><a href="datasets.html#descriptive-statistics-1"><i class="fa fa-check"></i><b>4.2.2</b> Descriptive Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="datasets.html"><a href="datasets.html#use-your-own-dataset"><i class="fa fa-check"></i><b>4.3</b> Use Your Own Dataset</a></li>
+</ul></li>
+<li class="part"><span><b>I Introductory Univariate Statistics</b></span></li>
+<li class="chapter" data-level="5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>5</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="5.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#null-and-research-hypotheses"><i class="fa fa-check"></i><b>5.1</b> Null and research hypotheses</a></li>
+<li class="chapter" data-level="5.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#statistical-analyses"><i class="fa fa-check"></i><b>5.2</b> Statistical analyses</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-do-we-read-the-anova-source-table"><i class="fa fa-check"></i><b>5.2.1</b> How do we read the ANOVA source table?</a></li>
+<li class="chapter" data-level="5.2.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-do-we-read-the-coefficients-table"><i class="fa fa-check"></i><b>5.2.2</b> How do we read the coefficients table?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#statistical-decision"><i class="fa fa-check"></i><b>5.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="5.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#apa-statement"><i class="fa fa-check"></i><b>5.4</b> APA statement</a></li>
+<li class="chapter" data-level="5.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#visualization"><i class="fa fa-check"></i><b>5.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="correlation.html"><a href="correlation.html"><i class="fa fa-check"></i><b>6</b> Correlation</a><ul>
+<li class="chapter" data-level="6.1" data-path="correlation.html"><a href="correlation.html#null-and-research-hypotheses-1"><i class="fa fa-check"></i><b>6.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="correlation.html"><a href="correlation.html#traditional-approach"><i class="fa fa-check"></i><b>6.1.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="6.1.2" data-path="correlation.html"><a href="correlation.html#glm-approach"><i class="fa fa-check"></i><b>6.1.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="correlation.html"><a href="correlation.html#statistical-analysis"><i class="fa fa-check"></i><b>6.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="correlation.html"><a href="correlation.html#traditional-approach-1"><i class="fa fa-check"></i><b>6.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="6.2.2" data-path="correlation.html"><a href="correlation.html#glm-approach-1"><i class="fa fa-check"></i><b>6.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="correlation.html"><a href="correlation.html#statistical-decision-1"><i class="fa fa-check"></i><b>6.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="6.4" data-path="correlation.html"><a href="correlation.html#apa-statement-1"><i class="fa fa-check"></i><b>6.4</b> APA statement</a></li>
+<li class="chapter" data-level="6.5" data-path="correlation.html"><a href="correlation.html#visualization-1"><i class="fa fa-check"></i><b>6.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html"><i class="fa fa-check"></i><b>7</b> One Sample <em>t</em>-Test</a><ul>
+<li class="chapter" data-level="7.1" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#null-and-research-hypotheses-2"><i class="fa fa-check"></i><b>7.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#traditional-approach-2"><i class="fa fa-check"></i><b>7.1.1</b> Traditional Approach</a></li>
+<li class="chapter" data-level="7.1.2" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#glm-approach-2"><i class="fa fa-check"></i><b>7.1.2</b> GLM Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#statistical-analysis-1"><i class="fa fa-check"></i><b>7.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#traditional-approach-3"><i class="fa fa-check"></i><b>7.2.1</b> Traditional Approach</a></li>
+<li class="chapter" data-level="7.2.2" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#glm-approach-3"><i class="fa fa-check"></i><b>7.2.2</b> GLM Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#statistical-decision-2"><i class="fa fa-check"></i><b>7.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="7.4" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#apa-statement-2"><i class="fa fa-check"></i><b>7.4</b> APA statement</a></li>
+<li class="chapter" data-level="7.5" data-path="one-sample-t-test.html"><a href="one-sample-t-test.html#visualization-2"><i class="fa fa-check"></i><b>7.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html"><i class="fa fa-check"></i><b>8</b> Dependent Samples <em>t</em>-Test</a><ul>
+<li class="chapter" data-level="8.1" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#null-and-research-hypotheses-3"><i class="fa fa-check"></i><b>8.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#traditional-approach-4"><i class="fa fa-check"></i><b>8.1.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="8.1.2" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#glm-approach-4"><i class="fa fa-check"></i><b>8.1.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#statistical-analysis-2"><i class="fa fa-check"></i><b>8.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#traditional-approach-5"><i class="fa fa-check"></i><b>8.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="8.2.2" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#glm-approach-5"><i class="fa fa-check"></i><b>8.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#statistical-decision-3"><i class="fa fa-check"></i><b>8.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="8.4" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#apa-statement-3"><i class="fa fa-check"></i><b>8.4</b> APA statement</a></li>
+<li class="chapter" data-level="8.5" data-path="dependent-samples-t-test.html"><a href="dependent-samples-t-test.html#visualization-3"><i class="fa fa-check"></i><b>8.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html"><i class="fa fa-check"></i><b>9</b> Independent Samples <em>t</em>-Test</a><ul>
+<li class="chapter" data-level="9.1" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#null-and-research-hypotheses-4"><i class="fa fa-check"></i><b>9.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#traditional-approach-6"><i class="fa fa-check"></i><b>9.1.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="9.1.2" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#glm-approach-6"><i class="fa fa-check"></i><b>9.1.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#statistical-analysis-3"><i class="fa fa-check"></i><b>9.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#traditional-approach-7"><i class="fa fa-check"></i><b>9.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="9.2.2" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#glm-approach-7"><i class="fa fa-check"></i><b>9.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#statistical-decision-4"><i class="fa fa-check"></i><b>9.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="9.4" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#apa-statement-4"><i class="fa fa-check"></i><b>9.4</b> APA statement</a></li>
+<li class="chapter" data-level="9.5" data-path="independent-samples-t-test.html"><a href="independent-samples-t-test.html#visualization-4"><i class="fa fa-check"></i><b>9.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>10</b> One-Way ANOVA</a><ul>
+<li class="chapter" data-level="10.1" data-path="one-way-anova.html"><a href="one-way-anova.html#coding-categorical-variables"><i class="fa fa-check"></i><b>10.1</b> Coding Categorical Variables</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="one-way-anova.html"><a href="one-way-anova.html#dummy-coding"><i class="fa fa-check"></i><b>10.1.1</b> Dummy Coding</a></li>
+<li class="chapter" data-level="10.1.2" data-path="one-way-anova.html"><a href="one-way-anova.html#othogon"><i class="fa fa-check"></i><b>10.1.2</b> Orthogonal Coding</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="one-way-anova.html"><a href="one-way-anova.html#null-and-research-hypothesis"><i class="fa fa-check"></i><b>10.2</b> Null and research hypothesis</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#traditional-approach-8"><i class="fa fa-check"></i><b>10.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="10.2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#glm-approach-8"><i class="fa fa-check"></i><b>10.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="one-way-anova.html"><a href="one-way-anova.html#statistical-analysis-4"><i class="fa fa-check"></i><b>10.3</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="one-way-anova.html"><a href="one-way-anova.html#traditional-approach-9"><i class="fa fa-check"></i><b>10.3.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="10.3.2" data-path="one-way-anova.html"><a href="one-way-anova.html#glm-approach-9"><i class="fa fa-check"></i><b>10.3.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="one-way-anova.html"><a href="one-way-anova.html#statistical-decision-5"><i class="fa fa-check"></i><b>10.4</b> Statistical decision</a></li>
+<li class="chapter" data-level="10.5" data-path="one-way-anova.html"><a href="one-way-anova.html#apa-statement-5"><i class="fa fa-check"></i><b>10.5</b> APA statement</a></li>
+<li class="chapter" data-level="10.6" data-path="one-way-anova.html"><a href="one-way-anova.html#visualization-5"><i class="fa fa-check"></i><b>10.6</b> Visualization</a><ul>
+<li class="chapter" data-level="10.6.1" data-path="one-way-anova.html"><a href="one-way-anova.html#traditional"><i class="fa fa-check"></i><b>10.6.1</b> Traditional</a></li>
+<li class="chapter" data-level="10.6.2" data-path="one-way-anova.html"><a href="one-way-anova.html#orthogonal-contrast-coding"><i class="fa fa-check"></i><b>10.6.2</b> Orthogonal Contrast Coding</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="factorial-anova.html"><a href="factorial-anova.html"><i class="fa fa-check"></i><b>11</b> Factorial ANOVA</a><ul>
+<li class="chapter" data-level="11.1" data-path="factorial-anova.html"><a href="factorial-anova.html#null-and-research-hypotheses-5"><i class="fa fa-check"></i><b>11.1</b> Null and research hypotheses</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="factorial-anova.html"><a href="factorial-anova.html#traditional-approach-10"><i class="fa fa-check"></i><b>11.1.1</b> Traditional Approach</a></li>
+<li class="chapter" data-level="11.1.2" data-path="factorial-anova.html"><a href="factorial-anova.html#glm-approach-10"><i class="fa fa-check"></i><b>11.1.2</b> GLM Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="factorial-anova.html"><a href="factorial-anova.html#statistical-analysis-5"><i class="fa fa-check"></i><b>11.2</b> Statistical analysis</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="factorial-anova.html"><a href="factorial-anova.html#traditional-approach-11"><i class="fa fa-check"></i><b>11.2.1</b> Traditional approach</a></li>
+<li class="chapter" data-level="11.2.2" data-path="factorial-anova.html"><a href="factorial-anova.html#glm-approach-11"><i class="fa fa-check"></i><b>11.2.2</b> GLM approach</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="factorial-anova.html"><a href="factorial-anova.html#statistical-decision-6"><i class="fa fa-check"></i><b>11.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="11.4" data-path="factorial-anova.html"><a href="factorial-anova.html#apa-statement-6"><i class="fa fa-check"></i><b>11.4</b> APA statement</a></li>
+<li class="chapter" data-level="11.5" data-path="factorial-anova.html"><a href="factorial-anova.html#visualization-6"><i class="fa fa-check"></i><b>11.5</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="glm-approach-summary.html"><a href="glm-approach-summary.html"><i class="fa fa-check"></i><b>12</b> GLM Approach Summary</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html"><i class="fa fa-check"></i>Authors</a><ul>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#ekarin-e.-pongpipat-m.a."><i class="fa fa-check"></i>Ekarin E. Pongpipat, M.A.</a></li>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#giuseppe-g.-miranda-m.s."><i class="fa fa-check"></i>Giuseppe G. Miranda, M.S.</a></li>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#matthew-j.-kmiecik-b.s."><i class="fa fa-check"></i>Matthew J. Kmiecik, B.S.</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Practical Extension of Introductory Statistics in Psychology using R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="one-sample-t-test" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> One Sample <em>t</em>-Test</h1>
+<p>Now that we have gone over the simple linear regression and how the simple linear regression is written and interpreted identically to the GLM (in addition to its standardized counterpart, the correlation), we can begin covering the other statistical analyses in the order they are typically taught.</p>
+<p>Let’s now go over the one-sample <em>t</em>-test, which compares a sample mean to a population mean (or an <em>a priori</em> value).</p>
+<p>For example, let’s say we were interested in determining if the salary of professors was significantly different than the national U.S. median income of $50,221 in 2009.</p>
+<p>For this example, we will again be using the <a href="datasets.html#salaries-dataset"><code>datasetSalaries</code></a> dataset.</p>
+<div id="null-and-research-hypotheses-2" class="section level2">
+<h2><span class="header-section-number">7.1</span> Null and research hypotheses</h2>
+<div id="traditional-approach-2" class="section level3">
+<h3><span class="header-section-number">7.1.1</span> Traditional Approach</h3>
+<p><span class="math display">\[H_0: \mu = \$50,221\]</span>
+<span class="math display">\[H_1: \mu \ne \$50,221\]</span></p>
+<p>where <span class="math inline">\(\mu\)</span> represents the population mean</p>
+<p>The null hypothesis states that there is no difference between the sample and population mean, or equivalently the sample and population mean are equal. The research hypothesis states that there is a difference between the sample and population mean, or equivalently the sample and population mean are not equal.</p>
+</div>
+<div id="glm-approach-2" class="section level3">
+<h3><span class="header-section-number">7.1.2</span> GLM Approach</h3>
+<p><span class="math display">\[Model: Salary = \beta_0 + \varepsilon\]</span>
+<span class="math display">\[H_0: \beta_0 = \$50,221\]</span>
+<span class="math display">\[H_1: \beta_0 \ne \$50,221\]</span></p>
+<p>where <span class="math inline">\(\beta_{0}\)</span> represents the intercept, <span class="math inline">\(\varepsilon\)</span> represents the population error, <span class="math inline">\(H_0\)</span> represents the null hypothesis, and <span class="math inline">\(H_1\)</span> represents the research hypothesis.</p>
+<p>In this particular case, we will not be using the nil hypothesis as we have an <em>a priori</em> comparison of $50,221.</p>
+<p>In the model, when there is no other predictor, the intercept will be the mean. This is because without any other information, the single best number to describe the data is the mean. Thus, the null hypothesis states the intercept (or the mean of 9-month academic salary of professors) is equal to $50,221. The research hypothesis states that the intercept (or the mean 9-month academic salary of professors) is not equal to $50,221.</p>
+</div>
+</div>
+<div id="statistical-analysis-1" class="section level2">
+<h2><span class="header-section-number">7.2</span> Statistical analysis</h2>
+<div id="traditional-approach-3" class="section level3">
+<h3><span class="header-section-number">7.2.1</span> Traditional Approach</h3>
+<p>To perform the traditional one-sample <em>t</em>-test, we can use the <code>t.test()</code> function. The first input is the DV of <code>salary</code>, which is again prefixed by the name of the dataset and the dollar sign. The second input is the <em>a priori</em> value (or population value, <span class="math inline">\(\mu\)</span>) that we are interested in testing (i.e., $50,221).</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">t.test</span>(<span class="dt">x =</span> datasetSalaries<span class="op">$</span>salary, <span class="dt">mu =</span> <span class="dv">50221</span>)</a></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  datasetSalaries$salary
+## t = 41.762, df = 396, p-value &lt; 2.2e-16
+## alternative hypothesis: true mean is not equal to 50221
+## 95 percent confidence interval:
+##  110717.9 116695.1
+## sample estimates:
+## mean of x 
+##  113706.5</code></pre>
+<p>From this output, we can see that the <em>t</em>-statistic (<code>t</code>) is <code>41.762</code>, degrees of freedom (<code>df</code>) is <code>396</code>, and the <code>p-value</code> is <code>2.2e-16</code>, with professor’s mean salary at $113,706.50. Therefore, professors earn a significantly higher salary compared with the national U.S. median income of $50,221 in 2009.</p>
+<p>The <em>t</em>-statistic and its respective <em>p</em>-value can be interpreted as we previously saw in the <a href="simple-linear-regression.html#how-do-we-read-the-coefficients-table">simple linear regression</a> chapter. We will spend more time explaining these values in the next section.</p>
+</div>
+<div id="glm-approach-3" class="section level3">
+<h3><span class="header-section-number">7.2.2</span> GLM Approach</h3>
+<p>Since we have an <em>a priori</em> hypothesis (i.e., median income of $50,221), we will need to first manipulate the DV by point deviating from this <em>a priori</em> value. To do this, we will need to subtract $50,221 from each salary score. Luckily, we can do that directly within the <code>lm()</code> fucntion. We have to point-deviate because the <code>lm()</code> function always tests regression estimates including the intercept against 0 (<span class="math inline">\(H_0 = 0\)</span>). By point deviating from $50,221, we are now asking if the mean of the new point deviated scores is different than 0, where 0 now equals $50,221. To test the intercept, we simply place a <code>1</code> as the predictor.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">model &lt;-<span class="st"> </span><span class="kw">lm</span>(salary <span class="op">-</span><span class="st"> </span><span class="dv">50221</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, datasetSalaries)</a></code></pre></div>
+<p>We will again only look at the coefficients table using the <code>summary()</code> function for this test and subsequent <em>t</em>-tests. Although, the ANOVA source table is not typically associated with this test, we could always examine it if desired using the <code>Anova()</code> function.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">summary</span>(model)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = salary - 50221 ~ 1, data = datasetSalaries)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -55906 -22706  -6406  20479 117839 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    63486       1520   41.76   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 30290 on 396 degrees of freedom</code></pre>
+<p>Notice that in both approaches that the values are identical with respect to the place of rounding. The <em>t</em>-statistic is <code>41.76</code> with <code>396</code> degrees of freedom (df), and the <em>p</em>-value is <code>&lt;2e-16</code>. However, the estimate of the GLM approach is now the sample mean of the point deviated scores. Thus, we if add back <code>$50,221</code>, we will obtain the same sample mean of <code>$113,707</code><a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>.</p>
+<p>Let’s go over the <em>t</em>-statistic and <em>p</em>-value to reinforce these concepts.</p>
+<p>Remember that the <em>t</em>-statistic represents the systematic difference compared to the unsystematic difference. In this case, the systematic difference is the difference between professor’s mean salary and U.S. median income (i.e., $113,707 - $50,221) and the unsystematic difference is standard error of the mean of the sample (in other words, random variability in the sample).</p>
+<p>Also, the <em>p</em>-value represents the probability of finding a particular <em>t</em>-statistic or <em>t</em>-statistic more extreme assuming that the null hypothesis is true. In this case, the probability of finding a <em>t</em>-statistic of <code>41.76</code> or more extreme is <code>&lt;2.2e-16</code>, which is extremely small and not likely to occur by chance.</p>
+</div>
+</div>
+<div id="statistical-decision-2" class="section level2">
+<h2><span class="header-section-number">7.3</span> Statistical decision</h2>
+<p>Given that the <em>p</em>-value of <code>2.2e-16</code> is smaller the alpha level (<span class="math inline">\(\alpha\)</span>) of <code>0.05</code>, we will reject the null hypothesis.</p>
+</div>
+<div id="apa-statement-2" class="section level2">
+<h2><span class="header-section-number">7.4</span> APA statement</h2>
+<p>A one sample <em>t</em>-test was performed to test if the salary of professors was different than the national U.S. median of $50,221. Professor salaries (<em>M</em> = $113,706, <em>SD</em> = $30,289) were significantly higher than the national U.S. median income, <em>t</em>(396) = 41.76, <em>p</em> &lt; .001.</p>
+</div>
+<div id="visualization-2" class="section level2">
+<h2><span class="header-section-number">7.5</span> Visualization</h2>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="co"># calculate descriptive statistics along with the 95% CI</span></a>
+<a class="sourceLine" id="cb47-2" data-line-number="2">dataset_summary &lt;-<span class="st"> </span>datasetSalaries <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb47-3" data-line-number="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">summarize</span>(</a>
+<a class="sourceLine" id="cb47-4" data-line-number="4">    <span class="dt">mean =</span> <span class="kw">mean</span>(salary),</a>
+<a class="sourceLine" id="cb47-5" data-line-number="5">    <span class="dt">sd =</span> <span class="kw">sd</span>(salary),</a>
+<a class="sourceLine" id="cb47-6" data-line-number="6">    <span class="dt">n =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb47-7" data-line-number="7">    <span class="dt">sem =</span> sd <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n),</a>
+<a class="sourceLine" id="cb47-8" data-line-number="8">    <span class="dt">tcrit =</span> <span class="kw">abs</span>(<span class="kw">qt</span>(<span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">df =</span> n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)),</a>
+<a class="sourceLine" id="cb47-9" data-line-number="9">    <span class="dt">ME =</span> tcrit <span class="op">*</span><span class="st"> </span>sem,</a>
+<a class="sourceLine" id="cb47-10" data-line-number="10">    <span class="dt">LL95CI =</span> mean <span class="op">-</span><span class="st"> </span>ME,</a>
+<a class="sourceLine" id="cb47-11" data-line-number="11">    <span class="dt">UL95CI =</span> mean <span class="op">+</span><span class="st"> </span>ME</a>
+<a class="sourceLine" id="cb47-12" data-line-number="12">  )</a>
+<a class="sourceLine" id="cb47-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb47-14" data-line-number="14"><span class="co"># plot</span></a>
+<a class="sourceLine" id="cb47-15" data-line-number="15"><span class="kw">ggplot</span>(datasetSalaries, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="st">&quot;&quot;</span>, salary)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb47-16" data-line-number="16"><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">width =</span> <span class="fl">0.1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb47-17" data-line-number="17"><span class="st">  </span><span class="kw">geom_hline</span>(</a>
+<a class="sourceLine" id="cb47-18" data-line-number="18">    <span class="dt">yintercept =</span> <span class="dv">50221</span>,</a>
+<a class="sourceLine" id="cb47-19" data-line-number="19">    <span class="dt">alpha =</span> <span class="fl">.5</span>,</a>
+<a class="sourceLine" id="cb47-20" data-line-number="20">    <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span></a>
+<a class="sourceLine" id="cb47-21" data-line-number="21">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb47-22" data-line-number="22"><span class="st">  </span><span class="kw">geom_errorbar</span>(</a>
+<a class="sourceLine" id="cb47-23" data-line-number="23">    <span class="dt">data =</span> dataset_summary,</a>
+<a class="sourceLine" id="cb47-24" data-line-number="24">    <span class="kw">aes</span>(</a>
+<a class="sourceLine" id="cb47-25" data-line-number="25">      <span class="dt">y =</span> mean,</a>
+<a class="sourceLine" id="cb47-26" data-line-number="26">      <span class="dt">ymin =</span> LL95CI,</a>
+<a class="sourceLine" id="cb47-27" data-line-number="27">      <span class="dt">ymax =</span> UL95CI</a>
+<a class="sourceLine" id="cb47-28" data-line-number="28">    ),</a>
+<a class="sourceLine" id="cb47-29" data-line-number="29">    <span class="dt">width =</span> <span class="fl">0.01</span>,</a>
+<a class="sourceLine" id="cb47-30" data-line-number="30">    <span class="dt">color =</span> <span class="st">&quot;#3182bd&quot;</span></a>
+<a class="sourceLine" id="cb47-31" data-line-number="31">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb47-32" data-line-number="32"><span class="st">  </span><span class="kw">geom_point</span>(</a>
+<a class="sourceLine" id="cb47-33" data-line-number="33">    <span class="dt">data =</span> dataset_summary, <span class="kw">aes</span>(<span class="st">&quot;&quot;</span>, mean),</a>
+<a class="sourceLine" id="cb47-34" data-line-number="34">    <span class="dt">size =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb47-35" data-line-number="35">    <span class="dt">color =</span> <span class="st">&quot;#3182bd&quot;</span></a>
+<a class="sourceLine" id="cb47-36" data-line-number="36">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb47-37" data-line-number="37"><span class="st">  </span><span class="kw">labs</span>(</a>
+<a class="sourceLine" id="cb47-38" data-line-number="38">    <span class="dt">x =</span> <span class="st">&quot;0&quot;</span>,</a>
+<a class="sourceLine" id="cb47-39" data-line-number="39">    <span class="dt">y =</span> <span class="st">&quot;9-Month Salary (USD)&quot;</span></a>
+<a class="sourceLine" id="cb47-40" data-line-number="40">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb47-41" data-line-number="41"><span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb47-42" data-line-number="42"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar)</a></code></pre></div>
+<div class="figure"><span id="fig:fig-one-sample-t-test"></span>
+<img src="practical-ext-of-intro-stats-in-psy-using-R_files/figure-html/fig-one-sample-t-test-1.png" alt="A dot plot of the salary of professors where the dot is the mean salary of professors and the whiskers are the 95% CI.
+Note: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points." width="672" />
+<p class="caption">
+Figure 7.1: A dot plot of the salary of professors where the dot is the mean salary of professors and the whiskers are the 95% CI.
+Note: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points.
+</p>
+</div>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="8">
+<li id="fn8"><p><span class="math inline">\(M = \$63,486+\$50,221=\$113,707\)</span><a href="one-sample-t-test.html#fnref8" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="correlation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dependent-samples-t-test.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/epongpipat/practical-ext-of-intro-stats-in-psy-using-R/edit/master/01-03-one-sample-t-test.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
