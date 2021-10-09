@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 12 GLM Approach Summary | A Practical Extension of Introductory Statistics in Psychology using R</title>
-  <meta name="description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 12 GLM Approach Summary | A Practical Extension of Introductory Statistics in Psychology using R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://ekarinpongpipat.com/practical-ext-of-intro-stats-in-psy-using-R/" />
-  
+  <meta property="og:image" content="https://ekarinpongpipat.com/practical-ext-of-intro-stats-in-psy-using-R//cover.png" />
   <meta property="og:description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R." />
   <meta name="github-repo" content="epongpipat/practical-ext-of-intro-stats-in-psy-using-R" />
 
@@ -20,26 +19,28 @@
   <meta name="twitter:title" content="Chapter 12 GLM Approach Summary | A Practical Extension of Introductory Statistics in Psychology using R" />
   
   <meta name="twitter:description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R." />
+  <meta name="twitter:image" content="https://ekarinpongpipat.com/practical-ext-of-intro-stats-in-psy-using-R//cover.png" />
+
+<meta name="author" content="Ekarin E. Pongpipat, Giuseppe G. Miranda, &amp; Matthew J. Kmiecik" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-
-<meta name="author" content="Ekarin E. Pongpipat, Giuseppe G. Miranda, &amp; Matthew J. Kmiecik">
-
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
-  
-<link rel="prev" href="factorial-anova.html">
-<link rel="next" href="references.html">
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link rel="prev" href="factorial-anova.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,29 +48,43 @@
 
 
 
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148431457-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-148431457-1');
+</script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -78,9 +93,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -112,6 +127,7 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -134,6 +150,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#what-wont-this-book-cover"><i class="fa fa-check"></i><b>1.3</b> What won’t this book cover?</a></li>
 <li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#why-r"><i class="fa fa-check"></i><b>1.4</b> Why R?</a></li>
 <li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#issues-and-recommendations"><i class="fa fa-check"></i><b>1.5</b> Issues and Recommendations</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>1.6</b> License</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>2</b> Prerequisites</a><ul>
 <li class="chapter" data-level="2.1" data-path="prerequisites.html"><a href="prerequisites.html#knowledge"><i class="fa fa-check"></i><b>2.1</b> Knowledge</a></li>
@@ -157,15 +174,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="datasets.html"><a href="datasets.html#use-your-own-dataset"><i class="fa fa-check"></i><b>4.3</b> Use Your Own Dataset</a></li>
 </ul></li>
 <li class="part"><span><b>I Introductory Univariate Statistics</b></span></li>
-<li class="chapter" data-level="5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>5</b> Simple Linear Regression</a><ul>
-<li class="chapter" data-level="5.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#null-and-research-hypotheses"><i class="fa fa-check"></i><b>5.1</b> Null and research hypotheses</a></li>
-<li class="chapter" data-level="5.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#statistical-analyses"><i class="fa fa-check"></i><b>5.2</b> Statistical analyses</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-do-we-read-the-anova-source-table"><i class="fa fa-check"></i><b>5.2.1</b> How do we read the ANOVA source table?</a></li>
-<li class="chapter" data-level="5.2.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-do-we-read-the-coefficients-table"><i class="fa fa-check"></i><b>5.2.2</b> How do we read the coefficients table?</a></li>
+<li class="chapter" data-level="5" data-path="simple_linear_regression.html"><a href="simple_linear_regression.html"><i class="fa fa-check"></i><b>5</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="5.1" data-path="simple_linear_regression.html"><a href="simple_linear_regression.html#null-and-research-hypotheses"><i class="fa fa-check"></i><b>5.1</b> Null and research hypotheses</a></li>
+<li class="chapter" data-level="5.2" data-path="simple_linear_regression.html"><a href="simple_linear_regression.html#statistical-analyses"><i class="fa fa-check"></i><b>5.2</b> Statistical analyses</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="simple_linear_regression.html"><a href="simple_linear_regression.html#how-do-we-read-the-anova-source-table"><i class="fa fa-check"></i><b>5.2.1</b> How do we read the ANOVA source table?</a></li>
+<li class="chapter" data-level="5.2.2" data-path="simple_linear_regression.html"><a href="simple_linear_regression.html#how-do-we-read-the-coefficients-table"><i class="fa fa-check"></i><b>5.2.2</b> How do we read the coefficients table?</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#statistical-decision"><i class="fa fa-check"></i><b>5.3</b> Statistical decision</a></li>
-<li class="chapter" data-level="5.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#apa-statement"><i class="fa fa-check"></i><b>5.4</b> APA statement</a></li>
-<li class="chapter" data-level="5.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#visualization"><i class="fa fa-check"></i><b>5.5</b> Visualization</a></li>
+<li class="chapter" data-level="5.3" data-path="simple_linear_regression.html"><a href="simple_linear_regression.html#statistical-decision"><i class="fa fa-check"></i><b>5.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="5.4" data-path="simple_linear_regression.html"><a href="simple_linear_regression.html#apa-statement"><i class="fa fa-check"></i><b>5.4</b> APA statement</a></li>
+<li class="chapter" data-level="5.5" data-path="simple_linear_regression.html"><a href="simple_linear_regression.html#visualization"><i class="fa fa-check"></i><b>5.5</b> Visualization</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="correlation.html"><a href="correlation.html"><i class="fa fa-check"></i><b>6</b> Correlation</a><ul>
 <li class="chapter" data-level="6.1" data-path="correlation.html"><a href="correlation.html#null-and-research-hypotheses-1"><i class="fa fa-check"></i><b>6.1</b> Null and research hypotheses</a><ul>
@@ -256,9 +273,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
 <li class="chapter" data-level="" data-path="authors.html"><a href="authors.html"><i class="fa fa-check"></i>Authors</a><ul>
-<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#ekarin-e.-pongpipat-m.a."><i class="fa fa-check"></i>Ekarin E. Pongpipat, M.A.</a></li>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#ekarin-e.-pongpipat-m.a."><i class="fa fa-check"></i>Ekarin E. Pongpipat, M.A. </a></li>
 <li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#giuseppe-g.-miranda-m.s."><i class="fa fa-check"></i>Giuseppe G. Miranda, M.S.</a></li>
-<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#matthew-j.-kmiecik-b.s."><i class="fa fa-check"></i>Matthew J. Kmiecik, B.S.</a></li>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#matthew-j.-kmiecik-ph.d"><i class="fa fa-check"></i>Matthew J. Kmiecik, Ph.D</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -299,12 +316,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -312,12 +330,12 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -332,7 +350,15 @@ gitbook.start({
 "link": null,
 "text": null
 },
+"view": {
+"link": null,
+"text": null
+},
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }
@@ -347,8 +373,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

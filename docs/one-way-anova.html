@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 One-Way ANOVA | A Practical Extension of Introductory Statistics in Psychology using R</title>
-  <meta name="description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 One-Way ANOVA | A Practical Extension of Introductory Statistics in Psychology using R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://ekarinpongpipat.com/practical-ext-of-intro-stats-in-psy-using-R/" />
-  
+  <meta property="og:image" content="https://ekarinpongpipat.com/practical-ext-of-intro-stats-in-psy-using-R//cover.png" />
   <meta property="og:description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R." />
   <meta name="github-repo" content="epongpipat/practical-ext-of-intro-stats-in-psy-using-R" />
 
@@ -20,26 +19,28 @@
   <meta name="twitter:title" content="Chapter 10 One-Way ANOVA | A Practical Extension of Introductory Statistics in Psychology using R" />
   
   <meta name="twitter:description" content="This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R." />
+  <meta name="twitter:image" content="https://ekarinpongpipat.com/practical-ext-of-intro-stats-in-psy-using-R//cover.png" />
+
+<meta name="author" content="Ekarin E. Pongpipat, Giuseppe G. Miranda, &amp; Matthew J. Kmiecik" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-
-<meta name="author" content="Ekarin E. Pongpipat, Giuseppe G. Miranda, &amp; Matthew J. Kmiecik">
-
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
-  
-<link rel="prev" href="independent-samples-t-test.html">
-<link rel="next" href="factorial-anova.html">
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link rel="prev" href="independent-samples-t-test.html"/>
+<link rel="next" href="factorial-anova.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,29 +48,43 @@
 
 
 
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148431457-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-148431457-1');
+</script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -78,9 +93,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -112,6 +127,7 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -134,6 +150,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#what-wont-this-book-cover"><i class="fa fa-check"></i><b>1.3</b> What won’t this book cover?</a></li>
 <li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#why-r"><i class="fa fa-check"></i><b>1.4</b> Why R?</a></li>
 <li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#issues-and-recommendations"><i class="fa fa-check"></i><b>1.5</b> Issues and Recommendations</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>1.6</b> License</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>2</b> Prerequisites</a><ul>
 <li class="chapter" data-level="2.1" data-path="prerequisites.html"><a href="prerequisites.html#knowledge"><i class="fa fa-check"></i><b>2.1</b> Knowledge</a></li>
@@ -157,15 +174,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="datasets.html"><a href="datasets.html#use-your-own-dataset"><i class="fa fa-check"></i><b>4.3</b> Use Your Own Dataset</a></li>
 </ul></li>
 <li class="part"><span><b>I Introductory Univariate Statistics</b></span></li>
-<li class="chapter" data-level="5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>5</b> Simple Linear Regression</a><ul>
-<li class="chapter" data-level="5.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#null-and-research-hypotheses"><i class="fa fa-check"></i><b>5.1</b> Null and research hypotheses</a></li>
-<li class="chapter" data-level="5.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#statistical-analyses"><i class="fa fa-check"></i><b>5.2</b> Statistical analyses</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-do-we-read-the-anova-source-table"><i class="fa fa-check"></i><b>5.2.1</b> How do we read the ANOVA source table?</a></li>
-<li class="chapter" data-level="5.2.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-do-we-read-the-coefficients-table"><i class="fa fa-check"></i><b>5.2.2</b> How do we read the coefficients table?</a></li>
+<li class="chapter" data-level="5" data-path="simple_linear_regression.html"><a href="simple_linear_regression.html"><i class="fa fa-check"></i><b>5</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="5.1" data-path="simple_linear_regression.html"><a href="simple_linear_regression.html#null-and-research-hypotheses"><i class="fa fa-check"></i><b>5.1</b> Null and research hypotheses</a></li>
+<li class="chapter" data-level="5.2" data-path="simple_linear_regression.html"><a href="simple_linear_regression.html#statistical-analyses"><i class="fa fa-check"></i><b>5.2</b> Statistical analyses</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="simple_linear_regression.html"><a href="simple_linear_regression.html#how-do-we-read-the-anova-source-table"><i class="fa fa-check"></i><b>5.2.1</b> How do we read the ANOVA source table?</a></li>
+<li class="chapter" data-level="5.2.2" data-path="simple_linear_regression.html"><a href="simple_linear_regression.html#how-do-we-read-the-coefficients-table"><i class="fa fa-check"></i><b>5.2.2</b> How do we read the coefficients table?</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#statistical-decision"><i class="fa fa-check"></i><b>5.3</b> Statistical decision</a></li>
-<li class="chapter" data-level="5.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#apa-statement"><i class="fa fa-check"></i><b>5.4</b> APA statement</a></li>
-<li class="chapter" data-level="5.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#visualization"><i class="fa fa-check"></i><b>5.5</b> Visualization</a></li>
+<li class="chapter" data-level="5.3" data-path="simple_linear_regression.html"><a href="simple_linear_regression.html#statistical-decision"><i class="fa fa-check"></i><b>5.3</b> Statistical decision</a></li>
+<li class="chapter" data-level="5.4" data-path="simple_linear_regression.html"><a href="simple_linear_regression.html#apa-statement"><i class="fa fa-check"></i><b>5.4</b> APA statement</a></li>
+<li class="chapter" data-level="5.5" data-path="simple_linear_regression.html"><a href="simple_linear_regression.html#visualization"><i class="fa fa-check"></i><b>5.5</b> Visualization</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="correlation.html"><a href="correlation.html"><i class="fa fa-check"></i><b>6</b> Correlation</a><ul>
 <li class="chapter" data-level="6.1" data-path="correlation.html"><a href="correlation.html#null-and-research-hypotheses-1"><i class="fa fa-check"></i><b>6.1</b> Null and research hypotheses</a><ul>
@@ -256,9 +273,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
 <li class="chapter" data-level="" data-path="authors.html"><a href="authors.html"><i class="fa fa-check"></i>Authors</a><ul>
-<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#ekarin-e.-pongpipat-m.a."><i class="fa fa-check"></i>Ekarin E. Pongpipat, M.A.</a></li>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#ekarin-e.-pongpipat-m.a."><i class="fa fa-check"></i>Ekarin E. Pongpipat, M.A. </a></li>
 <li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#giuseppe-g.-miranda-m.s."><i class="fa fa-check"></i>Giuseppe G. Miranda, M.S.</a></li>
-<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#matthew-j.-kmiecik-b.s."><i class="fa fa-check"></i>Matthew J. Kmiecik, B.S.</a></li>
+<li class="chapter" data-level="" data-path="authors.html"><a href="authors.html#matthew-j.-kmiecik-ph.d"><i class="fa fa-check"></i>Matthew J. Kmiecik, Ph.D</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -286,7 +303,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>For example, let’s say that we were interested in determining if salary was significantly different for professors of different ranks (i.e., assistant professor, associate professor, and professor).</p>
 <p>For this example, we will use the dataset: <a href="datasets.html#salaries-dataset"><code>datasetSalaries</code></a>.</p>
 <p>As mentioned in the independent samples <em>t</em>-test, when dealing with categorical predictors, it is always good idea to check the coding scheme of the categorical variable.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>rank)</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="one-way-anova.html#cb66-1"></a><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>rank)</span></code></pre></div>
 <pre><code>##                     2 3
 ## Assistant Professor 0 0
 ## Associate Professor 1 0
@@ -308,20 +325,20 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Determining if there is a difference in salaries of professors that are tenured (<code>Associate Professor</code> and <code>Professor</code>) compared to those that are untenured (<code>Assistant Professor</code>).</li>
 <li>Determining if there is a difference in salaries of professors that are <code>Associate Professors</code> compared to <code>Professors</code>.</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>rank) &lt;-<span class="st"> </span><span class="kw">cbind</span>(
-  <span class="dt">TenuredvAssistant =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>),
-  <span class="dt">AssociatevProfessor =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">-1</span>, <span class="dv">1</span>)
-)</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="one-way-anova.html#cb68-1"></a><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>rank) &lt;-<span class="st"> </span><span class="kw">cbind</span>(</span>
+<span id="cb68-2"><a href="one-way-anova.html#cb68-2"></a>  <span class="dt">TenuredvAssistant =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb68-3"><a href="one-way-anova.html#cb68-3"></a>  <span class="dt">AssociatevProfessor =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">-1</span>, <span class="dv">1</span>)</span>
+<span id="cb68-4"><a href="one-way-anova.html#cb68-4"></a>)</span></code></pre></div>
 <p>To make a coding scheme orthogonal, we need to make sure that 1) the sum of each contrast equals zero and that 2) the sum of each contrast product is 0.</p>
 <p>For example, to make the tenured vs. untenured professor contrast, we can code <code>Assistant Professor</code> as <code>-2</code> and both <code>Associate Professor</code> and <code>Professor</code> as <code>1</code> and assign it the name <code>TenuredvAssistant</code>. It’s best to use signs that go in the direction of our prediction so that it’s reflected in our estimates. Since, we expect that tenured professors have higher salaries, tenured professors are assigned the positive value and assistant professors are assigned the negative value. Notice that the sum of the <code>TenuredvAssistant</code> contrast also adds up to 0.<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></p>
 <p>To make the next contrast of <code>Associate Professor</code> compared to <code>Professor</code>, we can code <code>Assistant Professor</code> as <code>0</code>, <code>Associate Professor</code> as <code>-1</code>, and <code>Professor</code> as <code>1</code> and give it the name <code>AssociatevProfessor</code>. Notice again that the sum of the <code>AssociatevProfessor</code> contrast adds up to 0.<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a></p>
 <p>Since both contrasts sum to zero, we can now check if the sum of products for each level across contrasts equals 0. In other words, we multiply the values across each contrast pair for each level and add them together. For example, the product across the contrasts of <code>Assistant Professor</code> is <span class="math inline">\(2*0 = 0\)</span>, <code>Associate Professor</code> is <span class="math inline">\(1*-1=-1\)</span>, and <code>Professor</code> is <span class="math inline">\(1*1=1\)</span>. If we add them together, we get <span class="math inline">\(0-1+1=0\)</span>.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></p>
 <p>To take orthogonal contrast coding a step further and make our estimates readily interpretable as the mean difference of that contrast, we can ensure that the difference of each contrast is 1. To do this, we can divide each contrast code by the number of values that are not coded as 0 for each contrast. For example, since all 3 codes of the <code>TenuredvAssistant</code> contrast are not equal to 0, we can divide by 3. Similarly, for the <code>AssociatevProfessor</code> contrast, we can divide each contrast code by 2 since 2 of the contrast codes are not equal to 0. Note that this is a rule of thumb and should be verified if contrasts are more complex.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>rank) &lt;-<span class="st"> </span><span class="kw">cbind</span>(
-  <span class="dt">TenuredvAssistant =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>),
-  <span class="dt">AssociatevProfessor =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)
-)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>rank)</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="one-way-anova.html#cb69-1"></a><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>rank) &lt;-<span class="st"> </span><span class="kw">cbind</span>(</span>
+<span id="cb69-2"><a href="one-way-anova.html#cb69-2"></a>  <span class="dt">TenuredvAssistant =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>),</span>
+<span id="cb69-3"><a href="one-way-anova.html#cb69-3"></a>  <span class="dt">AssociatevProfessor =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb69-4"><a href="one-way-anova.html#cb69-4"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="one-way-anova.html#cb70-1"></a><span class="kw">contrasts</span>(datasetSalaries<span class="op">$</span>rank)</span></code></pre></div>
 <pre><code>##                     TenuredvAssistant AssociatevProfessor
 ## Assistant Professor        -0.6666667                 0.0
 ## Associate Professor         0.3333333                -0.5
@@ -367,8 +384,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="traditional-approach-9" class="section level3">
 <h3><span class="header-section-number">10.3.1</span> Traditional approach</h3>
 <p>To perform a traditional One-Way ANOVA, we can use the <code>aov()</code> function. The first argument in the <code>aov()</code> function is the formula and the second argument is the name of the dataset. Notice, that in the formula, we do not have to specify both contrasts because we have already applied the coding scheme directly to the categorical IV of <code>rank</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">aov</span>(salary <span class="op">~</span><span class="st"> </span>rank, datasetSalaries)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Anova</span>(model, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;III&quot;</span>))</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="one-way-anova.html#cb72-1"></a>model &lt;-<span class="st"> </span><span class="kw">aov</span>(salary <span class="op">~</span><span class="st"> </span>rank, datasetSalaries)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="one-way-anova.html#cb73-1"></a><span class="kw">Anova</span>(model, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;III&quot;</span>))</span></code></pre></div>
 <pre><code>## Anova Table (Type III tests)
 ## 
 ## Response: salary
@@ -380,28 +397,24 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Traditionally, if the main of effect of a categorical IV was significant, we would perform a post-hoc test (e.g., Tukey’s Honest Significant Difference [HSD]). In our case, <code>rank</code> is significant as the <em>p</em>-value of <code>2.2e-16</code> is less than our alpha of <code>0.05</code> and we would perform a post-hoc test to determine where the difference in salary actually comes from.</p>
 <p>To perform Tukey’s HSD, we could use the <code>TukeyHSD</code> function and provide the ANOVA analysis of the model as the input. The Tukey HSD essentially performs multiple independent samples <em>t</em>-tests of all possible pairs of the levels of a categorical IV but uses the error term from the ANOVA analysis in its calculation.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">TukeyHSD</span>(model)</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="one-way-anova.html#cb75-1"></a><span class="kw">TukeyHSD</span>(model)</span></code></pre></div>
 <pre><code>##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
 ## 
 ## Fit: aov(formula = salary ~ rank, data = datasetSalaries)
 ## 
 ## $rank
-##                                             diff       lwr      upr
-## Associate Professor-Assistant Professor 13100.45  3382.195 22818.71
-## Professor-Assistant Professor           45996.12 38395.941 53596.31
-## Professor-Associate Professor           32895.67 25154.507 40636.84
-##                                             p adj
-## Associate Professor-Assistant Professor 0.0046514
-## Professor-Assistant Professor           0.0000000
-## Professor-Associate Professor           0.0000000</code></pre>
+##                                             diff       lwr      upr     p adj
+## Associate Professor-Assistant Professor 13100.45  3382.195 22818.71 0.0046514
+## Professor-Assistant Professor           45996.12 38395.941 53596.31 0.0000000
+## Professor-Associate Professor           32895.67 25154.507 40636.84 0.0000000</code></pre>
 <p>Given that this post-hoc test compares all pairs of levels without any <em>a priori</em> assumptions (similarly, for other post-hoc tests), is another reason to use the <em>a priori</em> orthogonal contrast coding scheme.</p>
 </div>
 <div id="glm-approach-9" class="section level3">
 <h3><span class="header-section-number">10.3.2</span> GLM approach</h3>
 <p>Notice, that in the formula, we do not have to specify both contrasts because we have already applied the coding scheme directly to the categorical IV of <code>rank</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(salary <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>rank, datasetSalaries)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Anova</span>(model, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;III&quot;</span>))</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="one-way-anova.html#cb77-1"></a>model &lt;-<span class="st"> </span><span class="kw">lm</span>(salary <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>rank, datasetSalaries)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="one-way-anova.html#cb78-1"></a><span class="kw">Anova</span>(model, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;III&quot;</span>))</span></code></pre></div>
 <pre><code>## Anova Table (Type III tests)
 ## 
 ## Response: salary
@@ -412,7 +425,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Note that in both analyses, the <em>F</em>-statistic of <code>128.22</code> with <code>2</code> between degrees of freedom (df), <code>394</code> within degrees of freedom (df), and <em>p</em>-value of <code>2.2e-16</code> are identical.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model)</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="one-way-anova.html#cb80-1"></a><span class="kw">summary</span>(model)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = salary ~ 1 + rank, data = datasetSalaries)
@@ -450,32 +463,32 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">10.6</span> Visualization</h2>
 <div id="traditional" class="section level3">
 <h3><span class="header-section-number">10.6.1</span> Traditional</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate descriptive statistics along with the 95% CI</span>
-dataset_summary &lt;-<span class="st"> </span>datasetSalaries <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(rank) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarize</span>(
-    <span class="dt">mean =</span> <span class="kw">mean</span>(salary),
-    <span class="dt">sd =</span> <span class="kw">sd</span>(salary),
-    <span class="dt">n =</span> <span class="kw">n</span>(),
-    <span class="dt">sem =</span> sd <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n),
-    <span class="dt">tcrit =</span> <span class="kw">abs</span>(<span class="kw">qt</span>(<span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">df =</span> n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)),
-    <span class="dt">ME =</span> tcrit <span class="op">*</span><span class="st"> </span>sem,
-    <span class="dt">LL95CI =</span> mean <span class="op">-</span><span class="st"> </span>ME,
-    <span class="dt">UL95CI =</span> mean <span class="op">+</span><span class="st"> </span>ME
-  )
-
-<span class="co"># plot</span>
-<span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(rank, salary)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">width =</span> <span class="fl">0.1</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">data =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> rank, <span class="dt">y =</span> mean, <span class="dt">ymin =</span> LL95CI, <span class="dt">ymax =</span> UL95CI), <span class="dt">color =</span> <span class="st">&quot;#3182bd&quot;</span>, <span class="dt">width =</span> <span class="fl">0.02</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">dat =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> rank, <span class="dt">y =</span> mean), <span class="dt">color =</span> <span class="st">&quot;#3182bd&quot;</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(
-    <span class="dt">x =</span> <span class="st">&quot;Rank&quot;</span>,
-    <span class="dt">y =</span> <span class="st">&quot;9-Month Academic Salary (USD)&quot;</span>
-  ) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_classic</span>()</code></pre>
-<div class="figure"><span id="fig:fig-one-way-anova-traditional"></span>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="one-way-anova.html#cb82-1"></a><span class="co"># calculate descriptive statistics along with the 95% CI</span></span>
+<span id="cb82-2"><a href="one-way-anova.html#cb82-2"></a>dataset_summary &lt;-<span class="st"> </span>datasetSalaries <span class="op">%&gt;%</span></span>
+<span id="cb82-3"><a href="one-way-anova.html#cb82-3"></a><span class="st">  </span><span class="kw">group_by</span>(rank) <span class="op">%&gt;%</span></span>
+<span id="cb82-4"><a href="one-way-anova.html#cb82-4"></a><span class="st">  </span><span class="kw">summarize</span>(</span>
+<span id="cb82-5"><a href="one-way-anova.html#cb82-5"></a>    <span class="dt">mean =</span> <span class="kw">mean</span>(salary),</span>
+<span id="cb82-6"><a href="one-way-anova.html#cb82-6"></a>    <span class="dt">sd =</span> <span class="kw">sd</span>(salary),</span>
+<span id="cb82-7"><a href="one-way-anova.html#cb82-7"></a>    <span class="dt">n =</span> <span class="kw">n</span>(),</span>
+<span id="cb82-8"><a href="one-way-anova.html#cb82-8"></a>    <span class="dt">sem =</span> sd <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n),</span>
+<span id="cb82-9"><a href="one-way-anova.html#cb82-9"></a>    <span class="dt">tcrit =</span> <span class="kw">abs</span>(<span class="kw">qt</span>(<span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">df =</span> n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)),</span>
+<span id="cb82-10"><a href="one-way-anova.html#cb82-10"></a>    <span class="dt">ME =</span> tcrit <span class="op">*</span><span class="st"> </span>sem,</span>
+<span id="cb82-11"><a href="one-way-anova.html#cb82-11"></a>    <span class="dt">LL95CI =</span> mean <span class="op">-</span><span class="st"> </span>ME,</span>
+<span id="cb82-12"><a href="one-way-anova.html#cb82-12"></a>    <span class="dt">UL95CI =</span> mean <span class="op">+</span><span class="st"> </span>ME</span>
+<span id="cb82-13"><a href="one-way-anova.html#cb82-13"></a>  )</span>
+<span id="cb82-14"><a href="one-way-anova.html#cb82-14"></a></span>
+<span id="cb82-15"><a href="one-way-anova.html#cb82-15"></a><span class="co"># plot</span></span>
+<span id="cb82-16"><a href="one-way-anova.html#cb82-16"></a><span class="kw">ggplot</span>(datasetSalaries, <span class="kw">aes</span>(rank, salary)) <span class="op">+</span></span>
+<span id="cb82-17"><a href="one-way-anova.html#cb82-17"></a><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">width =</span> <span class="fl">0.1</span>) <span class="op">+</span></span>
+<span id="cb82-18"><a href="one-way-anova.html#cb82-18"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">data =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> rank, <span class="dt">y =</span> mean, <span class="dt">ymin =</span> LL95CI, <span class="dt">ymax =</span> UL95CI), <span class="dt">color =</span> <span class="st">&quot;#3182bd&quot;</span>, <span class="dt">width =</span> <span class="fl">0.02</span>) <span class="op">+</span></span>
+<span id="cb82-19"><a href="one-way-anova.html#cb82-19"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">dat =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> rank, <span class="dt">y =</span> mean), <span class="dt">color =</span> <span class="st">&quot;#3182bd&quot;</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb82-20"><a href="one-way-anova.html#cb82-20"></a><span class="st">  </span><span class="kw">labs</span>(</span>
+<span id="cb82-21"><a href="one-way-anova.html#cb82-21"></a>    <span class="dt">x =</span> <span class="st">&quot;Rank&quot;</span>,</span>
+<span id="cb82-22"><a href="one-way-anova.html#cb82-22"></a>    <span class="dt">y =</span> <span class="st">&quot;9-Month Academic Salary (USD)&quot;</span></span>
+<span id="cb82-23"><a href="one-way-anova.html#cb82-23"></a>  ) <span class="op">+</span></span>
+<span id="cb82-24"><a href="one-way-anova.html#cb82-24"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar) <span class="op">+</span></span>
+<span id="cb82-25"><a href="one-way-anova.html#cb82-25"></a><span class="st">  </span><span class="kw">theme_classic</span>()</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:fig-one-way-anova-traditional"></span>
 <img src="practical-ext-of-intro-stats-in-psy-using-R_files/figure-html/fig-one-way-anova-traditional-1.png" alt="A dot plot of the 9-month academic salaries of professors by their rank within the university (i.e., assistant professor, associate professor, and professor). Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. 
 Note: The data points are only jittered (dispersed) for easier visualization of all data points." width="672" />
 <p class="caption">
@@ -486,57 +499,57 @@ Note: The data points are only jittered (dispersed) for easier visualization of 
 </div>
 <div id="orthogonal-contrast-coding" class="section level3">
 <h3><span class="header-section-number">10.6.2</span> Orthogonal Contrast Coding</h3>
-<pre class="sourceCode r"><code class="sourceCode r">datasetSalaries_long &lt;-<span class="st"> </span>datasetSalaries <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">professor =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(.),
-         <span class="dt">TenuredvAssistant =</span> <span class="kw">case_when</span>(
-    rank <span class="op">==</span><span class="st"> &quot;Assistant Professor&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">-2</span>,
-    rank <span class="op">==</span><span class="st"> &quot;Associate Professor&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,
-    rank <span class="op">==</span><span class="st"> &quot;Professor&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>),
-        <span class="dt">AssociatevProfessor =</span> <span class="kw">case_when</span>(
-    rank <span class="op">==</span><span class="st"> &quot;Assistant Professor&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">0</span>,
-    rank <span class="op">==</span><span class="st"> &quot;Associate Professor&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">-1</span>,
-    rank <span class="op">==</span><span class="st"> &quot;Professor&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>)
-  ) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(professor, salary, TenuredvAssistant, AssociatevProfessor) <span class="op">%&gt;%</span>
-<span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(., <span class="dt">id.vars =</span> <span class="kw">c</span>(<span class="st">&quot;professor&quot;</span>, <span class="st">&quot;salary&quot;</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(value <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rank =</span> <span class="kw">case_when</span>(
-    variable <span class="op">==</span><span class="st"> &quot;TenuredvAssistant&quot;</span> <span class="op">&amp;&amp;</span><span class="st"> </span>value <span class="op">==</span><span class="st"> </span><span class="dv">-2</span> <span class="op">~</span><span class="st"> &quot;Assistant&quot;</span>,
-    variable <span class="op">==</span><span class="st"> &quot;TenuredvAssistant&quot;</span> <span class="op">&amp;&amp;</span><span class="st"> </span>value <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> &quot;Tenured&quot;</span>,
-    variable <span class="op">==</span><span class="st"> &quot;AssociatevProfessor&quot;</span> <span class="op">&amp;&amp;</span><span class="st"> </span>value <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> &quot;Professor&quot;</span>,
-    variable <span class="op">==</span><span class="st"> &quot;AssociatevProfessor&quot;</span> <span class="op">&amp;&amp;</span><span class="st"> </span>value <span class="op">==</span><span class="st"> </span><span class="dv">-1</span> <span class="op">~</span><span class="st"> &quot;Associate&quot;</span>
-  ))
-
-dataset_summary &lt;-<span class="st"> </span>datasetSalaries_long <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(variable, value) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarize</span>(
-    <span class="dt">mean =</span> <span class="kw">mean</span>(salary),
-    <span class="dt">sd =</span> <span class="kw">sd</span>(salary),
-    <span class="dt">n =</span> <span class="kw">n</span>(),
-    <span class="dt">sem =</span> sd <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n),
-    <span class="dt">tcrit =</span> <span class="kw">abs</span>(<span class="kw">qt</span>(<span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">df =</span> n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)),
-    <span class="dt">ME =</span> tcrit <span class="op">*</span><span class="st"> </span>sem,
-    <span class="dt">LL95CI =</span> mean <span class="op">-</span><span class="st"> </span>ME,
-    <span class="dt">UL95CI =</span> mean <span class="op">+</span><span class="st"> </span>ME
-  )
-
-<span class="kw">ggplot</span>(datasetSalaries_long, <span class="kw">aes</span>(value, salary)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">width =</span> <span class="fl">0.3</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">data =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> value, <span class="dt">y =</span> mean, <span class="dt">ymin =</span> LL95CI, <span class="dt">ymax =</span> UL95CI), <span class="dt">color =</span> <span class="st">&quot;#3182bd&quot;</span>, <span class="dt">width =</span> <span class="fl">0.05</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> value, <span class="dt">y =</span> mean)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> value, <span class="dt">y =</span> mean), <span class="dt">color =</span> <span class="st">&quot;#3182bd&quot;</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> rank, <span class="dt">x =</span> value, <span class="dt">y =</span> <span class="dv">0</span>), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>variable) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(
-    <span class="dt">x =</span> <span class="st">&quot;Rank&quot;</span>,
-    <span class="dt">y =</span> <span class="st">&quot;9-Month Academic Salary (USD)&quot;</span>
-  ) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>), <span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">strip.background =</span> <span class="kw">element_blank</span>())</code></pre>
-<div class="figure"><span id="fig:unnamed-chunk-44"></span>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="one-way-anova.html#cb83-1"></a>datasetSalaries_long &lt;-<span class="st"> </span>datasetSalaries <span class="op">%&gt;%</span></span>
+<span id="cb83-2"><a href="one-way-anova.html#cb83-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">professor =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(.),</span>
+<span id="cb83-3"><a href="one-way-anova.html#cb83-3"></a>         <span class="dt">TenuredvAssistant =</span> <span class="kw">case_when</span>(</span>
+<span id="cb83-4"><a href="one-way-anova.html#cb83-4"></a>    rank <span class="op">==</span><span class="st"> &quot;Assistant Professor&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">-2</span>,</span>
+<span id="cb83-5"><a href="one-way-anova.html#cb83-5"></a>    rank <span class="op">==</span><span class="st"> &quot;Associate Professor&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</span>
+<span id="cb83-6"><a href="one-way-anova.html#cb83-6"></a>    rank <span class="op">==</span><span class="st"> &quot;Professor&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>),</span>
+<span id="cb83-7"><a href="one-way-anova.html#cb83-7"></a>        <span class="dt">AssociatevProfessor =</span> <span class="kw">case_when</span>(</span>
+<span id="cb83-8"><a href="one-way-anova.html#cb83-8"></a>    rank <span class="op">==</span><span class="st"> &quot;Assistant Professor&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">0</span>,</span>
+<span id="cb83-9"><a href="one-way-anova.html#cb83-9"></a>    rank <span class="op">==</span><span class="st"> &quot;Associate Professor&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">-1</span>,</span>
+<span id="cb83-10"><a href="one-way-anova.html#cb83-10"></a>    rank <span class="op">==</span><span class="st"> &quot;Professor&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb83-11"><a href="one-way-anova.html#cb83-11"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb83-12"><a href="one-way-anova.html#cb83-12"></a><span class="st">  </span><span class="kw">select</span>(professor, salary, TenuredvAssistant, AssociatevProfessor) <span class="op">%&gt;%</span></span>
+<span id="cb83-13"><a href="one-way-anova.html#cb83-13"></a><span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(., <span class="dt">id.vars =</span> <span class="kw">c</span>(<span class="st">&quot;professor&quot;</span>, <span class="st">&quot;salary&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb83-14"><a href="one-way-anova.html#cb83-14"></a><span class="st">  </span><span class="kw">filter</span>(value <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></span>
+<span id="cb83-15"><a href="one-way-anova.html#cb83-15"></a><span class="st">  </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span></span>
+<span id="cb83-16"><a href="one-way-anova.html#cb83-16"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rank =</span> <span class="kw">case_when</span>(</span>
+<span id="cb83-17"><a href="one-way-anova.html#cb83-17"></a>    variable <span class="op">==</span><span class="st"> &quot;TenuredvAssistant&quot;</span> <span class="op">&amp;&amp;</span><span class="st"> </span>value <span class="op">==</span><span class="st"> </span><span class="dv">-2</span> <span class="op">~</span><span class="st"> &quot;Assistant&quot;</span>,</span>
+<span id="cb83-18"><a href="one-way-anova.html#cb83-18"></a>    variable <span class="op">==</span><span class="st"> &quot;TenuredvAssistant&quot;</span> <span class="op">&amp;&amp;</span><span class="st"> </span>value <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> &quot;Tenured&quot;</span>,</span>
+<span id="cb83-19"><a href="one-way-anova.html#cb83-19"></a>    variable <span class="op">==</span><span class="st"> &quot;AssociatevProfessor&quot;</span> <span class="op">&amp;&amp;</span><span class="st"> </span>value <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> &quot;Professor&quot;</span>,</span>
+<span id="cb83-20"><a href="one-way-anova.html#cb83-20"></a>    variable <span class="op">==</span><span class="st"> &quot;AssociatevProfessor&quot;</span> <span class="op">&amp;&amp;</span><span class="st"> </span>value <span class="op">==</span><span class="st"> </span><span class="dv">-1</span> <span class="op">~</span><span class="st"> &quot;Associate&quot;</span></span>
+<span id="cb83-21"><a href="one-way-anova.html#cb83-21"></a>  ))</span>
+<span id="cb83-22"><a href="one-way-anova.html#cb83-22"></a></span>
+<span id="cb83-23"><a href="one-way-anova.html#cb83-23"></a>dataset_summary &lt;-<span class="st"> </span>datasetSalaries_long <span class="op">%&gt;%</span></span>
+<span id="cb83-24"><a href="one-way-anova.html#cb83-24"></a><span class="st">  </span><span class="kw">group_by</span>(variable, value) <span class="op">%&gt;%</span></span>
+<span id="cb83-25"><a href="one-way-anova.html#cb83-25"></a><span class="st">  </span><span class="kw">summarize</span>(</span>
+<span id="cb83-26"><a href="one-way-anova.html#cb83-26"></a>    <span class="dt">mean =</span> <span class="kw">mean</span>(salary),</span>
+<span id="cb83-27"><a href="one-way-anova.html#cb83-27"></a>    <span class="dt">sd =</span> <span class="kw">sd</span>(salary),</span>
+<span id="cb83-28"><a href="one-way-anova.html#cb83-28"></a>    <span class="dt">n =</span> <span class="kw">n</span>(),</span>
+<span id="cb83-29"><a href="one-way-anova.html#cb83-29"></a>    <span class="dt">sem =</span> sd <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n),</span>
+<span id="cb83-30"><a href="one-way-anova.html#cb83-30"></a>    <span class="dt">tcrit =</span> <span class="kw">abs</span>(<span class="kw">qt</span>(<span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">df =</span> n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)),</span>
+<span id="cb83-31"><a href="one-way-anova.html#cb83-31"></a>    <span class="dt">ME =</span> tcrit <span class="op">*</span><span class="st"> </span>sem,</span>
+<span id="cb83-32"><a href="one-way-anova.html#cb83-32"></a>    <span class="dt">LL95CI =</span> mean <span class="op">-</span><span class="st"> </span>ME,</span>
+<span id="cb83-33"><a href="one-way-anova.html#cb83-33"></a>    <span class="dt">UL95CI =</span> mean <span class="op">+</span><span class="st"> </span>ME</span>
+<span id="cb83-34"><a href="one-way-anova.html#cb83-34"></a>  )</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;variable&#39;. You can override using the `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="one-way-anova.html#cb85-1"></a><span class="kw">ggplot</span>(datasetSalaries_long, <span class="kw">aes</span>(value, salary)) <span class="op">+</span></span>
+<span id="cb85-2"><a href="one-way-anova.html#cb85-2"></a><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">width =</span> <span class="fl">0.3</span>) <span class="op">+</span></span>
+<span id="cb85-3"><a href="one-way-anova.html#cb85-3"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">data =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> value, <span class="dt">y =</span> mean, <span class="dt">ymin =</span> LL95CI, <span class="dt">ymax =</span> UL95CI), <span class="dt">color =</span> <span class="st">&quot;#3182bd&quot;</span>, <span class="dt">width =</span> <span class="fl">0.05</span>) <span class="op">+</span></span>
+<span id="cb85-4"><a href="one-way-anova.html#cb85-4"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> value, <span class="dt">y =</span> mean)) <span class="op">+</span></span>
+<span id="cb85-5"><a href="one-way-anova.html#cb85-5"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> dataset_summary, <span class="kw">aes</span>(<span class="dt">x =</span> value, <span class="dt">y =</span> mean), <span class="dt">color =</span> <span class="st">&quot;#3182bd&quot;</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb85-6"><a href="one-way-anova.html#cb85-6"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> rank, <span class="dt">x =</span> value, <span class="dt">y =</span> <span class="dv">0</span>), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb85-7"><a href="one-way-anova.html#cb85-7"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>variable) <span class="op">+</span></span>
+<span id="cb85-8"><a href="one-way-anova.html#cb85-8"></a><span class="st">  </span><span class="kw">labs</span>(</span>
+<span id="cb85-9"><a href="one-way-anova.html#cb85-9"></a>    <span class="dt">x =</span> <span class="st">&quot;Rank&quot;</span>,</span>
+<span id="cb85-10"><a href="one-way-anova.html#cb85-10"></a>    <span class="dt">y =</span> <span class="st">&quot;9-Month Academic Salary (USD)&quot;</span></span>
+<span id="cb85-11"><a href="one-way-anova.html#cb85-11"></a>  ) <span class="op">+</span></span>
+<span id="cb85-12"><a href="one-way-anova.html#cb85-12"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar) <span class="op">+</span></span>
+<span id="cb85-13"><a href="one-way-anova.html#cb85-13"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>), <span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>)) <span class="op">+</span></span>
+<span id="cb85-14"><a href="one-way-anova.html#cb85-14"></a><span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span></span>
+<span id="cb85-15"><a href="one-way-anova.html#cb85-15"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">strip.background =</span> <span class="kw">element_blank</span>())</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-44"></span>
 <img src="practical-ext-of-intro-stats-in-psy-using-R_files/figure-html/unnamed-chunk-44-1.png" alt="A dot plot of the 9-month academic salaries of professors by their rank within the university. Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points are only jittered (dispersed) for easier visualization of all data points." width="672" />
 <p class="caption">
 Figure 10.2: A dot plot of the 9-month academic salaries of professors by their rank within the university. Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points are only jittered (dispersed) for easier visualization of all data points.
@@ -549,9 +562,9 @@ Figure 10.2: A dot plot of the 9-month academic salaries of professors by their 
 <div class="footnotes">
 <hr />
 <ol start="13">
-<li id="fn13"><p><span class="math inline">\(\Sigma Contrast\_Codes_{TenuredvAssistant} = -2 + 1 + 1 = 0\)</span><a href="one-way-anova.html#fnref13" class="footnote-back">↩</a></p></li>
-<li id="fn14"><p><span class="math inline">\(\Sigma Contrast\_Code_{AssociatevProfessor} = 0 -1 + 1 = 0\)</span><a href="one-way-anova.html#fnref14" class="footnote-back">↩</a></p></li>
-<li id="fn15"><p><span class="math inline">\(\Sigma Contrast_{TenuredvAssistant}*Contrast_{AssociatevProfessor} = (2*0) + (1*-1) + (1*1) = 0\)</span><a href="one-way-anova.html#fnref15" class="footnote-back">↩</a></p></li>
+<li id="fn13"><p><span class="math inline">\(\Sigma Contrast\_Codes_{TenuredvAssistant} = -2 + 1 + 1 = 0\)</span><a href="one-way-anova.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<li id="fn14"><p><span class="math inline">\(\Sigma Contrast\_Code_{AssociatevProfessor} = 0 -1 + 1 = 0\)</span><a href="one-way-anova.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p><span class="math inline">\(\Sigma Contrast_{TenuredvAssistant}*Contrast_{AssociatevProfessor} = (2*0) + (1*-1) + (1*1) = 0\)</span><a href="one-way-anova.html#fnref15" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -564,12 +577,13 @@ Figure 10.2: A dot plot of the 9-month academic salaries of professors by their 
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -577,12 +591,12 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -597,7 +611,15 @@ gitbook.start({
 "link": null,
 "text": null
 },
+"view": {
+"link": null,
+"text": null
+},
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }
@@ -612,8 +634,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
