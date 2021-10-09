@@ -19,7 +19,7 @@ jobs:
           xfun::pkg_attach2(pkgs)
         shell: Rscript {0}
       - name: Render book
-        run: Rscript -e 'bookdown::render(output_dir = "docs/")'
+        run: Rscript -e 'bookdown::render_book(output_dir = "docs/")'
       - name: Commit results
         run: |
           git add docs/
