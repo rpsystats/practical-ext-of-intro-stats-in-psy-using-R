@@ -1,0 +1,27 @@
+on:
+  push:
+    branches: main
+
+name: render book
+
+jobs:
+  render:
+    name: render book
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-pandoc@master
+      - name: Install dependencies
+        run: |
+          install.packages("xfun")
+          pkgs <- c('rmarkdown', 'bookdown', 'tidyverse', 'psych', 'car', 'knitr', 'carData', 'MASS', 'scales')
+          xfun::pkg_attach2(pkgs)
+        shell: Rscript {0}
+      - name: Render book
+        run: Rscript -e 'bookdown::render(output_dir = "docs/")'
+      - name: Commit results
+        run: |
+          git add docs/
+          git commit -m 'gh actions: render and commit book'
+          git push origin
