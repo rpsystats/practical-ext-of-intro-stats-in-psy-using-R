@@ -15,7 +15,7 @@ jobs:
       - name: Install dependencies
         run: |
           install.packages("xfun")
-          pkgs <- c('rmarkdown', 'bookdown', 'tidyverse', 'psych', 'car', 'knitr', 'carData', 'MASS', 'scales', 'kableExtra')
+          pkgs <- c('rmarkdown', 'bookdown', 'tidyverse', 'psych', 'car', 'knitr', 'carData', 'MASS', 'scales', 'kableExtra', 'reshape2')
           xfun::pkg_attach2(pkgs)
         shell: Rscript {0}
       - name: Render book
